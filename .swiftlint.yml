@@ -13,4 +13,10 @@ disabled_rules: # rule identifiers to exclude from running
 - line_length
 - vertical_whitespace
 - trailing_newline
+- identifier_name
+- cyclomatic_complexity
+- function_body_length
+- comma
+- opening_brace
+- function_parameter_count
 

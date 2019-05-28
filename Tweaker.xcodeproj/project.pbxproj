@@ -9,9 +9,24 @@
 /* Begin PBXBuildFile section */
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
-		AB081F9A229D4BDC00ACA4DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB081F98229D4BDC00ACA4DD /* Main.storyboard */; };
-		AB081F9C229D4BDD00ACA4DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* Assets.xcassets */; };
-		AB081F9F229D4BDD00ACA4DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9D229D4BDD00ACA4DD /* LaunchScreen.storyboard */; };
+		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
+		ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */; };
+		ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */; };
+		ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7F1229D70120070A17E /* UIEnteryL.swift */; };
+		ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */; };
+		ABFBA802229D7B460070A17E /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA804229D7B460070A17E /* Main_iPad.storyboard */; };
+		ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */; };
+		ABFBA818229D7DC40070A17E /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA80E229D7DC40070A17E /* Global.swift */; };
+		ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA80F229D7DC40070A17E /* UITableViewExtensions.swift */; };
+		ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA810229D7DC40070A17E /* StringExtensions.swift */; };
+		ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA811229D7DC40070A17E /* UIViewControllerExtensions.swift */; };
+		ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA812229D7DC40070A17E /* UIImageExtensions.swift */; };
+		ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA813229D7DC40070A17E /* UINavigationControllerExtensions.swift */; };
+		ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA814229D7DC40070A17E /* UIViewExtensions.swift */; };
+		ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA815229D7DC40070A17E /* UILabelExtensions.swift */; };
+		ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */; };
+		ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */; };
+		ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA823229D801E0070A17E /* UIHommyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +35,27 @@
 		8FAFF248A0D68F72CAA3FED6 /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 		AB081F91229D4BDC00ACA4DD /* Tweaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AB081F99229D4BDC00ACA4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AB081F9B229D4BDD00ACA4DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AB081F9E229D4BDD00ACA4DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
 		AB081FA0229D4BDD00ACA4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBars.xcassets; sourceTree = "<group>"; };
+		ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryS.swift; sourceTree = "<group>"; };
+		ABFBA7F1229D70120070A17E /* UIEnteryL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryL.swift; sourceTree = "<group>"; };
+		ABFBA800229D7B3D0070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ABFBA803229D7B460070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		ABFBA806229D7B4F0070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		ABFBA80B229D7B580070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
+		ABFBA80C229D7B5F0070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
+		ABFBA80E229D7DC40070A17E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		ABFBA80F229D7DC40070A17E /* UITableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
+		ABFBA810229D7DC40070A17E /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		ABFBA811229D7DC40070A17E /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
+		ABFBA812229D7DC40070A17E /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		ABFBA813229D7DC40070A17E /* UINavigationControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExtensions.swift; sourceTree = "<group>"; };
+		ABFBA814229D7DC40070A17E /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		ABFBA815229D7DC40070A17E /* UILabelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtensions.swift; sourceTree = "<group>"; };
+		ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
+		ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		ABFBA823229D801E0070A17E /* UIHommyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				AB081F93229D4BDC00ACA4DD /* Tweaker */,
+				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
+				AB081FA0229D4BDD00ACA4DD /* Info.plist */,
 				AB081F92229D4BDC00ACA4DD /* Products */,
 				35F0FD9C7EF0DEEACEA4981B /* Pods */,
 				A8D167314D643758CB5730CD /* Frameworks */,
@@ -76,14 +110,11 @@
 		AB081F93229D4BDC00ACA4DD /* Tweaker */ = {
 			isa = PBXGroup;
 			children = (
-				ABFBA7E6229D566E0070A17E /* AssSets */,
 				ABFBA7E4229D563C0070A17E /* Engine */,
+				ABFBA7E6229D566E0070A17E /* AssSets */,
+				ABFBA7E8229D6D8B0070A17E /* Themes */,
 				ABFBA7E5229D564E0070A17E /* Interface */,
-				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
-				AB081F9B229D4BDD00ACA4DD /* Assets.xcassets */,
-				AB081F98229D4BDC00ACA4DD /* Main.storyboard */,
-				AB081F9D229D4BDD00ACA4DD /* LaunchScreen.storyboard */,
-				AB081FA0229D4BDD00ACA4DD /* Info.plist */,
+				ABFBA80D229D7DC40070A17E /* Extensions */,
 			);
 			path = Tweaker;
 			sourceTree = "<group>";
@@ -98,6 +129,10 @@
 		ABFBA7E5229D564E0070A17E /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				ABFBA822229D7FDC0070A17E /* CommanViews */,
+				ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */,
+				ABFBA7EB229D6F140070A17E /* iPhoneOS */,
+				ABFBA7EC229D6F2A0070A17E /* iPadOS */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -105,8 +140,60 @@
 		ABFBA7E6229D566E0070A17E /* AssSets */ = {
 			isa = PBXGroup;
 			children = (
+				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
+				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
 			);
 			path = AssSets;
+			sourceTree = "<group>";
+		};
+		ABFBA7E8229D6D8B0070A17E /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Themes;
+			sourceTree = "<group>";
+		};
+		ABFBA7EB229D6F140070A17E /* iPhoneOS */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */,
+				ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */,
+			);
+			path = iPhoneOS;
+			sourceTree = "<group>";
+		};
+		ABFBA7EC229D6F2A0070A17E /* iPadOS */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA804229D7B460070A17E /* Main_iPad.storyboard */,
+				ABFBA7F1229D70120070A17E /* UIEnteryL.swift */,
+			);
+			path = iPadOS;
+			sourceTree = "<group>";
+		};
+		ABFBA80D229D7DC40070A17E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA80E229D7DC40070A17E /* Global.swift */,
+				ABFBA810229D7DC40070A17E /* StringExtensions.swift */,
+				ABFBA814229D7DC40070A17E /* UIViewExtensions.swift */,
+				ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */,
+				ABFBA815229D7DC40070A17E /* UILabelExtensions.swift */,
+				ABFBA812229D7DC40070A17E /* UIImageExtensions.swift */,
+				ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */,
+				ABFBA80F229D7DC40070A17E /* UITableViewExtensions.swift */,
+				ABFBA811229D7DC40070A17E /* UIViewControllerExtensions.swift */,
+				ABFBA813229D7DC40070A17E /* UINavigationControllerExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ABFBA822229D7FDC0070A17E /* CommanViews */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA823229D801E0070A17E /* UIHommyView.swift */,
+			);
+			path = CommanViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +209,7 @@
 				AB081F8E229D4BDC00ACA4DD /* Frameworks */,
 				AB081F8F229D4BDC00ACA4DD /* Resources */,
 				F3EE9197E21382200FC7E212 /* [CP] Embed Pods Frameworks */,
+				ABFBA825229D807B0070A17E /* Bump Version */,
 			);
 			buildRules = (
 			);
@@ -149,11 +237,13 @@
 			};
 			buildConfigurationList = AB081F8C229D4BDC00ACA4DD /* Build configuration list for PBXProject "Tweaker" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = zh_CN;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				zh_CN,
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = AB081F88229D4BDC00ACA4DD;
 			productRefGroup = AB081F92229D4BDC00ACA4DD /* Products */;
@@ -170,9 +260,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB081F9F229D4BDD00ACA4DD /* LaunchScreen.storyboard in Resources */,
-				AB081F9C229D4BDD00ACA4DD /* Assets.xcassets in Resources */,
-				AB081F9A229D4BDC00ACA4DD /* Main.storyboard in Resources */,
+				ABFBA802229D7B460070A17E /* Main_iPad.storyboard in Resources */,
+				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
+				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
+				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
+				ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +288,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
+		};
+		ABFBA825229D807B0070A17E /* Bump Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Bump Version";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\");\nbuildNumber=$(($buildNumber + 1));\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\";\n";
 		};
 		D73B61CC6B752CEA0F6D0815 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -312,27 +422,50 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
+				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
+				ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */,
+				ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */,
+				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
+				ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */,
+				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
+				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
+				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
+				ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */,
+				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
+				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
+				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AB081F98229D4BDC00ACA4DD /* Main.storyboard */ = {
+		ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AB081F99229D4BDC00ACA4DD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AB081F9D229D4BDD00ACA4DD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB081F9E229D4BDD00ACA4DD /* Base */,
+				ABFBA800229D7B3D0070A17E /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		ABFBA804229D7B460070A17E /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABFBA803229D7B460070A17E /* Base */,
+				ABFBA80C229D7B5F0070A17E /* zh-Hans */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABFBA806229D7B4F0070A17E /* Base */,
+				ABFBA80B229D7B580070A17E /* zh-Hans */,
+			);
+			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -342,6 +475,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -403,6 +537,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
