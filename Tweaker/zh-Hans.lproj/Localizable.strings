@@ -1,0 +1,21 @@
+/* 
+  Localizable.strings
+  Tweaker
+
+  Created by Lakr Aream on 2019/5/28.
+  Copyright © 2019 Lakr Aream. All rights reserved.
+*/
+
+// This is for later localizing other language
+
+// 星期的话时间数据统一给了咱们英文，所以就翻译一下
+"Monday" = "星期一";
+"Tuesday" = "星期二";
+"Wednesday" = "星期三";
+"Thursday" = "星期四";
+"Friday" = "星期五";
+"Saturday" = "星期六";
+"Sunday" = "星期日";
+"日";
+"月";
+"今日精选";

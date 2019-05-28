@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cAc-5L-yC3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8B5-uZ-pfY">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--HommyS-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIHommyS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="UIHommyS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,27 +27,9 @@
             <point key="canvasLocation" x="2833" y="320"/>
         </scene>
         <!--EnteryS-->
-        <scene sceneID="7oi-AS-3xn">
-            <objects>
-                <navigationController storyboardIdentifier="UIEnteryS" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cAc-5L-yC3" customClass="UIEnteryS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bvc-eS-AfE">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="8B5-uZ-pfY" kind="relationship" relationship="rootViewController" id="8Iu-V9-qtW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0LL-tH-dUJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="208.69565217391306" y="663.61607142857144"/>
-        </scene>
-        <!--Tab Bar Controller-->
         <scene sceneID="jqo-i8-fZg">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8B5-uZ-pfY" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="UIEnteryS" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8B5-uZ-pfY" customClass="UIEnteryS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="oD9-uN-k0j"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="O9G-c4-Hen">
@@ -72,7 +54,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="o8q-Gu-84n" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="发现" image="News" id="gcX-np-kpX"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3vz-pa-Jed">
+                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3vz-pa-Jed">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -90,7 +72,7 @@
         <!--View Controller-->
         <scene sceneID="25N-dS-WN5">
             <objects>
-                <viewController id="htO-DB-OIi" customClass="ViewController" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="htO-DB-OIi" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tk4-EL-sxI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -125,7 +107,7 @@
         <!--View Controller-->
         <scene sceneID="VpU-Hq-wdh">
             <objects>
-                <viewController id="clt-8o-aHa" customClass="ViewController" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="clt-8o-aHa" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lEf-qp-4Vv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,7 +142,7 @@
         <!--View Controller-->
         <scene sceneID="QwF-ct-z57">
             <objects>
-                <viewController id="Ya9-75-hC8" customClass="ViewController" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Ya9-75-hC8" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Q5-ta-ghn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

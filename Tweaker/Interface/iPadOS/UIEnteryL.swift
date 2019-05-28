@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UIEnteryL: UINavigationController {
+class UIEnteryL: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

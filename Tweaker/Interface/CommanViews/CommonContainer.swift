@@ -6,4 +6,8 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-var LKUIViewContainer = [UIView]()
+
+class common_views {
+    // 啥都不用干
+    
+}

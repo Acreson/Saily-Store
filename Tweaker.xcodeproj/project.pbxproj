@@ -27,7 +27,13 @@
 		ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */; };
 		ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */; };
 		ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA823229D801E0070A17E /* UIHommyView.swift */; };
-		ABFBA82A229D833B0070A17E /* UIViewCacheContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA829229D833B0070A17E /* UIViewCacheContainer.swift */; };
+		ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA829229D833B0070A17E /* CommonContainer.swift */; };
+		ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */; };
+		ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA82F229D87170070A17E /* ColorSheetCommon.swift */; };
+		ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA831229D88790070A17E /* AppRootClass.swift */; };
+		ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA837229D8DC70070A17E /* Localizable.strings */; };
+		ABFBA83A229D943C0070A17E /* UIHommy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommy.swift */; };
+		ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA83B229D99EB0070A17E /* AppUserClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,7 +63,14 @@
 		ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDeviceExtensions.swift; sourceTree = "<group>"; };
 		ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		ABFBA823229D801E0070A17E /* UIHommyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyView.swift; sourceTree = "<group>"; };
-		ABFBA829229D833B0070A17E /* UIViewCacheContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewCacheContainer.swift; sourceTree = "<group>"; };
+		ABFBA829229D833B0070A17E /* CommonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonContainer.swift; sourceTree = "<group>"; };
+		ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ApplicationSupport.xcassets; sourceTree = "<group>"; };
+		ABFBA82F229D87170070A17E /* ColorSheetCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSheetCommon.swift; sourceTree = "<group>"; };
+		ABFBA831229D88790070A17E /* AppRootClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootClass.swift; sourceTree = "<group>"; };
+		ABFBA836229D8DC70070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		ABFBA838229D8E3A0070A17E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		ABFBA839229D943C0070A17E /* UIHommy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommy.swift; sourceTree = "<group>"; };
+		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +129,7 @@
 				ABFBA7E8229D6D8B0070A17E /* Themes */,
 				ABFBA7E5229D564E0070A17E /* Interface */,
 				ABFBA80D229D7DC40070A17E /* Extensions */,
+				ABFBA837229D8DC70070A17E /* Localizable.strings */,
 			);
 			path = Tweaker;
 			sourceTree = "<group>";
@@ -124,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
+				ABFBA831229D88790070A17E /* AppRootClass.swift */,
+				ABFBA83B229D99EB0070A17E /* AppUserClass.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -131,8 +147,8 @@
 		ABFBA7E5229D564E0070A17E /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				ABFBA822229D7FDC0070A17E /* CommanViews */,
 				ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */,
+				ABFBA822229D7FDC0070A17E /* CommanViews */,
 				ABFBA7EB229D6F140070A17E /* iPhoneOS */,
 				ABFBA7EC229D6F2A0070A17E /* iPadOS */,
 			);
@@ -143,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
+				ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */,
 				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
 			);
 			path = AssSets;
@@ -151,6 +168,7 @@
 		ABFBA7E8229D6D8B0070A17E /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				ABFBA82F229D87170070A17E /* ColorSheetCommon.swift */,
 			);
 			path = Themes;
 			sourceTree = "<group>";
@@ -160,6 +178,7 @@
 			children = (
 				ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */,
 				ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */,
+				ABFBA839229D943C0070A17E /* UIHommy.swift */,
 			);
 			path = iPhoneOS;
 			sourceTree = "<group>";
@@ -193,8 +212,8 @@
 		ABFBA822229D7FDC0070A17E /* CommanViews */ = {
 			isa = PBXGroup;
 			children = (
+				ABFBA829229D833B0070A17E /* CommonContainer.swift */,
 				ABFBA823229D801E0070A17E /* UIHommyView.swift */,
-				ABFBA829229D833B0070A17E /* UIViewCacheContainer.swift */,
 			);
 			path = CommanViews;
 			sourceTree = "<group>";
@@ -240,10 +259,9 @@
 			};
 			buildConfigurationList = AB081F8C229D4BDC00ACA4DD /* Build configuration list for PBXProject "Tweaker" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = zh_CN;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				zh_CN,
 				en,
 				Base,
 				"zh-Hans",
@@ -266,7 +284,9 @@
 				ABFBA802229D7B460070A17E /* Main_iPad.storyboard in Resources */,
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
+				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
+				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
 				ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,13 +451,17 @@
 				ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */,
 				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
 				ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */,
+				ABFBA83A229D943C0070A17E /* UIHommy.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */,
+				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
+				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
-				ABFBA82A229D833B0070A17E /* UIViewCacheContainer.swift in Sources */,
+				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
+				ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */,
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
@@ -470,6 +494,15 @@
 				ABFBA80B229D7B580070A17E /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		ABFBA837229D8DC70070A17E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABFBA836229D8DC70070A17E /* zh-Hans */,
+				ABFBA838229D8E3A0070A17E /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
