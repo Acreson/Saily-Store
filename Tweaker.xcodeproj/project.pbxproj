@@ -76,13 +76,37 @@
 		AB081F93229D4BDC00ACA4DD /* Tweaker */ = {
 			isa = PBXGroup;
 			children = (
+				ABFBA7E6229D566E0070A17E /* AssSets */,
+				ABFBA7E4229D563C0070A17E /* Engine */,
+				ABFBA7E5229D564E0070A17E /* Interface */,
 				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
-				AB081F98229D4BDC00ACA4DD /* Main.storyboard */,
 				AB081F9B229D4BDD00ACA4DD /* Assets.xcassets */,
+				AB081F98229D4BDC00ACA4DD /* Main.storyboard */,
 				AB081F9D229D4BDD00ACA4DD /* LaunchScreen.storyboard */,
 				AB081FA0229D4BDD00ACA4DD /* Info.plist */,
 			);
 			path = Tweaker;
+			sourceTree = "<group>";
+		};
+		ABFBA7E4229D563C0070A17E /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		ABFBA7E5229D564E0070A17E /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		ABFBA7E6229D566E0070A17E /* AssSets */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AssSets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +117,7 @@
 			buildConfigurationList = AB081FA3229D4BDD00ACA4DD /* Build configuration list for PBXNativeTarget "Tweaker" */;
 			buildPhases = (
 				D73B61CC6B752CEA0F6D0815 /* [CP] Check Pods Manifest.lock */,
+				ABFBA7E7229D5AF20070A17E /* SwiftLint */,
 				AB081F8D229D4BDC00ACA4DD /* Sources */,
 				AB081F8E229D4BDC00ACA4DD /* Frameworks */,
 				AB081F8F229D4BDC00ACA4DD /* Resources */,
@@ -154,6 +179,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		ABFBA7E7229D5AF20070A17E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which \"${PODS_ROOT}/SwiftLint/swiftlint\" >/dev/null; then\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
+		};
 		D73B61CC6B752CEA0F6D0815 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -419,6 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
 				INFOPLIST_FILE = Tweaker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -438,6 +482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
 				INFOPLIST_FILE = Tweaker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
