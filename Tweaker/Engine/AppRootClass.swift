@@ -19,16 +19,17 @@ class app_root_class {
     public var root_path: String?
     public var root_db: Database?
     
-    
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()
     public let queue_dispatch                                   = DispatchQueue(label: "com.lakr233.common.queue", qos: .utility, attributes: .concurrent)
     
     var container_cache_uiview = [UIView]()                 // 视图缓存咯
+    var container_news_repo    = [DMNewsRepo]()             // 新闻源缓存
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展
     let ins_user_manager = app_user_class()                 // 用户管理
+    let ins_common_operator = app_opeerator()               // 通用处理
     
     // 初始化 App
     func initializing() {
@@ -40,7 +41,7 @@ class app_root_class {
         root_path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         if root_path!.contains("CoreSimulator") {
             print("[*] 从模拟器启动应用程序 - " + (root_path ?? "wtf?"))
-        }else if root_path!.contains("/Containers/Data/Application") {
+        } else if root_path!.contains("/Containers/Data/Application") {
             print("[*] 从沙盒启动应用程序。")
         }
         try? FileManager.default.removeItem(atPath: root_path! + "/daemon.call")
@@ -60,7 +61,8 @@ class app_root_class {
             let fake_udid = UUID().uuidString
             var fake_udid_out = ""
             for item in fake_udid {
-                if (item != "-") {
+                // swiftlint:disable:next for_where
+                if item != "-" {
                     fake_udid_out += item.description
                 }
             }

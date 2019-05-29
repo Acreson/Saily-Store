@@ -34,6 +34,12 @@ class UIHommyS: UIViewController {
         let header = LKRoot.ins_view_manager.create_AS_home_header_view()
         container!.addSubview(header)
         
+        // 处理一下正在加载 😂
+        let loading = UIActivityIndicatorView()
+        loading.startAnimating()
+        loading.color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        view.addSubview(loading)
+        
         // 处理 AutoLayout
         self.container?.snp.makeConstraints({ (x) in
             x.top.equalTo(self.view.safeAreaInsets.top)
@@ -47,6 +53,11 @@ class UIHommyS: UIViewController {
             x.right.equalTo(self.view.snp.right)
             x.height.equalTo(128)
         })
+        loading.snp.makeConstraints { (x) in
+            x.center.equalTo(self.view.snp.center)
+        }
+        
+        
     }
     
 }

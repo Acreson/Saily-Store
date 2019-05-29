@@ -10,6 +10,8 @@
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
+		AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F80229EDC74003A78BE /* CommonOperator.swift */; };
+		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
 		ABE6DCF4229E8C2A00D18D9E /* DMCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
@@ -51,6 +53,8 @@
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
 		AB198F7C229EDA36003A78BE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
 		AB198F7E229EDA3A003A78BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
+		AB198F80229EDC74003A78BE /* CommonOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOperator.swift; sourceTree = "<group>"; };
+		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
 		ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
@@ -148,6 +152,15 @@
 			path = Tweaker;
 			sourceTree = "<group>";
 		};
+		AB198F7F229EDC64003A78BE /* Operator */ = {
+			isa = PBXGroup;
+			children = (
+				AB198F80229EDC74003A78BE /* CommonOperator.swift */,
+				AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */,
+			);
+			path = Operator;
+			sourceTree = "<group>";
+		};
 		ABE6DCF0229E8BC600D18D9E /* Hommy */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +195,7 @@
 				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
 				ABFBA831229D88790070A17E /* AppRootClass.swift */,
 				ABFBA83B229D99EB0070A17E /* AppUserClass.swift */,
+				AB198F7F229EDC64003A78BE /* Operator */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -503,6 +517,8 @@
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */,
+				AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */,
+				AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */,
 				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,

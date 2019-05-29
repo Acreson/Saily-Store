@@ -26,11 +26,14 @@ class DBMNewsRepo: WCDBSwift.TableCodable {
     var content: String?
     var sort_id: Int?
     
-    enum CodingKeys: String, CodingTableKey {
+    enum CodingKeys: String, CodingTableKey { // swiftlint:disable:next nesting
         typealias Root = DBMNewsRepo
         
+        // swiftlint:disable:next redundant_string_enum_value
         case link = "link"
+        // swiftlint:disable:next redundant_string_enum_value
         case content = "content"
+        // swiftlint:disable:next redundant_string_enum_value
         case sort_id = "sort_id"
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)

@@ -30,9 +30,10 @@ class DBMCard: WCDBSwift.TableCodable {
     var KEY: String?
     var type: card_type?
     
-    enum CodingKeys: String, CodingTableKey {
+    enum CodingKeys: String, CodingTableKey { // swiftlint:disable:next nesting
         typealias Root = DBMCard
         
+        // swiftlint:disable:next redundant_string_enum_value
         case KEY = "KEY"
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
