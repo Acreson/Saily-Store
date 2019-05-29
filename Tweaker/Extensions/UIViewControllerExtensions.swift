@@ -27,7 +27,7 @@ extension UIViewController {
     func twitter_animte() {
         // logo mask
         self.view.layer.mask = CALayer()
-        self.view.layer.mask?.contents = UIImage(named: "iConFullWhite")!.cgImage
+        self.view.layer.mask?.contents = UIImage(named: "icon_white")!.cgImage
         self.view.layer.mask?.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
         self.view.layer.mask?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.view.layer.mask?.position = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height / 2)

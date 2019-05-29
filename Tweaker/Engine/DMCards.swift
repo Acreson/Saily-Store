@@ -9,35 +9,34 @@
 // 卡片的 KEY 使用随机生成的 UUID
 // 是主键，具有唯一性。
 
-// MARK RAM
+// MARK: RAM
 
-class DMCards {
+class DMCard {
     
-    var type: card_type                     = .photo_full
+    public var type: card_type                     = .photo_full
     
-    var main_title_string                   = ""
-    var sub_title_string:       String?
-    var last_update_string:     String?
-    var description_string:     String?
-    
+    public var main_title_string                   = ""
+    public var sub_title_string:       String?
+    public var last_update_string:     String?
+    public var description_string:     String?
     
 }
 
-// MARK DATABASE
+// MARK: DATABASE
 
-class DBMCards: WCDBSwift.TableCodable {
+// 当没有网络连接时，从本地读取缓存。
+class DBMCard: WCDBSwift.TableCodable {
     
     var KEY: String?
     var type: card_type?
     
     enum CodingKeys: String, CodingTableKey {
-        typealias Root = DBMCards
+        typealias Root = DBMCard
         
         case KEY = "KEY"
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         
-        //Column constraints for primary key, unique, not null, default value and so on. It is optional.
         static var columnConstraintBindings: [CodingKeys: ColumnConstraintBinding]? {
             return [
                 KEY: ColumnConstraintBinding(isPrimary: true, isUnique: true)

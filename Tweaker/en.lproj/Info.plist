@@ -17,9 +17,18 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.5</string>
 	<key>CFBundleVersion</key>
-	<string>75</string>
+	<string>108</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>我们需要使用相机来拍摄您请求的照片。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>我们需要访问照片图库来获取您请求的照片。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

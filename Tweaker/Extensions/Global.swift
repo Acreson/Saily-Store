@@ -12,3 +12,6 @@
 @_exported import WCDBSwift
 @_exported import SnapKit
 @_exported import UIKit
+@_exported import SDWebImage
+
+

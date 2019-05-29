@@ -6,8 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-import UIKit
-
 class UIEnteryS: UITabBarController {
     
     override func viewDidLoad() {
@@ -15,6 +13,16 @@ class UIEnteryS: UITabBarController {
         
         print("[*] 将以 iPhone 的方式加载故事版。")
         
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let view = item.value(forKey: "_view") as? UIView else { return   }
+        for item in view.subviews {
+            if let image = item as? UIImageView {
+                image.shineAnimation()
+                break
+            }
+        }
     }
     
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-
-
 extension common_views {
     
     func create_AS_home_header_view() -> UIView {

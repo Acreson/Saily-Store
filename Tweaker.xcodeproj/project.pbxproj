@@ -13,6 +13,9 @@
 		ABE6DCF4229E8C2A00D18D9E /* DMCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
+		ABE6DD01229EBBB600D18D9E /* UIManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD00229EBBB600D18D9E /* UIManage.swift */; };
+		ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */; };
+		ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD04229ED2A000D18D9E /* DMSettings.swift */; };
 		ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */; };
 		ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */; };
 		ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7F1229D70120070A17E /* UIEnteryL.swift */; };
@@ -46,10 +49,14 @@
 		AB081F91229D4BDC00ACA4DD /* Tweaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
-		AB081FA0229D4BDD00ACA4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB198F7C229EDA36003A78BE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
+		AB198F7E229EDA3A003A78BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
+		ABE6DD00229EBBB600D18D9E /* UIManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManage.swift; sourceTree = "<group>"; };
+		ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsRepos.swift; sourceTree = "<group>"; };
+		ABE6DD04229ED2A000D18D9E /* DMSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSettings.swift; sourceTree = "<group>"; };
 		ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBars.xcassets; sourceTree = "<group>"; };
 		ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryS.swift; sourceTree = "<group>"; };
 		ABFBA7F1229D70120070A17E /* UIEnteryL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryL.swift; sourceTree = "<group>"; };
@@ -112,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				AB081F93229D4BDC00ACA4DD /* Tweaker */,
-				AB081FA0229D4BDD00ACA4DD /* Info.plist */,
 				AB081F92229D4BDC00ACA4DD /* Products */,
 				35F0FD9C7EF0DEEACEA4981B /* Pods */,
 				A8D167314D643758CB5730CD /* Frameworks */,
@@ -130,6 +136,7 @@
 		AB081F93229D4BDC00ACA4DD /* Tweaker */ = {
 			isa = PBXGroup;
 			children = (
+				AB198F7D229EDA36003A78BE /* Info.plist */,
 				ABFBA7E6229D566E0070A17E /* AssSets */,
 				ABFBA7E8229D6D8B0070A17E /* Themes */,
 				ABFBA7E4229D563C0070A17E /* Engine */,
@@ -162,6 +169,8 @@
 			children = (
 				ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */,
 				ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */,
+				ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */,
+				ABE6DD04229ED2A000D18D9E /* DMSettings.swift */,
 			);
 			name = DataModel;
 			path = Engine;
@@ -212,6 +221,7 @@
 				ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */,
 				ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */,
 				ABFBA839229D943C0070A17E /* UIHommy.swift */,
+				ABE6DD00229EBBB600D18D9E /* UIManage.swift */,
 			);
 			path = iPhoneOS;
 			sourceTree = "<group>";
@@ -362,7 +372,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\");\nbuildNumber=$(($buildNumber + 1));\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\";\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\");\nbuildNumber=$(($buildNumber + 1));\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\";\n";
 		};
 		D73B61CC6B752CEA0F6D0815 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -480,7 +490,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
+				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
+				ABE6DD01229EBBB600D18D9E /* UIManage.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
+				ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */,
 				ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */,
 				ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */,
 				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
@@ -507,6 +520,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		AB198F7D229EDA36003A78BE /* Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB198F7C229EDA36003A78BE /* zh-Hans */,
+				AB198F7E229EDA3A003A78BE /* en */,
+			);
+			name = Info.plist;
+			sourceTree = "<group>";
+		};
 		ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -670,7 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
-				INFOPLIST_FILE = Tweaker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tweaker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -690,7 +712,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
-				INFOPLIST_FILE = Tweaker/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tweaker/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8B5-uZ-pfY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YiD-tc-8Gh">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HommyS-->
+        <!--发现-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="UIHommyS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="UIHommyS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,11 +20,28 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="发现" image="News" id="efM-eE-DOU"/>
                     <navigationItem key="navigationItem" id="tam-RO-dIU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2833" y="320"/>
+            <point key="canvasLocation" x="1954" y="327"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jd7-SW-0qI">
+            <objects>
+                <navigationController id="YiD-tc-8Gh" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="OZr-0J-30y">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8B5-uZ-pfY" kind="relationship" relationship="rootViewController" id="KcH-4e-iW0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9b-ez-q5H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="664"/>
         </scene>
         <!--EnteryS-->
         <scene sceneID="jqo-i8-fZg">
@@ -38,7 +55,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="o8q-Gu-84n" kind="relationship" relationship="viewControllers" id="1Oo-uk-YLp"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="KCL-Z5-ULY"/>
                         <segue destination="rBA-fQ-iCr" kind="relationship" relationship="viewControllers" id="n70-dF-kFL"/>
                         <segue destination="DLb-iY-RTn" kind="relationship" relationship="viewControllers" id="860-I0-8s7"/>
                         <segue destination="56T-xO-pmK" kind="relationship" relationship="viewControllers" id="rxe-qh-L0P"/>
@@ -48,31 +65,10 @@
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="663.61607142857144"/>
         </scene>
-        <!--发现-->
-        <scene sceneID="nfq-At-H4l">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="o8q-Gu-84n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="News" id="gcX-np-kpX"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3vz-pa-Jed">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5vH-c0-yNV">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="RS1-p0-imR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cZa-so-wkV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1955" y="320"/>
-        </scene>
-        <!--View Controller-->
+        <!--Manage-->
         <scene sceneID="25N-dS-WN5">
             <objects>
-                <viewController id="htO-DB-OIi" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIManage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="htO-DB-OIi" customClass="UIManage" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tk4-EL-sxI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,6 +92,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qzu-LA-w1s">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="htO-DB-OIi" kind="relationship" relationship="rootViewController" id="oIY-Nh-2eW"/>
                     </connections>
