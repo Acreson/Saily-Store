@@ -33,7 +33,7 @@ extension common_views {
         formatter.dateFormat = "dd"
         sub_title_text += formatter.string(from: today) + "日".localized() + " "
         // 写日期到副标题
-        formatter.dateFormat = "EEEE"
+        formatter.dateFormat = "EEE"
         sub_title_text += formatter.string(from: today).localized()
 
         sub_title.text = sub_title_text
@@ -46,12 +46,13 @@ extension common_views {
             x.height.equalTo(18)
         }
         
+        
         main_title.text = "今日精选".localized()
         main_title.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
         main_title.font = UIFont(name: ".SFUIText-Bold", size: 34) ?? UIFont.systemFont(ofSize: 34)
         main_title.snp.makeConstraints { (x) in
             x.top.equalTo(sub_title.snp.bottom).offset(0)
-            x.left.equalTo(sub_title.snp.left).offset(0)
+            x.left.equalTo(sub_title.snp.left).offset(-1)
             x.width.equalTo(138)
             x.height.equalTo(48)
         }

@@ -10,6 +10,9 @@
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
+		ABE6DCF4229E8C2A00D18D9E /* DMCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */; };
+		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
+		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
 		ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */; };
 		ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */; };
 		ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA7F1229D70120070A17E /* UIEnteryL.swift */; };
@@ -44,6 +47,9 @@
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
 		AB081FA0229D4BDD00ACA4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCards.swift; sourceTree = "<group>"; };
+		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
+		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
 		ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBars.xcassets; sourceTree = "<group>"; };
 		ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryS.swift; sourceTree = "<group>"; };
 		ABFBA7F1229D70120070A17E /* UIEnteryL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIEnteryL.swift; sourceTree = "<group>"; };
@@ -124,14 +130,41 @@
 		AB081F93229D4BDC00ACA4DD /* Tweaker */ = {
 			isa = PBXGroup;
 			children = (
-				ABFBA7E4229D563C0070A17E /* Engine */,
 				ABFBA7E6229D566E0070A17E /* AssSets */,
 				ABFBA7E8229D6D8B0070A17E /* Themes */,
+				ABFBA7E4229D563C0070A17E /* Engine */,
+				ABE6DCF2229E8BDF00D18D9E /* DataModel */,
 				ABFBA7E5229D564E0070A17E /* Interface */,
 				ABFBA80D229D7DC40070A17E /* Extensions */,
 				ABFBA837229D8DC70070A17E /* Localizable.strings */,
 			);
 			path = Tweaker;
+			sourceTree = "<group>";
+		};
+		ABE6DCF0229E8BC600D18D9E /* Hommy */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA823229D801E0070A17E /* UIHommyView.swift */,
+			);
+			path = Hommy;
+			sourceTree = "<group>";
+		};
+		ABE6DCF1229E8BD600D18D9E /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		ABE6DCF2229E8BDF00D18D9E /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */,
+				ABE6DCF3229E8C2A00D18D9E /* DMCards.swift */,
+			);
+			name = DataModel;
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		ABFBA7E4229D563C0070A17E /* Engine */ = {
@@ -213,7 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				ABFBA829229D833B0070A17E /* CommonContainer.swift */,
-				ABFBA823229D801E0070A17E /* UIHommyView.swift */,
+				ABE6DCF1229E8BD600D18D9E /* Cards */,
+				ABE6DCF0229E8BC600D18D9E /* Hommy */,
 			);
 			path = CommanViews;
 			sourceTree = "<group>";
@@ -456,13 +490,16 @@
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */,
+				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
+				ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
 				ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */,
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
+				ABE6DCF4229E8C2A00D18D9E /* DMCards.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
