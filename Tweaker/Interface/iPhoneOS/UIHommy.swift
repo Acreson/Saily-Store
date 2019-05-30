@@ -9,6 +9,7 @@
 class UIHommyS: UIViewController {
     
     var container: UIScrollView?
+    var header_view: UIView?
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +34,7 @@ class UIHommyS: UIViewController {
         // 处理一下头条
         let header = LKRoot.ins_view_manager.create_AS_home_header_view()
         container!.addSubview(header)
+        header_view = header
         
         // 为所有不可删除 view 打 tag
         for item in view.subviews {
@@ -126,20 +128,109 @@ class UIHommyS: UIViewController {
             LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
                 if ret == 0 {
                     print("[*] 开始构建主页面")
-                    // 调整主容器大小
                     DispatchQueue.main.async {
-                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 450)
-                    }
-                    
-                    let debugger = LKRoot.container_news_repo
-                    print(debugger)
-                    
-                    var last_view = UIView()
-                    // 创建卡片组
-                    for repo in LKRoot.container_news_repo {
                         
+                        // 删除加载指示
+                        for item in self.view.subviews where item.tag == view_tags.indicator.rawValue {
+                            item.removeFromSuperview()
+                        }
+                        
+                        // 调整主容器大小
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 450)
+                        
+                        let debugger = LKRoot.container_news_repo
+                        print(debugger)
+                        
+                        // 第一个源的瞄点
+                        var last_view = UIView()
+                        if self.header_view != nil {
+                            last_view = self.header_view!
+                        }
+                        // 创建卡片组
+                        let card_width = UIScreen.main.bounds.width - 40
+                        for repo in LKRoot.container_news_repo {
+                            // 创建View
+                            let new_view = UIView()
+                            self.container?.addSubview(new_view)
+                            new_view.snp.makeConstraints({ (x) in
+                                x.top.equalTo(last_view.snp.bottom).offset(8)
+                                x.left.equalTo(self.view.snp.left)
+                                x.right.equalTo(self.view.snp.right)
+                                x.height.equalTo(450)
+                            })
+                            // 小标题
+                            let small_title = UILabel(text: repo.sub_title)
+                            small_title.font = UIFont(name: ".SFUIText-Semibold", size: 11) ?? UIFont.systemFont(ofSize: 11)
+                            if let color = UIColor(hexString: repo.subtitle_color) {
+                                small_title.textColor = color
+                            } else {
+                                small_title.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+                            }
+                            new_view.addSubview(small_title)
+                            small_title.snp.makeConstraints({ (x) in
+                                x.top.equalTo(new_view.snp.top).offset(4)
+                                x.left.equalTo(new_view.snp.left).offset(38)
+                            })
+                            // 大标题
+                            let big_title = UILabel(text: repo.title)
+                            big_title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                            if let color = UIColor(hexString: repo.title_color) {
+                                big_title.textColor = color
+                            } else {
+                                big_title.textColor = LKRoot.ins_color_manager.read_a_color("main_title_three")
+                            }
+                            new_view.addSubview(big_title)
+                            big_title.snp.makeConstraints({ (x) in
+                                x.top.equalTo(small_title.snp.bottom).offset(2)
+                                x.left.equalTo(small_title.snp.left).offset(0)
+                            })
+                            // 容器
+                            let cards_container = UIScrollView()
+                            cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * card_width + CGFloat(20) , height: CGFloat(340))
+                            new_view.addSubview(cards_container)
+                            cards_container.snp.makeConstraints({ (x) in
+                                x.height.equalTo(340)
+                                x.left.equalTo(self.view.snp.left)
+                                x.right.equalTo(self.view.snp.right)
+                                x.top.equalTo(big_title.snp.bottom).offset(18)
+                            })
+                            
+                            // 添加卡片
+                            var last_card = UIView()    // 定位片
+                            new_view.addSubview(last_card)
+                            last_card.snp.makeConstraints({ (x) in
+                                x.width.equalTo(0)
+                                x.height.equalTo(340)
+                                x.top.equalTo(cards_container.snp.top).offset(0)
+                                x.left.equalTo(cards_container.snp.left).offset(0)
+                            })
+                            for card in repo.cards {    // 开始添加
+                                let new_card_container = UIView()
+                                new_card_container.setRadius(radius: 8)
+                                new_card_container.addShadow(ofColor: UIColor(hexString: "0x9A9A9A")!, radius: 8, offset: CGSize(width: 6, height: 6), opacity: 0.5)
+                                cards_container.addSubview(new_card_container)
+                                new_card_container.snp.makeConstraints({ (x) in
+                                    x.top.equalTo(cards_container.snp.top)
+                                    x.left.equalTo(last_card.snp.right).offset(20)
+                                    x.width.equalTo(card_width)
+                                    x.height.equalTo(320)
+                                })
+                                let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card)
+                                new_card.setRadius(radius: 8)
+                                new_card_container.addSubview(new_card)
+                                new_card.snp.makeConstraints({ (x) in
+                                    x.top.equalTo(new_card_container.snp.top).offset(0)
+                                    x.left.equalTo(new_card_container.snp.left).offset(0)
+                                    x.right.equalTo(new_card_container.snp.right).offset(0)
+                                    x.bottom.equalTo(new_card_container.snp.bottom).offset(0)
+                                })
+                                last_card = new_card_container
+                            }
+                            
+                            // 移动瞄点
+                            last_view = new_view
+                        }
                     }
-                    
                 } else {
                     DispatchQueue.main.async {
                         for item in self.view.subviews where item.tag == view_tags.indicator.rawValue {
