@@ -14,5 +14,23 @@ extension String {
         return NSLocalizedString(self, comment: comment)
     }
     
+    func drop_space() -> String {
+        var ret = self
+        while ret.hasPrefix(" ") {
+            ret = ret.dropFirst().to_String()
+        }
+        while ret.hasSuffix(" ") {
+            ret = ret.dropLast().to_String()
+        }
+        return ret
+    }
+    
 }
 
+extension Substring {
+    
+    func to_String() -> String {
+        return String(self)
+    }
+    
+}

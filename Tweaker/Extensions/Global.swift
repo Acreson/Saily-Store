@@ -13,5 +13,5 @@
 @_exported import SnapKit
 @_exported import UIKit
 @_exported import SDWebImage
-
+@_exported import Alamofire
 

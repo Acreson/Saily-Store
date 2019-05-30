@@ -39,6 +39,9 @@
          location = "group:Info">
       </FileRef>
       <FileRef
+         location = "group:base">
+      </FileRef>
+      <FileRef
          location = "group:zh-Hans">
       </FileRef>
    </Group>

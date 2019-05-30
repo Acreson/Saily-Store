@@ -10,12 +10,15 @@
 
 class DMNewsRepo {
     
-    public var name         = String()
-    public var link         = String()
-    public var language     = [String]()
-    public var title        = String()
-    public var sub_title    = String()
-    public var icon         = String()
+    public var name                 = String()
+    public var link                 = String()
+    public var language             = [String]()
+    public var title                = String()
+    public var sub_title            = String()
+    public var icon                 = String()
+    
+    public var title_color          = String()
+    public var subtitle_color       = String()
     
 }
 

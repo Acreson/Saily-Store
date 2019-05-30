@@ -22,6 +22,7 @@ class app_root_class {
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()
     public let queue_dispatch                                   = DispatchQueue(label: "com.lakr233.common.queue", qos: .utility, attributes: .concurrent)
+    public let queue_alamofire                                  = DispatchQueue(label: "com.lakr233.alamofire.queue", qos: .utility, attributes: .concurrent)
     
     var container_cache_uiview = [UIView]()                 // 视图缓存咯
     var container_news_repo    = [DMNewsRepo]()             // 新闻源缓存
@@ -52,7 +53,7 @@ class app_root_class {
         
         // 检查数据库数据完整性
         try? root_db?.create(table: "LKNewsRepos", of: DBMNewsRepo.self)
-        try? root_db?.create(table: "LKSettings", of: DBMNewsRepo.self)
+        try? root_db?.create(table: "LKSettings", of: DBMSettings.self)
         let read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
         if read_try == nil || read_try?.count == 0 {
             // 开始初始化数据库
@@ -60,11 +61,8 @@ class app_root_class {
             // 伪造UDID
             let fake_udid = UUID().uuidString
             var fake_udid_out = ""
-            for item in fake_udid {
-                // swiftlint:disable:next for_where
-                if item != "-" {
-                    fake_udid_out += item.description
-                }
+            for item in fake_udid where item != "-" {
+                fake_udid_out += item.description
             }
             fake_udid_out += UUID().uuidString.dropLast(28)
             fake_udid_out = fake_udid_out.lowercased()

@@ -9,3 +9,4 @@
 "日" = "";
 "月" = " - ";
 "今日精选" = "Todays";
+"LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n" = "LKRP-TITLE| |Failed to load this news repo.\nLKRP-SUBTITLE| |Please retry.\n";
