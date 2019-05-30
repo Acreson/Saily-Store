@@ -52,7 +52,7 @@ class UIHommyS: UIViewController {
             x.top.equalTo(self.container!.snp.top)
             x.left.equalTo(self.view.snp.left)
             x.right.equalTo(self.view.snp.right)
-            x.height.equalTo(128)
+            x.height.equalTo(100)
         })
         
         // 发送到加载
@@ -136,7 +136,7 @@ class UIHommyS: UIViewController {
                         }
                         
                         // 调整主容器大小
-                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 460) + 128
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128
                         
                         let debugger = LKRoot.container_news_repo
                         print(debugger)
@@ -156,7 +156,7 @@ class UIHommyS: UIViewController {
                                 x.top.equalTo(last_view.snp.bottom).offset(8)
                                 x.left.equalTo(self.view.snp.left)
                                 x.right.equalTo(self.view.snp.right)
-                                x.height.equalTo(450)
+                                x.height.equalTo(415)
                             })
                             // 小标题
                             let small_title = UILabel(text: repo.sub_title)
