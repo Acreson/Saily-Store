@@ -20,6 +20,8 @@ class DMNewsRepo {
     public var title_color          = String()
     public var subtitle_color       = String()
     
+    public var cards                = [DMNewsCard]()
+    
 }
 
 // MARK: DATABASE

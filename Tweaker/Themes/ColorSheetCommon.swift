@@ -45,4 +45,6 @@ class color_sheet {
                     "submain_title_one"             : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1)     // UIColor(hex: 0x9A9A9A),
     ]
     
+    
+    
 }

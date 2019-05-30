@@ -124,7 +124,51 @@ class UIHommyS: UIViewController {
         print("[*] 开始加载今日精选。")
         LKRoot.queue_dispatch.async {
             LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
-                print(ret)
+                if ret == 0 {
+                    print("[*] 开始构建主页面")
+                    // 调整主容器大小
+                    DispatchQueue.main.async {
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 450)
+                    }
+                    
+                    let debugger = LKRoot.container_news_repo
+                    print(debugger)
+                    
+                    var last_view = UIView()
+                    // 创建卡片组
+                    for repo in LKRoot.container_news_repo {
+                        
+                    }
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        for item in self.view.subviews where item.tag == view_tags.indicator.rawValue {
+                            item.removeFromSuperview()
+                        }
+                        
+                        let retry_button = UIButton()
+                        retry_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_tint_color"), for: .normal)
+                        retry_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("button_touched_color"), for: .highlighted)
+                        retry_button.setTitle("加载失败 点击重试".localized(), for: .normal)
+                        retry_button.addTarget(self, action: #selector(self.build_view), for: .touchUpInside)
+                        self.view.addSubview(retry_button)
+                        retry_button.snp.makeConstraints { (x) in
+                            x.centerX.equalTo(self.view.snp.centerX)
+                            x.centerY.equalTo(self.view.snp.centerY).offset(66)
+                        }
+                        
+                        let label = UILabel()
+                        label.text = "!"
+                        label.font = UIFont(name: ".SFUIText-Semibold", size: 88) ?? UIFont.systemFont(ofSize: 88)
+                        label.textAlignment = .center
+                        label.textColor = LKRoot.ins_color_manager.read_a_color("button_touched_color")
+                        self.view.addSubview(label)
+                        label.snp.makeConstraints { (x) in
+                            x.centerX.equalTo(self.view.snp.centerX)
+                            x.centerY.equalTo(self.view.snp.centerY).offset(0)
+                        }
+                    } // DispatchQueue
+                } // if
             })
         }
         

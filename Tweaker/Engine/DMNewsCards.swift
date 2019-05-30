@@ -15,10 +15,19 @@ class DMNewsCard {
     
     public var type: card_type                     = .photo_full
     
-    public var main_title_string                   = ""
+    public var content: String?                    = String()
+    
+    public var image_container                     = [String]()
+    
+    public var main_title_string                   = String()
     public var sub_title_string:       String?
     public var last_update_string:     String?
     public var description_string:     String?
+    
+    public var main_title_string_color             = String()
+    public var sub_title_string_color              = String()
+    public var last_update_string_color            = String()
+    public var description_string_color            = String()
     
 }
 
