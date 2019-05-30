@@ -73,6 +73,12 @@ class app_root_class {
             default_news_repos.link = "https://lakraream.github.io/Tweaker/"
             default_news_repos.sort_id = 0
             try? root_db?.insert(objects: [default_news_repos], intoTable: "LKNewsRepos")
+            #if DEBUG
+            let default_news_repos_local = DBMNewsRepo()
+            default_news_repos_local.link = "http://192.168.6.111/repos/Tweaker/"
+            default_news_repos_local.sort_id = 1
+            try? root_db?.insert(objects: [default_news_repos_local], intoTable: "LKNewsRepos")
+            #endif
         }
         
         

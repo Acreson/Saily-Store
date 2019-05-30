@@ -136,7 +136,7 @@ class UIHommyS: UIViewController {
                         }
                         
                         // 调整主容器大小
-                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 450)
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 460) + 128
                         
                         let debugger = LKRoot.container_news_repo
                         print(debugger)
@@ -168,7 +168,7 @@ class UIHommyS: UIViewController {
                             }
                             new_view.addSubview(small_title)
                             small_title.snp.makeConstraints({ (x) in
-                                x.top.equalTo(new_view.snp.top).offset(4)
+                                x.top.equalTo(new_view.snp.top).offset(18)
                                 x.left.equalTo(new_view.snp.left).offset(38)
                             })
                             // 大标题
@@ -186,7 +186,7 @@ class UIHommyS: UIViewController {
                             })
                             // 容器
                             let cards_container = UIScrollView()
-                            cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * card_width + CGFloat(20) , height: CGFloat(350))
+                            cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * (card_width + 27.5) + 27.5, height: 350)
                             new_view.addSubview(cards_container)
                             cards_container.snp.makeConstraints({ (x) in
                                 x.height.equalTo(350)

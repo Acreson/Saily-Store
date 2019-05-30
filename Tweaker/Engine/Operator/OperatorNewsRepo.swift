@@ -102,7 +102,7 @@ extension app_opeerator {
                 // 无法合成下载链接，丢弃数据
             }
             net_semaphore_2.wait()
-            new.cards = NP_cards_content_invoker(content_str: read_cards!)
+            new.cards = NP_cards_content_invoker(content_str: read_cards ?? "")
             // 放内存
             LKRoot.container_news_repo.append(new)
         } // for
