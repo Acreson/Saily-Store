@@ -5,7 +5,7 @@
 
 #   case photo_full                             = 0x101
 #   case photo_full_with_banner_down_dark       = 0x102
-#   case photo_half_with_banner_down_lioght     = 0x111
+#   case photo_half_with_banner_down_light     = 0x111
 #   case river_view_animate                     = 0x201
 #   case river_view_static                      = 0x202
 
@@ -45,7 +45,7 @@ LKCD-SUBTITLE-COLOR|                            |0xFFFFFF
 
 --> Begin Card
 
-LKCD-TYPE|                                      |photo_half_with_banner_down_lioght
+LKCD-TYPE|                                      |photo_half_with_banner_down_light
 LKCD-TITLE|                                     |OpenSSH 密码与安全|掌握你的设备。
 LKCD-SUBTITLE|                                  |出来乍到必备教学
 LKCD-DESSTR|                                    |Written By Lakr Aream
@@ -59,7 +59,7 @@ LKCD-DESSTR-COLOR|                              |0x999999
 
 --> Begin Card
 
-LKCD-TYPE|                                      |photo_half_with_banner_down_lioght
+LKCD-TYPE|                                      |photo_half_with_banner_down_light
 LKCD-TITLE|                                     |Renet - 连个锤子|应用无法联网一键修复方案
 LKCD-SUBTITLE|                                  |专为🇨🇳的iPhone和iPad设计
 LKCD-DESSTR|                                    |Written By Lakr Aream

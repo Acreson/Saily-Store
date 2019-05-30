@@ -147,7 +147,7 @@ class UIHommyS: UIViewController {
                             last_view = self.header_view!
                         }
                         // 创建卡片组
-                        let card_width = UIScreen.main.bounds.width - 40
+                        let card_width = UIScreen.main.bounds.width - 55
                         for repo in LKRoot.container_news_repo {
                             // 创建View
                             let new_view = UIView()
@@ -186,10 +186,10 @@ class UIHommyS: UIViewController {
                             })
                             // 容器
                             let cards_container = UIScrollView()
-                            cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * card_width + CGFloat(20) , height: CGFloat(340))
+                            cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * card_width + CGFloat(20) , height: CGFloat(350))
                             new_view.addSubview(cards_container)
                             cards_container.snp.makeConstraints({ (x) in
-                                x.height.equalTo(340)
+                                x.height.equalTo(350)
                                 x.left.equalTo(self.view.snp.left)
                                 x.right.equalTo(self.view.snp.right)
                                 x.top.equalTo(big_title.snp.bottom).offset(18)
@@ -197,10 +197,10 @@ class UIHommyS: UIViewController {
                             
                             // 添加卡片
                             var last_card = UIView()    // 定位片
-                            new_view.addSubview(last_card)
+                            cards_container.addSubview(last_card)
                             last_card.snp.makeConstraints({ (x) in
                                 x.width.equalTo(0)
-                                x.height.equalTo(340)
+                                x.height.equalTo(333)
                                 x.top.equalTo(cards_container.snp.top).offset(0)
                                 x.left.equalTo(cards_container.snp.left).offset(0)
                             })
@@ -211,9 +211,9 @@ class UIHommyS: UIViewController {
                                 cards_container.addSubview(new_card_container)
                                 new_card_container.snp.makeConstraints({ (x) in
                                     x.top.equalTo(cards_container.snp.top)
-                                    x.left.equalTo(last_card.snp.right).offset(20)
+                                    x.left.equalTo(last_card.snp.right).offset(27.5)
                                     x.width.equalTo(card_width)
-                                    x.height.equalTo(320)
+                                    x.height.equalTo(333)
                                 })
                                 let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card)
                                 new_card.setRadius(radius: 8)

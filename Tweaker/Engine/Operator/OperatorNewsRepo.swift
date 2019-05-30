@@ -201,7 +201,7 @@ extension app_opeerator {
             case "LKCD-TYPE":
                 switch body {
                 case "photo_full_with_banner_down_dark": ins_card.type = card_type.photo_full_with_banner_down_dark
-                case "photo_half_with_banner_down_lioght": ins_card.type = card_type.photo_half_with_banner_down_lioght
+                case "photo_half_with_banner_down_light": ins_card.type = card_type.photo_half_with_banner_down_light
                 case "river_view_animate": ins_card.type = card_type.river_view_animate
                 case "river_view_static": ins_card.type = card_type.river_view_static
                 default: ins_card.type = card_type.photo_full
