@@ -32,6 +32,7 @@ private class PPShineLayer: CAShapeLayer {
 
 extension UIView {
     
+    // 可能要弃用
     func dropShadow() {
         self.layer.masksToBounds = false
         self.layer.shadowColor = UIColor.black.cgColor

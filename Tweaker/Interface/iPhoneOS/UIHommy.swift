@@ -189,10 +189,10 @@ class UIHommyS: UIViewController {
                             cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * (card_width + 27.5) + 27.5, height: 350)
                             new_view.addSubview(cards_container)
                             cards_container.snp.makeConstraints({ (x) in
-                                x.height.equalTo(350)
+                                x.height.equalTo(360)
                                 x.left.equalTo(self.view.snp.left)
                                 x.right.equalTo(self.view.snp.right)
-                                x.top.equalTo(big_title.snp.bottom).offset(18)
+                                x.top.equalTo(big_title.snp.bottom).offset(8)
                             })
                             
                             // 添加卡片
@@ -200,21 +200,21 @@ class UIHommyS: UIViewController {
                             cards_container.addSubview(last_card)
                             last_card.snp.makeConstraints({ (x) in
                                 x.width.equalTo(0)
-                                x.height.equalTo(333)
+                                x.height.equalTo(360)
                                 x.top.equalTo(cards_container.snp.top).offset(0)
                                 x.left.equalTo(cards_container.snp.left).offset(0)
                             })
                             for card in repo.cards {    // 开始添加
                                 let new_card_container = UIView()
                                 new_card_container.setRadius(radius: 8)
-                                new_card_container.dropShadow()
+                                new_card_container.addShadow(ofColor: UIColor(hexString: "0x9A9A9A")!)
                                 new_card_container.clipsToBounds = false
                                 cards_container.addSubview(new_card_container)
                                 new_card_container.snp.makeConstraints({ (x) in
-                                    x.top.equalTo(cards_container.snp.top)
+                                    x.top.equalTo(cards_container.snp.top).offset(10)
                                     x.left.equalTo(last_card.snp.right).offset(27.5)
                                     x.width.equalTo(card_width)
-                                    x.height.equalTo(333)
+                                    x.height.equalTo(360 - 20)
                                 })
                                 let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card)
                                 new_card.setRadius(radius: 8)

@@ -202,12 +202,12 @@ extension common_views {
                     animate_request = true
                 }
                 let new_river = ASMultiAppsView()
-                new_river.apart_init(card_width: 480, card_hight: 480,
+                new_river.apart_init(card_width: 400, card_hight: 320,
                                      images: info.image_container,
                                      animate: animate_request,
-                                     image_width: 66, image_hight: 66,
+                                     image_width: 77, image_hight: 77,
                                      image_angle: -23.33,
-                                     image_gap: 12, image_radius: 8)
+                                     image_gap: 13, image_radius: 12)
                 let river_holder = UIView()
                 river_holder.clipsToBounds = true
                 ret.addSubview(river_holder)
@@ -220,8 +220,8 @@ extension common_views {
                 }
                 new_river.snp.makeConstraints { (x) in
                     x.center.equalTo(river_holder.snp.center)
-                    x.height.equalTo(480)
-                    x.width.equalTo(480)
+                    x.height.equalTo(400)
+                    x.width.equalTo(320)
                 }
                 
             }
