@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.backgroundColor = #colorLiteral(red: 0.2880531251, green: 0.5978398919, blue: 0.9421789646, alpha: 1)
+        self.window!.backgroundColor = #colorLiteral(red: 0.2882809639, green: 0.5985316038, blue: 0.9432967305, alpha: 1)
         self.window!.makeKeyAndVisible()
         
         // Twitter 动画

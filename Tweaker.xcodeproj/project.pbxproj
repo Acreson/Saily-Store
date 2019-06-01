@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
+		AB1461AE22A26AD500C031FE /* ASMultiAppsRiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */; };
 		AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F80229EDC74003A78BE /* CommonOperator.swift */; };
 		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
 		AB53B64F22A021D800492BAB /* CreateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53B64E22A021D800492BAB /* CreateCard.swift */; };
@@ -52,6 +53,7 @@
 		AB081F91229D4BDC00ACA4DD /* Tweaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
+		AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASMultiAppsRiver.swift; sourceTree = "<group>"; };
 		AB198F7C229EDA36003A78BE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
 		AB198F7E229EDA3A003A78BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		AB198F80229EDC74003A78BE /* CommonOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOperator.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			children = (
 				ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */,
 				AB53B64E22A021D800492BAB /* CreateCard.swift */,
+				AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -419,80 +422,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tweaker/Pods-Tweaker-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
-				"${BUILT_PRODUCTS_DIR}/BitByteData/BitByteData.framework",
-				"${BUILT_PRODUCTS_DIR}/CardParts/CardParts.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
-				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
-				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
-				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
-				"${BUILT_PRODUCTS_DIR}/InAppViewDebugger/InAppViewDebugger.framework",
-				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
-				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/NightNight/NightNight.framework",
-				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer-22/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
-				"${BUILT_PRODUCTS_DIR}/SWCompression/SWCompression.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/UIImageColors/UIImageColors.framework",
-				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
-				"${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
-				"${BUILT_PRODUCTS_DIR}/fishhook/fishhook.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Tweaker/Pods-Tweaker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BitByteData.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardParts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppViewDebugger.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NightNight.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWCompression.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImageColors.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDBSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fishhook.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Tweaker/Pods-Tweaker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -506,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB1461AE22A26AD500C031FE /* ASMultiAppsRiver.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManage.swift in Sources */,

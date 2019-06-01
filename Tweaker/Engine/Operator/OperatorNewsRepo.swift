@@ -29,6 +29,7 @@ extension app_opeerator {
             // 下载数据 丢弃所有下载失败的源数据。
             let net_semaphore = DispatchSemaphore(value: 0)
             if let request_url = URL(string: (new.link + "Info")) {
+                print("[*] 准备从 " + request_url.absoluteString + " 请求数据。")
                 AF.request(request_url).response(queue: LKRoot.queue_alamofire) { (respond) in
                     switch respond.result {
                     case .success:
@@ -58,7 +59,18 @@ extension app_opeerator {
                 // 无法合成下载链接，丢弃数据
                 item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
             }
+            var signal_ed_62 = false
+            LKRoot.queue_dispatch.async {
+                sleep(UInt32(LKRoot.settings?.network_timeout ?? 6))
+                if signal_ed_62 {
+                    return
+                }
+                item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
+                net_semaphore.signal()
+                print("[*] 网络数据超时，放弃数据。")
+            }
             net_semaphore.wait()
+            signal_ed_62 = true
             // 更新数据库
             let new_update = DBMNewsRepo()
             new_update.content = item.content
@@ -67,7 +79,7 @@ extension app_opeerator {
                                         with: new_update,
                                         where: DBMNewsRepo.Properties.link == item.link!)
             // 解包
-            NP_content_invoker(content_str: item.content!, target_RAM: new)
+            NP_content_invoker(content_str: item.content ?? "", target_RAM: new)
             // 下载卡片内容
             var dl_url_str = new.link
             var got_a_link = false
@@ -86,6 +98,7 @@ extension app_opeerator {
             var read_cards: String?
             let net_semaphore_2 = DispatchSemaphore(value: 0)
             if let dl_url = URL(string: dl_url_str) {
+                print("[*] 准备从 " + dl_url.absoluteString + " 请求数据。")
                 AF.request(dl_url).response { (respond) in
                     if respond.data != nil {
                         read_cards = String(data: respond.data!, encoding: .utf8)
@@ -93,7 +106,20 @@ extension app_opeerator {
                             read_cards = String(data: respond.data!, encoding: .ascii)
                         }
                         if read_cards == nil {
-                            read_cards = ""
+                            read_cards = """
+                            --> Begin Card
+                            LKCD-TYPE|                                      |photo_half_with_banner_down_light
+                            LKCD-TITLE|                                     |无法解析新闻内容|请联系维护者尽快修复
+                            LKCD-SUBTITLE|                                  |BAD NETWORK RESULT
+                            LKCD-DESSTR|                                    |--- ERROR ---
+                            LKCD-PHOTO|                                     |LKINTERNAL-ERROR-LOAD
+                            
+                            LKCD-TITLE-COLOR|                               |0x000000
+                            LKCD-SUBTITLE-COLOR|                            |0x0AAADD
+                            LKCD-DESSTR-COLOR|                              |0x999999
+                            
+                            ---> End Card
+                            """
                         }
                     }
                     net_semaphore_2.signal()
@@ -101,7 +127,31 @@ extension app_opeerator {
             } else {
                 // 无法合成下载链接，丢弃数据
             }
+            var signal_ed_130 = false
+            LKRoot.queue_dispatch.async {
+                sleep(UInt32(LKRoot.settings?.network_timeout ?? 6))
+                if signal_ed_130 {
+                    return
+                }
+                read_cards = """
+                --> Begin Card
+                LKCD-TYPE|                                      |photo_half_with_banner_down_light
+                LKCD-TITLE|                                     |无法下载新闻内容|请联系维护者尽快修复
+                LKCD-SUBTITLE|                                  |BAD NETWORK RESULT
+                LKCD-DESSTR|                                    |--- ERROR ---
+                LKCD-PHOTO|                                     |LKINTERNAL-ERROR-LOAD
+                
+                LKCD-TITLE-COLOR|                               |0x000000
+                LKCD-SUBTITLE-COLOR|                            |0x0AAADD
+                LKCD-DESSTR-COLOR|                              |0x999999
+                
+                ---> End Card
+                """
+                net_semaphore_2.signal()
+                print("[*] 网络数据超时，放弃数据。")
+            }
             net_semaphore_2.wait()
+            signal_ed_130 = true
             new.cards = NP_cards_content_invoker(content_str: read_cards ?? "")
             // 放内存
             LKRoot.container_news_repo.append(new)
@@ -209,7 +259,11 @@ extension app_opeerator {
             case "LKCD-TITLE": ins_card.main_title_string = body
             case "LKCD-SUBTITLE": ins_card.sub_title_string = body
             case "LKCD-DESSTR": ins_card.description_string = body
-            case "LKCD-PHOTO": ins_card.image_container.append(body)
+            case "LKCD-PHOTO":
+                for photo in body.split(separator: ",") {
+                    let photo = photo.to_String().drop_space()
+                    ins_card.image_container.append(photo)
+                }
             case "LKCD-TITLE-COLOR": ins_card.main_title_string_color = body
             case "LKCD-SUBTITLE-COLOR": ins_card.sub_title_string_color = body
             case "LKCD-DESSTR-COLOR": ins_card.description_string_color = body

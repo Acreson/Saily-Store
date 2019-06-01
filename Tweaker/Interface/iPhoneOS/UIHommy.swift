@@ -207,7 +207,8 @@ class UIHommyS: UIViewController {
                             for card in repo.cards {    // 开始添加
                                 let new_card_container = UIView()
                                 new_card_container.setRadius(radius: 8)
-                                new_card_container.addShadow(ofColor: UIColor(hexString: "0x9A9A9A")!, radius: 8, offset: CGSize(width: 6, height: 6), opacity: 0.5)
+                                new_card_container.dropShadow()
+                                new_card_container.clipsToBounds = false
                                 cards_container.addSubview(new_card_container)
                                 new_card_container.snp.makeConstraints({ (x) in
                                     x.top.equalTo(cards_container.snp.top)

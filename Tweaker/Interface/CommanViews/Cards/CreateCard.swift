@@ -161,6 +161,70 @@ extension common_views {
                     x.bottom.equalTo(des_str.snp.top).offset(0)
                 }
             }
+        case .river_view_static, .river_view_animate:
+            do {
+                ret.backgroundColor = .white
+                // 俩标题
+                let sub_title = UILabel(text: info.sub_title_string)
+                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                if let color = UIColor(hexString: info.sub_title_string_color) {
+                    sub_title.textColor = color
+                } else {
+                    sub_title.textColor = .gray
+                }
+                let title = UITextView()
+                title.text = info.main_title_string
+                title.isUserInteractionEnabled = false
+                title.font = UIFont(name: ".SFUIText-Bold", size: 26) ?? UIFont.systemFont(ofSize: 26)
+                title.backgroundColor = .clear
+                if let color = UIColor(hexString: info.main_title_string) {
+                    title.textColor = color
+                } else {
+                    title.textColor = .black
+                }
+                title.textContainer.maximumNumberOfLines = 2
+                title.textContainer.lineBreakMode = .byWordWrapping
+                ret.addSubview(sub_title)
+                ret.addSubview(title)
+                sub_title.snp.makeConstraints { (x) in
+                    x.top.equalTo(ret.snp.top).offset(18)
+                    x.left.equalTo(ret.snp.left).offset(18)
+                }
+                title.snp.makeConstraints { (x) in
+                    x.top.equalTo(sub_title.snp.bottom).offset(0)
+                    x.left.equalTo(sub_title.snp.left).offset(-4)
+                    x.right.equalTo(ret.snp.right).offset(-14)
+                    x.height.equalTo(38)
+                }
+                // 创建ASMultiAppsRiver
+                var animate_request = false
+                if info.type == .river_view_animate {
+                    animate_request = true
+                }
+                let new_river = ASMultiAppsView()
+                new_river.apart_init(card_width: 480, card_hight: 480,
+                                     images: info.image_container,
+                                     animate: animate_request,
+                                     image_width: 66, image_hight: 66,
+                                     image_angle: -23.33,
+                                     image_gap: 12, image_radius: 8)
+                let river_holder = UIView()
+                river_holder.clipsToBounds = true
+                ret.addSubview(river_holder)
+                river_holder.addSubview(new_river)
+                river_holder.snp.makeConstraints { (x) in
+                    x.top.equalTo(title.snp.bottom).offset(18)
+                    x.left.equalTo(ret.snp.left)
+                    x.right.equalTo(ret.snp.right)
+                    x.bottom.equalTo(ret.snp.bottom)
+                }
+                new_river.snp.makeConstraints { (x) in
+                    x.center.equalTo(river_holder.snp.center)
+                    x.height.equalTo(480)
+                    x.width.equalTo(480)
+                }
+                
+            }
         default:
             print("[*] 这啥玩意哦？")
         }
