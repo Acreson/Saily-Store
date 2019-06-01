@@ -207,7 +207,7 @@ extension common_views {
                                      animate: animate_request,
                                      image_width: 77, image_hight: 77,
                                      image_angle: -23.33,
-                                     image_gap: 13, image_radius: 12)
+                                     image_gap: 13, image_radius: 16)
                 let river_holder = UIView()
                 river_holder.clipsToBounds = true
                 ret.addSubview(river_holder)

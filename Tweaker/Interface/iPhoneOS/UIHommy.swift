@@ -136,7 +136,7 @@ class UIHommyS: UIViewController {
                         }
                         
                         // 调整主容器大小
-                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128 + 66
                         
                         let debugger = LKRoot.container_news_repo
                         print(debugger)
@@ -188,6 +188,7 @@ class UIHommyS: UIViewController {
                             let cards_container = UIScrollView()
                             cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * (card_width + 27.5) + 27.5, height: 350)
                             new_view.addSubview(cards_container)
+                            cards_container.decelerationRate = .fast
                             cards_container.snp.makeConstraints({ (x) in
                                 x.height.equalTo(360)
                                 x.left.equalTo(self.view.snp.left)
@@ -231,6 +232,19 @@ class UIHommyS: UIViewController {
                             // 移动瞄点
                             last_view = new_view
                         }
+                        
+                        // 署名
+                        let label = UILabel()
+                        label.text = "Designed By @Lakr233 2019.5"
+                        label.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
+                        label.alpha = 0.233
+                        label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                        self.container?.addSubview(label)
+                        label.snp.makeConstraints({ (x) in
+                            x.top.equalTo(last_view.snp.bottom).offset(42)
+                            x.centerX.equalTo(self.view.snp.centerX)
+                        })
+                        
                     }
                 } else {
                     DispatchQueue.main.async {
