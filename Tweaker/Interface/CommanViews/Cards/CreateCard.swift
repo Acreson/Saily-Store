@@ -155,10 +155,90 @@ extension common_views {
                     x.left.equalTo(ret.snp.left).offset(18)
                 }
                 title.snp.makeConstraints { (x) in
-                    x.top.equalTo(sub_title.snp.bottom).offset(0)
+                    x.top.equalTo(sub_title.snp.bottom).offset(2.333)
                     x.left.equalTo(ret.snp.left).offset(12)
                     x.right.equalTo(ret.snp.right).offset(-12)
                     x.bottom.equalTo(des_str.snp.top).offset(0)
+                }
+            }
+        case .photo_full_with_banner_down_dark:
+            do {
+                // 图片底
+                if let image_url = URL(string: info.image_container.first ?? "") {
+                    let bg = UIImageView()
+                    bg.sd_setImage(with: image_url, placeholderImage: UIImage(named: "SDWebImagePlaceHolder"))
+                    bg.contentMode = .scaleAspectFill
+                    bg.clipsToBounds = true
+                    ret.addSubview(bg)
+                    bg.snp.makeConstraints { (x) in
+                        x.top.equalTo(ret.snp.top)
+                        x.left.equalTo(ret.snp.left)
+                        x.bottom.equalTo(ret.snp.bottom)
+                        x.right.equalTo(ret.snp.right)
+                    }
+                } else {
+                    let bg = UIView()
+                    bg.backgroundColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
+                    ret.addSubview(bg)
+                    bg.snp.makeConstraints { (x) in
+                        x.top.equalTo(ret.snp.top)
+                        x.left.equalTo(ret.snp.left)
+                        x.bottom.equalTo(ret.snp.bottom)
+                        x.right.equalTo(ret.snp.right)
+                    }
+                    
+                }
+                // 黑色底
+                let dummy = UIView()
+                dummy.backgroundColor = .black
+                dummy.alpha = 0.75
+                ret.addSubview(dummy)
+                dummy.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left)
+                    x.right.equalTo(ret.snp.right)
+                    x.bottom.equalTo(ret.snp.bottom)
+                    x.height.equalTo(98)
+                }
+                // 俩标题
+                let sub_title = UILabel(text: info.sub_title_string)
+                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                if let color = UIColor(hexString: info.sub_title_string_color) {
+                    sub_title.textColor = color
+                } else {
+                    sub_title.textColor = .white
+                }
+                let title = UILabel(text: info.main_title_string)
+                title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                if let color = UIColor(hexString: info.main_title_string) {
+                    title.textColor = color
+                } else {
+                    title.textColor = .white
+                }
+                ret.addSubview(sub_title)
+                ret.addSubview(title)
+                sub_title.snp.makeConstraints { (x) in
+                    x.top.equalTo(dummy.snp.top).offset(18)
+                    x.left.equalTo(ret.snp.left).offset(18)
+                }
+                title.snp.makeConstraints { (x) in
+                    x.top.equalTo(sub_title.snp.bottom).offset(2)
+                    x.left.equalTo(sub_title.snp.left).offset(0)
+                }
+                // 底下的文字
+                let des_str = UILabel()
+                des_str.text = info.description_string
+                des_str.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                if let color = UIColor(hexString: info.description_string_color) {
+                    des_str.textColor = color
+                } else {
+                    des_str.textColor = .gray
+                }
+                
+                ret.addSubview(des_str)
+                des_str.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(18)
+                    x.right.equalTo(ret.snp.right).offset(-18)
+                    x.top.equalTo(title.snp.bottom).offset(2)
                 }
             }
         case .river_view_static, .river_view_animate:

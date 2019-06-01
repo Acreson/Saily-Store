@@ -44,20 +44,20 @@ extension app_opeerator {
                             read = String(data: respond.data!, encoding: .ascii)
                         }
                         if read == nil {
-                            item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
+                            item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
                             print("[E] 无法解压下载的 Info 数据，丢弃")
                         } else {
                             item.content = read
                         }
                     default:
                         // 无法合成下载链接，丢弃数据
-                        item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
+                        item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
                     } // switch
                     net_semaphore.signal()
                 } // AF
             } else {
                 // 无法合成下载链接，丢弃数据
-                item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
+                item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
             }
             var signal_ed_62 = false
             LKRoot.queue_dispatch.async {
@@ -65,7 +65,7 @@ extension app_opeerator {
                 if signal_ed_62 {
                     return
                 }
-                item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n"
+                item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
                 net_semaphore.signal()
                 print("[*] 网络数据超时，放弃数据。")
             }
@@ -119,7 +119,7 @@ extension app_opeerator {
                             LKCD-DESSTR-COLOR|                              |0x999999
                             
                             ---> End Card
-                            """
+                            """.localized()
                         }
                     }
                     net_semaphore_2.signal()
@@ -146,7 +146,7 @@ extension app_opeerator {
                 LKCD-DESSTR-COLOR|                              |0x999999
                 
                 ---> End Card
-                """
+                """.localized()
                 net_semaphore_2.signal()
                 print("[*] 网络数据超时，放弃数据。")
             }
