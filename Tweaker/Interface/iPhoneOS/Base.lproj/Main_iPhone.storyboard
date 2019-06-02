@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="663.61607142857144"/>
         </scene>
-        <!--Manage-->
+        <!--ManageS-->
         <scene sceneID="25N-dS-WN5">
             <objects>
-                <viewController storyboardIdentifier="UIManage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="htO-DB-OIi" customClass="UIManage" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIManage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="htO-DB-OIi" customClass="UIManageS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tk4-EL-sxI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

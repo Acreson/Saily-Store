@@ -1,12 +1,12 @@
 //
-//  UIManage.swift
+//  UIManageS.swift
 //  Tweaker
 //
 //  Created by Lakr Aream on 2019/5/29.
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-class UIManage: UIViewController {
+class UIManageS: UIViewController {
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {

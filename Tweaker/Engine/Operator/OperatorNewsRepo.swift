@@ -288,8 +288,10 @@ extension app_opeerator {
         var signaled_here = false
         var ret_str: String?
         
-        AF.request(dl_url).response { (ret) in
-            guard let ret_data = ret.data else {
+        print("[*] 准备从 " + dl_url.absoluteString + " 请求数据。")
+        
+        AF.request(dl_url).response(queue: LKRoot.queue_alamofire) { (ret) in
+            guard ret.data != nil else {
                 print("[Resumable - fatalError] 无下载内容。")
                 signaled_here = true
                 network_semaphore.signal()
@@ -307,6 +309,7 @@ extension app_opeerator {
         LKRoot.queue_alamofire.async {
             sleep(UInt32(LKRoot.settings?.network_timeout ?? 6))
             if !signaled_here {
+                print("[*] 网络数据超时，放弃数据。")
                 network_semaphore.signal()
             }
         }
@@ -314,8 +317,10 @@ extension app_opeerator {
         network_semaphore.wait()
         
         if ret_str == "" || ret_str == nil {
-            ret_str = ""
+            ret_str = "--> Begin Section |text_inherit_saying|错误|\n尝试下载卡片内容失败了。\n---> End Section".localized()
         }
+    
+        result_str(ret_str ?? "")
         
     } // NP_download_card_contents
     

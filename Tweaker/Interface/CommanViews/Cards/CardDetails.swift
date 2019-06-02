@@ -8,6 +8,8 @@
 
 class UICardDetailView: UIView {
     
+    var lenth: CGFloat = 128
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -22,8 +24,10 @@ class UICardDetailView: UIView {
 
 extension common_views {
     
-    func NPCD_create_card_detail(info: DMNewsCard) -> UICardDetailView {
+    func NPCD_create_card_detail(info: String) -> UICardDetailView {
         let ret = UICardDetailView()
+        
+        
         
         return ret
     }

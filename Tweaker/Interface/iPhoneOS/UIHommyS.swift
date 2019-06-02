@@ -1,5 +1,5 @@
 //
-//  UIHommy.swift
+//  UIHommyS.swift
 //  Tweaker
 //
 //  Created by Lakr Aream on 2019/5/29.
@@ -13,7 +13,10 @@ class UIHommyS: UIViewController {
     var container: UIScrollView?
     var header_view: UIView?
     
+    var card_exists = false
     var card_details_scroll_view: UIScrollView?
+    var card_view: UICardView?
+    var card_text_view: UIView?
     var card_details_vseffect_view: UIView?
     
     // 控制 NAV
@@ -435,23 +438,20 @@ class UIHommyS: UIViewController {
             
             
             // 存接口
+            self.card_exists = true
             self.card_details_scroll_view = container_d
             self.card_details_vseffect_view = cover_backend
+            self.card_text_view = text_container
+            self.card_view = nc_view
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     self.tabBarController?.tabBar.layoutIfNeeded()
                     self.tabBarController?.tabBar.layer.position.y += 100
                     nc_view.layoutIfNeeded()
-                    if LKRoot.safe_area_needed {
-                        nc_view.frame = CGRect(x: 0, y: -44, width: UIScreen.main.bounds.width, height: 416)
-                        text_container.frame = CGRect(x: 0, y: 372, width: UIScreen.main.bounds.width, height: 666)
-                        container_d.contentSize = CGSize(width: 0, height: 1200)
-                    } else {
-                        nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
-                        text_container.frame = CGRect(x: 0, y: 416, width: UIScreen.main.bounds.width, height: 666)
-                        container_d.contentSize = CGSize(width: 0, height: 1200)
-                    }
+                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
+                    text_container.frame = CGRect(x: 0, y: 416, width: UIScreen.main.bounds.width, height: 666)
+                    container_d.contentSize = CGSize(width: 0, height: 888)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
                     close_image.alpha = 0.75
@@ -495,11 +495,50 @@ class UIHommyS: UIViewController {
                 UIApplication.shared.endIgnoringInteractionEvents()
             }
             
+            LKRoot.queue_dispatch.async {
+                LKRoot.ins_common_operator.NP_download_card_contents(target: button.card_info, result_str: { (ret_str) in
+                    // 判断卡片是否还存在
+                    if !self.card_exists {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        // 构建卡片
+                        for item in self.card_text_view?.subviews ?? [] where item.tag == view_tags.indicator.rawValue {
+                            item.removeFromSuperview()
+                        }
+                        
+                        let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
+                        if new_container.lenth + 466 < 1024 {
+                            // 咱们啥都别干
+                        } else {
+                            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                                self.card_details_scroll_view?.layoutIfNeeded()
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 466 + new_container.lenth)
+                            })
+                        }
+                        self.card_text_view?.snp.remakeConstraints({ (x) in
+                            x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
+                            x.left.equalTo(self.view.snp.left)
+                            x.right.equalTo(self.view.snp.right)
+                            x.height.equalTo(new_container.lenth)
+                        })
+                        self.card_text_view?.addSubview(new_container)
+                        new_container.snp.makeConstraints({ (x) in
+                            x.top.equalTo(self.card_text_view?.snp.top ?? self.view.snp.bottom).offset(28)
+                            x.left.equalTo(self.view.snp.left)
+                            x.right.equalTo(self.view.snp.right)
+                            x.height.equalTo(new_container.lenth)
+                        })
+                    } // DispatchQueue.main.async
+                }) // NP_download_card_contents
+            } // queue_dispatch
         }
     } // card_button_handler
     
     // 卡片消失动画
     @objc func close_button_handler(sender: Any?) {
+        
+        self.card_exists = false
         
         UIApplication.shared.beginIgnoringInteractionEvents()
         
@@ -539,6 +578,8 @@ class UIHommyS: UIViewController {
                 }
                 self.card_details_vseffect_view = nil
                 self.card_details_scroll_view = nil
+                self.card_text_view = nil
+                self.card_view = nil
             })
         }
         

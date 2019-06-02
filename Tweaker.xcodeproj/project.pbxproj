@@ -19,7 +19,7 @@
 		ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
-		ABE6DD01229EBBB600D18D9E /* UIManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD00229EBBB600D18D9E /* UIManage.swift */; };
+		ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD00229EBBB600D18D9E /* UIManageS.swift */; };
 		ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */; };
 		ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DD04229ED2A000D18D9E /* DMSettings.swift */; };
 		ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */; };
@@ -44,7 +44,7 @@
 		ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA82F229D87170070A17E /* ColorSheetCommon.swift */; };
 		ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA831229D88790070A17E /* AppRootClass.swift */; };
 		ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA837229D8DC70070A17E /* Localizable.strings */; };
-		ABFBA83A229D943C0070A17E /* UIHommy.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommy.swift */; };
+		ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommyS.swift */; };
 		ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA83B229D99EB0070A17E /* AppUserClass.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +66,7 @@
 		ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
-		ABE6DD00229EBBB600D18D9E /* UIManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManage.swift; sourceTree = "<group>"; };
+		ABE6DD00229EBBB600D18D9E /* UIManageS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManageS.swift; sourceTree = "<group>"; };
 		ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsRepos.swift; sourceTree = "<group>"; };
 		ABE6DD04229ED2A000D18D9E /* DMSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSettings.swift; sourceTree = "<group>"; };
 		ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TabBars.xcassets; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		ABFBA831229D88790070A17E /* AppRootClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootClass.swift; sourceTree = "<group>"; };
 		ABFBA836229D8DC70070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		ABFBA838229D8E3A0070A17E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		ABFBA839229D943C0070A17E /* UIHommy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommy.swift; sourceTree = "<group>"; };
+		ABFBA839229D943C0070A17E /* UIHommyS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyS.swift; sourceTree = "<group>"; };
 		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,8 +254,8 @@
 			children = (
 				ABFBA807229D7B4F0070A17E /* Main_iPhone.storyboard */,
 				ABFBA7EF229D700F0070A17E /* UIEnteryS.swift */,
-				ABFBA839229D943C0070A17E /* UIHommy.swift */,
-				ABE6DD00229EBBB600D18D9E /* UIManage.swift */,
+				ABFBA839229D943C0070A17E /* UIHommyS.swift */,
+				ABE6DD00229EBBB600D18D9E /* UIManageS.swift */,
 			);
 			path = iPhoneOS;
 			sourceTree = "<group>";
@@ -457,14 +457,14 @@
 				AB1461AE22A26AD500C031FE /* ASMultiAppsRiver.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
-				ABE6DD01229EBBB600D18D9E /* UIManage.swift in Sources */,
+				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
 				ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */,
 				ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */,
 				ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */,
 				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
 				ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */,
-				ABFBA83A229D943C0070A17E /* UIHommy.swift in Sources */,
+				ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
