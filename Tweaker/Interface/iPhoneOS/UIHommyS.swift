@@ -471,6 +471,7 @@ class UIHommyS: UIViewController {
                     })
 //                    some.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("button_touched_color"))
                     let text = UILabel(text: "返回".localized())
+                    text.textAlignment = .center
                     text.font = UIFont(name: ".SFUIText-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24)
                     text.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
                     container_d.addSubview(text)
