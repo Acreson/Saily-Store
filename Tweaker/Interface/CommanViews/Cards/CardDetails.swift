@@ -1,12 +1,12 @@
 //
-//  CardDetails.swift
+//  UICardDetailView.swift
 //  Tweaker
 //
 //  Created by Lakr Aream on 2019/6/3.
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-class CardDetails: UIView {
+class UICardDetailView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,6 +20,11 @@ class CardDetails: UIView {
     
 }
 
-extension CardDetails {
+extension common_views {
     
+    func NPCD_create_card_detail(info: DMNewsCard) -> UICardDetailView {
+        let ret = UICardDetailView()
+        
+        return ret
+    }
 }

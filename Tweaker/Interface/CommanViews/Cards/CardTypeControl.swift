@@ -19,5 +19,19 @@ enum card_type: Int {
     case what_the_fuck_is_this                  = 0x666
 }
 
-
+enum card_detail_type: Int {
+    
+    case text                                   = 0x101
+    case text_inherit_saying                    = 0x102
+    case photo                                  = 0x201
+    case photo_with_description                 = 0x202
+    case news_repo                              = 0x301
+    case package_repo                           = 0x302
+    case package                                = 0x303
+    
+    // PRIVATE API - DO NOT USE IT PPPPLLLLEEEEAAAASSSSEEEE :P XD
+    case LKPrivateAPI_RESVERED                  = 0x600
+    case LKPrivateAPI_setting_page              = 0x620
+    
+}
 

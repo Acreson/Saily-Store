@@ -87,6 +87,7 @@ class UIHommyS: UIViewController {
         loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
         loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
         loading_label.tag = view_tags.indicator.rawValue
+        loading_label.textAlignment = .center
         view.addSubview(loading_label)
         loading.snp.makeConstraints { (x) in
             x.centerY.equalTo(in_where.snp.centerY).offset(38)
@@ -318,6 +319,8 @@ class UIHommyS: UIViewController {
         
         if let button = sender as? UICardButton {
             
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
             for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
                 item.removeFromSuperview()
             }
@@ -386,6 +389,11 @@ class UIHommyS: UIViewController {
             nc_view.tag = view_tags.must_remove.rawValue
             container_d.addSubview(nc_view)
             
+            // 内容本体
+            let text_container = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: 188))
+            container_d.addSubview(text_container)
+            text_container.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            
             // 关闭按钮
             let close_image = UIImageView(image: UIImage(named: "CloseButton"))
             close_image.tag = view_tags.must_remove.rawValue
@@ -407,12 +415,23 @@ class UIHommyS: UIViewController {
             close_button.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(0)
                 x.right.equalTo(self.view.snp.right).offset(0)
-                x.width.equalTo(66)
-                x.height.equalTo(66)
+                x.width.equalTo(88)
+                x.height.equalTo(88)
             }
             
-            // 内容本体
-            let text_container = UIView()
+            // 加载指示
+            let loading = UIActivityIndicatorView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 6, y: 128, width: 12, height: 12))
+            loading.startAnimating()
+            loading.color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            loading.tag = view_tags.indicator.rawValue
+            text_container.addSubview(loading)
+            let loading_label = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 48, y: 148, width: 96, height: 28))
+            loading_label.text = "- 正在加载 -".localized()
+            loading_label.textAlignment = .center
+            loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+            loading_label.tag = view_tags.indicator.rawValue
+            text_container.addSubview(loading_label)
             
             
             // 存接口
@@ -426,20 +445,63 @@ class UIHommyS: UIViewController {
                     nc_view.layoutIfNeeded()
                     if LKRoot.safe_area_needed {
                         nc_view.frame = CGRect(x: 0, y: -44, width: UIScreen.main.bounds.width, height: 416)
+                        text_container.frame = CGRect(x: 0, y: 372, width: UIScreen.main.bounds.width, height: 666)
+                        container_d.contentSize = CGSize(width: 0, height: 1200)
                     } else {
                         nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
-                        
+                        text_container.frame = CGRect(x: 0, y: 416, width: UIScreen.main.bounds.width, height: 666)
+                        container_d.contentSize = CGSize(width: 0, height: 1200)
                     }
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
                     close_image.alpha = 0.75
-                }, completion: nil)
+                }, completion: { _ in
+                    
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    
+                    // 底部返回按钮
+                    let some = UIView()
+                    some.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+                    container_d.addSubview(some)
+                    some.snp.makeConstraints({ (x) in
+                        x.top.equalTo(text_container.snp.bottom).offset(0.233)
+                        x.left.equalTo(self.view.snp.left)
+                        x.right.equalTo(self.view.snp.right)
+                        x.height.equalTo(92)
+                    })
+//                    some.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("button_touched_color"))
+                    let text = UILabel(text: "返回".localized())
+                    text.font = UIFont(name: ".SFUIText-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24)
+                    text.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+                    container_d.addSubview(text)
+                    text.snp.makeConstraints({ (x) in
+                        x.center.equalTo(some.snp.center)
+                        x.width.equalTo(66)
+                        x.height.equalTo(38)
+                    })
+                    let back_button = UIButton()
+                    back_button.addTarget(self, action: #selector(self.close_button_handler(sender:)), for: .touchUpInside)
+                    some.addSubview(back_button)
+                    back_button.snp.makeConstraints({ (x) in
+                        x.top.equalTo(some.snp.top)
+                        x.left.equalTo(some.snp.left)
+                        x.bottom.equalTo(some.snp.bottom)
+                        x.right.equalTo(some.snp.right)
+                    })
+                })
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                UIApplication.shared.endIgnoringInteractionEvents()
             }
             
         }
     } // card_button_handler
     
+    // 卡片消失动画
     @objc func close_button_handler(sender: Any?) {
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
         
         var items = [UIView]()
         for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
@@ -454,6 +516,7 @@ class UIHommyS: UIViewController {
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
                                                                   width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 66)
+                    self.card_details_scroll_view?.alpha = 0
                 })
             }
         } else {
@@ -468,13 +531,17 @@ class UIHommyS: UIViewController {
         }
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             UIView.animate(withDuration: 0.5, animations: {
                 for item in items {
                     item.removeFromSuperview()
                 }
+                self.card_details_vseffect_view = nil
+                self.card_details_scroll_view = nil
             })
         }
+        
+        UIApplication.shared.endIgnoringInteractionEvents()
         
     }
     
