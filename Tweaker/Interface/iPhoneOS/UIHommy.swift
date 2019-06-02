@@ -56,6 +56,13 @@ class UIHommyS: UIViewController {
             x.height.equalTo(100)
         })
         
+        // 判断是否存在safeArea
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if header.superview?.convert(header.frame.origin, to: nil).y ?? 20 > 25 {
+                LKRoot.safe_area_needed = true
+            }
+        }
+        
         // 发送到加载
         build_view()
         

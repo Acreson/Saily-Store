@@ -20,6 +20,7 @@ class app_root_class {
     public var root_db: Database?
     
     public var settings: DBMSettings?
+    public var safe_area_needed: Bool = false
     
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()

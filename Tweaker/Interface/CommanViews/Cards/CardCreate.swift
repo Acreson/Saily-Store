@@ -8,6 +8,8 @@
 
 class UICardView: UIView {
     
+    var top_insert: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -27,12 +29,8 @@ extension common_views {
         ret.clipsToBounds = true
         let top_v_insert = UIView()
         ret.addSubview(top_v_insert)
-        top_v_insert.snp.makeConstraints { (x) in
-            x.top.equalTo(ret.snp.top)
-            x.centerX.equalTo(ret.snp.centerX)
-            x.width.equalTo(18)
-            x.height.equalTo(0)
-        }
+        top_v_insert.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        ret.top_insert = top_v_insert
         switch info.type {
         case .photo_full:
             do {
