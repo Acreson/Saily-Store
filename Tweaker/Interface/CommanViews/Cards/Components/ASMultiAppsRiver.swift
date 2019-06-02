@@ -58,7 +58,7 @@ class ASMultiAppsView: UIView {
         }
         
         // 计算一行的View个数
-        let count = Int(self.bounds.width / (self.image_size.width + self.image_gap)) + 3
+        let count = Int(self.bounds.width / (self.image_size.width + self.image_gap)) + 2
         // 计算行数
         var lines = Int(self.bounds.height / (self.image_size.height + self.image_gap)) + 1
         

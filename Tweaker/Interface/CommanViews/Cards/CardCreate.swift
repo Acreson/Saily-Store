@@ -123,6 +123,7 @@ extension common_views {
                     x.left.equalTo(ret.snp.left).offset(18)
                     x.right.equalTo(ret.snp.right).offset(-18)
                     x.bottom.equalTo(ret.snp.bottom).offset(-12)
+                    x.height.equalTo(18)
                 }
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
@@ -149,6 +150,7 @@ extension common_views {
                 sub_title.snp.makeConstraints { (x) in
                     x.bottom.equalTo(title.snp.top).offset(-4)
                     x.left.equalTo(ret.snp.left).offset(18)
+                    x.height.equalTo(18)
                 }
                 title.snp.makeConstraints { (x) in
                     x.bottom.equalTo(des_str.snp.top).offset(-4)
@@ -303,12 +305,12 @@ extension common_views {
                     animate_request = true
                 }
                 let new_river = ASMultiAppsView()
-                new_river.apart_init(card_width: 360, card_hight: 280,
+                new_river.apart_init(card_width: 300, card_hight: 250,
                                      images: info.image_container,
                                      animate: animate_request,
-                                     image_width: 77, image_hight: 77,
+                                     image_width: 66, image_hight: 66,
                                      image_angle: -23.33,
-                                     image_gap: 13, image_radius: 16)
+                                     image_gap: 12, image_radius: 14)
                 let river_holder = UIView()
                 river_holder.clipsToBounds = true
                 ret.addSubview(river_holder)
