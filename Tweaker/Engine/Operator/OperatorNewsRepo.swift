@@ -82,22 +82,22 @@ extension app_opeerator {
             NP_content_invoker(content_str: item.content ?? "", target_RAM: new)
             // 下载卡片内容
             var dl_url_str = new.link
-            var got_a_link = false
-            for_preferred_languages: for item in Locale.preferredLanguages {
-                if item.split(separator: "-").count < 2 {
-                    print("[Resumable - fatalError] for_preferred_languages - split.count < 2 - DATA: " + item)
-                    continue for_preferred_languages
-                }
-                let read = item.split(separator: "-")[0].to_String() + "-" + item.split(separator: "-")[1].to_String()
-                if new.language.contains(read) {
-                    got_a_link = true
-                    dl_url_str += read
-                    break
-                }
-            }
-            if !got_a_link {
-                dl_url_str += "base"
-            }
+//            var got_a_link = false
+//            for_preferred_languages: for item in Locale.preferredLanguages {
+//                if item.split(separator: "-").count < 2 {
+//                    print("[Resumable - fatalError] for_preferred_languages - split.count < 2 - DATA: " + item)
+//                    continue for_preferred_languages
+//                }
+//                let read = item.split(separator: "-")[0].to_String() + "-" + item.split(separator: "-")[1].to_String()
+//                if new.language.contains(read) {
+//                    got_a_link = true
+//                    dl_url_str += read
+//                    break
+//                }
+//            }
+//            if !got_a_link {
+                dl_url_str += "Base"
+//            }
             // 下载卡片内容
             var read_cards: String?
             let net_semaphore_2 = DispatchSemaphore(value: 0)

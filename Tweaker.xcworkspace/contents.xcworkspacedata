@@ -17,6 +17,13 @@
       location = "group:IO"
       name = "IO">
       <Group
+         location = "group:Contents"
+         name = "Contents">
+         <FileRef
+            location = "group:0x01">
+         </FileRef>
+      </Group>
+      <Group
          location = "group:Resource"
          name = "Resource">
          <FileRef
@@ -40,9 +47,6 @@
       </FileRef>
       <FileRef
          location = "group:base">
-      </FileRef>
-      <FileRef
-         location = "group:zh-Hans">
       </FileRef>
    </Group>
 </Workspace>

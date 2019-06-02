@@ -516,7 +516,8 @@ class UIHommyS: UIViewController {
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
                                                                   width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 66)
-                    self.card_details_scroll_view?.alpha = 0
+                    self.card_details_scroll_view?.contentOffset = .init(x: 0, y: 0)
+//                    self.card_details_scroll_view?.alpha = 0
                 })
             }
         } else {
