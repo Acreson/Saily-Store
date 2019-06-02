@@ -1,4 +1,4 @@
-# Base file contains default language which your user's will see when your repo is not localized.
+# Base file contains your repo contents with default language.
 
 # This is an example of news repo card major content.
 # Please strictly follow the example.
@@ -30,6 +30,7 @@ LKCD-PHOTO|                                     |https://github.com/LakrAream/La
 LKCD-TITLE-COLOR|                               |0xFFFFFF
 LKCD-SUBTITLE-COLOR|                            |0xFFFFFF
 LKCD-DESSTR-COLOR|                              |0xFFFFFF
+LKCD-CONTENTS|                                  |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Contents/0x01
 
 ---> End Card
 
@@ -42,6 +43,7 @@ LKCD-PHOTO|                                     |https://github.com/LakrAream/La
 
 LKCD-TITLE-COLOR|                               |0xFFFFFF
 LKCD-SUBTITLE-COLOR|                            |0xFFFFFF
+LKCD-CONTENTS|                                  |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Contents/0x02
 
 ---> End Card
 
@@ -56,6 +58,7 @@ LKCD-PHOTO|                                     |https://github.com/LakrAream/La
 LKCD-TITLE-COLOR|                               |0x000000
 LKCD-SUBTITLE-COLOR|                            |0x999999
 LKCD-DESSTR-COLOR|                              |0x999999
+LKCD-CONTENTS|                                  |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Contents/0x03
 
 ---> End Card
 
@@ -70,5 +73,6 @@ LKCD-PHOTO|                                     |https://github.com/LakrAream/La
 LKCD-TITLE-COLOR|                               |0x000000
 LKCD-SUBTITLE-COLOR|                            |0x0AAADD
 LKCD-DESSTR-COLOR|                              |0x999999
+LKCD-CONTENTS|                                  |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Contents/0x04
 
 ---> End Card

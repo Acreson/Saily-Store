@@ -19,6 +19,7 @@ target 'Tweaker' do
   pod 'CardParts'
   pod 'NightNight'
   pod 'UIImageColors'
+  pod 'SwiftyMarkdown'
   pod 'LTMorphingLabel'
   pod 'JJFloatingActionButton'
   pod 'NVActivityIndicatorView'

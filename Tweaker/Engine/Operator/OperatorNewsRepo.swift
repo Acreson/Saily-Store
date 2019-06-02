@@ -271,11 +271,53 @@ extension app_opeerator {
             case "LKCD-TITLE-COLOR": ins_card.main_title_string_color = body
             case "LKCD-SUBTITLE-COLOR": ins_card.sub_title_string_color = body
             case "LKCD-DESSTR-COLOR": ins_card.description_string_color = body
+            case "LKCD-CONTENTS": ins_card.content = body
             default: print("[?] 这啥玩意？" + name)
             }
         }
         return ret
     } // NP_cards_content_invoker
+    
+    func NP_download_card_contents(target: DMNewsCard, result_str: @escaping (String) -> Void) {
+        guard let dl_url = URL(string: target.content ?? "") else {
+            print("[Resumable - fatalError] 无法内容创建下载链接。")
+            return
+        }
+        
+        let network_semaphore = DispatchSemaphore(value: 0)
+        var signaled_here = false
+        var ret_str: String?
+        
+        AF.request(dl_url).response { (ret) in
+            guard let ret_data = ret.data else {
+                print("[Resumable - fatalError] 无下载内容。")
+                signaled_here = true
+                network_semaphore.signal()
+                return
+            }
+            ret_str = String(data: ret.data!, encoding: .utf8)
+            if ret_str == nil {
+                ret_str = String(data: ret.data!, encoding: .ascii)
+            }
+            signaled_here = true
+            network_semaphore.signal()
+            return
+        }
+        
+        LKRoot.queue_alamofire.async {
+            sleep(UInt32(LKRoot.settings?.network_timeout ?? 6))
+            if !signaled_here {
+                network_semaphore.signal()
+            }
+        }
+        
+        network_semaphore.wait()
+        
+        if ret_str == "" || ret_str == nil {
+            ret_str = ""
+        }
+        
+    } // NP_download_card_contents
     
 }
 

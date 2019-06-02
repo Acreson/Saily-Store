@@ -5,7 +5,7 @@
 
 # RECOMMEND LINES
 LKRP-NAME|                          |Winker 小世界
-LKRP-PROVIDE-LANGUAGE|              |zh-Hans
+LKRP-PROVIDE-LANGUAGE|              |zh-Hans                        # For future uses.
 LKRP-TITLE|                         |一声来自 Tweaker 的问候
 LKRP-SUBTITLE|                      |教学与设置
 LKRP-ICON|                          |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/icon.png

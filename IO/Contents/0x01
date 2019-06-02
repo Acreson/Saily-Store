@@ -1,74 +1,45 @@
-# Base file contains default language which your user's will see when your repo is not localized.
+# Example Content
 
-# This is an example of news repo card major content.
-# Please strictly follow the example.
+# enum card_detail_type: Int {
 
-# enum card_type: Int {
-
-#   case photo_full                             = 0x101
-#   case photo_full_with_banner_down_dark       = 0x102
-#   case photo_half_with_banner_down_light      = 0x111
-#   case river_view_animate                     = 0x201
-#   case river_view_static                      = 0x202
+#    case text                                   = 0x101
+#    case text_inherit_saying                    = 0x102
+#    case photo                                  = 0x201
+#    case photo_with_description                 = 0x202
+#    case news_repo                              = 0x301
+#    case package_repo                           = 0x302
+#    case package                                = 0x303
 
 # }
 
-# Every value here is optional.
-# "|" After/In content means "\n"
+--> Begin Section |text
+致用户的一封信：
 
---> Begin Card
+      还曾记得越狱的鼻祖 Cydia 吗？
 
-# RECOMMEND LINES
-LKCD-TYPE|                                      |photo_full
-LKCD-TITLE|                                     |在这里，重新定义。
-LKCD-SUBTITLE|                                  |欢迎来到全新的 Tweak Store
-LKCD-DESSTR|                                    |欢迎来到全新的 Tweak Store|在这里，修改系统，安装应用，无所不能。
-LKCD-PHOTO|                                     |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/welcome.png
+      这个咖啡色的纸盒快递承载了我多少年自由的回忆。从 iPhone 3Gs 开始，一直到 iPhoneX ，从 iOS4 开始一直到 iOS12 ，Cydia 都是越狱本身不可或缺的一部分。在此，我们向祖先们致敬。
+---> End Section
 
-# OPRION LINES
-# Optional property will implement later and may not effective in nearly versions.
-LKCD-TITLE-COLOR|                               |0xFFFFFF
-LKCD-SUBTITLE-COLOR|                            |0xFFFFFF
-LKCD-DESSTR-COLOR|                              |0xFFFFFF
+--> Begin Section |photo_with_description|https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/Jailbroken-iPhone.png|
+在设备性能极度严苛的条件下完美运转的 Cydia
+---> End Section
 
----> End Card
+--> Begin Section |text
+      但是随着设备硬件性能的发展，人们审美的变化，Cydia 已经看上去不那么闪闪发光，这也让社区诞生了许许多多的新产品。例如 Zebra, Sileo 这样的软件包管理器。Tweaker 就是其中的一款。
 
---> Begin Card
+      我们费劲心血，精心设计。在打造这款软件包管理器的过程中，曾4次推翻项目重构，共精简代码千行，优化数据模型十余次，UI帧率优化近百次，只为打造极致的用户体验。
+---> End Section
 
-LKCD-TYPE|                                      |photo_full
-LKCD-TITLE|                                     |Dark Night - 黑暗模式
-LKCD-SUBTITLE|                                  |自定义的生活
-LKCD-PHOTO|                                     |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/night.png
+--> Begin Section |text_inherit_saying|本程序作者寄语|
+自由自在，无忧无虑的作品，是社区最好的礼物。他不参杂世间俗味，明白任重和道远。在他心底飘散着芬芳，值得你去喜欢。
+---> End Section
 
-LKCD-TITLE-COLOR|                               |0xFFFFFF
-LKCD-SUBTITLE-COLOR|                            |0xFFFFFF
+--> Begin Section |text|
+      本软件遵循 iOS 开发设计原则，依赖 APT/DPKG，与 Cydia 兼容。（与 Sileo 的兼容存在一定问题，请自行斟酌） 如果在使用过程中遇到任何问题，欢迎在软件的 “我与世界” 页面内获取支持。本软件完全开源，免费。
 
----> End Card
+      祝越狱社区天长地久。
 
---> Begin Card
+2019年5月
+Lakr Aream - @Lakr233
+---> End Section
 
-LKCD-TYPE|                                      |photo_half_with_banner_down_light
-LKCD-TITLE|                                     |OpenSSH 密码与安全|掌握你的设备。
-LKCD-SUBTITLE|                                  |出来乍到必备教学
-LKCD-DESSTR|                                    |Written By Lakr Aream
-LKCD-PHOTO|                                     |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/ssh.png
-
-LKCD-TITLE-COLOR|                               |0x000000
-LKCD-SUBTITLE-COLOR|                            |0x999999
-LKCD-DESSTR-COLOR|                              |0x999999
-
----> End Card
-
---> Begin Card
-
-LKCD-TYPE|                                      |photo_half_with_banner_down_light
-LKCD-TITLE|                                     |Renet - 连个锤子|应用无法联网一键修复
-LKCD-SUBTITLE|                                  |专为🇨🇳的iPhone和iPad设计
-LKCD-DESSTR|                                    |Written By Lakr Aream
-LKCD-PHOTO|                                     |https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/renet.png
-
-LKCD-TITLE-COLOR|                               |0x000000
-LKCD-SUBTITLE-COLOR|                            |0x0AAADD
-LKCD-DESSTR-COLOR|                              |0x999999
-
----> End Card

@@ -22,10 +22,22 @@
          <FileRef
             location = "group:0x01">
          </FileRef>
+         <FileRef
+            location = "group:0x02">
+         </FileRef>
+         <FileRef
+            location = "group:0x03">
+         </FileRef>
+         <FileRef
+            location = "group:0x04">
+         </FileRef>
       </Group>
       <Group
          location = "group:Resource"
          name = "Resource">
+         <FileRef
+            location = "group:Jailbroken-iPhone.png">
+         </FileRef>
          <FileRef
             location = "group:icon.png">
          </FileRef>
@@ -46,7 +58,7 @@
          location = "group:Info">
       </FileRef>
       <FileRef
-         location = "group:base">
+         location = "group:/Users/lakr/Documents/GitHub/Tweak-Store/IO/Base">
       </FileRef>
    </Group>
 </Workspace>
