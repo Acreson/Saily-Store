@@ -13,6 +13,9 @@ class UIHommyS: UIViewController {
     var container: UIScrollView?
     var header_view: UIView?
     
+    var card_details_scroll_view: UIScrollView?
+    var card_details_vseffect_view: UIView?
+    
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -355,8 +358,6 @@ class UIHommyS: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 UIView.animate(withDuration: 0.18) {
-                    self.tabBarController?.tabBar.layoutIfNeeded()
-                    self.tabBarController?.tabBar.layer.position.y += 100
                     cover_backend.alpha = 1
                     color_backend.alpha = 0.5
                 }
@@ -367,10 +368,9 @@ class UIHommyS: UIViewController {
             container_d.tag = view_tags.must_remove.rawValue
             self.view.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
-                x.top.equalTo(self.view.snp.top)
-                x.left.equalTo(self.view.snp.left)
-                x.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
-                x.right.equalTo(self.view.snp.right)
+                x.width.equalTo(UIScreen.main.bounds.width)
+                x.height.equalTo(UIScreen.main.bounds.height)
+                x.center.equalTo(self.view.center)
             }
             
             // 创建一个一摸一样的卡片
@@ -385,28 +385,47 @@ class UIHommyS: UIViewController {
             container_d.addSubview(nc_view)
             
             // 关闭按钮
-            let close_button = UIButton()
-            close_button.backgroundColor = .white
-            close_button.alpha = 0
-            close_button.setImage(UIImage(named: "CloseButton"), for: .normal)
-            close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
-            close_button.tag = view_tags.must_remove.rawValue
-            container_d.addSubview(close_button)
-            close_button.snp.makeConstraints { (x) in
+            let close_image = UIImageView(image: UIImage(named: "CloseButton"))
+            close_image.tag = view_tags.must_remove.rawValue
+            close_image.alpha = 0
+            close_image.backgroundColor = .white
+            close_image.contentMode = .center
+            self.view.addSubview(close_image)
+            close_image.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(18)
                 x.right.equalTo(self.view.snp.right).offset(-18)
                 x.width.equalTo(28)
                 x.height.equalTo(28)
-                close_button.setRadiusCGF(radius: 14)
+                close_image.setRadiusCGF(radius: 14)
+            }
+            let close_button = UIButton()
+            close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
+            close_button.tag = view_tags.must_remove.rawValue
+            container_d.addSubview(close_button)
+            close_button.snp.makeConstraints { (x) in
+                x.top.equalTo(self.view.snp.top).offset(0)
+                x.right.equalTo(self.view.snp.right).offset(0)
+                x.width.equalTo(66)
+                x.height.equalTo(66)
             }
             
+            // 内容本体
+            let text_container = UIView()
+            
+            
+            // 存接口
+            self.card_details_scroll_view = container_d
+            self.card_details_vseffect_view = cover_backend
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .curveEaseIn, animations: {
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                    self.tabBarController?.tabBar.layoutIfNeeded()
+                    self.tabBarController?.tabBar.layer.position.y += 100
                     nc_view.layoutIfNeeded()
                     nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
-                    close_button.alpha = 0.75
+                    close_image.alpha = 0.75
                 }, completion: nil)
             }
             
@@ -420,14 +439,26 @@ class UIHommyS: UIViewController {
             items.append(item)
         }
         
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.tabBarController?.tabBar.layer.position.y -= 100
-                for item in items {
-                    item.alpha = 0
-                }
-            })
+        if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                    self.tabBarController?.tabBar.layer.position.y -= 100
+                    self.card_details_vseffect_view?.alpha = 0
+                    self.card_details_scroll_view?.layoutIfNeeded()
+                    self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                })
+            }
+        } else {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                    self.tabBarController?.tabBar.layer.position.y -= 100
+                    for item in items {
+                        item.alpha = 0
+                    }
+                })
+            }
         }
+        
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             UIView.animate(withDuration: 0.5, animations: {

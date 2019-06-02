@@ -14,6 +14,7 @@ target 'Tweaker' do
   
   pod 'SwifterSwift'
 
+  pod 'Hero'
   pod 'SnapKit'
   pod 'CardParts'
   pod 'NightNight'

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
+		AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04C51C22A4436000B29F0C /* CardDetails.swift */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
 		AB1461AE22A26AD500C031FE /* ASMultiAppsRiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */; };
@@ -51,6 +52,7 @@
 		5611913E3A1A08D876FA52C9 /* Pods-Tweaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.debug.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.debug.xcconfig"; sourceTree = "<group>"; };
 		7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tweaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FAFF248A0D68F72CAA3FED6 /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
+		AB04C51C22A4436000B29F0C /* CardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetails.swift; sourceTree = "<group>"; };
 		AB081F91229D4BDC00ACA4DD /* Tweaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				AB1DB1C622A368690005DDD7 /* Components */,
 				ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */,
 				AB53B64E22A021D800492BAB /* CardCreate.swift */,
+				AB04C51C22A4436000B29F0C /* CardDetails.swift */,
 				AB1DB1C722A36A180005DDD7 /* CardButton.swift */,
 			);
 			path = Cards;
@@ -465,6 +468,7 @@
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
+				AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */,
 				ABFBA824229D801E0070A17E /* UIHommyView.swift in Sources */,
 				AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */,
 				AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */,
