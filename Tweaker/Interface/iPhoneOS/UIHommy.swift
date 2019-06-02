@@ -366,6 +366,8 @@ class UIHommyS: UIViewController {
             // 创建容器
             let container_d = UIScrollView()
             container_d.tag = view_tags.must_remove.rawValue
+            container_d.contentSize = CGSize(width: 0, height: 2080)
+            container_d.addShadow(ofColor: .gray)
             self.view.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
                 x.width.equalTo(UIScreen.main.bounds.width)
@@ -422,7 +424,12 @@ class UIHommyS: UIViewController {
                     self.tabBarController?.tabBar.layoutIfNeeded()
                     self.tabBarController?.tabBar.layer.position.y += 100
                     nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
+                    if LKRoot.safe_area_needed {
+                        nc_view.frame = CGRect(x: 0, y: -44, width: UIScreen.main.bounds.width, height: 416)
+                    } else {
+                        nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
+                        
+                    }
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
                     close_image.alpha = 0.75
@@ -445,7 +452,8 @@ class UIHommyS: UIViewController {
                     self.tabBarController?.tabBar.layer.position.y -= 100
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
-                    self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
+                                                                  width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 66)
                 })
             }
         } else {
