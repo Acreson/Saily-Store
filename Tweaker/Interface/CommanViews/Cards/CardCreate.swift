@@ -288,14 +288,14 @@ extension common_views {
                 ret.addSubview(sub_title)
                 ret.addSubview(title)
                 sub_title.snp.makeConstraints { (x) in
-                    x.top.equalTo(ret.snp.top).offset(18)
+                    x.top.equalTo(top_v_insert.snp.bottom).offset(18)
                     x.left.equalTo(ret.snp.left).offset(18)
                 }
                 title.snp.makeConstraints { (x) in
                     x.top.equalTo(sub_title.snp.bottom).offset(0)
                     x.left.equalTo(sub_title.snp.left).offset(-4)
                     x.right.equalTo(ret.snp.right).offset(-14)
-                    x.height.equalTo(38)
+                    x.height.equalTo(42)
                 }
                 // 创建ASMultiAppsRiver
                 var animate_request = false
@@ -303,7 +303,7 @@ extension common_views {
                     animate_request = true
                 }
                 let new_river = ASMultiAppsView()
-                new_river.apart_init(card_width: 400, card_hight: 320,
+                new_river.apart_init(card_width: 360, card_hight: 280,
                                      images: info.image_container,
                                      animate: animate_request,
                                      image_width: 77, image_hight: 77,
@@ -320,9 +320,10 @@ extension common_views {
                     x.bottom.equalTo(ret.snp.bottom)
                 }
                 new_river.snp.makeConstraints { (x) in
-                    x.center.equalTo(river_holder.snp.center)
-                    x.height.equalTo(400)
-                    x.width.equalTo(320)
+                    x.top.equalTo(river_holder.snp.top)
+                    x.left.equalTo(river_holder.snp.left)
+                    x.right.equalTo(river_holder.snp.right)
+                    x.bottom.equalTo(river_holder.snp.bottom)
                 }
                 
             }

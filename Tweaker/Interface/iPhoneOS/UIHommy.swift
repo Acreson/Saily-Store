@@ -6,6 +6,7 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+
 // swiftlint:disable:next type_body_length
 class UIHommyS: UIViewController {
     
@@ -67,6 +68,10 @@ class UIHommyS: UIViewController {
         build_view()
         
     } // viewDidLoad
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    } // prefersStatusBarHidden
     
     func build_loading(in_where: UIView) {
         let loading = UIActivityIndicatorView()
@@ -317,7 +322,7 @@ class UIHommyS: UIViewController {
             print("            - with location: " + button.center.debugDescription)
             
             // 添加特效层
-            let vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
             let color_backend = UIView()
             let cover_backend = UIView()
             vs_effect.tag = view_tags.must_remove.rawValue
@@ -348,34 +353,91 @@ class UIHommyS: UIViewController {
                 x.right.equalTo(self.view.snp.right)
             }
             
-            UIView.animate(withDuration: 0.2) {
-                self.tabBarController?.tabBar.layoutIfNeeded()
-                self.tabBarController?.tabBar.layer.position.y += 100
-                cover_backend.alpha = 1
-                color_backend.alpha = 0.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                UIView.animate(withDuration: 0.18) {
+                    self.tabBarController?.tabBar.layoutIfNeeded()
+                    self.tabBarController?.tabBar.layer.position.y += 100
+                    cover_backend.alpha = 1
+                    color_backend.alpha = 0.5
+                }
+            }
+            
+            // 创建容器
+            let container_d = UIScrollView()
+            container_d.tag = view_tags.must_remove.rawValue
+            self.view.addSubview(container_d)
+            container_d.snp.makeConstraints { (x) in
+                x.top.equalTo(self.view.snp.top)
+                x.left.equalTo(self.view.snp.left)
+                x.bottom.equalTo((self.tabBarController?.tabBar.snp.top)!)
+                x.right.equalTo(self.view.snp.right)
             }
             
             // 创建一个一摸一样的卡片
             let nc_view = LKRoot.ins_view_manager.NPCD_create_card(info: button.card_info)
             nc_view.bounds = button.bounds
+            nc_view.tag = view_tags.must_remove.rawValue
             // 计算卡片位置
             nc_view.center = button.superview?.convert(button.center, to: nil) ?? CGPoint()
             button.start_postion_in_window = nc_view.center
             nc_view.setRadiusINT(radius: LKRoot.settings?.card_radius)
             nc_view.tag = view_tags.must_remove.rawValue
-            self.view.addSubview(nc_view)
+            container_d.addSubview(nc_view)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                UIView.animate(withDuration: 0.666, animations: {
-                    nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 406)
-                    
-                })
+            // 关闭按钮
+            let close_button = UIButton()
+            close_button.backgroundColor = .white
+            close_button.alpha = 0
+            close_button.setImage(UIImage(named: "CloseButton"), for: .normal)
+            close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
+            close_button.tag = view_tags.must_remove.rawValue
+            container_d.addSubview(close_button)
+            close_button.snp.makeConstraints { (x) in
+                x.top.equalTo(self.view.snp.top).offset(18)
+                x.right.equalTo(self.view.snp.right).offset(-18)
+                x.width.equalTo(28)
+                x.height.equalTo(28)
+                close_button.setRadiusCGF(radius: 14)
             }
-
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                UIView.transition(with: nc_view, duration: 0.233, options: .curveEaseOut, animations: {
+                    nc_view.layoutIfNeeded()
+                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 360)
+                    nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
+                    nc_view.setRadiusCGF(radius: 0)
+                    close_button.alpha = 0.75
+                }, completion: nil)
+            }
             
         }
+    } // card_button_handler
+    
+    @objc func close_button_handler(sender: Any?) {
+        
+        var items = [UIView]()
+        for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
+            items.append(item)
+        }
+        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.tabBarController?.tabBar.layer.position.y -= 100
+                for item in items {
+                    item.alpha = 0
+                }
+            })
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            UIView.animate(withDuration: 0.5, animations: {
+                for item in items {
+                    item.removeFromSuperview()
+                }
+            })
+        }
+        
     }
     
 }
+
