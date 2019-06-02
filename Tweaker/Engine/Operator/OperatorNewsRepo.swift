@@ -83,7 +83,11 @@ extension app_opeerator {
             // 下载卡片内容
             var dl_url_str = new.link
             var got_a_link = false
-            for item in Locale.preferredLanguages {
+            for_preferred_languages: for item in Locale.preferredLanguages {
+                if item.split(separator: "-").count < 2 {
+                    print("[Resumable - fatalError] for_preferred_languages - split.count < 2 - DATA: " + item)
+                    continue for_preferred_languages
+                }
                 let read = item.split(separator: "-")[0].to_String() + "-" + item.split(separator: "-")[1].to_String()
                 if new.language.contains(read) {
                     got_a_link = true

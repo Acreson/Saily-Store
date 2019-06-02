@@ -1,16 +1,38 @@
 //
-//  CreateCard.swift
+//  CardCreate.swift
 //  Tweaker
 //
 //  Created by Lakr Aream on 2019/5/30.
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+class UICardView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        print("???")
+    }
+    
+}
+
 extension common_views {
     
-    func NPCD_create_card(info: DMNewsCard) -> UIView {
-        let ret = UIView()
+    func NPCD_create_card(info: DMNewsCard) -> UICardView {
+        let ret = UICardView()
         ret.clipsToBounds = true
+        let top_v_insert = UIView()
+        ret.addSubview(top_v_insert)
+        top_v_insert.snp.makeConstraints { (x) in
+            x.top.equalTo(ret.snp.top)
+            x.centerX.equalTo(ret.snp.centerX)
+            x.width.equalTo(18)
+            x.height.equalTo(0)
+        }
         switch info.type {
         case .photo_full:
             do {
@@ -20,6 +42,7 @@ extension common_views {
                     bg.sd_setImage(with: image_url, placeholderImage: UIImage(named: "SDWebImagePlaceHolder"))
                     bg.contentMode = .scaleAspectFill
                     bg.clipsToBounds = true
+                    
                     ret.addSubview(bg)
                     bg.snp.makeConstraints { (x) in
                         x.top.equalTo(ret.snp.top)
@@ -57,7 +80,7 @@ extension common_views {
                 ret.addSubview(sub_title)
                 ret.addSubview(title)
                 sub_title.snp.makeConstraints { (x) in
-                    x.top.equalTo(ret.snp.top).offset(18)
+                    x.top.equalTo(top_v_insert.snp.bottom).offset(18)
                     x.left.equalTo(ret.snp.left).offset(18)
                 }
                 title.snp.makeConstraints { (x) in

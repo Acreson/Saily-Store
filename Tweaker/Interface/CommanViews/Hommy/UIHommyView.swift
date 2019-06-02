@@ -56,7 +56,7 @@ extension common_views {
         }
         
         head_icon.image = LKRoot.ins_user_manager.return_user_icon()
-        head_icon.setRadius(radius: 19)
+        head_icon.setRadiusCGF()
         head_icon.snp.makeConstraints { (x) in
             x.centerY.equalTo(main_title.snp.centerY).offset(0)
             x.right.equalTo(ret_view.snp.right).offset(-18)

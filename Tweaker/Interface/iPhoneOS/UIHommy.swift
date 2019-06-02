@@ -6,6 +6,7 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+// swiftlint:disable:next type_body_length
 class UIHommyS: UIViewController {
     
     var container: UIScrollView?
@@ -146,6 +147,11 @@ class UIHommyS: UIViewController {
                         if self.header_view != nil {
                             last_view = self.header_view!
                         }
+                        
+                        // 创建索引
+                        var current_index_group = 0
+                        var current_index_ins   = 0
+                        
                         // 创建卡片组
                         let card_width = UIScreen.main.bounds.width - 55
                         for repo in LKRoot.container_news_repo {
@@ -207,7 +213,7 @@ class UIHommyS: UIViewController {
                             })
                             for card in repo.cards {    // 开始添加
                                 let new_card_container = UIView()
-                                new_card_container.setRadius(radius: 8)
+                                new_card_container.setRadiusINT(radius: LKRoot.settings?.card_radius)
                                 new_card_container.addShadow(ofColor: UIColor(hexString: "0x9A9A9A")!)
                                 new_card_container.clipsToBounds = false
                                 cards_container.addSubview(new_card_container)
@@ -218,7 +224,7 @@ class UIHommyS: UIViewController {
                                     x.height.equalTo(360 - 20)
                                 })
                                 let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card)
-                                new_card.setRadius(radius: 8)
+                                new_card.setRadiusINT(radius: LKRoot.settings?.card_radius)
                                 new_card_container.addSubview(new_card)
                                 new_card.snp.makeConstraints({ (x) in
                                     x.top.equalTo(new_card_container.snp.top).offset(0)
@@ -226,11 +232,24 @@ class UIHommyS: UIViewController {
                                     x.right.equalTo(new_card_container.snp.right).offset(0)
                                     x.bottom.equalTo(new_card_container.snp.bottom).offset(0)
                                 })
+                                let cover_button = UICardButton(info: card, index: CGPoint(x: current_index_group, y: current_index_ins), type: card.type, container: new_card_container, selff: new_card)
+                                new_card_container.addSubview(cover_button)
+                                cover_button.addTarget(self, action: #selector(self.card_button_handler(sender:)), for: .touchUpInside)
+                                cover_button.snp.makeConstraints({ (x) in
+                                    x.top.equalTo(new_card_container.snp.top).offset(0)
+                                    x.left.equalTo(new_card_container.snp.left).offset(0)
+                                    x.right.equalTo(new_card_container.snp.right).offset(0)
+                                    x.bottom.equalTo(new_card_container.snp.bottom).offset(0)
+                                })
+                                // 移动定位和 index
                                 last_card = new_card_container
+                                current_index_ins += 1
                             }
                             
                             // 移动瞄点
                             last_view = new_view
+                            current_index_ins = 0
+                            current_index_group += 1
                         }
                         
                         // 署名
@@ -279,5 +298,77 @@ class UIHommyS: UIViewController {
         }
         
     } // build_view
+    
+    @objc func card_button_handler(sender: Any?) {
+        
+        if let button = sender as? UICardButton {
+            
+            for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
+                item.removeFromSuperview()
+            }
+            print("[*] UICardButton action sent with index: " + button.card_index.debugDescription)
+            print("            - with location: " + button.center.debugDescription)
+            
+            // 添加特效层
+            let vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+            let color_backend = UIView()
+            let cover_backend = UIView()
+            vs_effect.tag = view_tags.must_remove.rawValue
+            color_backend.tag = view_tags.must_remove.rawValue
+            cover_backend.tag = view_tags.must_remove.rawValue
+            color_backend.backgroundColor = #colorLiteral(red: 0.9995248914, green: 0.9870037436, blue: 0.9178577065, alpha: 1)
+            color_backend.alpha = 0
+            cover_backend.addSubview(color_backend)
+            cover_backend.addSubview(vs_effect)
+            self.view.addSubview(cover_backend)
+            cover_backend.alpha = 0
+            cover_backend.snp.makeConstraints { (x) in
+                x.top.equalTo(cover_backend.snp.top)
+                x.left.equalTo(cover_backend.snp.left)
+                x.bottom.equalTo(cover_backend.snp.bottom)
+                x.right.equalTo(cover_backend.snp.right)
+            }
+            vs_effect.snp.makeConstraints { (x) in
+                x.top.equalTo(cover_backend.snp.top)
+                x.left.equalTo(cover_backend.snp.left)
+                x.bottom.equalTo(cover_backend.snp.bottom)
+                x.right.equalTo(cover_backend.snp.right)
+            }
+            cover_backend.snp.makeConstraints { (x) in
+                x.top.equalTo(self.view.snp.top)
+                x.left.equalTo(self.view.snp.left)
+                x.bottom.equalTo(self.view.snp.bottom)
+                x.right.equalTo(self.view.snp.right)
+            }
+            
+            UIView.animate(withDuration: 0.2) {
+                self.tabBarController?.tabBar.layoutIfNeeded()
+                self.tabBarController?.tabBar.layer.position.y += 100
+                cover_backend.alpha = 1
+                color_backend.alpha = 0.5
+            }
+            
+            // 创建一个一摸一样的卡片
+            let nc_view = LKRoot.ins_view_manager.NPCD_create_card(info: button.card_info)
+            nc_view.bounds = button.bounds
+            // 计算卡片位置
+            nc_view.center = button.superview?.convert(button.center, to: nil) ?? CGPoint()
+            button.start_postion_in_window = nc_view.center
+            nc_view.setRadiusINT(radius: LKRoot.settings?.card_radius)
+            nc_view.tag = view_tags.must_remove.rawValue
+            self.view.addSubview(nc_view)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                UIView.animate(withDuration: 0.666, animations: {
+                    nc_view.layoutIfNeeded()
+                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 406)
+                    
+                })
+            }
+
+            
+            
+        }
+    }
     
 }

@@ -13,7 +13,8 @@
 		AB1461AE22A26AD500C031FE /* ASMultiAppsRiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */; };
 		AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F80229EDC74003A78BE /* CommonOperator.swift */; };
 		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
-		AB53B64F22A021D800492BAB /* CreateCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53B64E22A021D800492BAB /* CreateCard.swift */; };
+		AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1DB1C722A36A180005DDD7 /* CardButton.swift */; };
+		AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53B64E22A021D800492BAB /* CardCreate.swift */; };
 		ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
@@ -58,7 +59,8 @@
 		AB198F7E229EDA3A003A78BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		AB198F80229EDC74003A78BE /* CommonOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOperator.swift; sourceTree = "<group>"; };
 		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
-		AB53B64E22A021D800492BAB /* CreateCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCard.swift; sourceTree = "<group>"; };
+		AB1DB1C722A36A180005DDD7 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
+		AB53B64E22A021D800492BAB /* CardCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCreate.swift; sourceTree = "<group>"; };
 		ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
@@ -165,6 +167,14 @@
 			path = Operator;
 			sourceTree = "<group>";
 		};
+		AB1DB1C622A368690005DDD7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		ABE6DCF0229E8BC600D18D9E /* Hommy */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,9 +186,10 @@
 		ABE6DCF1229E8BD600D18D9E /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				AB1DB1C622A368690005DDD7 /* Components */,
 				ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */,
-				AB53B64E22A021D800492BAB /* CreateCard.swift */,
-				AB1461AD22A26AD500C031FE /* ASMultiAppsRiver.swift */,
+				AB53B64E22A021D800492BAB /* CardCreate.swift */,
+				AB1DB1C722A36A180005DDD7 /* CardButton.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -459,10 +470,11 @@
 				AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */,
 				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
+				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
-				AB53B64F22A021D800492BAB /* CreateCard.swift in Sources */,
+				AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */,
 				ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
 				ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */,

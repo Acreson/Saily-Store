@@ -15,9 +15,44 @@ extension UIView {
 }
 
 extension UIView {
-    func setRadius(radius: CGFloat? = nil) {
+    
+    func setRadiusCGF(radius: CGFloat? = nil) {
         self.layer.cornerRadius = radius ?? self.frame.width / 2
         self.layer.masksToBounds = true
+    }
+    
+    func setRadiusINT(radius: Int? = nil) {
+        if radius == nil {
+            self.layer.cornerRadius = self.frame.width / 2
+        } else {
+            let radius = CGFloat(radius ?? 8)
+            self.layer.cornerRadius = radius
+        }
+        self.layer.masksToBounds = true
+    }
+}
+
+extension UIView {
+    public func removeAllConstraints() {
+        var _superview = self.superview
+        
+        while let superview = _superview {
+            for constraint in superview.constraints {
+                
+                if let first = constraint.firstItem as? UIView, first == self {
+                    superview.removeConstraint(constraint)
+                }
+                
+                if let second = constraint.secondItem as? UIView, second == self {
+                    superview.removeConstraint(constraint)
+                }
+            }
+            
+            _superview = superview.superview
+        }
+        
+        self.removeConstraints(self.constraints)
+        self.translatesAutoresizingMaskIntoConstraints = true
     }
 }
 
