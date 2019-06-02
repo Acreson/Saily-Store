@@ -495,7 +495,7 @@ class UIHommyS: UIViewController {
                 UIApplication.shared.endIgnoringInteractionEvents()
             }
             
-            LKRoot.queue_dispatch.async {
+            LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 0.8) {
                 LKRoot.ins_common_operator.NP_download_card_contents(target: button.card_info, result_str: { (ret_str) in
                     // 判断卡片是否还存在
                     if !self.card_exists {
