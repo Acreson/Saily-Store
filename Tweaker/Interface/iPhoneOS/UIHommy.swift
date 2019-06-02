@@ -401,9 +401,9 @@ class UIHommyS: UIViewController {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                UIView.transition(with: nc_view, duration: 0.233, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .curveEaseIn, animations: {
                     nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 360)
+                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
                     close_button.alpha = 0.75
@@ -421,7 +421,7 @@ class UIHommyS: UIViewController {
         }
         
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.tabBarController?.tabBar.layer.position.y -= 100
                 for item in items {
                     item.alpha = 0

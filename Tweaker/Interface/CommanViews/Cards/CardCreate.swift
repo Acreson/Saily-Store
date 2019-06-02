@@ -108,31 +108,6 @@ extension common_views {
         case .photo_half_with_banner_down_light:
             do {
                 ret.backgroundColor = .white
-                // 图片底
-                if let image_url = URL(string: info.image_container.first ?? "") {
-                    let bg = UIImageView()
-                    bg.sd_setImage(with: image_url, placeholderImage: UIImage(named: "SDWebImagePlaceHolder"))
-                    bg.contentMode = .scaleAspectFill
-                    bg.clipsToBounds = true
-                    ret.addSubview(bg)
-                    bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.centerY).offset(28)
-                        x.right.equalTo(ret.snp.right)
-                    }
-                } else {
-                    let bg = UIView()
-                    bg.backgroundColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
-                    ret.addSubview(bg)
-                    bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.centerY).offset(28)
-                        x.right.equalTo(ret.snp.right)
-                    }
-                    
-                }
                 // 底下的文字
                 let des_str = UILabel()
                 des_str.text = info.description_string
@@ -172,14 +147,39 @@ extension common_views {
                 ret.addSubview(sub_title)
                 ret.addSubview(title)
                 sub_title.snp.makeConstraints { (x) in
-                    x.top.equalTo(ret.snp.centerY).offset(42)
+                    x.bottom.equalTo(title.snp.top).offset(-4)
                     x.left.equalTo(ret.snp.left).offset(18)
                 }
                 title.snp.makeConstraints { (x) in
-                    x.top.equalTo(sub_title.snp.bottom).offset(2.333)
+                    x.bottom.equalTo(des_str.snp.top).offset(-4)
                     x.left.equalTo(ret.snp.left).offset(12)
                     x.right.equalTo(ret.snp.right).offset(-12)
-                    x.bottom.equalTo(des_str.snp.top).offset(0)
+                    x.height.equalTo(75)
+                }
+                // 图片底
+                if let image_url = URL(string: info.image_container.first ?? "") {
+                    let bg = UIImageView()
+                    bg.sd_setImage(with: image_url, placeholderImage: UIImage(named: "SDWebImagePlaceHolder"))
+                    bg.contentMode = .scaleAspectFill
+                    bg.clipsToBounds = true
+                    ret.addSubview(bg)
+                    bg.snp.makeConstraints { (x) in
+                        x.top.equalTo(ret.snp.top)
+                        x.left.equalTo(ret.snp.left)
+                        x.bottom.equalTo(sub_title.snp.top).offset(-18)
+                        x.right.equalTo(ret.snp.right)
+                    }
+                } else {
+                    let bg = UIView()
+                    bg.backgroundColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
+                    ret.addSubview(bg)
+                    bg.snp.makeConstraints { (x) in
+                        x.top.equalTo(ret.snp.top)
+                        x.left.equalTo(ret.snp.left)
+                        x.bottom.equalTo(ret.snp.centerY).offset(28)
+                        x.right.equalTo(ret.snp.right)
+                    }
+                    
                 }
             }
         case .photo_full_with_banner_down_dark:
