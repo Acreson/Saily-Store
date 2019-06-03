@@ -36,6 +36,18 @@
          location = "group:Resource"
          name = "Resource">
          <FileRef
+            location = "group:ssh_example.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:corellium.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:design.png">
+         </FileRef>
+         <FileRef
+            location = "group:colorsheet.png">
+         </FileRef>
+         <FileRef
             location = "group:Jailbroken-iPhone.png">
          </FileRef>
          <FileRef

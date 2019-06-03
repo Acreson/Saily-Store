@@ -82,10 +82,7 @@ class app_root_class {
         fake_udid_out += UUID().uuidString.dropLast(28)
         fake_udid_out = fake_udid_out.lowercased()
         new_setting.fake_UDID = fake_udid_out
-        new_setting.network_timeout = 6
-        #if DEBUG
-        new_setting.network_timeout = 3
-        #endif
+        new_setting.network_timeout = 8
         settings = new_setting
         try? root_db?.insert(objects: [new_setting], intoTable: "LKSettings")
         // 写入新闻源地址
@@ -96,12 +93,6 @@ class app_root_class {
         default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
         try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: "LKNewsRepos")
-//        #if DEBUG
-//        let default_news_repos_local = DBMNewsRepo()
-//        default_news_repos_local.link = "http://192.168.6.111/repos/Tweaker/"
-//        default_news_repos_local.sort_id = 1
-//        try? root_db?.insert(objects: [default_news_repos_local], intoTable: "LKNewsRepos")
-//        #endif
     }
     
 }

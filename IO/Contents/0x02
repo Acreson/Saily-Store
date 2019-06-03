@@ -1,1 +1,26 @@
+--> Begin Section |text
+一秒变身黑暗模式
+//BLANK-LINE//
+      Tweaker 的新主题
+      还有红橙黄绿青蓝紫。
+---> End Section
 
+--> Begin Section |photo|https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/colorsheet.png|
+---> End Section
+
+--> Begin Section |text
+      在 Tweaker 的代码中，有这样一份文件：“ColorSheetCommon.swift” 它定义了用户的颜色主题，也为用户间主题分享打下了基础。灰白蓝三色虽然很经典，但是看久了也会产生视觉疲劳。这个时候，你就可以在管理页面切换新的主题。
+---> End Section
+
+--> Begin Section |photo_with_description|https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/design.png|
+开发过程中曾经使用过的设计稿
+---> End Section
+
+--> Begin Section |text
+//BLANK-LINE//
+//BLANK-LINE//
+本程序设计师：@Lakr233
+//BLANK-LINE//
+2019.6.3
+//BLANK-LINE//
+---> End Section
