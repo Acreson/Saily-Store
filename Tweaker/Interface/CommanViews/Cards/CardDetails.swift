@@ -98,16 +98,17 @@ extension common_views {
     
     func NPCD_create_card_detail_build_single(type: card_detail_type, body: String, vfsl: [String]) -> (UIView, CGFloat) {
         let ret = UIView()
-        var lenth = CGFloat(0)
+        var lenth = CGFloat(2)
         
         switch type {
         case .text:
             do {
                 let text_view = UITextView()
-                let font = UIFont(name: ".SFUIText-Semibold", size: 18) ?? UIFont.systemFont(ofSize: 18)
+                let font = UIFont(name: ".SFUIText-Semibold", size: 16) ?? UIFont.systemFont(ofSize: 16)
                 text_view.font = font
                 text_view.textColor = .darkGray
                 text_view.text = body
+                text_view.backgroundColor = .clear
                 text_view.isUserInteractionEnabled = false
                 ret.addSubview(text_view)
                 
@@ -126,8 +127,60 @@ extension common_views {
             }
         case .text_inherit_saying:
             do {
-                lenth = 104
-                
+                lenth = 28
+                let left_label = UILabel()
+                left_label.text = "“"
+                left_label.textColor = .lightGray
+                left_label.font = UIFont(name:"HiraMinProN-W6", size: 128)
+                ret.addSubview(left_label)
+                left_label.snp.makeConstraints { (x) in
+                    x.top.equalTo(ret.snp.top).offset(-38)
+                    x.left.equalTo(ret.snp.left).offset(-15)
+                    x.width.equalTo(150)
+                    x.height.equalTo(188)
+                }
+                let text = UITextView()
+                text.textColor = .black
+                text.text = body
+                text.backgroundColor = .clear
+                text.isUserInteractionEnabled = false
+                text.font = UIFont(name:"HiraMinProN-W6", size: 20)
+                ret.addSubview(text)
+                text.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(55)
+                    x.top.equalTo(ret.snp.top)
+                    x.right.equalTo(ret.snp.right).offset(0)
+                    if LKRoot.is_iPad {
+                        // 晚点再来处理
+                        x.height.equalTo(text.contentSize.height)
+                    } else {
+                        x.height.equalTo(text.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 56, height: CGFloat.infinity)).height) // 56 + 28
+                    }
+                }
+                lenth += text.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 84, height: CGFloat.infinity)).height
+                let right_label = UILabel()
+                right_label.text = "”"
+                right_label.textColor = .lightGray
+                right_label.font = UIFont(name:"HiraMinProN-W6", size: 54)
+                ret.addSubview(right_label)
+                right_label.snp.makeConstraints { (x) in
+                    x.top.equalTo(text.snp.bottom).offset(-6)
+                    x.right.equalTo(ret.snp.right).offset(12)
+                    x.width.equalTo(55)
+                    x.height.equalTo(55)
+                }
+                let des_str = UILabel()
+                des_str.text = vfsl.first ?? ""
+                des_str.font = UIFont(name:"HiraMinProN-W6", size: 16)
+                des_str.textColor = .darkGray
+                des_str.textAlignment = .right
+                ret.addSubview(des_str)
+                des_str.snp.makeConstraints { (x) in
+                    x.top.equalTo(text.snp.bottom).offset(0)
+                    x.right.equalTo(right_label.snp.left).offset(-4)
+                    x.left.equalTo(ret.snp.left)
+                    x.height.equalTo(18)
+                }
             }
         case .photo:
             do {
@@ -160,7 +213,7 @@ extension common_views {
                 }
                 let des_str = UILabel()
                 des_str.text = body
-                des_str.font = UIFont(name:"Source Han Serif CN", size: 12)
+                des_str.font = UIFont(name:"HiraMinProN-W6", size: 12)
                 des_str.textColor = .lightGray
                 des_str.textAlignment = .center
                 ret.addSubview(des_str)

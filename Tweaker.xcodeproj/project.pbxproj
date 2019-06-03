@@ -16,7 +16,6 @@
 		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
 		AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1DB1C722A36A180005DDD7 /* CardButton.swift */; };
 		AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53B64E22A021D800492BAB /* CardCreate.swift */; };
-		AB623BF922A54F26000D5714 /* SourceHanSerifCN-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB623BF822A54F26000D5714 /* SourceHanSerifCN-Regular.otf */; };
 		ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
@@ -64,7 +63,6 @@
 		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
 		AB1DB1C722A36A180005DDD7 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		AB53B64E22A021D800492BAB /* CardCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCreate.swift; sourceTree = "<group>"; };
-		AB623BF822A54F26000D5714 /* SourceHanSerifCN-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSerifCN-Regular.otf"; sourceTree = "<group>"; };
 		ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
@@ -236,7 +234,6 @@
 		ABFBA7E6229D566E0070A17E /* AssSets */ = {
 			isa = PBXGroup;
 			children = (
-				AB623BF822A54F26000D5714 /* SourceHanSerifCN-Regular.otf */,
 				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
 				ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */,
 				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
@@ -366,7 +363,6 @@
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
 				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
-				AB623BF922A54F26000D5714 /* SourceHanSerifCN-Regular.otf in Resources */,
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
 				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
 				ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */,

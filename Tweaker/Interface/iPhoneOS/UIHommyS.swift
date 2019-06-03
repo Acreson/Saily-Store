@@ -511,7 +511,7 @@ class UIHommyS: UIViewController {
                         let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
-                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 466 + new_container.lenth)
+                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 500 + new_container.lenth)
                         })
                         self.card_text_view?.snp.remakeConstraints({ (x) in
                             x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
