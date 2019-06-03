@@ -75,6 +75,9 @@ extension common_views {
             }
             if read.drop_space().hasPrefix("---> End Section") {
                 // 尾
+                if content_body.hasSuffix("/n") {
+                    content_body = content_body.dropLast().to_String()
+                }
                 let return_this_shit = NPCD_create_card_detail_build_single(type: content_head, body: content_body, vfsl: content_vfsl)
                 ret.addSubview(return_this_shit.0)
                 return_this_shit.0.snp.makeConstraints { (x) in
