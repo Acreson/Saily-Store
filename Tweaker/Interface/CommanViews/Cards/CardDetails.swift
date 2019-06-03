@@ -75,7 +75,7 @@ extension common_views {
             }
             if read.drop_space().hasPrefix("---> End Section") {
                 // 尾
-                if content_body.hasSuffix("/n") {
+                if content_body.hasSuffix("\n") {
                     content_body = content_body.dropLast().to_String()
                 }
                 let return_this_shit = NPCD_create_card_detail_build_single(type: content_head, body: content_body, vfsl: content_vfsl)
@@ -93,6 +93,18 @@ extension common_views {
             // 身子
             content_body += read + "\n"
         }
+        
+        // 底层分割
+        let return_this_shit = NPCD_create_card_detail_build_single(type: .text, body: "\n\n\n", vfsl: [])
+        ret.addSubview(return_this_shit.0)
+        return_this_shit.0.snp.makeConstraints { (x) in
+            x.top.equalTo(last_view.snp.bottom).offset(8)
+            x.left.equalTo(ret.snp.left)
+            x.right.equalTo(ret.snp.right)
+            x.height.equalTo(return_this_shit.1)
+        }
+        last_view = return_this_shit.0
+        ret.lenth += return_this_shit.1
         
         ret.last_view_for_auto_layout = last_view
         
@@ -137,7 +149,7 @@ extension common_views {
                 left_label.font = UIFont(name:"HiraMinProN-W6", size: 128)
                 ret.addSubview(left_label)
                 left_label.snp.makeConstraints { (x) in
-                    x.top.equalTo(ret.snp.top).offset(-38)
+                    x.top.equalTo(ret.snp.top).offset(-35)
                     x.left.equalTo(ret.snp.left).offset(-15)
                     x.width.equalTo(150)
                     x.height.equalTo(188)
@@ -147,11 +159,11 @@ extension common_views {
                 text.text = body
                 text.backgroundColor = .clear
                 text.isUserInteractionEnabled = false
-                text.font = UIFont(name:"HiraMinProN-W6", size: 20)
+                text.font = .boldSystemFont(ofSize: 20)
                 ret.addSubview(text)
                 text.snp.makeConstraints { (x) in
                     x.left.equalTo(ret.snp.left).offset(55)
-                    x.top.equalTo(ret.snp.top)
+                    x.top.equalTo(ret.snp.top).offset(3)
                     x.right.equalTo(ret.snp.right).offset(0)
                     if LKRoot.is_iPad {
                         // 晚点再来处理
@@ -167,19 +179,19 @@ extension common_views {
                 right_label.font = UIFont(name:"HiraMinProN-W6", size: 54)
                 ret.addSubview(right_label)
                 right_label.snp.makeConstraints { (x) in
-                    x.top.equalTo(text.snp.bottom).offset(-6)
+                    x.top.equalTo(text.snp.bottom).offset(-3)
                     x.right.equalTo(ret.snp.right).offset(12)
                     x.width.equalTo(55)
                     x.height.equalTo(55)
                 }
                 let des_str = UILabel()
                 des_str.text = vfsl.first ?? ""
-                des_str.font = UIFont(name:"HiraMinProN-W6", size: 16)
+                des_str.font = UIFont(name:"Georgia-Blod", size: 16)
                 des_str.textColor = .darkGray
                 des_str.textAlignment = .right
                 ret.addSubview(des_str)
                 des_str.snp.makeConstraints { (x) in
-                    x.top.equalTo(text.snp.bottom).offset(0)
+                    x.top.equalTo(text.snp.bottom).offset(3)
                     x.right.equalTo(right_label.snp.left).offset(-4)
                     x.left.equalTo(ret.snp.left)
                     x.height.equalTo(18)
