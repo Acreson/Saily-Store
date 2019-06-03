@@ -25,6 +25,25 @@ extension String {
         return ret
     }
     
+    func drop_comment() -> String {
+        if !self.contains("#") {
+            return self
+        }
+        if self.hasPrefix("#") {
+            return ""
+        }
+        return self.split(separator: "#").first?.to_String() ?? ""
+    }
+    
+    func returnUIHeight(font: UIFont, widthOfView: CGFloat) -> CGFloat {
+        let frame = NSString(string: self).boundingRect(
+            with: CGSize(width: widthOfView, height: .infinity),
+            options: [.usesFontLeading, .usesLineFragmentOrigin],
+            attributes: [.font : font],
+            context: nil)
+        return frame.size.height
+    }
+    
 }
 
 extension Substring {

@@ -8,8 +8,6 @@
 
 import UIKit
 
-var is_iPad = false
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            is_iPad = true
+            LKRoot.is_iPad = true
         }
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -27,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Twitter 动画
         var mainStoryboard: UIStoryboard = UIStoryboard(name: "Main_iPhone", bundle: nil)
-        if is_iPad {
+        if LKRoot.is_iPad {
             mainStoryboard = UIStoryboard(name: "Main_iPad", bundle: nil)
         }
         let navigationController = mainStoryboard.instantiateInitialViewController()!

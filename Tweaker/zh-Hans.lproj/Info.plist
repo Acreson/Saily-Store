@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0.5</string>
 	<key>CFBundleVersion</key>
-	<string>649</string>
+	<string>705</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -29,6 +29,10 @@
 	<string>我们需要使用相机来拍摄您请求的照片。</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>我们需要访问照片图库来获取您请求的照片。</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SourceHanSerifCN-Regular.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -16,11 +16,14 @@ class app_root_class {
     public let is_debug = false
     #endif
     
+    var is_iPad = false
+    
     public var root_path: String?
     public var root_db: Database?
     
     public var settings: DBMSettings?
     public var safe_area_needed: Bool = false
+    public var this_is_an_iPhone: Bool = false
     
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()

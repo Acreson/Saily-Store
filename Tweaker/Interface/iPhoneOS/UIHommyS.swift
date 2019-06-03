@@ -509,14 +509,10 @@ class UIHommyS: UIViewController {
                         }
                         
                         let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
-                        if new_container.lenth + 466 < 1024 {
-                            // 咱们啥都别干
-                        } else {
-                            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                                self.card_details_scroll_view?.layoutIfNeeded()
-                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 466 + new_container.lenth)
-                            })
-                        }
+                        UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                            self.card_details_scroll_view?.layoutIfNeeded()
+                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 466 + new_container.lenth)
+                        })
                         self.card_text_view?.snp.remakeConstraints({ (x) in
                             x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
                             x.left.equalTo(self.view.snp.left)
@@ -526,9 +522,9 @@ class UIHommyS: UIViewController {
                         self.card_text_view?.addSubview(new_container)
                         new_container.snp.makeConstraints({ (x) in
                             x.top.equalTo(self.card_text_view?.snp.top ?? self.view.snp.bottom).offset(28)
-                            x.left.equalTo(self.view.snp.left)
-                            x.right.equalTo(self.view.snp.right)
-                            x.height.equalTo(new_container.lenth)
+                            x.left.equalTo(self.view.snp.left).offset(28)
+                            x.right.equalTo(self.view.snp.right).offset(-28)
+                            x.height.equalTo(new_container.lenth + 256)
                         })
                     } // DispatchQueue.main.async
                 }) // NP_download_card_contents
