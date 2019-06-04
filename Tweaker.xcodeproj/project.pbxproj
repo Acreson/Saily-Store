@@ -16,6 +16,7 @@
 		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
 		AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1DB1C722A36A180005DDD7 /* CardButton.swift */; };
 		AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53B64E22A021D800492BAB /* CardCreate.swift */; };
+		ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC2C89222A5AC0C005E2F8F /* UIHommyL.swift */; };
 		ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */; };
 		ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */; };
 		ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */; };
@@ -63,6 +64,7 @@
 		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
 		AB1DB1C722A36A180005DDD7 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		AB53B64E22A021D800492BAB /* CardCreate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCreate.swift; sourceTree = "<group>"; };
+		ABC2C89222A5AC0C005E2F8F /* UIHommyL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyL.swift; sourceTree = "<group>"; };
 		ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNewsCards.swift; sourceTree = "<group>"; };
 		ABE6DCF5229E8C5300D18D9E /* DMCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMCommon.swift; sourceTree = "<group>"; };
 		ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTypeControl.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			children = (
 				ABFBA804229D7B460070A17E /* Main_iPad.storyboard */,
 				ABFBA7F1229D70120070A17E /* UIEnteryL.swift */,
+				ABC2C89222A5AC0C005E2F8F /* UIHommyL.swift */,
 			);
 			path = iPadOS;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
 				ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */,
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
+				ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */,
 				ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);

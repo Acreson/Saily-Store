@@ -133,12 +133,13 @@ extension common_views {
                     x.top.equalTo(ret.snp.top)
                     if LKRoot.is_iPad {
                         // 晚点再来处理
-                        x.height.equalTo(text_view.contentSize.height)
+                        x.height.equalTo(text_view.sizeThatFits(CGSize(width: 444, height: CGFloat.infinity)).height)
+                        lenth += text_view.sizeThatFits(CGSize(width: 444, height: CGFloat.infinity)).height
                     } else {
                         x.height.equalTo(text_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 56, height: CGFloat.infinity)).height)
+                        lenth += text_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 56, height: CGFloat.infinity)).height
                     }
                 }
-                lenth += text_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 56, height: CGFloat.infinity)).height
             }
         case .text_inherit_saying:
             do {
@@ -167,12 +168,13 @@ extension common_views {
                     x.right.equalTo(ret.snp.right).offset(0)
                     if LKRoot.is_iPad {
                         // 晚点再来处理
-                        x.height.equalTo(text.contentSize.height)
+                        x.height.equalTo(text.sizeThatFits(CGSize(width: 444, height: CGFloat.infinity)).height)
+                        lenth += text.sizeThatFits(CGSize(width: 444, height: CGFloat.infinity)).height
                     } else {
                         x.height.equalTo(text.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 56, height: CGFloat.infinity)).height) // 56 + 28
+                        lenth += text.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 84, height: CGFloat.infinity)).height
                     }
                 }
-                lenth += text.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 84, height: CGFloat.infinity)).height
                 let right_label = UILabel()
                 right_label.text = "”"
                 right_label.textColor = .lightGray
