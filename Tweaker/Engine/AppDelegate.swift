@@ -19,20 +19,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             LKRoot.is_iPad = true
         }
         
+        LKRoot.initializing()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.backgroundColor = #colorLiteral(red: 0.2882809639, green: 0.5985316038, blue: 0.9432967305, alpha: 1)
         self.window!.makeKeyAndVisible()
         
-        // Twitter 动画
         var mainStoryboard: UIStoryboard = UIStoryboard(name: "Main_iPhone", bundle: nil)
         if LKRoot.is_iPad {
             mainStoryboard = UIStoryboard(name: "Main_iPad", bundle: nil)
         }
         let navigationController = mainStoryboard.instantiateInitialViewController()!
         self.window!.rootViewController = navigationController
-        navigationController.twitter_animte()
         
-        LKRoot.initializing()
+        if LKRoot.ins_color_manager.read_a_color("DARK_ENABLED") == .clear {
+            // Twitter 动画
+            navigationController.twitter_animte()
+        }
         
         return true
     }

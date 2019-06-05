@@ -79,8 +79,12 @@ extension UIView {
         self.layer.rasterizationScale = UIScreen.main.scale
     }
 
-    func addShadow(ofColor color: UIColor = UIColor(red: 0.07, green: 0.47, blue: 0.57, alpha: 1.0), radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
-        layer.shadowColor = color.cgColor
+    func addShadow(ofColor color: UIColor = .clear, radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
+        if color == .clear {
+            layer.shadowColor = color.cgColor
+        } else {
+            layer.shadowColor = LKRoot.ins_color_manager.read_a_color("shadow").cgColor
+        }
         layer.shadowOffset = offset
         layer.shadowRadius = radius
         layer.shadowOpacity = opacity

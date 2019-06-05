@@ -13,6 +13,10 @@ class UIEnteryS: UITabBarController {
         
         print("[*] 将以 iPhone 的方式加载故事版。")
         
+        tabBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        tabBar.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
+        tabBar.barTintColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
+        
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

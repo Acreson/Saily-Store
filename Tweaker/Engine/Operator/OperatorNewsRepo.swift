@@ -177,7 +177,7 @@ extension app_opeerator {
                 read_opt = line.to_String()
             }
             // 取头和身子
-            var sp_read = (read_opt ?? "").split(separator: "|")
+            let sp_read = (read_opt ?? "").split(separator: "|")
             if sp_read.count < 3 {
                 // 无效行，丢弃 ouo
                 continue for_sign
@@ -237,7 +237,7 @@ extension app_opeerator {
             }
             
             // 取头和身子
-            var sp_read = (read_opt ?? "").split(separator: "|")
+            let sp_read = (read_opt ?? "").split(separator: "|")
             if sp_read.count < 3 {
                 // 无效行，丢弃 ouo
                 continue for_sign

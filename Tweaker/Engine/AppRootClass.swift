@@ -65,6 +65,9 @@ class app_root_class {
             bootstrap_this_app()
         }
 
+        // iOS 13 黑暗模式初始化
+        ins_color_manager.iOS13_init()
+        
         // 发送到下载处理引擎
         
     }

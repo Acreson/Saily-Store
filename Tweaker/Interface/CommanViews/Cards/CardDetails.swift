@@ -121,7 +121,7 @@ extension common_views {
                 let text_view = UITextView()
                 let font = UIFont(name: ".SFUIText-Semibold", size: 16) ?? UIFont.systemFont(ofSize: 16)
                 text_view.font = font
-                text_view.textColor = .darkGray
+                text_view.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 text_view.text = body
                 text_view.backgroundColor = .clear
                 text_view.isUserInteractionEnabled = false
@@ -146,7 +146,7 @@ extension common_views {
                 lenth = 28
                 let left_label = UILabel()
                 left_label.text = "“"
-                left_label.textColor = .lightGray
+                left_label.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 left_label.font = UIFont(name:"HiraMinProN-W6", size: 128)
                 ret.addSubview(left_label)
                 left_label.snp.makeConstraints { (x) in
@@ -156,7 +156,7 @@ extension common_views {
                     x.height.equalTo(188)
                 }
                 let text = UITextView()
-                text.textColor = .black
+                text.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 text.text = body
                 text.backgroundColor = .clear
                 text.isUserInteractionEnabled = false
@@ -177,7 +177,7 @@ extension common_views {
                 }
                 let right_label = UILabel()
                 right_label.text = "”"
-                right_label.textColor = .lightGray
+                right_label.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 right_label.font = UIFont(name:"HiraMinProN-W6", size: 54)
                 ret.addSubview(right_label)
                 right_label.snp.makeConstraints { (x) in
@@ -189,7 +189,7 @@ extension common_views {
                 let des_str = UILabel()
                 des_str.text = vfsl.first ?? ""
                 des_str.font = UIFont(name:"Georgia-Blod", size: 16)
-                des_str.textColor = .darkGray
+                des_str.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 des_str.textAlignment = .right
                 ret.addSubview(des_str)
                 des_str.snp.makeConstraints { (x) in
@@ -231,7 +231,7 @@ extension common_views {
                 let des_str = UILabel()
                 des_str.text = body
                 des_str.font = UIFont(name:"HiraMinProN-W6", size: 12)
-                des_str.textColor = .lightGray
+                des_str.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 des_str.textAlignment = .center
                 ret.addSubview(des_str)
                 des_str.snp.makeConstraints { (x) in

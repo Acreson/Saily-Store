@@ -12,6 +12,7 @@ class UIHommyL: UIViewController {
     var container: UIScrollView?
     var header_view: UIView?
     
+    var loading_session_ID = UUID().uuidString
     var card_exists = false
     var card_details_scroll_view: UIScrollView?
     var card_view: UICardView?
@@ -20,6 +21,7 @@ class UIHommyL: UIViewController {
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
+        view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     } // viewWillAppear
@@ -232,7 +234,7 @@ class UIHommyL: UIViewController {
                             for card in repo.cards {    // 开始添加
                                 let new_card_container = UIView()
                                 new_card_container.setRadiusINT(radius: LKRoot.settings?.card_radius)
-                                new_card_container.addShadow(ofColor: UIColor(hexString: "0x9A9A9A")!)
+                                new_card_container.addShadow()
                                 new_card_container.clipsToBounds = false
                                 cards_container.addSubview(new_card_container)
                                 new_card_container.snp.makeConstraints({ (x) in
@@ -319,6 +321,9 @@ class UIHommyL: UIViewController {
     
     @objc func card_button_handler(sender: Any?) {
         
+        loading_session_ID = UUID().uuidString
+        let current_session = loading_session_ID
+        
         if let button = sender as? UICardButton {
             
             UIApplication.shared.beginIgnoringInteractionEvents()
@@ -330,16 +335,21 @@ class UIHommyL: UIViewController {
             print("            - with location: " + button.center.debugDescription)
             
             // 添加特效层
-            let vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            let vs_effect: UIVisualEffectView?
+            if LKRoot.ins_color_manager.read_a_color("DARK_ENABLED") != .clear {
+                vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+            } else {
+                vs_effect = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+            }
             let color_backend = UIView()
             let cover_backend = UIView()
-            vs_effect.tag = view_tags.must_remove.rawValue
+            vs_effect!.tag = view_tags.must_remove.rawValue
             color_backend.tag = view_tags.must_remove.rawValue
             cover_backend.tag = view_tags.must_remove.rawValue
-            color_backend.backgroundColor = #colorLiteral(red: 0.9995248914, green: 0.9870037436, blue: 0.9178577065, alpha: 1)
+            color_backend.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
             color_backend.alpha = 0
             cover_backend.addSubview(color_backend)
-            cover_backend.addSubview(vs_effect)
+            cover_backend.addSubview(vs_effect!)
             self.view.addSubview(cover_backend)
             cover_backend.alpha = 0
             cover_backend.snp.makeConstraints { (x) in
@@ -348,7 +358,7 @@ class UIHommyL: UIViewController {
                 x.bottom.equalTo(cover_backend.snp.bottom)
                 x.right.equalTo(cover_backend.snp.right)
             }
-            vs_effect.snp.makeConstraints { (x) in
+            vs_effect!.snp.makeConstraints { (x) in
                 x.top.equalTo(cover_backend.snp.top)
                 x.left.equalTo(cover_backend.snp.left)
                 x.bottom.equalTo(cover_backend.snp.bottom)
@@ -372,7 +382,7 @@ class UIHommyL: UIViewController {
             let container_d = UIScrollView()
             container_d.tag = view_tags.must_remove.rawValue
             container_d.contentSize = CGSize(width: 0, height: 2080)
-            container_d.addShadow(ofColor: .gray)
+            container_d.addShadow()
             self.view.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
                 x.left.equalTo(self.view.snp.left)
@@ -445,12 +455,12 @@ class UIHommyL: UIViewController {
             self.card_view = nc_view
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     self.tabBarController?.tabBar.layoutIfNeeded()
                     self.tabBarController?.tabBar.layer.position.y += 100
                     nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 0, width: 500, height: 416)
-                    text_container.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 416, width: 500, height: 666)
+                    nc_view.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 66, width: 500, height: 416)
+                    text_container.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 482, width: 500, height: 666)
                     container_d.contentSize = CGSize(width: 0, height: 888)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
@@ -469,7 +479,6 @@ class UIHommyL: UIViewController {
                         x.width.equalTo(500)
                         x.height.equalTo(92)
                     })
-                    //                    some.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("button_touched_color"))
                     let text = UILabel(text: "返回".localized())
                     text.textAlignment = .center
                     text.font = UIFont(name: ".SFUIText-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24)
@@ -492,14 +501,14 @@ class UIHommyL: UIViewController {
                     
                     // iPad 专属剧中布局
                     self.card_view?.snp.makeConstraints({ (x) in
-                        x.top.equalTo(container_d.snp.top)
+                        x.top.equalTo(container_d.snp.top).offset(66)
                         x.centerX.equalTo(container_d.snp.centerX)
                         x.width.equalTo(500)
                         x.height.equalTo(416)
                     })
                     
                     self.card_text_view?.snp.makeConstraints({ (x) in
-                        x.top.equalTo(container_d.snp.top).offset(416)
+                        x.top.equalTo(container_d.snp.top).offset(482)
                         x.centerX.equalTo(container_d.snp.centerX)
                         x.width.equalTo(500)
                         x.height.equalTo(666)
@@ -518,6 +527,9 @@ class UIHommyL: UIViewController {
                     if !self.card_exists {
                         return
                     }
+                    if current_session !=  self.loading_session_ID {
+                        return
+                    }
                     DispatchQueue.main.async {
                         // 构建卡片
                         for item in self.card_text_view?.subviews ?? [] where item.tag == view_tags.indicator.rawValue {
@@ -527,7 +539,7 @@ class UIHommyL: UIViewController {
                         let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
-                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 500 + new_container.lenth)
+                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 600 + new_container.lenth)
                         })
                         self.card_text_view?.snp.remakeConstraints({ (x) in
                             x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
