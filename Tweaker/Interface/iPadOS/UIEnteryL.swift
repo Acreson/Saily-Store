@@ -7,9 +7,7 @@
 //
 
 class UIEnteryL: UITabBarController {
-    
-    var last_tapped_view_controller: UIViewController?
-    var tabbar_layout: CALayer?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +24,6 @@ class UIEnteryL: UITabBarController {
             self.last_tapped_view_controller = self.selectedViewController
         }
         
-    }
-    
-    func tabbar_layout_record() {
-        tabbar_layout = tabBar.layer
-    }
-    
-    func tabbar_layout_recovery() {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
-            self.tabBar.layer.position.y = self.tabbar_layout?.position.y ?? 0
-        }, completion: nil)
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {

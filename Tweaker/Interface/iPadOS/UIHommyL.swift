@@ -576,7 +576,7 @@ class UIHommyL: UIViewController {
         if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                    self.tabBarController?.tabBar.layer.position.y -= 100
+                    (LKRoot.tabbar_view_controller as? UIEnteryL)?.tabbar_layout_recovery()
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
