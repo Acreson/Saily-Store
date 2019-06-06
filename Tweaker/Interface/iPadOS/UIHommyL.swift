@@ -523,7 +523,11 @@ class UIHommyL: UIViewController {
             }
             
             LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 0.8) {
-                LKRoot.ins_common_operator.NP_download_card_contents(target: button.card_info, result_str: { (ret_str) in
+                var master_link = ""
+                if Int(button.card_index.x) < LKRoot.container_news_repo.count && Int(button.card_index.x) >= 0 {
+                    master_link = LKRoot.container_news_repo[Int(button.card_index.x)].link
+                }
+                LKRoot.ins_common_operator.NP_download_card_contents(target: button.card_info, master_link: master_link, result_str: { (ret_str) in
                     // 判断卡片是否还存在
                     if !self.card_exists {
                         return

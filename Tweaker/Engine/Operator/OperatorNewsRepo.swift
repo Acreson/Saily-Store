@@ -79,7 +79,7 @@ extension app_opeerator {
                                         with: new_update,
                                         where: DBMNewsRepo.Properties.link == item.link!)
             // 解包
-            NP_content_invoker(content_str: item.content ?? "", target_RAM: new)
+            NP_content_invoker(content_str: item.content ?? "", target_RAM: new, master_link: new_update.link ?? "")
             // 下载卡片内容
             var dl_url_str = new.link
 //            var got_a_link = false
@@ -156,14 +156,14 @@ extension app_opeerator {
             }
             net_semaphore_2.wait()
             signal_ed_130 = true
-            new.cards = NP_cards_content_invoker(content_str: read_cards ?? "")
+            new.cards = NP_cards_content_invoker(content_str: read_cards ?? "", master_link: item.link ?? "")
             // 放内存
             LKRoot.container_news_repo.append(new)
         } // for
         CallB(operation_result.success.rawValue)
     } // NP_sync_and_download
 
-    func NP_content_invoker(content_str: String, target_RAM: DMNewsRepo) {
+    func NP_content_invoker(content_str: String, target_RAM: DMNewsRepo, master_link: String) {
         for_sign: for line in content_str.split(separator: "\n") {
             // 写入可写属性
             var read_opt: String?
@@ -198,7 +198,17 @@ extension app_opeerator {
                 for language in body.split(separator: ",") {
                     target_RAM.language.append(language.to_String())
                 }
-            case "LKRP-ICON": target_RAM.icon = body
+            case "LKRP-ICON":
+                var bodyy = body
+                if bodyy.hasPrefix("./") {
+                    bodyy = bodyy.dropFirst().to_String()
+                    if master_link.hasSuffix("/") {
+                        bodyy = master_link + bodyy.dropFirst().to_String()
+                    } else {
+                        bodyy = master_link + bodyy
+                    }
+                }
+                target_RAM.icon = bodyy
             case "LKRP-TITLE": target_RAM.title = body
             case "LKRP-SUBTITLE": target_RAM.sub_title = body
             case "LKRP-TITLE-COLOR": target_RAM.title_color = body
@@ -208,7 +218,7 @@ extension app_opeerator {
         }
     } // NP_content_invoker
     
-    func NP_cards_content_invoker(content_str: String) -> [DMNewsCard] {
+    func NP_cards_content_invoker(content_str: String, master_link: String) -> [DMNewsCard] {
         
         var ins_card = DMNewsCard()
         var ret = [DMNewsCard]()
@@ -265,20 +275,36 @@ extension app_opeerator {
             case "LKCD-DESSTR": ins_card.description_string = body
             case "LKCD-PHOTO":
                 for photo in body.split(separator: ",") {
-                    let photo = photo.to_String().drop_space()
+                    var photo = photo.to_String().drop_space()
+                    if photo.hasPrefix("./") {
+                        if master_link.hasSuffix("/") {
+                            photo = master_link + photo.dropFirst().to_String()
+                        } else {
+                            photo = master_link + photo
+                        }
+                    }
                     ins_card.image_container.append(photo)
                 }
             case "LKCD-TITLE-COLOR": ins_card.main_title_string_color = body
             case "LKCD-SUBTITLE-COLOR": ins_card.sub_title_string_color = body
             case "LKCD-DESSTR-COLOR": ins_card.description_string_color = body
-            case "LKCD-CONTENTS": ins_card.content = body
+            case "LKCD-CONTENTS":
+                    var link = body.drop_space()
+                    if link.hasPrefix("./") {
+                        if master_link.hasSuffix("/") {
+                            link = master_link + link.dropFirst().to_String()
+                        } else {
+                            link = master_link + link
+                        }
+                    }
+                ins_card.content = link
             default: print("[?] 这啥玩意？" + name)
             }
         }
         return ret
     } // NP_cards_content_invoker
     
-    func NP_download_card_contents(target: DMNewsCard, result_str: @escaping (String) -> Void) {
+    func NP_download_card_contents(target: DMNewsCard, master_link: String, result_str: @escaping (String) -> Void) {
         guard let dl_url = URL(string: target.content ?? "") else {
             print("[Resumable - fatalError] 无法内容创建下载链接。")
             return
@@ -320,7 +346,30 @@ extension app_opeerator {
             ret_str = "--> Begin Section |text_inherit_saying|错误|\n尝试下载卡片内容失败了。\n---> End Section".localized()
         }
     
-        result_str(ret_str ?? "")
+        // 对软链接进行修复
+        var ret_str_fixed = ""
+        for item in (ret_str ?? "").split(separator: "\n") {
+            var read = item.to_String()
+            if read.hasPrefix("--> Begin Section |") && read.contains("|./") {
+                read = ""
+                for content in item.to_String().split(separator: "|") {
+                    var read_inner = content.to_String()
+                    if read_inner.hasPrefix("./") {
+                        if master_link.hasSuffix("/") {
+                            read_inner = master_link.dropLast().to_String() + read_inner.dropFirst().to_String()
+                        } else {
+                            read_inner = master_link + read_inner.dropFirst().to_String()
+                        }
+                    }
+                    read += read_inner + "|"
+                }
+                ret_str_fixed += read + "\n"
+            } else {
+                ret_str_fixed += read + "\n"
+            }
+        }
+        
+        result_str(ret_str_fixed )
         
     } // NP_download_card_contents
     
