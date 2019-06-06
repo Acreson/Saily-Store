@@ -119,8 +119,7 @@ extension common_views {
         case .text:
             do {
                 let text_view = UITextView()
-                let font = UIFont(name: ".SFUIText-Semibold", size: 16) ?? UIFont.systemFont(ofSize: 16)
-                text_view.font = font
+                text_view.font = .systemFont(ofSize: 16)
                 text_view.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 text_view.text = body
                 text_view.backgroundColor = .clear
@@ -188,7 +187,7 @@ extension common_views {
                 }
                 let des_str = UILabel()
                 des_str.text = vfsl.first ?? ""
-                des_str.font = UIFont(name:"Georgia-Blod", size: 16)
+                des_str.font = .systemFont(ofSize: 16)
                 des_str.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 des_str.textAlignment = .right
                 ret.addSubview(des_str)
@@ -230,7 +229,7 @@ extension common_views {
                 }
                 let des_str = UILabel()
                 des_str.text = body
-                des_str.font = UIFont(name:"HiraMinProN-W6", size: 12)
+                des_str.font = .systemFont(ofSize: 12)
                 des_str.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 des_str.textAlignment = .center
                 ret.addSubview(des_str)

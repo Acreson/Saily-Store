@@ -36,7 +36,7 @@ extension common_views {
 
         sub_title.text = sub_title_text
         sub_title.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
-        sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        sub_title.font = .boldSystemFont(ofSize: 13)
         sub_title.snp.makeConstraints { (x) in
             x.top.equalTo(ret_view.snp.top).offset(28)
             x.left.equalTo(ret_view.snp.left).offset(23)
@@ -47,7 +47,7 @@ extension common_views {
         
         main_title.text = "今日精选".localized()
         main_title.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        main_title.font = UIFont(name: ".SFUIText-Bold", size: 34) ?? UIFont.systemFont(ofSize: 34)
+        main_title.font = .boldSystemFont(ofSize: 34)
         main_title.snp.makeConstraints { (x) in
             x.top.equalTo(sub_title.snp.bottom).offset(0)
             x.left.equalTo(sub_title.snp.left).offset(-1)

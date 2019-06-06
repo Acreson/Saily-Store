@@ -90,7 +90,7 @@ class UIHommyL: UIViewController {
         let loading_label = UILabel()
         loading_label.text = "- 正在加载 -".localized()
         loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+        loading_label.font = .boldSystemFont(ofSize: 12)
         loading_label.tag = view_tags.indicator.rawValue
         loading_label.textAlignment = .center
         view.addSubview(loading_label)
@@ -133,7 +133,7 @@ class UIHommyL: UIViewController {
             
             let label = UILabel()
             label.text = "!"
-            label.font = UIFont(name: ".SFUIText-Semibold", size: 88) ?? UIFont.systemFont(ofSize: 88)
+            label.font = .boldSystemFont(ofSize: 88)
             label.textAlignment = .center
             label.textColor = LKRoot.ins_color_manager.read_a_color("button_touched_color")
             view.addSubview(label)
@@ -187,7 +187,7 @@ class UIHommyL: UIViewController {
                             })
                             // 小标题
                             let small_title = UILabel(text: repo.sub_title)
-                            small_title.font = UIFont(name: ".SFUIText-Semibold", size: 11) ?? UIFont.systemFont(ofSize: 11)
+                            small_title.font = .boldSystemFont(ofSize: 11)
                             if let color = UIColor(hexString: repo.subtitle_color) {
                                 small_title.textColor = color
                             } else {
@@ -200,7 +200,7 @@ class UIHommyL: UIViewController {
                             })
                             // 大标题
                             let big_title = UILabel(text: repo.title)
-                            big_title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                            big_title.font = .boldSystemFont(ofSize: 22)
                             if let color = UIColor(hexString: repo.title_color) {
                                 big_title.textColor = color
                             } else {
@@ -278,7 +278,7 @@ class UIHommyL: UIViewController {
                         label.text = "Designed By @Lakr233 2019.5"
                         label.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
                         label.alpha = 0.233
-                        label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                        label.font = .boldSystemFont(ofSize: 12)
                         self.container?.addSubview(label)
                         label.snp.makeConstraints({ (x) in
                             x.top.equalTo(last_view.snp.bottom).offset(42)
@@ -305,7 +305,7 @@ class UIHommyL: UIViewController {
                         
                         let label = UILabel()
                         label.text = "!"
-                        label.font = UIFont(name: ".SFUIText-Semibold", size: 88) ?? UIFont.systemFont(ofSize: 88)
+                        label.font = .boldSystemFont(ofSize: 88)
                         label.textAlignment = .center
                         label.textColor = LKRoot.ins_color_manager.read_a_color("button_touched_color")
                         self.view.addSubview(label)
@@ -321,6 +321,8 @@ class UIHommyL: UIViewController {
     } // build_view
     
     @objc func card_button_handler(sender: Any?) {
+        
+        LKRoot.ever_went_background = false
         
         loading_session_ID = UUID().uuidString
         let current_session = loading_session_ID
@@ -351,7 +353,7 @@ class UIHommyL: UIViewController {
             color_backend.alpha = 0
             cover_backend.addSubview(color_backend)
             cover_backend.addSubview(vs_effect!)
-            self.view.addSubview(cover_backend)
+            UIApplication.shared.keyWindow!.addSubview(cover_backend)
             cover_backend.alpha = 0
             cover_backend.snp.makeConstraints { (x) in
                 x.top.equalTo(cover_backend.snp.top)
@@ -384,7 +386,7 @@ class UIHommyL: UIViewController {
             container_d.tag = view_tags.must_remove.rawValue
             container_d.contentSize = CGSize(width: 0, height: 2080)
             container_d.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-            self.view.addSubview(container_d)
+            UIApplication.shared.keyWindow!.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
                 x.left.equalTo(self.view.snp.left)
                 x.right.equalTo(self.view.snp.right)
@@ -404,7 +406,7 @@ class UIHommyL: UIViewController {
             container_d.addSubview(nc_view)
             
             // 内容本体
-            let text_container = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: 188))
+            let text_container = UIView(frame: CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: UIScreen.main.bounds.height + 66, width: 500, height: 188))
             container_d.addSubview(text_container)
             text_container.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
             
@@ -414,7 +416,7 @@ class UIHommyL: UIViewController {
             close_image.alpha = 0
             close_image.backgroundColor = .white
             close_image.contentMode = .center
-            self.view.addSubview(close_image)
+            UIApplication.shared.keyWindow!.addSubview(close_image)
             close_image.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(18)
                 x.right.equalTo(self.view.snp.right).offset(-18)
@@ -425,7 +427,7 @@ class UIHommyL: UIViewController {
             let close_button = UIButton()
             close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
             close_button.tag = view_tags.must_remove.rawValue
-            container_d.addSubview(close_button)
+            UIApplication.shared.keyWindow!.addSubview(close_button)
             close_button.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(0)
                 x.right.equalTo(self.view.snp.right).offset(0)
@@ -443,10 +445,9 @@ class UIHommyL: UIViewController {
             loading_label.text = "- 正在加载 -".localized()
             loading_label.textAlignment = .center
             loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-            loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+            loading_label.font = .boldSystemFont(ofSize: 12)
             loading_label.tag = view_tags.indicator.rawValue
             text_container.addSubview(loading_label)
-            
             
             // 存接口
             self.card_exists = true
@@ -455,10 +456,14 @@ class UIHommyL: UIViewController {
             self.card_text_view = text_container
             self.card_view = nc_view
             
+            // 强制前端显示
+            UIApplication.shared.keyWindow!.bringSubviewToFront(cover_backend)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(container_d)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(close_image)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(close_button)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                    self.tabBarController?.tabBar.layoutIfNeeded()
-                    self.tabBarController?.tabBar.layer.position.y += 100
                     nc_view.layoutIfNeeded()
                     nc_view.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 66, width: 500, height: 416)
                     text_container.frame = CGRect(x: (UIScreen.main.bounds.width - 500) / 2, y: 482, width: 500, height: 666)
@@ -482,7 +487,7 @@ class UIHommyL: UIViewController {
                     })
                     let text = UILabel(text: "返回".localized())
                     text.textAlignment = .center
-                    text.font = UIFont(name: ".SFUIText-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24)
+                    text.font = .boldSystemFont(ofSize: 24)
                     text.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
                     container_d.addSubview(text)
                     text.snp.makeConstraints({ (x) in
@@ -500,7 +505,7 @@ class UIHommyL: UIViewController {
                         x.right.equalTo(some.snp.right)
                     })
                     
-                    // iPad 专属剧中布局
+                    // iPad 专属居中布局
                     self.card_view?.snp.makeConstraints({ (x) in
                         x.top.equalTo(container_d.snp.top).offset(66)
                         x.centerX.equalTo(container_d.snp.centerX)
@@ -532,9 +537,10 @@ class UIHommyL: UIViewController {
                     if !self.card_exists {
                         return
                     }
-                    if current_session !=  self.loading_session_ID {
+                    if current_session != self.loading_session_ID {
                         return
                     }
+                    self.loading_session_ID = ""
                     DispatchQueue.main.async {
                         // 构建卡片
                         for item in self.card_text_view?.subviews ?? [] where item.tag == view_tags.indicator.rawValue {
@@ -576,11 +582,14 @@ class UIHommyL: UIViewController {
         for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
             items.append(item)
         }
+        for item in UIApplication.shared.keyWindow!.subviews where item.tag == view_tags.must_remove.rawValue {
+            items.append(item)
+        }
         
         if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                    self.tabBarController?.tabBar.layer.position.y -= 100
+                    
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,

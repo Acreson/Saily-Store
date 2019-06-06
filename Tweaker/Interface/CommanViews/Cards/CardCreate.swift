@@ -62,14 +62,14 @@ extension common_views {
                 }
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
-                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                sub_title.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
                     sub_title.textColor = .white
                 }
                 let title = UILabel(text: info.main_title_string)
-                title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                title.font = .boldSystemFont(ofSize: 22)
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
                 } else {
@@ -88,7 +88,7 @@ extension common_views {
                 // 底下的文字
                 let des_str = UITextView()
                 des_str.text = info.description_string
-                des_str.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                des_str.font = .boldSystemFont(ofSize: 12)
                 des_str.isUserInteractionEnabled = false
                 des_str.backgroundColor = .clear
                 if let color = UIColor(hexString: info.description_string_color) {
@@ -111,7 +111,7 @@ extension common_views {
                 // 底下的文字
                 let des_str = UILabel()
                 des_str.text = info.description_string
-                des_str.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                des_str.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.description_string_color) {
                     des_str.textColor = color
                 } else {
@@ -127,7 +127,7 @@ extension common_views {
                 }
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
-                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                sub_title.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
@@ -136,7 +136,7 @@ extension common_views {
                 let title = UITextView()
                 title.text = info.main_title_string
                 title.isUserInteractionEnabled = false
-                title.font = UIFont(name: ".SFUIText-Bold", size: 26) ?? UIFont.systemFont(ofSize: 26)
+                title.font = .boldSystemFont(ofSize: 26)
                 title.backgroundColor = .clear
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
@@ -224,14 +224,14 @@ extension common_views {
                 }
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
-                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                sub_title.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
                     sub_title.textColor = .white
                 }
                 let title = UILabel(text: info.main_title_string)
-                title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                title.font = .boldSystemFont(ofSize: 22)
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
                 } else {
@@ -250,7 +250,7 @@ extension common_views {
                 // 底下的文字
                 let des_str = UILabel()
                 des_str.text = info.description_string
-                des_str.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                des_str.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.description_string_color) {
                     des_str.textColor = color
                 } else {
@@ -269,7 +269,7 @@ extension common_views {
                 ret.backgroundColor = .white
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
-                sub_title.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                sub_title.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
@@ -278,7 +278,7 @@ extension common_views {
                 let title = UITextView()
                 title.text = info.main_title_string
                 title.isUserInteractionEnabled = false
-                title.font = UIFont(name: ".SFUIText-Bold", size: 26) ?? UIFont.systemFont(ofSize: 26)
+                title.font = .boldSystemFont(ofSize: 26)
                 title.backgroundColor = .clear
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color

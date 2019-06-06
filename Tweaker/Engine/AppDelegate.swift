@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        
+        LKRoot.ever_went_background = true
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

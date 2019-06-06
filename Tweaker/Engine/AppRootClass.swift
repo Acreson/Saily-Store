@@ -16,6 +16,9 @@ class app_root_class {
     public let is_debug = false
     #endif
     
+    // iOS 13 Fix
+    var ever_went_background = false
+    
     var is_iPad = false
     
     public var root_path: String?

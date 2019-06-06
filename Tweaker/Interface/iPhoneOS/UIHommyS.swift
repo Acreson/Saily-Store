@@ -6,7 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-
 // swiftlint:disable:next type_body_length
 class UIHommyS: UIViewController {
     
@@ -91,7 +90,7 @@ class UIHommyS: UIViewController {
         let loading_label = UILabel()
         loading_label.text = "- 正在加载 -".localized()
         loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+        loading_label.font = .boldSystemFont(ofSize: 12)
         loading_label.tag = view_tags.indicator.rawValue
         loading_label.textAlignment = .center
         view.addSubview(loading_label)
@@ -134,7 +133,7 @@ class UIHommyS: UIViewController {
             
             let label = UILabel()
             label.text = "!"
-            label.font = UIFont(name: ".SFUIText-Semibold", size: 88) ?? UIFont.systemFont(ofSize: 88)
+            label.font = .boldSystemFont(ofSize: 88)
             label.textAlignment = .center
             label.textColor = LKRoot.ins_color_manager.read_a_color("button_touched_color")
             view.addSubview(label)
@@ -147,7 +146,7 @@ class UIHommyS: UIViewController {
         }
         
         print("[*] 开始加载今日精选。")
-        LKRoot.queue_dispatch.async {
+        LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 1) {
             LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
                 if ret == 0 {
                     print("[*] 开始构建主页面")
@@ -175,7 +174,7 @@ class UIHommyS: UIViewController {
                         var current_index_ins   = 0
                         
                         // 创建卡片组
-                        let card_width = UIScreen.main.bounds.width - 55
+                        let card_width = CGFloat(UIScreen.main.bounds.width - 55)
                         for repo in LKRoot.container_news_repo {
                             // 创建View
                             let new_view = UIView()
@@ -188,7 +187,7 @@ class UIHommyS: UIViewController {
                             })
                             // 小标题
                             let small_title = UILabel(text: repo.sub_title)
-                            small_title.font = UIFont(name: ".SFUIText-Semibold", size: 11) ?? UIFont.systemFont(ofSize: 11)
+                            small_title.font = .boldSystemFont(ofSize: 11)
                             if let color = UIColor(hexString: repo.subtitle_color) {
                                 small_title.textColor = color
                             } else {
@@ -201,7 +200,7 @@ class UIHommyS: UIViewController {
                             })
                             // 大标题
                             let big_title = UILabel(text: repo.title)
-                            big_title.font = UIFont(name: ".SFUIText-Bold", size: 22) ?? UIFont.systemFont(ofSize: 22)
+                            big_title.font = .boldSystemFont(ofSize: 22)
                             if let color = UIColor(hexString: repo.title_color) {
                                 big_title.textColor = color
                             } else {
@@ -279,7 +278,7 @@ class UIHommyS: UIViewController {
                         label.text = "Designed By @Lakr233 2019.5"
                         label.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
                         label.alpha = 0.233
-                        label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+                        label.font = .boldSystemFont(ofSize: 12)
                         self.container?.addSubview(label)
                         label.snp.makeConstraints({ (x) in
                             x.top.equalTo(last_view.snp.bottom).offset(42)
@@ -306,7 +305,7 @@ class UIHommyS: UIViewController {
                         
                         let label = UILabel()
                         label.text = "!"
-                        label.font = UIFont(name: ".SFUIText-Semibold", size: 88) ?? UIFont.systemFont(ofSize: 88)
+                        label.font = .boldSystemFont(ofSize: 88)
                         label.textAlignment = .center
                         label.textColor = LKRoot.ins_color_manager.read_a_color("button_touched_color")
                         self.view.addSubview(label)
@@ -322,6 +321,8 @@ class UIHommyS: UIViewController {
     } // build_view
     
     @objc func card_button_handler(sender: Any?) {
+        
+        LKRoot.ever_went_background = false
         
         loading_session_ID = UUID().uuidString
         let current_session = loading_session_ID
@@ -352,7 +353,7 @@ class UIHommyS: UIViewController {
             color_backend.alpha = 0
             cover_backend.addSubview(color_backend)
             cover_backend.addSubview(vs_effect!)
-            self.view.addSubview(cover_backend)
+            UIApplication.shared.keyWindow!.addSubview(cover_backend)
             cover_backend.alpha = 0
             cover_backend.snp.makeConstraints { (x) in
                 x.top.equalTo(cover_backend.snp.top)
@@ -385,11 +386,12 @@ class UIHommyS: UIViewController {
             container_d.tag = view_tags.must_remove.rawValue
             container_d.contentSize = CGSize(width: 0, height: 2080)
             container_d.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-            self.view.addSubview(container_d)
+            UIApplication.shared.keyWindow!.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
-                x.width.equalTo(UIScreen.main.bounds.width)
-                x.height.equalTo(UIScreen.main.bounds.height)
-                x.center.equalTo(self.view.center)
+                x.left.equalTo(self.view.snp.left)
+                x.right.equalTo(self.view.snp.right)
+                x.bottom.equalTo(self.view.snp.bottom)
+                x.top.equalTo(self.view.snp.top)
             }
             
             // 创建一个一摸一样的卡片
@@ -414,7 +416,7 @@ class UIHommyS: UIViewController {
             close_image.alpha = 0
             close_image.backgroundColor = .white
             close_image.contentMode = .center
-            self.view.addSubview(close_image)
+            UIApplication.shared.keyWindow!.addSubview(close_image)
             close_image.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(18)
                 x.right.equalTo(self.view.snp.right).offset(-18)
@@ -425,7 +427,7 @@ class UIHommyS: UIViewController {
             let close_button = UIButton()
             close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
             close_button.tag = view_tags.must_remove.rawValue
-            container_d.addSubview(close_button)
+            UIApplication.shared.keyWindow!.addSubview(close_button)
             close_button.snp.makeConstraints { (x) in
                 x.top.equalTo(self.view.snp.top).offset(0)
                 x.right.equalTo(self.view.snp.right).offset(0)
@@ -434,19 +436,18 @@ class UIHommyS: UIViewController {
             }
             
             // 加载指示
-            let loading = UIActivityIndicatorView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 6, y: 128, width: 12, height: 12))
+            let loading = UIActivityIndicatorView(frame: CGRect(x: 500 / 2 - 6, y: 128, width: 12, height: 12))
             loading.startAnimating()
             loading.color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
             loading.tag = view_tags.indicator.rawValue
             text_container.addSubview(loading)
-            let loading_label = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 48, y: 148, width: 96, height: 28))
+            let loading_label = UILabel(frame: CGRect(x: 500 / 2 - 48, y: 148, width: 96, height: 28))
             loading_label.text = "- 正在加载 -".localized()
             loading_label.textAlignment = .center
             loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-            loading_label.font = UIFont(name: ".SFUIText-Semibold", size: 12) ?? UIFont.systemFont(ofSize: 12)
+            loading_label.font = .boldSystemFont(ofSize: 12)
             loading_label.tag = view_tags.indicator.rawValue
             text_container.addSubview(loading_label)
-            
             
             // 存接口
             self.card_exists = true
@@ -455,13 +456,17 @@ class UIHommyS: UIViewController {
             self.card_text_view = text_container
             self.card_view = nc_view
             
+            // 强制前端显示
+            UIApplication.shared.keyWindow!.bringSubviewToFront(cover_backend)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(container_d)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(close_image)
+            UIApplication.shared.keyWindow!.bringSubviewToFront(close_button)
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                    self.tabBarController?.tabBar.layoutIfNeeded()
-                    self.tabBarController?.tabBar.layer.position.y += 100
+                UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 416)
-                    text_container.frame = CGRect(x: 0, y: 416, width: UIScreen.main.bounds.width, height: 666)
+                    nc_view.frame = CGRect(x: 0, y: 66, width: UIScreen.main.bounds.width, height: 416)
+                    text_container.frame = CGRect(x: 0, y: 482, width: UIScreen.main.bounds.width, height: 666)
                     container_d.contentSize = CGSize(width: 0, height: 888)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
@@ -476,13 +481,13 @@ class UIHommyS: UIViewController {
                     container_d.addSubview(some)
                     some.snp.makeConstraints({ (x) in
                         x.top.equalTo(text_container.snp.bottom).offset(0.233)
-                        x.left.equalTo(self.view.snp.left)
-                        x.right.equalTo(self.view.snp.right)
+                        x.centerX.equalTo(self.view.snp.centerX)
+                        x.width.equalTo(UIScreen.main.bounds.width)
                         x.height.equalTo(92)
                     })
                     let text = UILabel(text: "返回".localized())
                     text.textAlignment = .center
-                    text.font = UIFont(name: ".SFUIText-Bold", size: 24) ?? UIFont.systemFont(ofSize: 24)
+                    text.font = .boldSystemFont(ofSize: 24)
                     text.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
                     container_d.addSubview(text)
                     text.snp.makeConstraints({ (x) in
@@ -499,6 +504,22 @@ class UIHommyS: UIViewController {
                         x.bottom.equalTo(some.snp.bottom)
                         x.right.equalTo(some.snp.right)
                     })
+                    
+                    //居中布局
+                    self.card_view?.snp.makeConstraints({ (x) in
+                        x.top.equalTo(container_d.snp.top).offset(66)
+                        x.centerX.equalTo(container_d.snp.centerX)
+                        x.width.equalTo(UIScreen.main.bounds.width)
+                        x.height.equalTo(416)
+                    })
+                    
+                    self.card_text_view?.snp.makeConstraints({ (x) in
+                        x.top.equalTo(container_d.snp.top).offset(482)
+                        x.centerX.equalTo(container_d.snp.centerX)
+                        x.width.equalTo(UIScreen.main.bounds.width)
+                        x.height.equalTo(666)
+                    })
+                    
                 })
             }
             
@@ -516,9 +537,10 @@ class UIHommyS: UIViewController {
                     if !self.card_exists {
                         return
                     }
-                    if current_session !=  self.loading_session_ID {
+                    if current_session != self.loading_session_ID {
                         return
                     }
+                    self.loading_session_ID = ""
                     DispatchQueue.main.async {
                         // 构建卡片
                         for item in self.card_text_view?.subviews ?? [] where item.tag == view_tags.indicator.rawValue {
@@ -528,24 +550,19 @@ class UIHommyS: UIViewController {
                         let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
-                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 500 + new_container.lenth)
-                            
-                            if 500 + new_container.lenth < UIScreen.main.bounds.height {
-                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: UIScreen.main.bounds.height + 128)
-                            }
-                            
+                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 600 + new_container.lenth)
                         })
                         self.card_text_view?.snp.remakeConstraints({ (x) in
                             x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
-                            x.left.equalTo(self.view.snp.left)
-                            x.right.equalTo(self.view.snp.right)
+                            x.left.equalTo(self.card_view?.snp.left ?? self.view.snp.left)
+                            x.right.equalTo(self.card_view?.snp.right ?? self.view.snp.right)
                             x.height.equalTo(new_container.lenth)
                         })
                         self.card_text_view?.addSubview(new_container)
                         new_container.snp.makeConstraints({ (x) in
                             x.top.equalTo(self.card_text_view?.snp.top ?? self.view.snp.bottom).offset(28)
-                            x.left.equalTo(self.view.snp.left).offset(28)
-                            x.right.equalTo(self.view.snp.right).offset(-28)
+                            x.left.equalTo(self.card_view?.snp.left ?? self.view.snp.left).offset(28)
+                            x.right.equalTo(self.card_view?.snp.right ?? self.view.snp.right).offset(-28)
                             x.height.equalTo(new_container.lenth + 256)
                         })
                     } // DispatchQueue.main.async
@@ -565,18 +582,20 @@ class UIHommyS: UIViewController {
         for item in self.view.subviews where item.tag == view_tags.must_remove.rawValue {
             items.append(item)
         }
+        for item in UIApplication.shared.keyWindow!.subviews where item.tag == view_tags.must_remove.rawValue {
+            items.append(item)
+        }
         
         if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     
-                    self.tabBarController?.tabBar.layer.position.y -= 100
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
-                                                                  width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 66)
+                                                                  width: 500, height: UIScreen.main.bounds.height - 66)
                     self.card_details_scroll_view?.contentOffset = .init(x: 0, y: 0)
-//                    self.card_details_scroll_view?.alpha = 0
+                    //                    self.card_details_scroll_view?.alpha = 0
                 })
             }
         } else {
