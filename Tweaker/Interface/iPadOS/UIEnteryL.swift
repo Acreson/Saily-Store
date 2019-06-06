@@ -8,6 +8,7 @@
 
 class UIEnteryL: UITabBarController {
 
+    var last_tapped_view_controller: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
