@@ -27,6 +27,10 @@ class app_opeerator {
             }
             test_network_semaphore.signal()
         }
+        LKRoot.queue_dispatch.async {
+            sleep(3)
+            test_network_semaphore.signal()
+        }
         test_network_semaphore.wait()
         return test_result
     }

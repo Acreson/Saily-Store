@@ -177,8 +177,8 @@
 			isa = PBXGroup;
 			children = (
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
-				AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
+				AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
