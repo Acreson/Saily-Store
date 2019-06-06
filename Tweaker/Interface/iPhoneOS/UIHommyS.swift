@@ -235,7 +235,7 @@ class UIHommyS: UIViewController {
                             for card in repo.cards {    // 开始添加
                                 let new_card_container = UIView()
                                 new_card_container.setRadiusINT(radius: LKRoot.settings?.card_radius)
-                                new_card_container.addShadow()
+                                new_card_container.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
                                 new_card_container.clipsToBounds = false
                                 cards_container.addSubview(new_card_container)
                                 new_card_container.snp.makeConstraints({ (x) in
@@ -383,7 +383,7 @@ class UIHommyS: UIViewController {
             let container_d = UIScrollView()
             container_d.tag = view_tags.must_remove.rawValue
             container_d.contentSize = CGSize(width: 0, height: 2080)
-            container_d.addShadow()
+            container_d.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             self.view.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
                 x.width.equalTo(UIScreen.main.bounds.width)

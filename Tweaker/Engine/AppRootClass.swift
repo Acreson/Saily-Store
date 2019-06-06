@@ -85,7 +85,7 @@ class app_root_class {
         fake_udid_out += UUID().uuidString.dropLast(28)
         fake_udid_out = fake_udid_out.lowercased()
         new_setting.fake_UDID = fake_udid_out
-        new_setting.network_timeout = 8
+        new_setting.network_timeout = 16
         settings = new_setting
         try? root_db?.insert(objects: [new_setting], intoTable: "LKSettings")
         // 写入新闻源地址

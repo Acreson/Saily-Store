@@ -10,7 +10,7 @@
 
 class color_sheet {
     
-    var current_color_sheet: color_sheet_id = .dark_blue
+    var current_color_sheet: color_sheet_id = .light
     
     enum color_sheet_id: Int {
         case light = 0x00
@@ -64,7 +64,7 @@ class color_sheet {
         "button_touched_color"          : #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1),    // UIColor(hex: 0xA9A9A9),
         
         "submain_title_one"             : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1),    // UIColor(hex: 0x9A9A9A),
-        "shadow"             : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1) 
+        "shadow"                        : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1)
     ]
     
     let CS_dark_blue = [
@@ -91,7 +91,7 @@ class color_sheet {
         "button_touched_color"          : #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1),    // UIColor(hex: 0xA9A9A9),
         
         "submain_title_one"             : #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),    // UIColor(hex: 0x9A9A9A),
-        "shadow"             : .clear
+        "shadow"                        : .clear
     ]
     
     

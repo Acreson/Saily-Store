@@ -67,23 +67,11 @@ private class PPShineLayer: CAShapeLayer {
 
 extension UIView {
     
-    // 可能要弃用
-    func dropShadow() {
-        self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowOffset = CGSize(width: 8, height: 8)
-        self.layer.shadowRadius = 8
-        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
-    }
-
     func addShadow(ofColor color: UIColor = .clear, radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
         if color == .clear {
-            layer.shadowColor = color.cgColor
+            return
         } else {
-            layer.shadowColor = LKRoot.ins_color_manager.read_a_color("shadow").cgColor
+            layer.shadowColor = color.cgColor
         }
         layer.shadowOffset = offset
         layer.shadowRadius = radius
