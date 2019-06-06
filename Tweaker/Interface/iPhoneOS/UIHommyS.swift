@@ -436,12 +436,12 @@ class UIHommyS: UIViewController {
             }
             
             // 加载指示
-            let loading = UIActivityIndicatorView(frame: CGRect(x: 500 / 2 - 6, y: 128, width: 12, height: 12))
+            let loading = UIActivityIndicatorView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 6, y: 128, width: 12, height: 12))
             loading.startAnimating()
             loading.color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
             loading.tag = view_tags.indicator.rawValue
             text_container.addSubview(loading)
-            let loading_label = UILabel(frame: CGRect(x: 500 / 2 - 48, y: 148, width: 96, height: 28))
+            let loading_label = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 48, y: 148, width: 96, height: 28))
             loading_label.text = "- 正在加载 -".localized()
             loading_label.textAlignment = .center
             loading_label.textColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
