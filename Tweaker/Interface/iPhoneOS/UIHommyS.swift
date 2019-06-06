@@ -38,6 +38,7 @@ class UIHommyS: UIViewController {
         // 先放一个 scrollview 放，且谨放一次
         if container == nil {
             container = UIScrollView()
+            container?.tag = view_tags.main_scroll_view_in_view_controller.rawValue
             view.addSubview(container!)
         }
         
@@ -564,6 +565,7 @@ class UIHommyS: UIViewController {
         if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                    
                     self.tabBarController?.tabBar.layer.position.y -= 100
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()

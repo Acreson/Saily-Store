@@ -37,6 +37,7 @@ class UIHommyL: UIViewController {
         // 先放一个 scrollview 放，且谨放一次
         if container == nil {
             container = UIScrollView()
+            container?.tag = view_tags.main_scroll_view_in_view_controller.rawValue
             view.addSubview(container!)
         }
         

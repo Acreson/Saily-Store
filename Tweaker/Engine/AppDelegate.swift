@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        
+        (LKRoot.tabbar_view_controller as? UIEnteryS)?.tabbar_layout_record()
+        (LKRoot.tabbar_view_controller as? UIEnteryL)?.tabbar_layout_record()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -53,7 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
+        // 避免移动过的Tabbar不认爹娘
+        if (LKRoot.tabbar_view_controller as? UIEnteryS)?.tabbar_layout != nil ||
+            (LKRoot.tabbar_view_controller as? UIEnteryL)?.tabbar_layout != nil {
+            (LKRoot.tabbar_view_controller as? UIEnteryS)?.tabbar_layout_recovery()
+            (LKRoot.tabbar_view_controller as? UIEnteryL)?.tabbar_layout_recovery()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

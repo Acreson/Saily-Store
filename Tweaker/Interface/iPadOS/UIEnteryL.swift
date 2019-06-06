@@ -8,8 +8,13 @@
 
 class UIEnteryL: UITabBarController {
     
+    var last_tapped_view_controller: UIViewController?
+    var tabbar_layout: CALayer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        LKRoot.tabbar_view_controller = self
         
         print("[*] 将以 iPad 的方式加载故事版。")
         
@@ -17,9 +22,38 @@ class UIEnteryL: UITabBarController {
         tabBar.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         tabBar.barTintColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.last_tapped_view_controller = self.selectedViewController
+        }
+        
+    }
+    
+    func tabbar_layout_record() {
+        tabbar_layout = tabBar.layer
+    }
+    
+    func tabbar_layout_recovery() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: .curveEaseInOut, animations: {
+            self.tabBar.layer.position.y = self.tabbar_layout?.position.y ?? 0
+        }, completion: nil)
     }
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+
+        let willing = selectedViewController
+        if willing == last_tapped_view_controller {
+            for this in willing?.view.subviews ?? [] where this as? UIScrollView != nil {
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+                    (this as? UIScrollView)?.contentOffset = CGPoint(x: 0, y: -66)
+                }, completion: { _ in
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                })
+            }
+            return
+        }
+        last_tapped_view_controller = selectedViewController
+        
         guard let view = item.value(forKey: "_view") as? UIView else { return   }
         for item in view.subviews {
             if let image = item as? UIImageView {

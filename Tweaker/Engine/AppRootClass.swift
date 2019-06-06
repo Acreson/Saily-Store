@@ -38,6 +38,9 @@ class app_root_class {
     let ins_user_manager = app_user_class()                 // 用户管理
     let ins_common_operator = app_opeerator()               // 通用处理
     
+    //  接口
+    var tabbar_view_controller: UITabBarController?
+    
     // 初始化 App
     func initializing() {
         

@@ -190,7 +190,6 @@
 		ABE6DCF1229E8BD600D18D9E /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				AB1DB1C622A368690005DDD7 /* Components */,
 				ABE6DCF7229E8F1200D18D9E /* CardTypeControl.swift */,
 				AB53B64E22A021D800492BAB /* CardCreate.swift */,
 				AB04C51C22A4436000B29F0C /* CardDetails.swift */,
@@ -292,6 +291,7 @@
 		ABFBA822229D7FDC0070A17E /* CommanViews */ = {
 			isa = PBXGroup;
 			children = (
+				AB1DB1C622A368690005DDD7 /* Components */,
 				ABFBA829229D833B0070A17E /* CommonContainer.swift */,
 				ABE6DCF1229E8BD600D18D9E /* Cards */,
 				ABE6DCF0229E8BC600D18D9E /* Hommy */,
