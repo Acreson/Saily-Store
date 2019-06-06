@@ -42,19 +42,13 @@ class ASMultiAppsView: UIView {
         
         self.addSubview(angle_wrapper)
         self.angle_wrapper.snp.makeConstraints { (x) in
-            x.top.equalTo(self.snp.top)
-            x.left.equalTo(self.snp.left)
-            x.right.equalTo(self.snp.right)
-            x.bottom.equalTo(self.snp.bottom)
+            x.edges.equalTo(self.snp.edges)
         }
         
         self.contentView = UIView()
         self.angle_wrapper.addSubview(self.contentView)
         self.contentView.snp.makeConstraints { (x) in
-            x.top.equalTo(self.angle_wrapper.snp.top)
-            x.left.equalTo(self.angle_wrapper.snp.left)
-            x.right.equalTo(self.angle_wrapper.snp.right)
-            x.bottom.equalTo(self.angle_wrapper.snp.bottom)
+            x.edges.equalTo(angle_wrapper.snp.edges)
         }
         
         // 计算一行的View个数

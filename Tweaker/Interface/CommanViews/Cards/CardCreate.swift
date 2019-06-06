@@ -43,20 +43,14 @@ extension common_views {
                     
                     ret.addSubview(bg)
                     bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.bottom)
-                        x.right.equalTo(ret.snp.right)
+                        x.edges.equalTo(ret.snp.edges)
                     }
                 } else {
                     let bg = UIView()
                     bg.backgroundColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
                     ret.addSubview(bg)
                     bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.bottom)
-                        x.right.equalTo(ret.snp.right)
+                        x.edges.equalTo(ret.snp.edges)
                     }
                     
                 }
@@ -194,20 +188,14 @@ extension common_views {
                     bg.clipsToBounds = true
                     ret.addSubview(bg)
                     bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.bottom)
-                        x.right.equalTo(ret.snp.right)
+                        x.edges.equalTo(ret.snp.edges)
                     }
                 } else {
                     let bg = UIView()
                     bg.backgroundColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
                     ret.addSubview(bg)
                     bg.snp.makeConstraints { (x) in
-                        x.top.equalTo(ret.snp.top)
-                        x.left.equalTo(ret.snp.left)
-                        x.bottom.equalTo(ret.snp.bottom)
-                        x.right.equalTo(ret.snp.right)
+                        x.edges.equalTo(ret.snp.edges)
                     }
                     
                 }

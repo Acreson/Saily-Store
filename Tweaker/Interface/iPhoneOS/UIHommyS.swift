@@ -26,11 +26,6 @@ class UIHommyS: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     } // viewWillAppear
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    } // viewWillDisappear
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +37,7 @@ class UIHommyS: UIViewController {
         }
         
         // 处理一下头条
-        let header = LKRoot.ins_view_manager.create_AS_home_header_view()
+        let header = LKRoot.ins_view_manager.create_AS_home_header_view(title_str: "今日精选".localized(), sub_str: "LKSIG-DATE", image_str: "NAMED:AccountHeadIconPlaceHolder")
         container!.addSubview(header)
         header_view = header
         
@@ -356,22 +351,13 @@ class UIHommyS: UIViewController {
             UIApplication.shared.keyWindow!.addSubview(cover_backend)
             cover_backend.alpha = 0
             cover_backend.snp.makeConstraints { (x) in
-                x.top.equalTo(cover_backend.snp.top)
-                x.left.equalTo(cover_backend.snp.left)
-                x.bottom.equalTo(cover_backend.snp.bottom)
-                x.right.equalTo(cover_backend.snp.right)
+                x.edges.equalTo(cover_backend.snp.edges)
             }
             vs_effect!.snp.makeConstraints { (x) in
-                x.top.equalTo(cover_backend.snp.top)
-                x.left.equalTo(cover_backend.snp.left)
-                x.bottom.equalTo(cover_backend.snp.bottom)
-                x.right.equalTo(cover_backend.snp.right)
+                x.edges.equalTo(cover_backend.snp.edges)
             }
             cover_backend.snp.makeConstraints { (x) in
-                x.top.equalTo(self.view.snp.top)
-                x.left.equalTo(self.view.snp.left)
-                x.bottom.equalTo(self.view.snp.bottom)
-                x.right.equalTo(self.view.snp.right)
+                x.edges.equalTo(self.view.snp.edges)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
@@ -388,10 +374,7 @@ class UIHommyS: UIViewController {
             container_d.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             UIApplication.shared.keyWindow!.addSubview(container_d)
             container_d.snp.makeConstraints { (x) in
-                x.left.equalTo(self.view.snp.left)
-                x.right.equalTo(self.view.snp.right)
-                x.bottom.equalTo(self.view.snp.bottom)
-                x.top.equalTo(self.view.snp.top)
+                x.edges.equalTo(self.view.snp.edges)
             }
             
             // 创建一个一摸一样的卡片
@@ -499,10 +482,7 @@ class UIHommyS: UIViewController {
                     back_button.addTarget(self, action: #selector(self.close_button_handler(sender:)), for: .touchUpInside)
                     some.addSubview(back_button)
                     back_button.snp.makeConstraints({ (x) in
-                        x.top.equalTo(some.snp.top)
-                        x.left.equalTo(some.snp.left)
-                        x.bottom.equalTo(some.snp.bottom)
-                        x.right.equalTo(some.snp.right)
+                        x.edges.equalTo(some.snp.edges)
                     })
                     
                     //居中布局
