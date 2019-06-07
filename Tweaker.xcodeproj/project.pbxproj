@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04118A1722AA7E0500C4D94E /* InfoPlist.strings */; };
 		494DD3DA12C5C2C1A47C08EE /* Pods_Tweaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */; };
 		AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04C51C22A4436000B29F0C /* CardDetails.swift */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
@@ -51,6 +52,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04118A1622AA7E0500C4D94E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		04118A1822AA7E0800C4D94E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		04118A1B22AA7EDD00C4D94E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5611913E3A1A08D876FA52C9 /* Pods-Tweaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.debug.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.debug.xcconfig"; sourceTree = "<group>"; };
 		7198ABAC921C8F036EAF89A4 /* Pods_Tweaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tweaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FAFF248A0D68F72CAA3FED6 /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
@@ -60,8 +64,6 @@
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
 		AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView.swift; sourceTree = "<group>"; };
 		AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LKASMultiAppsRiver.swift; sourceTree = "<group>"; };
-		AB198F7C229EDA36003A78BE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "zh-Hans"; path = "zh-Hans.lproj/Info.plist"; sourceTree = "<group>"; };
-		AB198F7E229EDA3A003A78BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = en.lproj/Info.plist; sourceTree = "<group>"; };
 		AB198F80229EDC74003A78BE /* CommonOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOperator.swift; sourceTree = "<group>"; };
 		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
 		AB1DB1C722A36A180005DDD7 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
@@ -152,13 +154,14 @@
 		AB081F93229D4BDC00ACA4DD /* Tweaker */ = {
 			isa = PBXGroup;
 			children = (
-				AB198F7D229EDA36003A78BE /* Info.plist */,
 				ABFBA7E6229D566E0070A17E /* AssSets */,
 				ABFBA7E8229D6D8B0070A17E /* Themes */,
 				ABFBA7E4229D563C0070A17E /* Engine */,
 				ABE6DCF2229E8BDF00D18D9E /* DataModel */,
 				ABFBA7E5229D564E0070A17E /* Interface */,
 				ABFBA80D229D7DC40070A17E /* Extensions */,
+				04118A1B22AA7EDD00C4D94E /* Info.plist */,
+				04118A1722AA7E0500C4D94E /* InfoPlist.strings */,
 				ABFBA837229D8DC70070A17E /* Localizable.strings */,
 			);
 			path = Tweaker;
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABFBA802229D7B460070A17E /* Main_iPad.storyboard in Resources */,
+				04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */,
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
 				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
@@ -491,13 +495,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		AB198F7D229EDA36003A78BE /* Info.plist */ = {
+		04118A1722AA7E0500C4D94E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AB198F7C229EDA36003A78BE /* zh-Hans */,
-				AB198F7E229EDA3A003A78BE /* en */,
+				04118A1622AA7E0500C4D94E /* zh-Hans */,
+				04118A1822AA7E0800C4D94E /* en */,
 			);
-			name = Info.plist;
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		ABFBA801229D7B3D0070A17E /* LaunchScreen.storyboard */ = {
