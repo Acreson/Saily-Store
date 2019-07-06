@@ -54,16 +54,23 @@ class UIManageS: UIViewController {
         })
         
         let test = LKIconGroupDetailView()
+        let addrs = ["https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/icon.png",
+//                     "GitHubIcon",
+                     "AppIcon"]
+        test.table_view_title_source = ["Tweak Store",
+                                        //                     "GitHubIcon",
+                                        "Lakr Aream"]
         test.apart_init(title: "新闻源".localized(),
                         sub_title: "这里包含了您在首页看到的所有新闻的来源。我们始终建议您只添加受信任的来源。".localized(),
                         title_color: LKRoot.ins_color_manager.read_a_color("main_title_two"),
-                        sub_title_color: LKRoot.ins_color_manager.read_a_color("sub_text"))
+                        sub_title_color: LKRoot.ins_color_manager.read_a_color("sub_text"),
+                        icon_addrs: addrs)
         container?.addSubview(test)
         test.snp.makeConstraints { (x) in
             x.top.equalTo(self.header_view?.snp.bottom ?? self.view.snp.bottom).offset(28)
             x.left.equalTo(self.view.snp.left).offset(28)
             x.right.equalTo(self.view.snp.right).offset(-28)
-            x.height.equalTo(test.lenth)
+            x.height.equalTo(233)
         }
         
     }

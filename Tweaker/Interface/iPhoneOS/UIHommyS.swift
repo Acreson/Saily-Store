@@ -109,7 +109,24 @@ class UIHommyS: UIViewController {
         build_loading(in_where: view)
         
         // 检查联网
-        if LKRoot.ins_common_operator.test_network() == operation_result.failed.rawValue {
+        LKRoot.queue_dispatch.async {
+            if LKRoot.ins_common_operator.test_network() == operation_result.failed.rawValue {
+                DispatchQueue.main.async {
+                    self.process_after_network_test()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.process_after_network_test(network_available: true)
+                }
+            }
+        }
+        
+    } // build_view
+    
+    func process_after_network_test(network_available: Bool = false) {
+        
+        // 检查联网
+        if !network_available {
             
             for item in view.subviews where item.tag == view_tags.indicator.rawValue {
                 item.removeFromSuperview()
@@ -208,6 +225,8 @@ class UIHommyS: UIViewController {
                             })
                             // 容器
                             let cards_container = UIScrollView()
+                            cards_container.showsHorizontalScrollIndicator = false
+                            cards_container.showsVerticalScrollIndicator = false
                             cards_container.contentSize = CGSize(width: CGFloat(repo.cards.count) * (card_width + 27.5) + 27.5, height: 350)
                             new_view.addSubview(cards_container)
                             cards_container.decelerationRate = .fast
@@ -312,8 +331,7 @@ class UIHommyS: UIViewController {
                 } // if
             })
         }
-        
-    } // build_view
+    }
     
     @objc func card_button_handler(sender: Any?) {
         
@@ -323,6 +341,12 @@ class UIHommyS: UIViewController {
         let current_session = loading_session_ID
         
         if let button = sender as? UICardButton {
+            
+            var top_insert: CGFloat = 0
+            
+            if LKRoot.safe_area_needed {
+                top_insert = 50
+            }
             
             UIApplication.shared.beginIgnoringInteractionEvents()
             
@@ -369,6 +393,8 @@ class UIHommyS: UIViewController {
             
             // 创建容器
             let container_d = UIScrollView()
+            container_d.showsHorizontalScrollIndicator = false
+            container_d.showsVerticalScrollIndicator = false
             container_d.tag = view_tags.must_remove.rawValue
             container_d.contentSize = CGSize(width: 0, height: 2080)
             container_d.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
@@ -383,6 +409,9 @@ class UIHommyS: UIViewController {
             nc_view.tag = view_tags.must_remove.rawValue
             // 计算卡片位置
             nc_view.center = button.superview?.convert(button.center, to: nil) ?? CGPoint()
+            if LKRoot.safe_area_needed {
+                nc_view.center.y -= 50
+            }
             button.start_postion_in_window = nc_view.center
             nc_view.setRadiusINT(radius: LKRoot.settings?.card_radius)
             nc_view.tag = view_tags.must_remove.rawValue
@@ -448,8 +477,8 @@ class UIHommyS: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                 UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     nc_view.layoutIfNeeded()
-                    nc_view.frame = CGRect(x: 0, y: 66, width: UIScreen.main.bounds.width, height: 416)
-                    text_container.frame = CGRect(x: 0, y: 482, width: UIScreen.main.bounds.width, height: 666)
+                    nc_view.frame = CGRect(x: 0, y: top_insert, width: UIScreen.main.bounds.width, height: 416)
+                    text_container.frame = CGRect(x: 0, y: 416 + top_insert, width: UIScreen.main.bounds.width, height: 666)
                     container_d.contentSize = CGSize(width: 0, height: 888)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
@@ -487,14 +516,14 @@ class UIHommyS: UIViewController {
                     
                     //居中布局
                     self.card_view?.snp.makeConstraints({ (x) in
-                        x.top.equalTo(container_d.snp.top).offset(66)
+                        x.top.equalTo(container_d.snp.top).offset(top_insert)
                         x.centerX.equalTo(container_d.snp.centerX)
                         x.width.equalTo(UIScreen.main.bounds.width)
                         x.height.equalTo(416)
                     })
                     
                     self.card_text_view?.snp.makeConstraints({ (x) in
-                        x.top.equalTo(container_d.snp.top).offset(482)
+                        x.top.equalTo(container_d.snp.top).offset(416 + top_insert)
                         x.centerX.equalTo(container_d.snp.centerX)
                         x.width.equalTo(UIScreen.main.bounds.width)
                         x.height.equalTo(666)
@@ -530,7 +559,11 @@ class UIHommyS: UIViewController {
                         let new_container = LKRoot.ins_view_manager.NPCD_create_card_detail(info: ret_str)
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
-                            self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 600 + new_container.lenth)
+                            if LKRoot.safe_area_needed {
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 580 + new_container.lenth)
+                            } else {
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 510 + new_container.lenth)
+                            }
                         })
                         self.card_text_view?.snp.remakeConstraints({ (x) in
                             x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)

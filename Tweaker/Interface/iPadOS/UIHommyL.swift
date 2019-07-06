@@ -109,6 +109,23 @@ class UIHommyL: UIViewController {
         build_loading(in_where: view)
         
         // 检查联网
+        LKRoot.queue_dispatch.async {
+            if LKRoot.ins_common_operator.test_network() == operation_result.failed.rawValue {
+                DispatchQueue.main.async {
+                    self.process_after_network_test()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.process_after_network_test(network_available: true)
+                }
+            }
+        }
+        
+    } // build_view
+    
+    func process_after_network_test(network_available: Bool = false) {
+        
+        // 检查联网
         if LKRoot.ins_common_operator.test_network() == operation_result.failed.rawValue {
             
             for item in view.subviews where item.tag == view_tags.indicator.rawValue {
@@ -309,8 +326,7 @@ class UIHommyL: UIViewController {
                 } // if
             })
         }
-        
-    } // build_view
+    }
     
     @objc func card_button_handler(sender: Any?) {
         
@@ -500,7 +516,7 @@ class UIHommyL: UIViewController {
                 })
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                 UIApplication.shared.endIgnoringInteractionEvents()
             }
             
@@ -569,10 +585,13 @@ class UIHommyL: UIViewController {
                     
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
-                    self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
-                                                                  width: 500, height: UIScreen.main.bounds.height - 66)
+//                    self.card_details_scroll_view?.alpha = 0
+                    self.card_details_scroll_view?.center.x += UIScreen.main.bounds.width
                     self.card_details_scroll_view?.contentOffset = .init(x: 0, y: 0)
                     //                    self.card_details_scroll_view?.alpha = 0
+                    for item in items {
+                        item.alpha = 0
+                    }
                 })
             }
         } else {
@@ -588,18 +607,15 @@ class UIHommyL: UIViewController {
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            UIView.animate(withDuration: 0.5, animations: {
-                for item in items {
-                    item.removeFromSuperview()
-                }
-                self.card_details_vseffect_view = nil
-                self.card_details_scroll_view = nil
-                self.card_text_view = nil
-                self.card_view = nil
-            })
+            for item in items {
+                item.removeFromSuperview()
+            }
+            self.card_details_vseffect_view = nil
+            self.card_details_scroll_view = nil
+            self.card_text_view = nil
+            self.card_view = nil
+            UIApplication.shared.endIgnoringInteractionEvents()
         }
-        
-        UIApplication.shared.endIgnoringInteractionEvents()
         
     }
     
