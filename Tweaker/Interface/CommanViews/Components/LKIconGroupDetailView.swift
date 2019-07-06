@@ -13,6 +13,7 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
     
     var lenth = 233
     var table_view = UITableView()
+    let sep = UIView()
     var table_view_icon_source = [String]()
     var table_view_title_source = [String]()
     var table_view_describe_source = [String]()
@@ -25,6 +26,7 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
     var shadow_view = UIView()
     
     var title_view = UILabel()
+    var title_color = UIColor()
     var sub_title_view = UITextView()
     
     enum tint_type: Int {
@@ -42,6 +44,7 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
     func apart_init(collapsed: Bool = true, title: String, sub_title: String, title_color: UIColor, sub_title_color: UIColor, icon_addrs: [String]) {
         
         is_collapsed = collapsed
+        self.title_color = title_color
         // 基础和背景
         addSubview(shadow_view)
         addSubview(content_view)
@@ -87,7 +90,6 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
         }
         
         // 分割线
-        let sep = UIView()
         sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
         sep.alpha = 0.3
         addSubview(sep)
@@ -110,13 +112,18 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
             x.height.equalTo(33)
         }
         
+        collapsed_button.addTarget(self, action: #selector(collapsed_operator), for: .touchUpInside)
+        collapsed_operator()
+    }
+    
+    @objc func collapsed_operator() {
         if is_collapsed {
             if collapsed_button.superview == nil {
                 self.addSubview(collapsed_button)
             }
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
-                sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
-                sep.snp.remakeConstraints({ (x) in
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+                self.sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
+                self.sep.snp.remakeConstraints({ (x) in
                     x.top.equalTo(self.sub_title_view.snp.bottom)
                     x.left.equalTo(self.content_view.snp.left)
                     x.right.equalTo(self.content_view.snp.right)
@@ -133,16 +140,19 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
                 x.left.equalTo(self.content_view.snp.left)
                 x.right.equalTo(self.content_view.snp.right)
             }
-        } else {UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
-            sep.backgroundColor = .clear
-            sep.snp.remakeConstraints({ (x) in
-                x.top.equalTo(self.sub_title_view.snp.bottom)
-                x.left.equalTo(self.content_view.snp.left)
-                x.right.equalTo(self.content_view.snp.right)
-                x.height.equalTo(self.table_view_title_source.count * 62)
-            })
-        }, completion: nil)
-            
+            is_collapsed = false
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+                self.sep.backgroundColor = .clear
+                self.sep.snp.remakeConstraints({ (x) in
+                    x.top.equalTo(self.sub_title_view.snp.bottom)
+                    x.left.equalTo(self.content_view.snp.left)
+                    x.right.equalTo(self.content_view.snp.right)
+                    x.height.equalTo(self.table_view_title_source.count * 62)
+                })
+            }, completion: nil)
+            collapsed_button.setTitle("点击来合上选项卡 ▲", for: .normal)
+            is_collapsed = true
         }
     }
     
