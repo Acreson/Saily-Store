@@ -335,6 +335,9 @@ class UIHommyS: UIViewController {
     
     @objc func card_button_handler(sender: Any?) {
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         LKRoot.ever_went_background = false
         
         loading_session_ID = UUID().uuidString
@@ -345,7 +348,12 @@ class UIHommyS: UIViewController {
             var top_insert: CGFloat = 0
             
             if LKRoot.safe_area_needed {
-                top_insert = 50
+                // swiftlint:disable:next discouraged_direct_init
+                if UIDevice()._id_str().contains("iPhone XS Max") {
+                    top_insert = 0
+                } else {
+                    top_insert = -52
+                }
             }
             
             UIApplication.shared.beginIgnoringInteractionEvents()
@@ -410,13 +418,13 @@ class UIHommyS: UIViewController {
             // 计算卡片位置
             nc_view.center = button.superview?.convert(button.center, to: nil) ?? CGPoint()
             if LKRoot.safe_area_needed {
-                nc_view.center.y -= 50
+                nc_view.center.y -= 46
             }
             button.start_postion_in_window = nc_view.center
             nc_view.setRadiusINT(radius: LKRoot.settings?.card_radius)
             nc_view.tag = view_tags.must_remove.rawValue
             container_d.addSubview(nc_view)
-            
+
             // 内容本体
             let text_container = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: 188))
             container_d.addSubview(text_container)
@@ -482,6 +490,7 @@ class UIHommyS: UIViewController {
                     container_d.contentSize = CGSize(width: 0, height: 888)
                     nc_view.top_insert?.frame = CGRect(x: 0, y: 0, width: 18, height: 28)
                     nc_view.setRadiusCGF(radius: 0)
+                    nc_view.layoutAll()
                     close_image.alpha = 0.75
                 }, completion: { _ in
                     
@@ -587,6 +596,8 @@ class UIHommyS: UIViewController {
     // 卡片消失动画
     @objc func close_button_handler(sender: Any?) {
         
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         self.card_exists = false
         
         UIApplication.shared.beginIgnoringInteractionEvents()

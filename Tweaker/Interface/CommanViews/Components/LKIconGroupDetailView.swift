@@ -9,94 +9,61 @@
 import Foundation
 import UIKit
 
-class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource {
-    
-    var lenth = 233
-    var table_view = UITableView()
-    let sep = UIView()
-    var table_view_icon_source = [String]()
-    var table_view_title_source = [String]()
-    var table_view_describe_source = [String]()
+class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDelegate, UITableViewDataSource {
     
     var is_collapsed = true
-    var collapsed_button = UIButton()
+    let contentView = UIView()
+    var icon_addrs = [String]()
     
-    var padding_insert = [0, 0, 0, 0]
-    var content_view = UIView()
-    var shadow_view = UIView()
-    
-    var title_view = UILabel()
-    var title_color = UIColor()
-    var sub_title_view = UITextView()
-    
-    enum tint_type: Int {
-        case button    = 0x01
-        case icons     = 0x02
-        case tint_text = 0x03
-    }
-    
-    enum body_type: Int {
-        case table     = 0x11
-        case text_icon = 0x02
-        
-    }
-    
-    func apart_init(collapsed: Bool = true, title: String, sub_title: String, title_color: UIColor, sub_title_color: UIColor, icon_addrs: [String]) {
-        
-        is_collapsed = collapsed
-        self.title_color = title_color
-        // 基础和背景
-        addSubview(shadow_view)
-        addSubview(content_view)
-        shadow_view.clipsToBounds = false
-        shadow_view.setRadiusCGF(radius: 8)
-        shadow_view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-        content_view.setRadiusCGF(radius: 8)
-        content_view.clipsToBounds = true
-        content_view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-        shadow_view.snp.makeConstraints { (x) in
-            x.edges.equalTo(content_view.snp.edges)
+    func apart_init() {
+        self.is_collapsed = LKRoot.settings?.manage_tab_news_repo_is_collapsed ?? true
+        contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
+        contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+        contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+        self.addSubview(contentView)
+        contentView.snp.makeConstraints { (x) in
+            x.top.equalTo(self.snp.top).offset(24)
+            x.bottom.equalTo(self.snp.bottom).offset(-24)
+            x.left.equalTo(self.snp.left).offset(24)
+            x.right.equalTo(self.snp.right).offset(-24)
         }
-        content_view.snp.makeConstraints { (x) in
-            x.top.equalTo(self.snp.top)
-            x.left.equalTo(self.snp.left)
-            x.right.equalTo(self.snp.right)
-        }
-        shadow_view.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
         
         // 标题
-        title_view.text = title
-        title_view.textColor = title_color
+        let title_view = UILabel()
+        title_view.text = "新闻源".localized()
+        title_view.textColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
         title_view.font = .boldSystemFont(ofSize: 28)
         addSubview(title_view)
         title_view.snp.makeConstraints { (x) in
-            x.top.equalTo(self.content_view.snp.top).offset(6)
-            x.left.equalTo(self.content_view.snp.left).offset(16)
+            x.top.equalTo(self.contentView.snp.top).offset(6)
+            x.left.equalTo(self.contentView.snp.left).offset(16)
             x.height.equalTo(46)
             x.width.equalTo(188)
         }
         
         // 描述
-        sub_title_view.text = sub_title
-        sub_title_view.textColor = sub_title_color
+        let sub_title_view = UITextView()
+        sub_title_view.text = "这里包含了您在首页看到的所有新闻的来源。我们始终建议您只添加受信任的来源。"
+        sub_title_view.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
         sub_title_view.font = .systemFont(ofSize: 10)
         sub_title_view.isUserInteractionEnabled = false
         addSubview(sub_title_view)
         sub_title_view.snp.makeConstraints { (x) in
             x.top.equalTo(title_view.snp.bottom).offset(0)
-            x.left.equalTo(self.content_view.snp.left).offset(12)
-            x.right.equalTo(self.content_view.snp.right).offset(-12)
+            x.left.equalTo(self.contentView.snp.left).offset(12)
+            x.right.equalTo(self.contentView.snp.right).offset(-12)
             x.height.equalTo(sub_title_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 92, height: .infinity)))
         }
         
         // 分割线
+        let sep = UIView()
         sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
         sep.alpha = 0.3
         addSubview(sep)
         sep.snp.makeConstraints { (x) in
-            x.top.equalTo(sub_title_view.snp.bottom)
-            x.left.equalTo(self.content_view.snp.left)
-            x.right.equalTo(self.content_view.snp.right)
+            x.top.equalTo(sub_title_view.snp.bottom).offset(6)
+            x.left.equalTo(self.contentView.snp.left)
+            x.right.equalTo(self.contentView.snp.right)
             x.height.equalTo(0.5)
         }
         
@@ -106,65 +73,139 @@ class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource 
         icon_stack.apart_init()
         self.addSubview(icon_stack)
         icon_stack.snp.makeConstraints { (x) in
-            x.right.equalTo(self.content_view.snp.right).offset(16)
-            x.top.equalTo(self.content_view.snp.top).offset(12)
+            x.right.equalTo(self.contentView.snp.right).offset(16)
+            x.top.equalTo(self.contentView.snp.top).offset(12)
             x.width.equalTo(2)
             x.height.equalTo(33)
         }
         
-        collapsed_button.addTarget(self, action: #selector(collapsed_operator), for: .touchUpInside)
-        collapsed_operator()
-    }
-    
-    @objc func collapsed_operator() {
-        if is_collapsed {
-            if collapsed_button.superview == nil {
-                self.addSubview(collapsed_button)
-            }
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
-                self.sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
-                self.sep.snp.remakeConstraints({ (x) in
-                    x.top.equalTo(self.sub_title_view.snp.bottom)
-                    x.left.equalTo(self.content_view.snp.left)
-                    x.right.equalTo(self.content_view.snp.right)
-                    x.height.equalTo(0.5)
-                })
-            }, completion: nil)
-            collapsed_button.setTitle("点击来展开全部 ▼", for: .normal)
-            collapsed_button.titleLabel?.font = .boldSystemFont(ofSize: 12)
-            collapsed_button.setTitleColor(title_color, for: .normal)
-            collapsed_button.setTitleColor(.gray, for: .focused)
-            collapsed_button.snp.remakeConstraints { (x) in
-                x.bottom.equalTo(self.content_view.snp.bottom)
-                x.top.equalTo(sep.snp.bottom)
-                x.left.equalTo(self.content_view.snp.left)
-                x.right.equalTo(self.content_view.snp.right)
-            }
-            is_collapsed = false
-        } else {
-            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
-                self.sep.backgroundColor = .clear
-                self.sep.snp.remakeConstraints({ (x) in
-                    x.top.equalTo(self.sub_title_view.snp.bottom)
-                    x.left.equalTo(self.content_view.snp.left)
-                    x.right.equalTo(self.content_view.snp.right)
-                    x.height.equalTo(self.table_view_title_source.count * 62)
-                })
-            }, completion: nil)
-            collapsed_button.setTitle("点击来合上选项卡 ▲", for: .normal)
-            is_collapsed = true
+        let collapsed_button = UIButton()
+        collapsed_button.setTitle("点击来展开全部新闻源 ▼", for: .normal)
+        collapsed_button.titleLabel?.font = .boldSystemFont(ofSize: 12)
+        collapsed_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+        collapsed_button.setTitleColor(.gray, for: .highlighted)
+        contentView.addSubview(collapsed_button)
+        collapsed_button.snp.remakeConstraints { (x) in
+            x.bottom.equalTo(self.contentView.snp.bottom)
+            x.top.equalTo(sep.snp.bottom)
+            x.left.equalTo(self.contentView.snp.left)
+            x.right.equalTo(self.contentView.snp.right)
         }
+
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return table_view_title_source.count
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return UITableViewCell()
     }
-    
+
 }
+
+//
+//class LKIconGroupDetailView: UIView, UITableViewDelegate, UITableViewDataSource {
+//
+//    var lenth = 233
+//    var table_view = UITableView()
+//    let sep = UIView()
+//    var table_view_icon_source = [String]()
+//    var table_view_title_source = [String]()
+//    var table_view_describe_source = [String]()
+//
+//    var is_collapsed = true
+//    var collapsed_button = UIButton()
+//
+//    var padding_insert = [0, 0, 0, 0]
+//    var content_view = UIView()
+//    var shadow_view = UIView()
+//
+//    var title_view = UILabel()
+//    var title_color = UIColor()
+//    var sub_title_view = UITextView()
+//
+//    enum tint_type: Int {
+//        case button    = 0x01
+//        case icons     = 0x02
+//        case tint_text = 0x03
+//    }
+//
+//    enum body_type: Int {
+//        case table     = 0x11
+//        case text_icon = 0x02
+//
+//    }
+//
+//    func apart_init(collapsed: Bool = true, title: String, sub_title: String, title_color: UIColor, sub_title_color: UIColor, icon_addrs: [String]) {
+//
+//        is_collapsed = collapsed
+//        self.title_color = title_color
+//        // 基础和背景
+//        addSubview(shadow_view)
+//        addSubview(content_view)
+//        shadow_view.clipsToBounds = false
+//        shadow_view.setRadiusCGF(radius: 8)
+//        shadow_view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+//        content_view.setRadiusCGF(radius: 8)
+//        content_view.clipsToBounds = true
+//        content_view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+//        shadow_view.snp.makeConstraints { (x) in
+//            x.edges.equalTo(content_view.snp.edges)
+//        }
+//        content_view.snp.makeConstraints { (x) in
+//            x.top.equalTo(self.snp.top)
+//            x.left.equalTo(self.snp.left)
+//            x.right.equalTo(self.snp.right)
+//        }
+//        shadow_view.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+//
+//
+//        collapsed_button.addTarget(self, action: #selector(collapsed_operator), for: .touchUpInside)
+//        collapsed_operator()
+//    }
+//
+//    @objc func collapsed_operator() {
+//        if is_collapsed {
+//            if collapsed_button.superview == nil {
+//                self.addSubview(collapsed_button)
+//            }
+//            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+//                self.sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
+//                self.sep.snp.remakeConstraints({ (x) in
+//                    x.top.equalTo(self.sub_title_view.snp.bottom)
+//                    x.left.equalTo(self.content_view.snp.left)
+//                    x.right.equalTo(self.content_view.snp.right)
+//                    x.height.equalTo(0.5)
+//                })
+//            }, completion: nil)
+//
+//            is_collapsed = false
+//        } else {
+//            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
+//                self.sep.backgroundColor = .clear
+//                self.sep.snp.remakeConstraints({ (x) in
+//                    x.top.equalTo(self.sub_title_view.snp.bottom)
+//                    x.left.equalTo(self.content_view.snp.left)
+//                    x.right.equalTo(self.content_view.snp.right)
+//                    x.height.equalTo(self.table_view_title_source.count * 62)
+//                })
+//            }, completion: nil)
+//            collapsed_button.setTitle("点击来合上选项卡 ▲", for: .normal)
+//            is_collapsed = true
+//        }
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return table_view_title_source.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        return UITableViewCell()
+//    }
+//
+//}
 
 class LKIconStack: UIView {
     

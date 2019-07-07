@@ -6,9 +6,9 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-class UIManageS: UIViewController {
+class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var container: UIScrollView?
+    var table_view: UITableView = UITableView()
     var header_view: UIView?
     
     // 控制 NAV
@@ -19,60 +19,63 @@ class UIManageS: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 先放一个 scrollview 放，且谨放一次
-        if container == nil {
-            container = UIScrollView()
-            container?.tag = view_tags.main_scroll_view_in_view_controller.rawValue
-            view.addSubview(container!)
+        table_view.separatorColor = .clear
+        table_view.clipsToBounds = false
+        table_view.delegate = self
+        table_view.dataSource = self
+        view.addSubview(table_view)
+        table_view.snp.makeConstraints { (x) in
+            x.edges.equalTo(self.view.snp.edges)
         }
-        
-        // 处理一下头条
-        let header = LKRoot.ins_view_manager.create_AS_home_header_view(title_str: "管理中心".localized(),
-                                                                        sub_str: "在这里，你和你的全部".localized(),
-                                                                        image_str: "NAMED:AccountHeadIconPlaceHolder")
-        container!.addSubview(header)
-        header_view = header
-        
-        // 为所有不可删除 view 打 tag
-        for item in view.subviews {
-            item.tag = view_tags.must_have.rawValue
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let ret = UITableViewCell()
+        switch indexPath.row {
+        case 0:        // 处理一下头条
+            let header = LKRoot.ins_view_manager.create_AS_home_header_view(title_str: "管理中心".localized(),
+                                                                            sub_str: "在这里，你和你的全部".localized(),
+                                                                            image_str: "NAMED:AccountHeadIconPlaceHolder")
+            ret.contentView.addSubview(header)
+            header.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+        case 1:
+            let news_repo_manager = LKIconGroupDetailView_NewsRepoSP()
+            news_repo_manager.icon_addrs = ["https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/icon.png",
+                                            //                     "GitHubIcon",
+                                            "AppIcon"]
+            news_repo_manager.apart_init()
+            ret.contentView.addSubview(news_repo_manager)
+            news_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+        default:
+            ret.backgroundColor = .random
         }
-        
-        // 处理 AutoLayout
-        self.container?.snp.makeConstraints({ (x) in
-            x.top.equalTo(self.view.safeAreaInsets.top)
-            x.left.equalTo(self.view.snp.left)
-            x.right.equalTo(self.view.snp.right)
-            x.bottom.equalTo(self.view.safeAreaInsets.bottom)
-        })
-        header.snp.makeConstraints({ (x) in
-            x.top.equalTo(self.container!.snp.top)
-            x.left.equalTo(self.view.snp.left)
-            x.right.equalTo(self.view.snp.right)
-            x.height.equalTo(100)
-        })
-        
-        let test = LKIconGroupDetailView()
-        let addrs = ["https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/icon.png",
-//                     "GitHubIcon",
-                     "AppIcon"]
-        test.table_view_title_source = ["Tweak Store",
-                                        //                     "GitHubIcon",
-                                        "Lakr Aream"]
-        test.apart_init(title: "新闻源".localized(),
-                        sub_title: "这里包含了您在首页看到的所有新闻的来源。我们始终建议您只添加受信任的来源。".localized(),
-                        title_color: LKRoot.ins_color_manager.read_a_color("main_title_two"),
-                        sub_title_color: LKRoot.ins_color_manager.read_a_color("sub_text"),
-                        icon_addrs: addrs)
-        container?.addSubview(test)
-        test.snp.makeConstraints { (x) in
-            x.top.equalTo(self.header_view?.snp.bottom ?? self.view.snp.bottom).offset(28)
-            x.left.equalTo(self.view.snp.left).offset(28)
-            x.right.equalTo(self.view.snp.right).offset(-28)
-            x.height.equalTo(233)
+        return ret
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0: return 108
+        case 1:
+            if LKRoot.settings?.manage_tab_news_repo_is_collapsed ?? true {
+                return 180
+            } else {
+                return 180 + CGFloat(LKRoot.container_news_repo.count * 62)
+            }
+        default: return 180
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table_view.deselectRow(at: indexPath, animated: true)
     }
     
 }

@@ -9,6 +9,14 @@
 import UIKit
 
 extension UIView {
+    
+    func layoutAll() {
+        for view in self.subviews {
+            view.layoutIfNeeded()
+            view.layoutAll()
+        }
+    }
+    
     func addSubviews(_ views: [UIView]) {
         views.forEach{ self.addSubview($0) }
     }
@@ -77,6 +85,7 @@ extension UIView {
         layer.shadowRadius = radius
         layer.shadowOpacity = opacity
         layer.masksToBounds = false
+        self.clipsToBounds = false
     }
     
     func shineAnimation() {

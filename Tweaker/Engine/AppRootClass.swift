@@ -66,7 +66,11 @@ class app_root_class {
         // 检查数据库数据完整性
         try? root_db?.create(table: "LKNewsRepos", of: DBMNewsRepo.self)
         try? root_db?.create(table: "LKSettings", of: DBMSettings.self)
-        let read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
+        var read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
+        if settings == nil {
+            sleep(1)
+            read_try = try? root_db?.getObjects(fromTable: "LKSettings")
+        }
         if read_try == nil || read_try?.count == 0 {
             bootstrap_this_app()
         }
@@ -76,6 +80,8 @@ class app_root_class {
         
         // 发送到下载处理引擎
         
+        // 临时解决一个很奇怪的问题
+        settings?.card_radius = 8
     }
     
     func bootstrap_this_app() {
