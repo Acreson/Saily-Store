@@ -275,5 +275,9 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 62
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table_view.deselectRow(at: indexPath, animated: true)
+    }
 }
 

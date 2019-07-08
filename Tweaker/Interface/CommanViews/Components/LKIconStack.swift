@@ -11,6 +11,8 @@ class LKIconStack: UIView {
     var image_views = [UIImageView]()
     var images_address = [String]()
     
+    private var last_image_address = [String]()
+    
     func validating_datas() -> Bool {
         if image_views.count == 0 || images_address.count == 0 {
             return false
@@ -23,9 +25,13 @@ class LKIconStack: UIView {
     }
     
     func apart_init() {
-        for view in self.subviews {
-            view.removeFromSuperview()
+        
+        if last_image_address == images_address {
+            return
         }
+        
+        last_image_address = images_address
+        
         self.clipsToBounds = false
         if images_address.count < 1 {
             print("[Resumable - fatalError] images_address.count < 1")
