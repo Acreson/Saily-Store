@@ -11,6 +11,7 @@ class LKIconStack: UIView {
     var image_views = [UIImageView]()
     var images_address = [String]()
     
+    private var ever_inited = false
     private var last_image_address = [String]()
     
     func validating_datas() -> Bool {
@@ -25,7 +26,6 @@ class LKIconStack: UIView {
     }
     
     func apart_init() {
-        
         if last_image_address == images_address {
             return
         }
@@ -37,6 +37,19 @@ class LKIconStack: UIView {
             print("[Resumable - fatalError] images_address.count < 1")
             return
         }
+        
+        if !ever_inited {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.build_view()
+            }
+        } else {
+            ever_inited = true
+            build_view()
+        }
+        
+    }
+    
+    func build_view() {
         let dummy = UIView()
         self.addSubview(dummy)
         dummy.snp.makeConstraints { (x) in

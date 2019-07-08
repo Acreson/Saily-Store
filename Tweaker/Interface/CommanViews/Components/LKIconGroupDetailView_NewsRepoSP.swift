@@ -122,7 +122,8 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         expend_button.setTitleColor(.gray, for: .highlighted)
         contentView.addSubview(expend_button)
         expend_button.snp.remakeConstraints { (x) in
-            x.bottom.equalTo(self.contentView.snp.bottom)
+//            x.bottom.equalTo(self.contentView.snp.bottom)
+            x.height.equalTo(30)
             x.top.equalTo(sep.snp.bottom)
             x.left.equalTo(self.contentView.snp.left)
             x.right.equalTo(self.contentView.snp.right)
@@ -207,6 +208,8 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         table_view.alpha = 0
         table_view.isHidden = false
         UIApplication.shared.beginIgnoringInteractionEvents()
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         DispatchQueue.main.async {
             (self.from_father_view as? UITableView)?.beginUpdates()
             UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
@@ -224,6 +227,8 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
     }
     
     @objc func collapse_self() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         if is_collapsed {
             update_status()
             return
