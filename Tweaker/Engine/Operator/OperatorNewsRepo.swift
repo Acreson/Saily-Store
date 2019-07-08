@@ -79,7 +79,7 @@ extension app_opeerator {
                                         with: new_update,
                                         where: DBMNewsRepo.Properties.link == item.link!)
             // 解包
-            NP_content_invoker(content_str: item.content ?? "", target_RAM: new, master_link: new_update.link ?? "")
+            NP_content_invoker(content_str: item.content ?? "", target_RAM: new, master_link: new.link)
             // 下载卡片内容
             var dl_url_str = new.link
 //            var got_a_link = false

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,7 +12,6 @@
 		AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04C51C22A4436000B29F0C /* CardDetails.swift */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
-		AB0958C222A9791B003B4D6F /* LKIconGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */; };
 		AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */; };
 		AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F80229EDC74003A78BE /* CommonOperator.swift */; };
 		AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */; };
@@ -49,6 +48,8 @@
 		ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA837229D8DC70070A17E /* Localizable.strings */; };
 		ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommyS.swift */; };
 		ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA83B229D99EB0070A17E /* AppUserClass.swift */; };
+		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
+		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +62,6 @@
 		AB081F91229D4BDC00ACA4DD /* Tweaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcons.xcassets; sourceTree = "<group>"; };
-		AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView.swift; sourceTree = "<group>"; };
 		AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LKASMultiAppsRiver.swift; sourceTree = "<group>"; };
 		AB198F80229EDC74003A78BE /* CommonOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonOperator.swift; sourceTree = "<group>"; };
 		AB198F82229EDEB8003A78BE /* OperatorNewsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorNewsRepo.swift; sourceTree = "<group>"; };
@@ -101,6 +101,8 @@
 		ABFBA838229D8E3A0070A17E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABFBA839229D943C0070A17E /* UIHommyS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyS.swift; sourceTree = "<group>"; };
 		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
+		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
+		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,7 +175,8 @@
 			children = (
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
-				AB0958C122A9791B003B4D6F /* LKIconGroupDetailView.swift */,
+				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
+				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -531,6 +534,7 @@
 			files = (
 				AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
+				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
@@ -542,8 +546,8 @@
 				ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
-				AB0958C222A9791B003B4D6F /* LKIconGroupDetailView.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
+				B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */,
 				AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */,
 				ABFBA824229D801E0070A17E /* LKHeader.swift in Sources */,
 				AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */,

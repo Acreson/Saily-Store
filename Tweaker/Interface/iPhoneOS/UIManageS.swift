@@ -23,6 +23,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         table_view.clipsToBounds = false
         table_view.delegate = self
         table_view.dataSource = self
+        table_view.allowsSelection = false
         view.addSubview(table_view)
         table_view.snp.makeConstraints { (x) in
             x.edges.equalTo(self.view.snp.edges)
@@ -47,10 +48,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         case 1:
             let news_repo_manager = LKIconGroupDetailView_NewsRepoSP()
-            news_repo_manager.icon_addrs = ["https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/icon.png",
-                                            //                     "GitHubIcon",
-                                            "AppIcon"]
-            news_repo_manager.apart_init()
+            news_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(news_repo_manager)
             news_repo_manager.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
