@@ -71,6 +71,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         sub_title_view.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
         sub_title_view.font = .systemFont(ofSize: 10)
         sub_title_view.isUserInteractionEnabled = false
+        sub_title_view.backgroundColor = .clear
         contentView.addSubview(sub_title_view)
         sub_title_view.snp.makeConstraints { (x) in
             x.top.equalTo(title_view.snp.bottom).offset(0)
@@ -274,6 +275,7 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
         ret.title.text = sync_news_repos[indexPath.row].name
         ret.link.text = sync_news_repos[indexPath.row].link
+        ret.backgroundColor = .clear
         return ret
     }
     

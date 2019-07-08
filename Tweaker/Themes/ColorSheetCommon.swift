@@ -10,7 +10,7 @@
 
 class color_sheet {
     
-    var current_color_sheet: color_sheet_id = .light
+    var current_color_sheet: color_sheet_id = .dark_blue
     
     enum color_sheet_id: Int {
         case light = 0x00
@@ -49,7 +49,7 @@ class color_sheet {
         "tabbar_untint"                 : #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1),    // UIColor(hex: 0x999999),
         "tabbar_background"             : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         
-        "table_view_title "             : #colorLiteral(red: 0.4117647059, green: 0.4117647059, blue: 0.4117647059, alpha: 1),    // UIColor(hex: 0x696969),
+        "table_view_title"              : #colorLiteral(red: 0.4117647059, green: 0.4117647059, blue: 0.4117647059, alpha: 1),    // UIColor(hex: 0x696969),
         "table_view_link"               : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1),    // UIColor(hex: 0x9A9A9A),
         
         "main_back_ground"              : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
@@ -80,7 +80,7 @@ class color_sheet {
         "tabbar_untint"                 : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1),    // UIColor(hex: 0x41464D),
         "tabbar_background"             : #colorLiteral(red: 0.01888785272, green: 0.05792274944, blue: 0.07932898116, alpha: 1),    // UIColor(hex: 0x050F14),
         
-        "table_view_title "             : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
+        "table_view_title"              : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         "table_view_link"               : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         
         "main_back_ground"              : #colorLiteral(red: 0.01888785272, green: 0.05792274944, blue: 0.07932898116, alpha: 1),    // UIColor(hex: 0x050F14),

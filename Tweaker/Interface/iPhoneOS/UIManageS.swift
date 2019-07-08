@@ -24,6 +24,9 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         table_view.delegate = self
         table_view.dataSource = self
         table_view.allowsSelection = false
+        table_view.backgroundView?.backgroundColor = .clear
+        table_view.backgroundColor = .clear
+        self.view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
         view.addSubview(table_view)
         table_view.snp.makeConstraints { (x) in
             x.edges.equalTo(self.view.snp.edges)
@@ -46,6 +49,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             header.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
         case 1:
             let news_repo_manager = LKIconGroupDetailView_NewsRepoSP()
             news_repo_manager.apart_init(father: tableView)
@@ -53,6 +58,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             news_repo_manager.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
         default:
             ret.backgroundColor = .random
         }
