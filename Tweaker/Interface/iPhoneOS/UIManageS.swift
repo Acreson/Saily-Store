@@ -63,7 +63,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: return 108
         case 1:
-            if LKRoot.settings?.manage_tab_news_repo_is_collapsed ?? true {
+            if LKRoot.container_manage_cell_status["NewsRepo"] ?? true {
                 return 180
             } else {
                 return 180 + CGFloat(LKRoot.container_news_repo.count * 62)

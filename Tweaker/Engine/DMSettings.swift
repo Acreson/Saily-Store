@@ -20,8 +20,6 @@ class DBMSettings: WCDBSwift.TableCodable {
     var network_timeout: Int?
     var card_radius: Int = 8
     
-    var manage_tab_news_repo_is_collapsed = true
-    
     enum CodingKeys: String, CodingTableKey { // swiftlint:disable:next nesting
         typealias Root = DBMSettings
         
@@ -33,8 +31,6 @@ class DBMSettings: WCDBSwift.TableCodable {
         case network_timeout = "network_timeout"
         // swiftlint:disable:next redundant_string_enum_value
         case card_radius = "card_radius"
-        // swiftlint:disable:next redundant_string_enum_value
-        case manage_tab_news_repo_is_collapsed = "manage_tab_news_repo_is_collapsed"
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         

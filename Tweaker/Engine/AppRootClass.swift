@@ -35,6 +35,8 @@ class app_root_class {
     
     var container_cache_uiview = [UIView]()                 // 视图缓存咯
     var container_news_repo    = [DMNewsRepo]()             // 新闻源缓存
+    var container_manage_cell_status = [String : Bool]()    // 管理页面是否展开
+    var container_refresh_ready = [String : Bool]()         // 全剧刷新状态缓存
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展

@@ -23,6 +23,9 @@ class LKIconStack: UIView {
     }
     
     func apart_init() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
         self.clipsToBounds = false
         if images_address.count < 1 {
             print("[Resumable - fatalError] images_address.count < 1")

@@ -101,6 +101,8 @@ class UIHommyS: UIViewController {
     
     @objc func build_view() {
         
+        LKRoot.container_refresh_ready["NewsRepos"] = false
+        
         for item in view.subviews where item.tag != view_tags.must_have.rawValue {
             item.removeFromSuperview()
         }
@@ -154,6 +156,7 @@ class UIHommyS: UIViewController {
                 x.centerY.equalTo(self.view.snp.centerY).offset(0)
             }
             
+            LKRoot.container_refresh_ready["NewsRepos"] = true
             return
         }
         
@@ -298,6 +301,8 @@ class UIHommyS: UIViewController {
                             x.top.equalTo(last_view.snp.bottom).offset(42)
                             x.centerX.equalTo(self.view.snp.centerX)
                         })
+                        
+                        LKRoot.container_refresh_ready["NewsRepos"] = true
                         
                     }
                 } else {
