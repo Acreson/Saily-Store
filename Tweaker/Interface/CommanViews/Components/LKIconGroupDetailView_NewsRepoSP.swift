@@ -41,6 +41,8 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
             from_father_view = father!
         }
         
+        sync_news_repos = LKRoot.container_news_repo
+        
         contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
         contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
         contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))

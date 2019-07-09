@@ -11,14 +11,16 @@ class LKIconStack: UIView {
     var image_views = [UIImageView]()
     var images_address = [String]()
     
-    private var ever_inited = false
+    var max_image_count = 5
+    
+    private var ever_inited = 0
     private var last_image_address = [String]()
     
     func validating_datas() -> Bool {
         if image_views.count == 0 || images_address.count == 0 {
             return false
         }
-        if image_views.count != images_address.count {
+        if image_views.count > images_address.count {
             print("[Resumable - fatalError] image_views.count != images_address.count")
             return false
         }
@@ -26,7 +28,7 @@ class LKIconStack: UIView {
     }
     
     func apart_init() {
-        if last_image_address == images_address {
+        if last_image_address == images_address && ever_inited == 1 {
             return
         }
         
@@ -35,16 +37,21 @@ class LKIconStack: UIView {
         self.clipsToBounds = false
         if images_address.count < 1 {
             print("[Resumable - fatalError] images_address.count < 1")
+            ever_inited = 1
             return
         }
         
-        if !ever_inited {
+        if ever_inited == 0 {
+            ever_inited = 1
+            build_view()
+        } else if ever_inited == 1 {
+            ever_inited = 2
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.build_view()
             }
         } else {
-            ever_inited = true
-            build_view()
+            update_image()
+            return
         }
         
     }
@@ -59,7 +66,10 @@ class LKIconStack: UIView {
             x.height.equalTo(33)
         }
         var anchor = dummy
-        for _ in 0..<images_address.count {
+        inner: for cnt in 0..<images_address.count {
+            if cnt > max_image_count {
+                break inner
+            }
             let new = UIImageView()
             let bloder = UIView()
             self.addSubview(bloder)
@@ -92,9 +102,6 @@ class LKIconStack: UIView {
     }
     
     func update_image() {
-        if !validating_datas() {
-            return
-        }
         for i in 0..<image_views.count {
             image_views[i].sd_setImage(with: URL(string: images_address[i]), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
                 if err != nil || img == nil {

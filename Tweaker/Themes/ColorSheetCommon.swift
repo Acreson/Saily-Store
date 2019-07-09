@@ -10,7 +10,7 @@
 
 class color_sheet {
     
-    var current_color_sheet: color_sheet_id = .dark_blue
+    var current_color_sheet: color_sheet_id = .light
     
     enum color_sheet_id: Int {
         case light = 0x00
