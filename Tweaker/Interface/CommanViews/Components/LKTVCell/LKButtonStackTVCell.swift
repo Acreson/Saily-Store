@@ -51,6 +51,8 @@ class LK2ButtonStackTVCell: UITableViewCell {
             x.bottom.equalTo(contentView.snp.bottom).offset(-6)
         }
         
+        contentView.backgroundColor = .clear
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

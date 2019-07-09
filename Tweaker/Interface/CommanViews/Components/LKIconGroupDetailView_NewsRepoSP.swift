@@ -277,10 +277,13 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row >= sync_news_repos.count {
             let ret = LK2ButtonStackTVCell()
-            ret.button1.setTitle("分享".localized(), for: .normal)
-            ret.button2.setTitle("添加".localized(), for: .normal)
+            ret.button1.setTitle("添加".localized(), for: .normal)
+            ret.button2.setTitle("分享".localized(), for: .normal)
             ret.button1.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
             ret.button2.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+            ret.button1.addTarget(self, action: #selector(add_button_recall), for: .touchUpInside)
+            ret.button2.addTarget(self, action: #selector(share_button_recall), for: .touchUpInside)
+            ret.backgroundColor = .clear
             return ret
         }
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID", for: indexPath) as? LKIconTVCell ?? LKIconTVCell()
@@ -304,6 +307,21 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
+        if indexPath.row < sync_news_repos.count {
+            some_shit_call(which: indexPath.row)
+        }
+    }
+    
+    @objc func add_button_recall() {
+        
+    }
+    
+    @objc func share_button_recall() {
+        
+    }
+    
+    func some_shit_call(which: Int) {
+        
     }
 }
 
