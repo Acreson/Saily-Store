@@ -31,7 +31,7 @@ class LK2ButtonStackTVCell: UITableViewCell {
         button1.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button1.setRadiusINT(radius: 8)
 //        button1.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-        button1.setTitleColor(.gray, for: .focused)
+        button1.setTitleColor(.gray, for: .highlighted)
         button1.snp.makeConstraints { (x) in
             x.left.equalTo(contentView.snp.left).offset(12)
             x.right.equalTo(dummy.snp.left).offset(-12)
@@ -43,7 +43,7 @@ class LK2ButtonStackTVCell: UITableViewCell {
         button2.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button2.setRadiusINT(radius: 8)
 //        button2.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-        button2.setTitleColor(.gray, for: .focused)
+        button2.setTitleColor(.gray, for: .highlighted)
         button2.snp.makeConstraints { (x) in
             x.left.equalTo(dummy.snp.right).offset(12)
             x.right.equalTo(contentView.snp.right).offset(-12)
