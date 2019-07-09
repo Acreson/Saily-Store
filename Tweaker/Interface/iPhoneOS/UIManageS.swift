@@ -70,12 +70,12 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return do_the_height_math(indexPath: indexPath)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        table_view.deselectRow(at: indexPath, animated: true)
-    }
-    
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return do_the_height_math(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table_view.deselectRow(at: indexPath, animated: true)
     }
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
@@ -85,7 +85,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if LKRoot.container_manage_cell_status["NewsRepo"] ?? true {
                 return 180
             } else {
-                return 180 + CGFloat(LKRoot.container_news_repo.count + 1) * 62
+                return 180 + CGFloat(LKRoot.container_news_repo.count + 1) * 62 - 32
             }
         default: return 180
         }

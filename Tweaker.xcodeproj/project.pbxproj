@@ -51,6 +51,7 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
+		B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
+		B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKButtonStackTVCell.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,7 +181,7 @@
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
-				B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */,
+				B470FA9322D4515D00C4A215 /* LKTVCell */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -293,6 +295,15 @@
 				ABE6DCF1229E8BD600D18D9E /* Cards */,
 			);
 			path = CommanViews;
+			sourceTree = "<group>";
+		};
+		B470FA9322D4515D00C4A215 /* LKTVCell */ = {
+			isa = PBXGroup;
+			children = (
+				B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */,
+				B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */,
+			);
+			path = LKTVCell;
 			sourceTree = "<group>";
 		};
 		ED82C75B30A614C976CA3647 /* Frameworks */ = {
@@ -550,6 +561,7 @@
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
+				B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */,
 				B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */,
 				AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */,
 				ABFBA824229D801E0070A17E /* LKHeader.swift in Sources */,

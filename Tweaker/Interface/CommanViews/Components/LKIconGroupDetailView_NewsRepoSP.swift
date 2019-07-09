@@ -127,7 +127,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         expend_button.snp.remakeConstraints { (x) in
 //            x.bottom.equalTo(self.contentView.snp.bottom)
             x.height.equalTo(30)
-            x.top.equalTo(sep.snp.bottom)
+            x.top.equalTo(sep.snp.bottom).offset(2)
             x.left.equalTo(self.contentView.snp.left)
             x.right.equalTo(self.contentView.snp.right)
         }
@@ -175,12 +175,14 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
     @objc func expend_self() {
         
         if !(LKRoot.container_refresh_ready["NewsRepos"] ?? false) {
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
                 self.expend_button.setTitle("请等待首页刷新进程完成".localized(), for: .normal)
+                self.expend_button.setTitleColor(.red, for: .normal)
             })
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.transition(with: self.expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.expend_button.setTitle("点击来展开全部新闻源 ▼".localized(), for: .normal)
+                    self.expend_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
                 })
             }
             return
@@ -193,7 +195,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
             x.top.equalTo(self.table_view_container.snp.top)
             x.left.equalTo(contentView.snp.left).offset(8)
             x.right.equalTo(contentView.snp.right).offset(-8)
-            x.height.equalTo(LKRoot.container_news_repo.count * 62)
+            x.height.equalTo((LKRoot.container_news_repo.count + 1) * 62 + 5 - 32)
         }
         expend_button.setTitle("点击来展开全部新闻源 ▼".localized(), for: .normal)
         var icon_addrs = [String]()
@@ -269,10 +271,18 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
 extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sync_news_repos.count
+        return sync_news_repos.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row >= sync_news_repos.count {
+            let ret = LK2ButtonStackTVCell()
+            ret.button1.setTitle("分享".localized(), for: .normal)
+            ret.button2.setTitle("添加".localized(), for: .normal)
+            ret.button1.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+            ret.button2.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+            return ret
+        }
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID", for: indexPath) as? LKIconTVCell ?? LKIconTVCell()
         ret.icon.sd_setImage(with: URL(string: sync_news_repos[indexPath.row].icon), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
             if err != nil || img == nil {
@@ -286,6 +296,9 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row >= sync_news_repos.count {
+            return 43
+        }
         return 62
     }
     
