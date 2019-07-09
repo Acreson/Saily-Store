@@ -69,7 +69,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         
         // 描述
         let sub_title_view = UITextView()
-        sub_title_view.text = "这里包含了您在首页看到的所有新闻的来源。我们始终建议您只添加受信任的来源。"
+        sub_title_view.text = "这里包含了您在首页看到的所有新闻的来源。我们始终建议您只添加受信任的来源。".localized()
         sub_title_view.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
         sub_title_view.font = .systemFont(ofSize: 10)
         sub_title_view.isUserInteractionEnabled = false
@@ -175,9 +175,13 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
     @objc func expend_self() {
         
         if !(LKRoot.container_refresh_ready["NewsRepos"] ?? false) {
-            expend_button.setTitle("请等待首页刷新进程完成".localized(), for: .normal)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.expend_button.setTitle("请等待首页刷新进程完成".localized(), for: .normal)
+            })
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.expend_button.setTitle("点击来展开全部新闻源 ▼".localized(), for: .normal)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.expend_button.setTitle("点击来展开全部新闻源 ▼".localized(), for: .normal)
+                })
             }
             return
         }

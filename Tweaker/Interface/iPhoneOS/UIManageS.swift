@@ -67,6 +67,18 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return do_the_height_math(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table_view.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return do_the_height_math(indexPath: indexPath)
+    }
+    
+    func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0: return 108
         case 1:
@@ -77,10 +89,6 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         default: return 180
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        table_view.deselectRow(at: indexPath, animated: true)
     }
     
 }

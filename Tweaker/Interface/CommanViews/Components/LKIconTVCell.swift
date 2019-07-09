@@ -62,11 +62,13 @@ class LKIconTVCell: UITableViewCell {
             x.top.equalTo(contentView.snp.top).offset(6)
         }
         
-        arrow.image = UIImage(named: "arrowRight")
+        arrow.image = UIImage(named: "info")
         arrow.contentMode = .scaleAspectFit
         arrow.snp.makeConstraints { (x) in
             x.centerY.equalTo(contentView.snp.centerY)
             x.right.equalTo(contentView.snp.right).offset(-6)
+            x.height.equalTo(20)
+            x.width.equalTo(20)
         }
     }
     
