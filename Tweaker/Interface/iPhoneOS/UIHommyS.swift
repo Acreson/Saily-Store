@@ -44,6 +44,9 @@ class UIHommyS: UIViewController {
             view.addSubview(container!)
         }
         
+        container?.showsVerticalScrollIndicator = false
+        container?.showsHorizontalScrollIndicator = false
+        
         // 处理一下头条
         let header = LKRoot.ins_view_manager.create_AS_home_header_view(title_str: "今日精选".localized(), sub_str: "LKSIG-DATE", image_str: "NAMED:AccountHeadIconPlaceHolder")
         container!.addSubview(header)
