@@ -470,6 +470,21 @@ class UIHommyS: UIViewController {
                 x.width.equalTo(88)
                 x.height.equalTo(88)
             }
+            close_image.isHidden = true
+            close_button.isHidden = true
+            // 避免脑残用户刷手速造成限制条件无祖先激活失败的崩溃
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                close_button.isHidden = false
+                close_image.isHidden = false
+                close_image.alpha = 0
+                close_button.alpha = 0
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.5, animations: {
+                        close_image.alpha = 1
+                        close_button.alpha = 1
+                    })
+                }
+            }
             
             // 加载指示
             let loading = UIActivityIndicatorView(frame: CGRect(x: UIScreen.main.bounds.width / 2 - 6, y: 128, width: 12, height: 12))
@@ -591,7 +606,7 @@ class UIHommyS: UIViewController {
                             }
                         })
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                             // 真不知道这个bug怎么修复姑且认为是snapkit同时在一次dispatch做remake时处理了两个remake
 //                            2019-07-10 17:58:28.565069+0800 Tweaker[23447:957127] [LayoutConstraints] Unable to simultaneously satisfy constraints.
 //                            Probably at least one of the constraints in the following list is one you don't want.
@@ -633,7 +648,7 @@ class UIHommyS: UIViewController {
                                     container_d.contentOffset = CGPoint(x: 0, y: -52)
                                 })
                             }
-                        })
+//                        })
                     } // DispatchQueue.main.async
                 }) // NP_download_card_contents
             } // queue_dispatch
@@ -660,7 +675,6 @@ class UIHommyS: UIViewController {
         if self.card_details_scroll_view != nil && self.card_details_vseffect_view != nil {
             DispatchQueue.main.async {
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                    
                     self.card_details_vseffect_view?.alpha = 0
                     self.card_details_scroll_view?.layoutIfNeeded()
                     self.card_details_scroll_view?.frame = CGRect(x: 0, y: UIScreen.main.bounds.height + 66 ,
