@@ -46,7 +46,7 @@ class UIEnteryS: UITabBarController {
         }
         last_tapped_view_controller = selectedViewController
         
-        guard let view = item.value(forKey: "_view") as? UIView else { return   }
+        guard let view = item.value(forKey: "_view") as? UIView else { return }
         for item in view.subviews {
             if let image = item as? UIImageView {
                 image.shineAnimation()

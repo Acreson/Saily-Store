@@ -10,6 +10,14 @@ import Foundation
 
 extension String {
     
+    func readClipBoard() -> String {
+        let pasteboardString: String? = UIPasteboard.general.string
+        if let theString = pasteboardString {
+            return theString
+        }
+        return ""
+    }
+    
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }

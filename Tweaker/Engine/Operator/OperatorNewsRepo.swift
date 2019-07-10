@@ -19,7 +19,7 @@ extension app_opeerator {
         }
         // 重置内存数据
         LKRoot.container_news_repo.removeAll()
-        for item in repos where item.link != nil {
+        inner_01: for item in repos where item.link != nil {
             let new = DMNewsRepo()
             if item.link!.hasSuffix("/") {
                 new.link = item.link!
@@ -35,6 +35,7 @@ extension app_opeerator {
                     case .success:
                         if respond.data == nil {
                             item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
+                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                             print("[E] 无法解压下载的 Info 数据，丢弃")
                         }
                         // 开始解码
@@ -45,18 +46,21 @@ extension app_opeerator {
                         }
                         if read == nil {
                             item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
+                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                             print("[E] 无法解压下载的 Info 数据，丢弃")
                         } else {
                             item.content = read
                         }
                     default:
                         // 无法合成下载链接，丢弃数据
+                        LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                         item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
                     } // switch
                     net_semaphore.signal()
                 } // AF
             } else {
                 // 无法合成下载链接，丢弃数据
+                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                 item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
             }
             var signal_ed_62 = false
@@ -66,11 +70,18 @@ extension app_opeerator {
                     return
                 }
                 item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
+                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                 net_semaphore.signal()
                 print("[*] 网络数据超时，放弃数据。")
             }
             net_semaphore.wait()
             signal_ed_62 = true
+            // 务必检查是不是错误的地址！
+            if !(item.content?.contains("LKRP-NAME") ?? false) {
+                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                print("if !item.content?.contains(LKRP-NAME)")
+                continue inner_01
+            }
             // 更新数据库
             let new_update = DBMNewsRepo()
             new_update.content = item.content
@@ -110,6 +121,7 @@ extension app_opeerator {
                             read_cards = String(data: respond.data!, encoding: .ascii)
                         }
                         if read_cards == nil {
+                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                             read_cards = """
                             --> Begin Card
                             LKCD-TYPE|                                      |photo_half_with_banner_down_light
@@ -137,6 +149,7 @@ extension app_opeerator {
                 if signal_ed_130 {
                     return
                 }
+                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
                 read_cards = """
                 --> Begin Card
                 LKCD-TYPE|                                      |photo_half_with_banner_down_light

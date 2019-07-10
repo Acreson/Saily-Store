@@ -51,7 +51,8 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
-		B46EE49A22D5E078000C6F6D /* LKPoPupWindowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */; };
+		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
+		B46EE49F22D611CD000C6F6D /* LKAddRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKAddRepoView.swift */; };
 		B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +108,8 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
-		B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPoPupWindowInput.swift; sourceTree = "<group>"; };
+		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
+		B46EE49E22D611CD000C6F6D /* LKAddRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKAddRepoView.swift; sourceTree = "<group>"; };
 		B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKButtonStackTVCell.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,7 +183,6 @@
 			children = (
 				B46EE49722D5E04B000C6F6D /* Views */,
 				B46EE49822D5E053000C6F6D /* ManageCells */,
-				B46EE49B22D5E07F000C6F6D /* Window */,
 				B470FA9322D4515D00C4A215 /* LKTVCell */,
 			);
 			path = Components;
@@ -304,6 +305,7 @@
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
+				B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,16 +314,9 @@
 			isa = PBXGroup;
 			children = (
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
+				B46EE49E22D611CD000C6F6D /* LKAddRepoView.swift */,
 			);
 			path = ManageCells;
-			sourceTree = "<group>";
-		};
-		B46EE49B22D5E07F000C6F6D /* Window */ = {
-			isa = PBXGroup;
-			children = (
-				B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */,
-			);
-			path = Window;
 			sourceTree = "<group>";
 		};
 		B470FA9322D4515D00C4A215 /* LKTVCell */ = {
@@ -430,30 +425,25 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/BitByteData/BitByteData.framework",
-				"${BUILT_PRODUCTS_DIR}/CardParts/CardParts.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
 				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
 				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
-				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/IHProgressHUD/IHProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/InAppViewDebugger/InAppViewDebugger.framework",
 				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
-				"${BUILT_PRODUCTS_DIR}/NightNight/NightNight.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
 				"${BUILT_PRODUCTS_DIR}/SWCompression/SWCompression.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyMarkdown/SwiftyMarkdown.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
@@ -470,30 +460,25 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BitByteData.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CardParts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/InAppViewDebugger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NightNight.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWCompression.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusAlert.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMarkdown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
@@ -580,6 +565,7 @@
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
 				ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */,
+				B46EE49F22D611CD000C6F6D /* LKAddRepoView.swift in Sources */,
 				ABFBA821229D7DC40070A17E /* UIColorExtensions.swift in Sources */,
 				ABFBA819229D7DC40070A17E /* UITableViewExtensions.swift in Sources */,
 				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
@@ -598,7 +584,6 @@
 				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
-				B46EE49A22D5E078000C6F6D /* LKPoPupWindowInput.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
@@ -609,6 +594,7 @@
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
 				ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */,
 				ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */,
+				B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,11 +14,11 @@ target 'Tweaker' do
   
   pod 'SwifterSwift'
 
-  pod 'Hero'
   pod 'SnapKit'
-  pod 'CardParts'
-  pod 'NightNight'
+  pod 'StatusAlert', '~> 1.1.1'
+  pod 'IHProgressHUD'
   pod 'UIImageColors'
+  pod 'SwiftMessages' # https://github.com/SwiftKickMobile/SwiftMessages
   pod 'SwiftyMarkdown'
   pod 'LTMorphingLabel'
   pod 'JJFloatingActionButton'

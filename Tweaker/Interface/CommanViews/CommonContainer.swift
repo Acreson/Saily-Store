@@ -19,5 +19,12 @@ enum view_tags: Int {
 
 class common_views {
     // 啥都不用干
-    
+}
+
+class manage_views {
+    // 啥都不用干
+}
+
+class cell_views {
+    // 啥都不用干
 }

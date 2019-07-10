@@ -64,15 +64,6 @@ extension UIView {
     }
 }
 
-private let kTransform = "transform"
-private let kStrokeStart = "strokeStart"
-private let kStrokeEnd = "strokeEnd"
-private let kOpacity = "opacity"
-
-private class PPShineLayer: CAShapeLayer {
-    
-}
-
 extension UIView {
     
     func addShadow(ofColor color: UIColor = .clear, radius: CGFloat = 3, offset: CGSize = .zero, opacity: Float = 0.5) {
@@ -87,6 +78,21 @@ extension UIView {
         layer.masksToBounds = false
         self.clipsToBounds = false
     }
+    
+}
+
+private let kTransform = "transform"
+private let kStrokeStart = "strokeStart"
+private let kStrokeEnd = "strokeEnd"
+private let kOpacity = "opacity"
+
+private class PPShineLayer: CAShapeLayer {
+    
+}
+
+extension UIView {
+    
+    // jkpang dev
     
     func shineAnimation() {
         removeOldSubLayers()
@@ -108,10 +114,6 @@ extension UIView {
         }
         CATransaction.commit()
     }
-}
-
-
-extension UIView {
     
     /// 移除旧layer
     fileprivate func removeOldSubLayers() {
@@ -158,10 +160,7 @@ extension UIView {
         circleShape.bounds = imageFrame
         circleShape.position = imgCenterPoint
         circleShape.path = UIBezierPath(ovalIn: imageFrame).cgPath
-        circleShape.fillColor = UIColor.blue.cgColor
-        if NightNight.theme == .night {
-            circleShape.fillColor = UIColor.white.cgColor
-        }
+        circleShape.fillColor = LKRoot.ins_color_manager.read_a_color("main_tint_color").cgColor
         circleShape.transform = CATransform3DMakeScale(0.0, 0.0, 1.0)
         backgroundLayer.addSublayer(circleShape)
         

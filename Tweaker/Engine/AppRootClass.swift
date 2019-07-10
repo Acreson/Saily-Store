@@ -33,7 +33,9 @@ class app_root_class {
     public let queue_dispatch                                   = DispatchQueue(label: "com.lakr233.common.queue", qos: .utility, attributes: .concurrent)
     public let queue_alamofire                                  = DispatchQueue(label: "com.lakr233.alamofire.queue", qos: .utility, attributes: .concurrent)
     
-    var container_cache_uiview = [UIView]()                 // 视图缓存咯
+    // 缓存view好像没啥用
+//    var container_cache_uiview = [UIView]()                 // 视图缓存咯
+    var container_string_store = [String : String]()
     var container_news_repo    = [DMNewsRepo]()             // 新闻源缓存
     var container_manage_cell_status = [String : Bool]()    // 管理页面是否展开
     var container_gobal_signal = [String : Bool]()          // 全剧刷新状态缓存 是否需要刷新
@@ -66,15 +68,11 @@ class app_root_class {
         try? FileManager.default.removeItem(atPath: root_path! + "/caches")
         
         // 检查数据库数据完整性
-        try? root_db?.create(table: "LKNewsRepos", of: DBMNewsRepo.self)
-        try? root_db?.create(table: "LKSettings", of: DBMSettings.self)
-        var read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
-        if settings == nil {
-            sleep(1)
-            read_try = try? root_db?.getObjects(fromTable: "LKSettings")
-        }
-        if read_try == nil || read_try?.count == 0 {
+        let read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
+        if read_try == nil || read_try?.count != 1 {
             bootstrap_this_app()
+        } else {
+            settings = read_try?.first!
         }
 
         // iOS 13 黑暗模式初始化
@@ -82,12 +80,12 @@ class app_root_class {
         
         // 发送到下载处理引擎
         
-        // 临时解决一个很奇怪的问题
-        settings?.card_radius = 8
     }
     
     func bootstrap_this_app() {
         // 开始初始化数据库
+        try? root_db?.create(table: "LKNewsRepos", of: DBMNewsRepo.self)
+        try? root_db?.create(table: "LKSettings", of: DBMSettings.self)
         let new_setting = DBMSettings()
         new_setting.card_radius = 8
         // 伪造UDID

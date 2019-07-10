@@ -52,7 +52,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 1:
-            let news_repo_manager = LKIconGroupDetailView_NewsRepoSP()
+            let news_repo_manager = manage_views.LKIconGroupDetailView_NewsRepoSP()
             news_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(news_repo_manager)
             news_repo_manager.snp.makeConstraints { (x) in

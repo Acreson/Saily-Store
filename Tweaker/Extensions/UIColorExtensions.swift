@@ -87,3 +87,36 @@ extension UIColor {
     }
 }
 
+// useless 你有他妈的uInt了
+
+//extension UIColor {
+//
+//    func toInt() -> Int? {
+//        var fRed : CGFloat = 0
+//        var fGreen : CGFloat = 0
+//        var fBlue : CGFloat = 0
+//        var fAlpha: CGFloat = 0
+//        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
+//            let iRed = Int(fRed * 255.0)
+//            let iGreen = Int(fGreen * 255.0)
+//            let iBlue = Int(fBlue * 255.0)
+//            let iAlpha = Int(fAlpha * 255.0)
+//
+//            //  (Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are blue).
+//            let a = iAlpha << 24
+//            let b = iRed << 16
+//            let c = iGreen << 8
+//            let d = iBlue
+//            let ret = a + b + c + d
+//            return ret
+//        } else {
+//            // Could not extract RGBA components:
+//            return nil
+//        }
+//    }
+//
+//    func toUInt() -> UInt {
+//        let ret = self.toInt() ?? 0
+//        return UInt(ret)
+//    }
+//}
