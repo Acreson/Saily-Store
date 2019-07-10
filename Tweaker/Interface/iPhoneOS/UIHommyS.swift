@@ -29,6 +29,7 @@ class UIHommyS: UIViewController {
                 view.removeFromSuperview()
             }
             container = nil
+            LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = false
             viewDidLoad()
         }
     } // viewWillAppear
@@ -581,23 +582,54 @@ class UIHommyS: UIViewController {
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
                             if LKRoot.safe_area_needed {
-                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 580 + new_container.lenth)
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 500 + new_container.lenth)
                             } else {
-                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 510 + new_container.lenth)
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 480 + new_container.lenth)
                             }
                         })
-                        self.card_text_view?.snp.remakeConstraints({ (x) in
-                            x.top.equalTo(self.card_view?.snp.bottom ?? self.view.snp.bottom)
-                            x.left.equalTo(self.card_view?.snp.left ?? self.view.snp.left)
-                            x.right.equalTo(self.card_view?.snp.right ?? self.view.snp.right)
-                            x.height.equalTo(new_container.lenth)
-                        })
-                        self.card_text_view?.addSubview(new_container)
-                        new_container.snp.makeConstraints({ (x) in
-                            x.top.equalTo(self.card_text_view?.snp.top ?? self.view.snp.bottom).offset(28)
-                            x.left.equalTo(self.card_view?.snp.left ?? self.view.snp.left).offset(28)
-                            x.right.equalTo(self.card_view?.snp.right ?? self.view.snp.right).offset(-28)
-                            x.height.equalTo(new_container.lenth + 256)
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                            // 真不知道这个bug怎么修复姑且认为是snapkit同时在一次dispatch做remake时处理了两个remake
+//                            2019-07-10 17:58:28.565069+0800 Tweaker[23447:957127] [LayoutConstraints] Unable to simultaneously satisfy constraints.
+//                            Probably at least one of the constraints in the following list is one you don't want.
+//                            Try this:
+//                            (1) look at each constraint and try to figure out which you don't expect;
+//                            (2) find the code that added the unwanted constraint or constraints and fix it.
+//                            (
+//                            "<SnapKit.LayoutConstraint:0x600000ca64c0@UIHommyS.swift#594 UIView:0x7ff817027c30.height == 1094.3333333333333>",
+//                            "<SnapKit.LayoutConstraint:0x600000cbe100@UIHommyS.swift#551 UIView:0x7ff817027c30.height == 666.0>"
+//                            )
+//
+//                            Will attempt to recover by breaking constraint
+//                            <SnapKit.LayoutConstraint:0x600000ca64c0@UIHommyS.swift#594 UIView:0x7ff817027c30.height == 1094.3333333333333>
+//
+//                            Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.
+//                            The methods in the UIConstraintBasedLayoutDebugging category on UIView listed in <UIKitCore/UIView.h> may also be helpful.
+                            self.card_view?.snp.remakeConstraints({ (x) in
+                                x.top.equalTo(container_d.snp.top).offset(top_insert)
+                                x.centerX.equalTo(container_d.snp.centerX)
+                                x.width.equalTo(UIScreen.main.bounds.width)
+                                x.height.equalTo(416)
+                            })
+                            self.card_text_view?.snp.remakeConstraints({ (x) in
+                                x.top.equalTo(container_d.snp.top).offset(416 + top_insert)
+                                x.centerX.equalTo(container_d.snp.centerX)
+                                x.width.equalTo(UIScreen.main.bounds.width)
+                                x.height.equalTo(new_container.lenth)
+                            })
+                            self.card_text_view?.addSubview(new_container)
+                            new_container.snp.makeConstraints({ (x) in
+                                x.top.equalTo(self.card_text_view?.snp.top ?? self.view.snp.bottom).offset(28)
+                                x.left.equalTo(self.card_view?.snp.left ?? self.view.snp.left).offset(28)
+                                x.right.equalTo(self.card_view?.snp.right ?? self.view.snp.right).offset(-28)
+                                x.height.equalTo(new_container.lenth + 256)
+                            })
+                            
+                            if new_container.lenth < 500 && LKRoot.safe_area_needed {
+                                UIView.animate(withDuration: 0.5, animations: {
+                                    container_d.contentOffset = CGPoint(x: 0, y: -52)
+                                })
+                            }
                         })
                     } // DispatchQueue.main.async
                 }) // NP_download_card_contents

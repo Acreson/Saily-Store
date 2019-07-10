@@ -315,15 +315,19 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     }
     
     @objc func add_button_recall() {
-        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
     
     @objc func share_button_recall() {
-        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
     
     func some_shit_call(which: Int) {
-        
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        print("[i] 用户选择了新闻源: " + sync_news_repos[which].link)
     }
 }
 
