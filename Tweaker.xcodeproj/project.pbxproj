@@ -51,6 +51,7 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
+		B46EE49A22D5E078000C6F6D /* LKPoPupWindowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */; };
 		B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
+		B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPoPupWindowInput.swift; sourceTree = "<group>"; };
 		B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKButtonStackTVCell.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,10 +179,9 @@
 		AB1DB1C622A368690005DDD7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				ABFBA823229D801E0070A17E /* LKHeader.swift */,
-				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
-				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
-				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
+				B46EE49722D5E04B000C6F6D /* Views */,
+				B46EE49822D5E053000C6F6D /* ManageCells */,
+				B46EE49B22D5E07F000C6F6D /* Window */,
 				B470FA9322D4515D00C4A215 /* LKTVCell */,
 			);
 			path = Components;
@@ -295,6 +296,32 @@
 				ABE6DCF1229E8BD600D18D9E /* Cards */,
 			);
 			path = CommanViews;
+			sourceTree = "<group>";
+		};
+		B46EE49722D5E04B000C6F6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ABFBA823229D801E0070A17E /* LKHeader.swift */,
+				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
+				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B46EE49822D5E053000C6F6D /* ManageCells */ = {
+			isa = PBXGroup;
+			children = (
+				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
+			);
+			path = ManageCells;
+			sourceTree = "<group>";
+		};
+		B46EE49B22D5E07F000C6F6D /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				B46EE49922D5E078000C6F6D /* LKPoPupWindowInput.swift */,
+			);
+			path = Window;
 			sourceTree = "<group>";
 		};
 		B470FA9322D4515D00C4A215 /* LKTVCell */ = {
@@ -571,6 +598,7 @@
 				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
+				B46EE49A22D5E078000C6F6D /* LKPoPupWindowInput.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,

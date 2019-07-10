@@ -29,6 +29,9 @@ class UIEnteryS: UITabBarController {
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         let willing = selectedViewController
         if willing == last_tapped_view_controller {
             for this in willing?.view.subviews ?? [] where this as? UIScrollView != nil {

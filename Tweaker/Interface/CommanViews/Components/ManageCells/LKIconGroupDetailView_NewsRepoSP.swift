@@ -150,6 +150,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         table_view.delegate = self
         table_view.dataSource = self
         table_view.isHidden = true
+        table_view.isScrollEnabled = false
         table_view_container.addSubview(table_view)
         table_view.snp.makeConstraints { (x) in
             x.top.equalTo(self.table_view_container.snp.top)
@@ -174,7 +175,7 @@ class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
     
     @objc func expend_self() {
         
-        if !(LKRoot.container_refresh_ready["NewsRepos"] ?? false) {
+        if !(LKRoot.container_gobal_signal["NewsRepos"] ?? false) {
             UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
                 self.expend_button.setTitle("请等待首页刷新进程完成".localized(), for: .normal)
                 self.expend_button.setTitleColor(.red, for: .normal)
@@ -294,6 +295,7 @@ extension LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
         ret.title.text = sync_news_repos[indexPath.row].name
         ret.link.text = sync_news_repos[indexPath.row].link
+//        ret.link.text = "https://never.steal.my/internal/links *)"
         ret.backgroundColor = .clear
         return ret
     }
