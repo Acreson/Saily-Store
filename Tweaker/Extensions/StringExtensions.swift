@@ -18,6 +18,10 @@ extension String {
         return ""
     }
     
+    func pushClipBoard() {
+        UIPasteboard.general.string = self
+    }
+    
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }

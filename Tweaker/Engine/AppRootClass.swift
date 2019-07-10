@@ -62,7 +62,7 @@ class app_root_class {
             print("[*] 从沙盒启动应用程序。")
         }
         try? FileManager.default.removeItem(atPath: root_path! + "/daemon.call")
-        try? FileManager.default.removeItem(atPath: root_path! + "/Lakr233.db-wal")
+//        try? FileManager.default.removeItem(atPath: root_path! + "/Lakr233.db-wal") 操这玩意害惨我了
         try? FileManager.default.createDirectory(atPath: root_path! + "/daemon.call", withIntermediateDirectories: true, attributes: nil)
         root_db = Database(withPath: root_path! + "/" + "Lakr233.db")
         try? FileManager.default.removeItem(atPath: root_path! + "/caches")

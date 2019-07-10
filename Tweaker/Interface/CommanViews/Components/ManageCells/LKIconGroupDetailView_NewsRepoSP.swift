@@ -318,6 +318,89 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row < sync_news_repos.count {
+            return true
+        }
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
+            self.sync_news_repos[index.row].link.pushClipBoard()
+            let statusAlert = StatusAlert()
+            statusAlert.image = UIImage(named: "Done")
+            statusAlert.title = "成功".localized()
+            statusAlert.message = (self.sync_news_repos[index.row].name) + "的地址已经复制到剪贴板".localized()
+            statusAlert.canBePickedOrDismissed = true
+            statusAlert.showInKeyWindow()
+        }
+        share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
+        
+        let delete = UITableViewRowAction(style: .normal, title: "删除") { _, index in
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            var out = [DBMNewsRepo]()
+            var i = 0
+            for item in LKRoot.container_news_repo where item.link != self.sync_news_repos[index.row].link {
+                let new = DBMNewsRepo()
+                new.link = item.link
+                new.sort_id = i
+                out.append(new)
+                i += 1
+            }
+            try? LKRoot.root_db?.delete(fromTable: "LKNewsRepos", where: DBMNewsRepo.Properties.link == self.sync_news_repos[index.row].link)
+            try? LKRoot.root_db?.insertOrReplace(objects: out, intoTable: "LKNewsRepos")
+            
+            IHProgressHUD.show()
+            LKRoot.queue_dispatch.async {
+                LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (_) in
+                    self.update_user_interface {
+                        let statusAlert = StatusAlert()
+                        statusAlert.image = UIImage(named: "Done")
+                        statusAlert.title = "删除成功".localized()
+                        statusAlert.message = "你已经成功的移除了这个新闻源".localized()
+                        statusAlert.canBePickedOrDismissed = true
+                        statusAlert.showInKeyWindow()
+                    }
+                })
+            }
+        }
+        delete.backgroundColor = .red
+        return [share, delete]
+    }
+    
+    func update_user_interface(CallB: @escaping () -> Void) {
+        LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
+        // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
+        self.sync_news_repos = LKRoot.container_news_repo
+        var icon_addrs = [String]()
+        for item in self.sync_news_repos {
+            icon_addrs.append(item.icon)
+        }
+        self.icon_stack.images_address = icon_addrs
+        self.icon_stack.ever_inited = 0
+        DispatchQueue.main.async {
+            (self.from_father_view as? UITableView)?.beginUpdates()
+            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                (self.from_father_view as? UITableView)?.endUpdates()
+            }, completion: { (_) in
+                self.table_view.snp.remakeConstraints { (x) in
+                    x.top.equalTo(self.table_view_container.snp.top)
+                    x.left.equalTo(self.contentView.snp.left).offset(8)
+                    x.right.equalTo(self.contentView.snp.right).offset(-8)
+                    x.height.equalTo((self.sync_news_repos.count + 1) * 62 + 5 - 32)
+                }
+                self.icon_stack.apart_init()
+                self.table_view.reloadData()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                IHProgressHUD.dismiss()
+                CallB()
+            })
+        }
+    
+    }
+    
     @objc func add_button_recall(sender: Any?) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
@@ -356,9 +439,9 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             for repo in LKRoot.container_news_repo where repo.link == read {
                 print("[*] 这个新闻源已经存在了撒咱们撤")
                 let statusAlert = StatusAlert()
-                statusAlert.image = UIImage(named: "Warning")
-                statusAlert.title = "添加失败".localized()
-                statusAlert.message = "请检查输入内容并在试一次".localized()
+                statusAlert.image = UIImage(named: "Exists")
+                statusAlert.title = "⚠️".localized()
+                statusAlert.message = "这个地址已经存在".localized()
                 statusAlert.canBePickedOrDismissed = true
                 statusAlert.showInKeyWindow()
                 return
@@ -368,12 +451,12 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 read += "/"
             }
             IHProgressHUD.show()
+            UIApplication.shared.beginIgnoringInteractionEvents()
             LKRoot.queue_dispatch.async {
                 let new = DBMNewsRepo()
                 new.link = read
                 new.sort_id = LKRoot.container_news_repo.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: "LKNewsRepos")
-                LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
                 LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
                     DispatchQueue.main.async {
                         if ret != 0 || LKRoot.container_gobal_signal["request_refresh_add_repos"] ?? false == true {
@@ -387,39 +470,16 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                             statusAlert.canBePickedOrDismissed = true
                             statusAlert.showInKeyWindow()
                             try? LKRoot.root_db?.delete(fromTable: "LKNewsRepos", where: DBMNewsRepo.Properties.link == read)
+                            UIApplication.shared.endIgnoringInteractionEvents()
                             return
                         }
-                        // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
-                        self.sync_news_repos = LKRoot.container_news_repo
-                        var icon_addrs = [String]()
-                        for item in self.sync_news_repos {
-                            icon_addrs.append(item.icon)
-                        }
-                        self.icon_stack.images_address = icon_addrs
-                        self.icon_stack.ever_inited = 0
-                        UIApplication.shared.beginIgnoringInteractionEvents()
-                        DispatchQueue.main.async {
-                            (self.from_father_view as? UITableView)?.beginUpdates()
-                            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                                (self.from_father_view as? UITableView)?.endUpdates()
-                            }, completion: { (_) in
-                                self.table_view.snp.remakeConstraints { (x) in
-                                    x.top.equalTo(self.table_view_container.snp.top)
-                                    x.left.equalTo(self.contentView.snp.left).offset(8)
-                                    x.right.equalTo(self.contentView.snp.right).offset(-8)
-                                    x.height.equalTo((self.sync_news_repos.count + 1) * 62 + 5 - 32)
-                                }
-                                self.icon_stack.apart_init()
-                                self.table_view.reloadData()
-                                UIApplication.shared.endIgnoringInteractionEvents()
-                                IHProgressHUD.dismiss()
-                                let statusAlert = StatusAlert()
-                                statusAlert.image = UIImage(named: "Done")
-                                statusAlert.title = "添加成功".localized()
-                                statusAlert.message = (self.sync_news_repos.last?.name ?? "") + " 已经添加到你的仓库".localized()
-                                statusAlert.canBePickedOrDismissed = true
-                                statusAlert.showInKeyWindow()
-                            })
+                        self.update_user_interface {
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "Done")
+                            statusAlert.title = "添加成功".localized()
+                            statusAlert.message = (self.sync_news_repos.last?.name ?? "") + " 已经添加到你的仓库".localized()
+                            statusAlert.canBePickedOrDismissed = true
+                            statusAlert.showInKeyWindow()
                         }
                     }
                 })
