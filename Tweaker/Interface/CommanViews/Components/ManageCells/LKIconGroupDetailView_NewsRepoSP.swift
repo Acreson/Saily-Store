@@ -494,9 +494,21 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         
     }
     
-    @objc func share_button_recall() {
+    @objc func share_button_recall(sender: Any?) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        var out = String()
+        for item in sync_news_repos {
+            out += item.link
+            out += "\n"
+        }
+        out = out.dropLast().to_String()
+        let some = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+        some.center = (sender as? UIView)?.center ?? CGPoint(x: 0, y: 0)
+        out.share(from_view: some)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            some.removeFromSuperview()
+        }
     }
     
     func some_shit_call(which: Int) {

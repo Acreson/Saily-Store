@@ -27,6 +27,22 @@
             </objects>
             <point key="canvasLocation" x="1754.2713567839196" y="731.65467625899282"/>
         </scene>
+        <!--管理-->
+        <scene sceneID="RvJ-GB-HbW">
+            <objects>
+                <viewController storyboardIdentifier="UIManageL" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s8e-Al-jA1" customClass="UIManageL" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s77-n8-tnu">
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="NXf-HB-WjA"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="管理" image="Packages_Received" id="g2C-RU-gKQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nPV-to-MoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1754" y="1410"/>
+        </scene>
         <!--EnteryL-->
         <scene sceneID="8T1-jU-JQ6">
             <objects>
@@ -45,6 +61,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="4mi-ox-aaq"/>
+                        <segue destination="s8e-Al-jA1" kind="relationship" relationship="viewControllers" id="3FW-Ix-4IM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZNG-9z-ovC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -54,6 +71,7 @@
     </scenes>
     <resources>
         <image name="News" width="22" height="22"/>
+        <image name="Packages_Received" width="23" height="23"/>
     </resources>
     <color key="tintColor" red="0.039215686270000001" green="0.66666666669999997" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

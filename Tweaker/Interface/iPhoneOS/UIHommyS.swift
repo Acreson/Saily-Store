@@ -536,7 +536,7 @@ class UIHommyS: UIViewController {
                         x.edges.equalTo(some.snp.edges)
                     })
                     
-                    //居中布局
+                    // 居中布局
                     self.card_view?.snp.makeConstraints({ (x) in
                         x.top.equalTo(container_d.snp.top).offset(top_insert)
                         x.centerX.equalTo(container_d.snp.centerX)

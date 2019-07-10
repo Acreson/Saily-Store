@@ -8,7 +8,7 @@
 那么手机越狱安全吗？
 ---> End Section
 
---> Begin Section |photo_with_description|https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/corellium.jpg|
+--> Begin Section |photo_with_description|./Resource/corellium.jpg|
 世界首家 iOS 虚拟化运营商 Corellium
 ---> End Section
 
@@ -47,7 +47,7 @@ SSH - ALPINE
 //BLANK-LINE//
 ---> End Section
 
---> Begin Section |photo_with_description|https://github.com/LakrAream/LakrAream.github.io/raw/master/Tweaker/Resource/ssh_example.jpg|
+--> Begin Section |photo_with_description|./Resource/ssh_example.jpg|
 终端案例输出
 ---> End Section
 

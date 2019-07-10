@@ -22,6 +22,27 @@ extension String {
         UIPasteboard.general.string = self
     }
     
+    func share(from_view: UIView? = nil) {
+        let textToShare = [self]
+        let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
+        
+        var some = UIViewController()
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            some = topController
+        }
+        
+        if let popoverController = activityViewController.popoverPresentationController {
+            popoverController.sourceRect = CGRect(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2, width: 0, height: 0)
+            popoverController.sourceView = from_view
+            popoverController.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+        }
+        
+        some.present(activityViewController, animated: true, completion: nil)
+    }
+    
     func localized(comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
