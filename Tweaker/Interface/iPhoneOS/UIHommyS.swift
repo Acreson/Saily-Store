@@ -606,7 +606,7 @@ class UIHommyS: UIViewController {
                             }
                         })
                         
-//                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                             // 真不知道这个bug怎么修复姑且认为是snapkit同时在一次dispatch做remake时处理了两个remake
 //                            2019-07-10 17:58:28.565069+0800 Tweaker[23447:957127] [LayoutConstraints] Unable to simultaneously satisfy constraints.
 //                            Probably at least one of the constraints in the following list is one you don't want.
@@ -648,7 +648,7 @@ class UIHommyS: UIViewController {
                                     container_d.contentOffset = CGPoint(x: 0, y: -52)
                                 })
                             }
-//                        })
+                        })
                     } // DispatchQueue.main.async
                 }) // NP_download_card_contents
             } // queue_dispatch

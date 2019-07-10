@@ -39,6 +39,9 @@ extension common_views {
             self.clipsToBounds = false
             if images_address.count < 1 {
                 print("[Resumable - fatalError] images_address.count < 1")
+                for item in self.subviews {
+                    item.removeFromSuperview()
+                }
                 ever_inited = 1
                 return
             }

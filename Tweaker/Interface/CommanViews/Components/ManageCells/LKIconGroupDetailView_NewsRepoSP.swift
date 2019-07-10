@@ -169,6 +169,12 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
+            if sync_news_repos.count == 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.expend_self()
+                }
+            }
+            
         }
         
         func update_status() {
@@ -339,6 +345,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
         
         let delete = UITableViewRowAction(style: .normal, title: "删除") { _, index in
+            self.sync_news_repos = LKRoot.container_news_repo
             UIApplication.shared.beginIgnoringInteractionEvents()
             var out = [DBMNewsRepo]()
             var i = 0

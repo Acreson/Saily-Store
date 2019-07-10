@@ -14,6 +14,7 @@ extension app_opeerator {
                                                                          fromTable: "LKNewsRepos",
                                                                          orderBy: [DBMNewsRepo.Properties.sort_id.asOrder(by: .ascending)]) else {
             print("[E] 无法从 LKNewsRepos 中获得数据，终止同步。")
+            LKRoot.container_news_repo.removeAll()
             CallB(operation_result.failed.rawValue)
             return
         }
