@@ -12,7 +12,9 @@ enum view_tags: Int {
     case indicator                              = 0x102
     case can_remove                             = 0x103
     case must_remove                            = 0x233
-
+    
+    case pop_up                                 = 0x234
+    
     case main_scroll_view_in_view_controller    = 0x111
     
 }

@@ -320,7 +320,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
         if indexPath.row < sync_news_repos.count {
-            some_shit_call(which: indexPath.row)
+            touched_cell(which: indexPath)
         }
     }
     
@@ -518,10 +518,40 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
     }
     
-    func some_shit_call(which: Int) {
+    func touched_cell(which: IndexPath) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-        print("[i] 用户选择了新闻源: " + sync_news_repos[which].link)
+        print("[i] 用户选择了新闻源: " + sync_news_repos[which.row].link)
+        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
+        let blocker = common_views.LKResponderBlockButton()
+        let dv = common_views.LKNewsRepoDetails()
+        dv.apart_init()
+        from_father_view?.superview?.addSubview(dv)
+        blocker.apart_init(father: from_father_view?.superview ?? UIView())
+        dv.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+        dv.setRadiusINT(radius: LKRoot.settings?.card_radius ?? 8)
+        dv.snp.makeConstraints { (x) in
+            x.left.equalTo(cell.snp.left)
+            x.right.equalTo(cell.snp.right)
+            x.top.equalTo(cell.snp.bottom).offset(48)
+            x.height.equalTo(128)
+        }
+        from_father_view?.superview?.bringSubviewToFront(dv)
+        dv.tag = view_tags.pop_up.rawValue
+        dv.clipsToBounds = false
+        blocker.addTarget(self, action: #selector(remove_popup), for: .touchUpInside)
+    }
+    
+    @objc func remove_popup(sender: Any?) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
+                view.alpha = 0
+            }
+        }, completion: { (_) in
+            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
+                view.removeFromSuperview()
+            }
+        })
     }
 }
 
