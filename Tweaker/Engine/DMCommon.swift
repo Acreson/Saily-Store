@@ -9,3 +9,13 @@
 class common_data_handler {
     
 }
+
+extension common_data_handler {
+    
+    enum table_name: String {
+        case LKSettings
+        case LKNewsRepos
+        case LKPackageRepos
+    }
+    
+}

@@ -68,7 +68,7 @@ class app_root_class {
         try? FileManager.default.removeItem(atPath: root_path! + "/caches")
         
         // 检查数据库数据完整性
-        let read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: "LKSettings")
+        let read_try: [DBMSettings]? = try? root_db?.getObjects(fromTable: common_data_handler.table_name.LKSettings.rawValue)
         if read_try == nil || read_try?.count != 1 {
             bootstrap_this_app()
         } else {
@@ -84,8 +84,9 @@ class app_root_class {
     
     func bootstrap_this_app() {
         // 开始初始化数据库
-        try? root_db?.create(table: "LKNewsRepos", of: DBMNewsRepo.self)
-        try? root_db?.create(table: "LKSettings", of: DBMSettings.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKNewsRepos.rawValue, of: DBMNewsRepo.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKSettings.rawValue, of: DBMSettings.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKPackageRepos.rawValue, of: DBMSettings.self)
         let new_setting = DBMSettings()
         new_setting.card_radius = 8
         // 伪造UDID
@@ -99,7 +100,7 @@ class app_root_class {
         new_setting.fake_UDID = fake_udid_out
         new_setting.network_timeout = 16
         settings = new_setting
-        try? root_db?.insert(objects: [new_setting], intoTable: "LKSettings")
+        try? root_db?.insert(objects: [new_setting], intoTable: common_data_handler.table_name.LKSettings.rawValue)
         // 写入新闻源地址
         let default_news_repos_tweaker = DBMNewsRepo()
         default_news_repos_tweaker.link = "https://lakraream.github.io/Tweaker/"
@@ -107,7 +108,23 @@ class app_root_class {
         let default_news_repos_aream = DBMNewsRepo()
         default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
-        try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: "LKNewsRepos")
+        try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
+        let default_links = ["https://apt.bingner.com/",
+                             "http://build.frida.re/",
+                             "https://repo.chariz.io/",
+                             "https://repo.nepeta.me/",
+                             "https://repo.dynastic.co/",
+                             "http://repo.packix.com"]
+        var insert = [DBMPackageRepos]()
+        var index = 0
+        for item in default_links {
+            let obj = DBMPackageRepos()
+            obj.link = item
+            obj.sort_id = index
+            index += 1
+            insert.append(obj)
+        }
+        try? root_db?.insert(objects: insert, intoTable: common_data_handler.table_name.LKPackageRepos.rawValue)
     }
     
 }

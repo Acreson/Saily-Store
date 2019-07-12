@@ -61,7 +61,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         default:
-            ret.backgroundColor = .white
+            ret.backgroundColor = .clear
         }
         return ret
     }

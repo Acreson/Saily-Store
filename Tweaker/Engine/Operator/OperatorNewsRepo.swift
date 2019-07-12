@@ -11,7 +11,7 @@ extension app_opeerator {
     func NP_sync_and_download(CallB: @escaping (Int) -> Void) {
         // 从数据库读取列表
         guard let repos: [DBMNewsRepo] = try? LKRoot.root_db?.getObjects(on: [DBMNewsRepo.Properties.link, DBMNewsRepo.Properties.sort_id, DBMNewsRepo.Properties.content],
-                                                                         fromTable: "LKNewsRepos",
+                                                                         fromTable: common_data_handler.table_name.LKNewsRepos.rawValue,
                                                                          orderBy: [DBMNewsRepo.Properties.sort_id.asOrder(by: .ascending)]) else {
             print("[E] 无法从 LKNewsRepos 中获得数据，终止同步。")
             LKRoot.container_news_repo.removeAll()
@@ -86,7 +86,7 @@ extension app_opeerator {
             // 更新数据库
             let new_update = DBMNewsRepo()
             new_update.content = item.content
-            try? LKRoot.root_db?.update(table: "LKNewsRepos",
+            try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKNewsRepos.rawValue,
                                         on: [DBMNewsRepo.Properties.content],
                                         with: new_update,
                                         where: DBMNewsRepo.Properties.link == item.link!)

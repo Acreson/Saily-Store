@@ -1,14 +1,14 @@
 //
-//  LKIconGroupDetailView_NewsRepoSP.swift
+//  LKIconGroupDetailView_PackageRepoSP.swift
 //  Tweaker
 //
-//  Created by Lakr Aream on 2019/7/8.
+//  Created by Lakr Aream on 2019/7/11.
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
 extension manage_views {
     
-    class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
+    class LKIconGroupDetailView_PackageRepoSP: UIView, UITableViewDataSource {
         
         var is_collapsed = true
         let contentView = UIView()
@@ -274,12 +274,11 @@ extension manage_views {
                 })
             }
         }
-        
     }
     
 }
 
-extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
+extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sync_news_repos.count + 1
@@ -405,7 +404,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 CallB()
             })
         }
-    
+        
     }
     
     @objc func add_button_recall(sender: Any?) {
@@ -453,7 +452,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 statusAlert.showInKeyWindow()
                 return
             }
-//             开始处理咯
+            //             开始处理咯
             if !read.hasSuffix("/") {
                 read += "/"
             }
@@ -521,25 +520,25 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func touched_cell(which: IndexPath) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-//        print("[i] 用户选择了新闻源: " + sync_news_repos[which.row].link)
-//        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
-//        let blocker = common_views.LKResponderBlockButton()
-//        let dv = common_views.LKNewsRepoDetails()
-//        dv.apart_init()
-//        from_father_view?.superview?.addSubview(dv)
-//        blocker.apart_init(father: from_father_view?.superview ?? UIView())
-//        dv.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-//        dv.setRadiusINT(radius: LKRoot.settings?.card_radius ?? 8)
-//        dv.snp.makeConstraints { (x) in
-//            x.left.equalTo(cell.snp.left)
-//            x.right.equalTo(cell.snp.right)
-//            x.top.equalTo(cell.snp.bottom).offset(48)
-//            x.height.equalTo(128)
-//        }
-//        from_father_view?.superview?.bringSubviewToFront(dv)
-//        dv.tag = view_tags.pop_up.rawValue
-//        dv.clipsToBounds = false
-//        blocker.addTarget(self, action: #selector(remove_popup), for: .touchUpInside)
+        //        print("[i] 用户选择了新闻源: " + sync_news_repos[which.row].link)
+        //        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
+        //        let blocker = common_views.LKResponderBlockButton()
+        //        let dv = common_views.LKNewsRepoDetails()
+        //        dv.apart_init()
+        //        from_father_view?.superview?.addSubview(dv)
+        //        blocker.apart_init(father: from_father_view?.superview ?? UIView())
+        //        dv.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+        //        dv.setRadiusINT(radius: LKRoot.settings?.card_radius ?? 8)
+        //        dv.snp.makeConstraints { (x) in
+        //            x.left.equalTo(cell.snp.left)
+        //            x.right.equalTo(cell.snp.right)
+        //            x.top.equalTo(cell.snp.bottom).offset(48)
+        //            x.height.equalTo(128)
+        //        }
+        //        from_father_view?.superview?.bringSubviewToFront(dv)
+        //        dv.tag = view_tags.pop_up.rawValue
+        //        dv.clipsToBounds = false
+        //        blocker.addTarget(self, action: #selector(remove_popup), for: .touchUpInside)
     }
     
     @objc func remove_popup(sender: Any?) {

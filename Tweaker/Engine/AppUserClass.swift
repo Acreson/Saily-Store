@@ -8,11 +8,9 @@
 
 class app_user_class {
     
-    
     func return_user_icon() -> UIImage {
         // 晚点写
         return UIImage(named: "AccountHeadIconPlaceHolder") ?? UIImage()
     }
-    
     
 }
