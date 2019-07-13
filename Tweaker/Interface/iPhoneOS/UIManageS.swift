@@ -113,9 +113,9 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         case 3:
             if LKRoot.container_manage_cell_status["PackageRepo"] ?? true {
-                return 180
+                return 187
             } else {
-                return 180 + CGFloat(LKRoot.container_package_repo.count + 1) * 62 - 32
+                return 187 + CGFloat(LKRoot.container_package_repo.count + 1) * 62 - 32
             }
         default: return 180
         }

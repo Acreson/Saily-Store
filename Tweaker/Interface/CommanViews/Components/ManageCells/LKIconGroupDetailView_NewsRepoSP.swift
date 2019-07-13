@@ -78,10 +78,11 @@ extension manage_views {
             sub_title_view.backgroundColor = .clear
             contentView.addSubview(sub_title_view)
             sub_title_view.snp.makeConstraints { (x) in
-                x.top.equalTo(title_view.snp.bottom).offset(0)
+                x.top.equalTo(title_view.snp.bottom).offset(-4)
                 x.left.equalTo(self.contentView.snp.left).offset(RN_ANCHOR_I - 4)
                 x.right.equalTo(self.contentView.snp.right).offset(-RN_ANCHOR_I + 4)
-                x.height.equalTo(sub_title_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 92, height: .infinity)))
+//                x.height.equalTo(sub_title_view.sizeThatFits(CGSize(width: UIScreen.main.bounds.width - 92, height: .infinity)))
+                x.height.equalTo(40)
             }
             
             // 分割线
