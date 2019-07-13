@@ -550,6 +550,72 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func touched_cell(which: IndexPath) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        
+        let item = LKRoot.container_news_repo_sync[which.row]
+        var exists = false
+        for some in LKRoot.container_news_repo where some.link == item.link {
+            exists = true
+            break
+        }
+        if !exists {
+            let alert = UIAlertController(title: "提示".localized(),
+                                          message: "这个新闻源的刷新进程在上一次刷新中意外退出了，我们建议您将其移除，或者尝试再次刷新。".localized(),
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "刷新", style: .default, handler: { (_) in
+                IHProgressHUD.show()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                LKRoot.queue_dispatch.async {
+                    LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
+                        self.update_user_interface {
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "Done")
+                            statusAlert.title = "刷新完成".localized()
+                            statusAlert.message = "我们已经按照您的要求刷新了新闻源。".localized()
+                            statusAlert.canBePickedOrDismissed = true
+                            statusAlert.showInKeyWindow()
+                        }
+                    })
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "删除", style: .destructive, handler: { (_) in
+                self.sync()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                var out = [DBMNewsRepo]()
+                var i = 0
+                for item in LKRoot.container_news_repo where item.link != LKRoot.container_news_repo_sync[which.row].link {
+                    let new = DBMNewsRepo()
+                    new.link = item.link
+                    new.sort_id = i
+                    out.append(new)
+                    i += 1
+                }
+                try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKNewsRepos.rawValue, where: DBMNewsRepo.Properties.link == LKRoot.container_news_repo_sync[which.row].link)
+                try? LKRoot.root_db?.insertOrReplace(objects: out, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
+                
+                IHProgressHUD.show()
+                LKRoot.queue_dispatch.async {
+                    LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
+                        self.update_user_interface {
+                            let statusAlert = StatusAlert()
+                            statusAlert.image = UIImage(named: "Done")
+                            statusAlert.title = "删除成功".localized()
+                            statusAlert.message = "你已经成功的移除了这个新闻源".localized()
+                            statusAlert.canBePickedOrDismissed = true
+                            statusAlert.showInKeyWindow()
+                        }
+                    })
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "了解", style: .default, handler: { (_) in
+            }))
+            if var topController = UIApplication.shared.keyWindow?.rootViewController {
+                while let presentedViewController = topController.presentedViewController {
+                    topController = presentedViewController
+                }
+                topController.present(alert, animated: true, completion: nil)
+            }
+        }
+        
 //        print("[i] 用户选择了新闻源: " + LKRoot.container_news_repo_sync[which.row].link)
 //        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
 //        let blocker = common_views.LKResponderBlockButton()
