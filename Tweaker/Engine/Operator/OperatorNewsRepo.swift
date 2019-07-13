@@ -9,6 +9,7 @@
 extension app_opeerator {
     
     func NR_sync_and_download(CallB: @escaping (Int) -> Void) {
+        LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"] = ""
         // 从数据库读取列表
         guard let repos: [DBMNewsRepo] = try? LKRoot.root_db?.getObjects(on: [DBMNewsRepo.Properties.link, DBMNewsRepo.Properties.sort_id, DBMNewsRepo.Properties.content],
                                                                          fromTable: common_data_handler.table_name.LKNewsRepos.rawValue,
@@ -36,7 +37,7 @@ extension app_opeerator {
                     case .success:
                         if respond.data == nil {
                             item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
-                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                             print("[E] 无法解压下载的 Info 数据，丢弃")
                         }
                         // 开始解码
@@ -47,21 +48,21 @@ extension app_opeerator {
                         }
                         if read == nil {
                             item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
-                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                             print("[E] 无法解压下载的 Info 数据，丢弃")
                         } else {
                             item.content = read
                         }
                     default:
                         // 无法合成下载链接，丢弃数据
-                        LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                        LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                         item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
                     } // switch
                     net_semaphore.signal()
                 } // AF
             } else {
                 // 无法合成下载链接，丢弃数据
-                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                 item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
             }
             var signal_ed_62 = false
@@ -71,7 +72,7 @@ extension app_opeerator {
                     return
                 }
                 item.content = "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n".localized()
-                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                 net_semaphore.signal()
                 print("[*] 网络数据超时，放弃数据。")
             }
@@ -79,7 +80,7 @@ extension app_opeerator {
             signal_ed_62 = true
             // 务必检查是不是错误的地址！
             if !(item.content?.contains("LKRP-NAME") ?? false) {
-                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                 print("if !item.content?.contains(LKRP-NAME)")
                 continue inner_01
             }
@@ -122,7 +123,7 @@ extension app_opeerator {
                             read_cards = String(data: respond.data!, encoding: .ascii)
                         }
                         if read_cards == nil {
-                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                             read_cards = """
                             --> Begin Card
                             LKCD-TYPE|                                      |photo_half_with_banner_down_light
@@ -150,7 +151,7 @@ extension app_opeerator {
                 if signal_ed_130 {
                     return
                 }
-                LKRoot.container_gobal_signal["request_refresh_add_repos"] = true
+                LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"]?.append(item.link ?? "")
                 read_cards = """
                 --> Begin Card
                 LKCD-TYPE|                                      |photo_half_with_banner_down_light

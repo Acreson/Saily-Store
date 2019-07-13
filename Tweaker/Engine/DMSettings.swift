@@ -36,4 +36,11 @@ class DBMSettings: WCDBSwift.TableCodable {
         
     }
     
+    func readUDID() -> String {
+        if real_UDID != nil {
+            return real_UDID!
+        }
+        return fake_UDID ?? UUID().uuidString
+    }
+    
 }

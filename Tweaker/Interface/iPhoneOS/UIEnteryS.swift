@@ -26,7 +26,7 @@ class UIEnteryS: UITabBarController {
         }
         
         // swiftlint:disable:next discouraged_direct_init
-        let dev = UIDevice()
+        let dev = LKRoot.shared_device
         if dev._id_str().contains("iPhone SE") || dev._id_str().contains("iPhone 5") {
             let alert = UIAlertController(title: "警告".localized(), message: "您的设备分辨率太低，这会影响到UI布局。我们不推荐您使用本产品。您可以通过设置页面的高级选项安装Cydia".localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "了解".localized(), style: .destructive, handler: nil))

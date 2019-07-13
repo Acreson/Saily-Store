@@ -20,6 +20,7 @@ class app_root_class {
     var ever_went_background = false
     
     var is_iPad = false
+    var shared_device = UIDevice()
     
     public var root_path: String?
     public var root_db: Database?
@@ -37,6 +38,7 @@ class app_root_class {
 //    var container_cache_uiview = [UIView]()                               // 视图缓存咯
     var container_string_store              = [String : String]()           // ???
     var container_news_repo                 = [DMNewsRepo]()                // 新闻源缓存
+    var container_news_repo_sync            = [DMNewsRepo]()                // 包换未刷新的源
     var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
     var container_gobal_signal              = [String : Bool]()             // 全剧刷新状态缓存 是否需要刷新
@@ -80,14 +82,16 @@ class app_root_class {
         ins_color_manager.iOS13_init()
         
         // 发送到下载处理引擎
-        
+        ins_common_operator.PR_sync_and_download { (ret) in
+            
+        }
     }
     
     func bootstrap_this_app() {
         // 开始初始化数据库
         try? root_db?.create(table: common_data_handler.table_name.LKNewsRepos.rawValue, of: DBMNewsRepo.self)
         try? root_db?.create(table: common_data_handler.table_name.LKSettings.rawValue, of: DBMSettings.self)
-        try? root_db?.create(table: common_data_handler.table_name.LKPackageRepos.rawValue, of: DBMSettings.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKPackageRepos.rawValue, of: DBMPackageRepos.self)
         let new_setting = DBMSettings()
         new_setting.card_radius = 8
         // 伪造UDID

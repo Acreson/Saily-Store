@@ -365,7 +365,7 @@ class UIHommyS: UIViewController {
             
             if LKRoot.safe_area_needed {
                 // swiftlint:disable:next discouraged_direct_init
-                if UIDevice()._id_str().contains("iPhone XS Max") || UIDevice()._id_str().contains("iPhone XR") {
+                if LKRoot.shared_device._id_str().contains("iPhone XS Max") || LKRoot.shared_device._id_str().contains("iPhone XR") {
                     top_insert = 0
                 } else {
                     top_insert = -52

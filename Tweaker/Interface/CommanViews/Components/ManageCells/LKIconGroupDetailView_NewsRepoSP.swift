@@ -8,6 +8,7 @@
 
 extension manage_views {
     
+    // swiftlint:disable:next type_body_length
     class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         
         var is_collapsed = true
@@ -21,8 +22,6 @@ extension manage_views {
         let table_view = UITableView()
         let icon_stack = common_views.LKIconStack()
         
-        var sync_news_repos = [DMNewsRepo]()
-        
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID")
@@ -30,6 +29,31 @@ extension manage_views {
         
         required init?(coder aDecoder: NSCoder) {
             super.init(coder: aDecoder)
+        }
+        
+        func sync() {
+            LKRoot.container_news_repo_sync = LKRoot.container_news_repo
+            guard let repos: [DBMNewsRepo] = try? LKRoot.root_db?.getObjects(on: [DBMNewsRepo.Properties.link, DBMNewsRepo.Properties.sort_id, DBMNewsRepo.Properties.content],
+                                                                             fromTable: common_data_handler.table_name.LKNewsRepos.rawValue,
+                                                                             orderBy: [DBMNewsRepo.Properties.sort_id.asOrder(by: .ascending)]) else {
+                                                                                print("[E] 无法从 LKNewsRepos 中获得数据，终止同步。")
+                                                                                LKRoot.container_news_repo.removeAll()
+                                                                                return
+            }
+            for item in repos {
+                var exists = false
+                inner: for exs in LKRoot.container_news_repo_sync where exs.link == item.link ?? "" {
+                    exists = true
+                    break inner
+                }
+                if !exists {
+                    let new = DMNewsRepo()
+                    new.link = item.link ?? ""
+                    new.name = "未知错误".localized()
+                    new.icon = "Error"
+                    LKRoot.container_news_repo_sync.append(new)
+                }
+            }
         }
         
         func apart_init(father: UIView?) {
@@ -43,7 +67,7 @@ extension manage_views {
                 from_father_view = father!
             }
             
-            sync_news_repos = LKRoot.container_news_repo
+            sync()
             
             contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
@@ -99,7 +123,7 @@ extension manage_views {
             
             // 图标组
             var icon_addrs = [String]()
-            for item in sync_news_repos {
+            for item in LKRoot.container_news_repo_sync {
                 icon_addrs.append(item.icon)
             }
             icon_stack.images_address = icon_addrs
@@ -159,7 +183,7 @@ extension manage_views {
                 x.top.equalTo(self.table_view_container.snp.top)
                 x.left.equalTo(contentView.snp.left).offset(8)
                 x.right.equalTo(contentView.snp.right).offset(-8)
-                x.height.equalTo(LKRoot.container_news_repo.count * 62)
+                x.height.equalTo(LKRoot.container_news_repo_sync.count * 62)
             }
             table_view.separatorColor = .clear
             table_view.backgroundColor = .clear
@@ -170,7 +194,7 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
-            if sync_news_repos.count == 0 {
+            if LKRoot.container_news_repo_sync.count == 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.expend_self()
                 }
@@ -199,17 +223,17 @@ extension manage_views {
             }
             
             // 更新缓存
-            sync_news_repos = LKRoot.container_news_repo
+            sync()
             table_view.reloadData()
             table_view.snp.remakeConstraints { (x) in
                 x.top.equalTo(self.table_view_container.snp.top)
                 x.left.equalTo(contentView.snp.left).offset(8)
                 x.right.equalTo(contentView.snp.right).offset(-8)
-                x.height.equalTo((LKRoot.container_news_repo.count + 1) * 62 + 5 - 32)
+                x.height.equalTo((LKRoot.container_news_repo_sync.count + 1) * 62 + 5 - 32)
             }
             expend_button.setTitle("点击来展开全部新闻源 ▼".localized(), for: .normal)
             var icon_addrs = [String]()
-            for item in sync_news_repos {
+            for item in LKRoot.container_news_repo_sync {
                 icon_addrs.append(item.icon)
             }
             icon_stack.images_address = icon_addrs
@@ -283,11 +307,11 @@ extension manage_views {
 extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sync_news_repos.count + 1
+        return LKRoot.container_news_repo_sync.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row >= sync_news_repos.count {
+        if indexPath.row >= LKRoot.container_news_repo_sync.count {
             let ret = cell_views.LK2ButtonStackTVCell()
             ret.button1.setTitle("添加".localized(), for: .normal)
             ret.button2.setTitle("分享".localized(), for: .normal)
@@ -299,20 +323,24 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             return ret
         }
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
-        ret.icon.sd_setImage(with: URL(string: sync_news_repos[indexPath.row].icon), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+        ret.icon.sd_setImage(with: URL(string: LKRoot.container_news_repo_sync[indexPath.row].icon), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
             if err != nil || img == nil {
-                ret.icon.image = UIImage(named: "AppIcon")
+                if let image = UIImage(named: LKRoot.container_news_repo_sync[indexPath.row].icon) {
+                    ret.icon.image = image
+                } else {
+                    ret.icon.image = UIImage(named: "AppIcon")
+                }
             }
         }
-        ret.title.text = sync_news_repos[indexPath.row].name
-        ret.link.text = sync_news_repos[indexPath.row].link
+        ret.title.text = LKRoot.container_news_repo_sync[indexPath.row].name
+        ret.link.text = LKRoot.container_news_repo_sync[indexPath.row].link
         //        ret.link.text = "https://never.steal.my/internal/links *)"
         ret.backgroundColor = .clear
         return ret
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row >= sync_news_repos.count {
+        if indexPath.row >= LKRoot.container_news_repo_sync.count {
             return 43
         }
         return 62
@@ -320,13 +348,13 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
-        if indexPath.row < sync_news_repos.count {
+        if indexPath.row < LKRoot.container_news_repo_sync.count {
             touched_cell(which: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row < sync_news_repos.count {
+        if indexPath.row < LKRoot.container_news_repo_sync.count {
             return true
         }
         return false
@@ -335,29 +363,29 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
-            self.sync_news_repos[index.row].link.pushClipBoard()
+            LKRoot.container_news_repo_sync[index.row].link.pushClipBoard()
             let statusAlert = StatusAlert()
             statusAlert.image = UIImage(named: "Done")
             statusAlert.title = "成功".localized()
-            statusAlert.message = (self.sync_news_repos[index.row].name) + "的地址已经复制到剪贴板".localized()
+            statusAlert.message = (LKRoot.container_news_repo_sync[index.row].name) + "的地址已经复制到剪贴板".localized()
             statusAlert.canBePickedOrDismissed = true
             statusAlert.showInKeyWindow()
         }
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
         
         let delete = UITableViewRowAction(style: .normal, title: "删除") { _, index in
-            self.sync_news_repos = LKRoot.container_news_repo
+            self.sync()
             UIApplication.shared.beginIgnoringInteractionEvents()
             var out = [DBMNewsRepo]()
             var i = 0
-            for item in LKRoot.container_news_repo where item.link != self.sync_news_repos[index.row].link {
+            for item in LKRoot.container_news_repo where item.link != LKRoot.container_news_repo_sync[index.row].link {
                 let new = DBMNewsRepo()
                 new.link = item.link
                 new.sort_id = i
                 out.append(new)
                 i += 1
             }
-            try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKNewsRepos.rawValue, where: DBMNewsRepo.Properties.link == self.sync_news_repos[index.row].link)
+            try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKNewsRepos.rawValue, where: DBMNewsRepo.Properties.link == LKRoot.container_news_repo_sync[index.row].link)
             try? LKRoot.root_db?.insertOrReplace(objects: out, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
             
             IHProgressHUD.show()
@@ -381,9 +409,9 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func update_user_interface(CallB: @escaping () -> Void) {
         LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
-        self.sync_news_repos = LKRoot.container_news_repo
+        self.sync()
         var icon_addrs = [String]()
-        for item in self.sync_news_repos {
+        for item in LKRoot.container_news_repo_sync {
             icon_addrs.append(item.icon)
         }
         self.icon_stack.images_address = icon_addrs
@@ -397,7 +425,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                     x.top.equalTo(self.table_view_container.snp.top)
                     x.left.equalTo(self.contentView.snp.left).offset(8)
                     x.right.equalTo(self.contentView.snp.right).offset(-8)
-                    x.height.equalTo((self.sync_news_repos.count + 1) * 62 + 5 - 32)
+                    x.height.equalTo((LKRoot.container_news_repo_sync.count + 1) * 62 + 5 - 32)
                 }
                 self.icon_stack.apart_init()
                 self.table_view.reloadData()
@@ -467,8 +495,8 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
                 LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
                     DispatchQueue.main.async {
-                        if ret != 0 || LKRoot.container_gobal_signal["request_refresh_add_repos"] ?? false == true {
-                            LKRoot.container_gobal_signal["request_refresh_add_repos"] = false
+                        if ret != 0 || (LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"] ?? "").contains(new.link ?? "") {
+                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"] = ""
                             IHProgressHUD.dismiss()
                             print("[*] 刷新失败")
                             let statusAlert = StatusAlert()
@@ -485,7 +513,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                             let statusAlert = StatusAlert()
                             statusAlert.image = UIImage(named: "Done")
                             statusAlert.title = "添加成功".localized()
-                            statusAlert.message = (self.sync_news_repos.last?.name ?? "") + " 已经添加到你的仓库".localized()
+                            statusAlert.message = (LKRoot.container_news_repo_sync.last?.name ?? "") + " 已经添加到你的仓库".localized()
                             statusAlert.canBePickedOrDismissed = true
                             statusAlert.showInKeyWindow()
                         }
@@ -506,7 +534,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         var out = String()
-        for item in sync_news_repos {
+        for item in LKRoot.container_news_repo_sync {
             out += item.link
             out += "\n"
         }
@@ -522,7 +550,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     func touched_cell(which: IndexPath) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-//        print("[i] 用户选择了新闻源: " + sync_news_repos[which.row].link)
+//        print("[i] 用户选择了新闻源: " + LKRoot.container_news_repo_sync[which.row].link)
 //        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
 //        let blocker = common_views.LKResponderBlockButton()
 //        let dv = common_views.LKNewsRepoDetails()

@@ -14,6 +14,15 @@ class DMPackageRepos {
     public var link                 = String()
     public var icon                 = String()
     public var sort_ID              = Int()
+    
+    func to_data_base() -> DBMPackageRepos {
+        let new = DBMPackageRepos()
+        new.name = name
+        new.link = link
+        new.icon = icon
+        new.sort_id = sort_ID
+        return new
+    }
 }
 
 // MARK: DATABASE
