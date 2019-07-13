@@ -173,7 +173,7 @@ class UIHommyS: UIViewController {
         
         print("[*] 开始加载今日精选。")
         LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 1) {
-            LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
+            LKRoot.ins_common_operator.NR_sync_and_download { (ret) in
                 if ret == 0 {
                     print("[*] 开始构建主页面")
                     DispatchQueue.main.async {
@@ -345,7 +345,7 @@ class UIHommyS: UIViewController {
                         }
                     } // DispatchQueue
                 } // if
-            })
+            }
         }
     }
     
@@ -580,7 +580,7 @@ class UIHommyS: UIViewController {
                 if Int(button.card_index.x) < LKRoot.container_news_repo.count && Int(button.card_index.x) >= 0 {
                     master_link = LKRoot.container_news_repo[Int(button.card_index.x)].link
                 }
-                LKRoot.ins_common_operator.NR_download_card_contents(target: button.card_info, master_link: master_link, result_str: { (ret_str) in
+                LKRoot.ins_common_operator.NR_download_card_contents(target: button.card_info, master_link: master_link) { (ret_str) in
                     // 判断卡片是否还存在
                     if !self.card_exists {
                         return
@@ -649,7 +649,7 @@ class UIHommyS: UIViewController {
                             }
                         })
                     } // DispatchQueue.main.async
-                }) // NP_download_card_contents
+                }    // NP_download_card_contents
             } // queue_dispatch
         }
     } // card_button_handler

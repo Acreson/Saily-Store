@@ -8,7 +8,7 @@
 
 extension app_opeerator {
     
-    func NR_sync_and_download(CallB: @escaping (Int) -> Void) {
+    func NR_sync_and_download(_ CallB: @escaping (Int) -> Void) {
         LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_NP"] = ""
         // 从数据库读取列表
         guard let repos: [DBMNewsRepo] = try? LKRoot.root_db?.getObjects(on: [DBMNewsRepo.Properties.link, DBMNewsRepo.Properties.sort_id, DBMNewsRepo.Properties.content],
@@ -319,7 +319,7 @@ extension app_opeerator {
         return ret
     } // NR_cards_content_invoker
     
-    func NR_download_card_contents(target: DMNewsCard, master_link: String, result_str: @escaping (String) -> Void) {
+    func NR_download_card_contents(target: DMNewsCard, master_link: String, _ result_str: @escaping (String) -> Void) {
         guard let dl_url = URL(string: target.content ?? "") else {
             print("[Resumable - fatalError] 无法内容创建下载链接。")
             return

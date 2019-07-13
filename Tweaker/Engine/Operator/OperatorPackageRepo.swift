@@ -8,7 +8,7 @@
 
 extension app_opeerator {
 
-    func PR_sync_and_download(CallB: @escaping (Int) -> Void) {
+    func PR_sync_and_download(_ CallB: @escaping (Int) -> Void) {
         guard let repos: [DBMPackageRepos] = try? LKRoot.root_db?.getObjects(on: [DBMPackageRepos.Properties.link,
                                                                                   DBMPackageRepos.Properties.icon,
                                                                                   DBMPackageRepos.Properties.name,

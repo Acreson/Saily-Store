@@ -390,7 +390,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             
             IHProgressHUD.show()
             LKRoot.queue_dispatch.async {
-                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
+                LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                     self.update_user_interface {
                         let statusAlert = StatusAlert()
                         statusAlert.image = UIImage(named: "Done")
@@ -399,14 +399,14 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                         statusAlert.canBePickedOrDismissed = true
                         statusAlert.showInKeyWindow()
                     }
-                })
+                }
             }
         }
         delete.backgroundColor = .red
         return [share, delete]
     }
     
-    func update_user_interface(CallB: @escaping () -> Void) {
+    func update_user_interface(_ CallB: @escaping () -> Void) {
         LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
         self.re_sync()
@@ -493,7 +493,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 new.link = read
                 new.sort_id = LKRoot.container_news_repo_DBSync.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
-                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
+                LKRoot.ins_common_operator.NR_sync_and_download { (ret) in
                     DispatchQueue.main.async {
                         if ret != 0 || (LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_NP"] ?? "").contains(new.link ?? "") {
                             LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_NP"] = ""
@@ -518,7 +518,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                             statusAlert.showInKeyWindow()
                         }
                     }
-                })
+                }
             }
         }))
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
@@ -565,7 +565,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 IHProgressHUD.show()
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 LKRoot.queue_dispatch.async {
-                    LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
+                    LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                         self.update_user_interface {
                             let statusAlert = StatusAlert()
                             statusAlert.image = UIImage(named: "Done")
@@ -574,7 +574,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                             statusAlert.canBePickedOrDismissed = true
                             statusAlert.showInKeyWindow()
                         }
-                    })
+                    }
                 }
             }))
             alert.addAction(UIAlertAction(title: "删除", style: .destructive, handler: { (_) in
@@ -594,7 +594,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 
                 IHProgressHUD.show()
                 LKRoot.queue_dispatch.async {
-                    LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
+                    LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                         self.update_user_interface {
                             let statusAlert = StatusAlert()
                             statusAlert.image = UIImage(named: "Done")
@@ -603,7 +603,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                             statusAlert.canBePickedOrDismissed = true
                             statusAlert.showInKeyWindow()
                         }
-                    })
+                    }
                 }
             }))
             alert.addAction(UIAlertAction(title: "了解", style: .default, handler: { (_) in

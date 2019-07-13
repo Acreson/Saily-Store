@@ -374,7 +374,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             IHProgressHUD.show()
             UIApplication.shared.beginIgnoringInteractionEvents()
             LKRoot.queue_dispatch.async {
-                LKRoot.ins_common_operator.PR_sync_and_download(CallB: { (_) in
+                LKRoot.ins_common_operator.PR_sync_and_download { (_) in
                     self.update_user_interface {
                         let statusAlert = StatusAlert()
                         statusAlert.image = UIImage(named: "Done")
@@ -383,14 +383,14 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                         statusAlert.canBePickedOrDismissed = true
                         statusAlert.showInKeyWindow()
                     }
-                })
+                }
             }
         }
         delete.backgroundColor = .red
         return [share, delete]
     }
     
-    func update_user_interface(CallB: @escaping () -> Void) {
+    func update_user_interface(_ CallB: @escaping () -> Void) {
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
         self.re_sync()
         var icon_addrs = [String]()
@@ -475,7 +475,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                 new.link = read
                 new.sort_id = LKRoot.container_package_repo_DBSync.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKPackageRepos.rawValue)
-                LKRoot.ins_common_operator.PR_sync_and_download(CallB: { (ret) in
+                LKRoot.ins_common_operator.PR_sync_and_download { (ret) in
                     DispatchQueue.main.async {
                         if ret != 0 || (LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_PR"] ?? "").contains(new.link ?? "") {
                             LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_PR"] = ""
@@ -500,7 +500,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                             statusAlert.showInKeyWindow()
                         }
                     }
-                })
+                }
             }
         }))
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
