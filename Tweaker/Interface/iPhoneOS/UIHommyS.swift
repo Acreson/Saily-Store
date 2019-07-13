@@ -24,12 +24,12 @@ class UIHommyS: UIViewController {
         view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        if LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] ?? false {
+        if LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] == "FALSE" {
             for view in view.subviews {
                 view.removeFromSuperview()
             }
             container = nil
-            LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = false
+            LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] = "FALSE"
             viewDidLoad()
         }
     } // viewWillAppear
@@ -112,7 +112,7 @@ class UIHommyS: UIViewController {
     
     @objc func build_view() {
         
-        LKRoot.container_gobal_signal["NewsRepos"] = false
+        LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "TRUE"
         
         for item in view.subviews where item.tag != view_tags.must_have.rawValue {
             item.removeFromSuperview()
@@ -167,7 +167,7 @@ class UIHommyS: UIViewController {
                 x.centerY.equalTo(self.view.snp.centerY).offset(0)
             }
             
-            LKRoot.container_gobal_signal["NewsRepos"] = true
+            LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
             return
         }
         
@@ -313,7 +313,7 @@ class UIHommyS: UIViewController {
                             x.centerX.equalTo(self.view.snp.centerX)
                         })
                         
-                        LKRoot.container_gobal_signal["NewsRepos"] = true
+                        LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
                         
                     }
                 } else {
@@ -343,6 +343,7 @@ class UIHommyS: UIViewController {
                             x.centerX.equalTo(self.view.snp.centerX)
                             x.centerY.equalTo(self.view.snp.centerY).offset(0)
                         }
+                        LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
                     } // DispatchQueue
                 } // if
             }

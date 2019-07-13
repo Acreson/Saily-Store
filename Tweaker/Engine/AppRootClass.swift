@@ -29,6 +29,7 @@ class app_root_class {
     public var settings: DBMSettings?
     public var safe_area_needed: Bool = false
     public var this_is_an_iPhone: Bool = false
+    public var current_page = UIViewController()
     
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()
@@ -43,7 +44,6 @@ class app_root_class {
     var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
     var container_package_repo_DBSync       = [DMPackageRepos]()            // 包含未刷新的源
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
-    var container_gobal_signal              = [String : Bool]()             // 全剧刷新状态缓存 是否需要刷新
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展
@@ -90,11 +90,18 @@ class app_root_class {
                 if ret != operation_result.success.rawValue {
                     return
                 }
-                self.ins_common_operator.PR_download_all_package { (ret) in
+                self.ins_common_operator.PR_download_all_package { (ret, container) in
                     if ret != operation_result.success.rawValue {
                         return
                     }
-                    
+                    var all_in_one = String()
+                    for item in container {
+                        all_in_one.append(item.value.cleanRN().drop_space())
+                        all_in_one.append("\n")
+                    }
+                    self.ins_common_operator.PR_package_wrapper(in_str: all_in_one) { _ in 
+                        
+                    }
                 }
             }
         }

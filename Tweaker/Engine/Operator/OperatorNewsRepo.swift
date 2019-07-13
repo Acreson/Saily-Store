@@ -16,6 +16,7 @@ extension app_opeerator {
                                                                          orderBy: [DBMNewsRepo.Properties.sort_id.asOrder(by: .ascending)]) else {
             print("[E] 无法从 LKNewsRepos 中获得数据，终止同步。")
             LKRoot.container_news_repo.removeAll()
+//            LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
             CallB(operation_result.failed.rawValue)
             return
         }
@@ -175,6 +176,7 @@ extension app_opeerator {
             // 放内存
             LKRoot.container_news_repo.append(new)
         } // for
+//        LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
         CallB(operation_result.success.rawValue)
     } // NR_sync_and_download
 

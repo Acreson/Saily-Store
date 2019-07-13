@@ -19,6 +19,7 @@ extension app_opeerator {
                                                                             CallB(operation_result.failed.rawValue)
                                                                             return
         } // guard let
+        LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] = "TRUE"
         LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_PR"] = ""
         LKRoot.container_package_repo.removeAll()
         inner_01: for item in repos where item.link != nil && item.link != "" {
@@ -88,6 +89,7 @@ extension app_opeerator {
                                         with: db,
                                         where: DBMPackageRepos.Properties.link == item.link!)
         }
+        LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] = "FALSE"
         CallB(operation_result.success.rawValue)
     } // PR_sync_and_download
     
@@ -103,20 +105,92 @@ extension app_opeerator {
         return ret
     } // PR_release_wrapper
     
-    func PR_download_all_package(_ CallB: @escaping (Int) -> Void) {
+    func PR_download_all_package(_ CallB: @escaping (Int, [String : String]) -> Void) {
         if LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] == "YES" {
+            CallB(operation_result.another_in_progress.rawValue, [String() : String()])
             return
         }
         // 上锁！
         LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "YES"
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = "我们正在后台进行任务，请耐心等待。".localized()
         var container = [String : String]()
         for item in LKRoot.container_package_repo {
             container[item.link] = ""
-            
+            var found = false
+            inner_search: for search_url in LKRoot.ins_networking.release_search_path where !found {
+                guard let url = URL(string: item.link + search_url) else {
+                    continue inner_search
+                }
+                // 检查文件扩展名
+                var backend = ""
+                if search_url.contains(".") {
+                    backend = String(search_url.split(separator: ".").last ?? "")
+                }
+                let ss = DispatchSemaphore(value: 0)
+                var finished = false
+                print("[*] 准备从 " + url.absoluteString + " 请求数据。")
+                AF.request(url, method: .get, headers: LKRoot.ins_networking.read_header()).response(queue: LKRoot.queue_dispatch) { (respond) in
+                    finished = true
+                    if respond.data == nil {
+                        ss.signal()
+                        return
+                    }
+                    
+                    let raw_data = respond.data!
+                    let out_data: Data
+                    
+                    switch backend {
+                    case "bz", "bz2":
+                        if let decompress_data = try? BZip2.decompress(data: raw_data) {
+                            out_data = decompress_data
+                        } else {
+                            out_data = raw_data
+                        }
+                    case "gz", "gz2":
+                        if let decompress_data = try? BZip2.decompress(data: raw_data) {
+                            out_data = decompress_data
+                        } else {
+                            out_data = raw_data
+                        }
+                    default:
+                        out_data = raw_data
+                    }
+                    
+                    var str: String? = String(data: out_data, encoding: .utf8)
+                    if str == nil {
+                        str = String(data: out_data, encoding: .ascii)
+                    }
+                    if str == nil || str == "" || str?.hasPrefix("<!DOCTYPE") ?? false || str?.hasPrefix("<html>") ?? false || str?.hasPrefix("<?xml version=") ?? false {
+                        ss.signal()
+                        return
+                    }
+                    // yo! 找到正确的数据了！
+                    container[item.link] = str!
+                    found = true
+                    ss.signal()
+                    return
+                }
+                LKRoot.queue_dispatch.async {
+                    sleep(UInt32(LKRoot.settings?.network_timeout ?? 6))
+                    if finished {
+                        return
+                    }
+                    finished = true
+                    ss.signal()
+                }
+                ss.wait()
+            } // inner_search
         }
         LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "NO"
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
+        CallB(operation_result.success.rawValue, container)
     } // PR_download_all_package
     
+    func PR_package_wrapper(in_str: String, _ CallB: @escaping (Int) -> Void) {
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = "正在刷新软件包列表，这可能需要一些时间。".localized()
+        sleep(5)
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
+    }
 }
 
 /*

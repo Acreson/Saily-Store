@@ -7,8 +7,6 @@
 //
 
 class UIEnteryS: UITabBarController {
-    
-    var last_tapped_view_controller: UIViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +20,7 @@ class UIEnteryS: UITabBarController {
         tabBar.barTintColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.last_tapped_view_controller = self.selectedViewController
+            LKRoot.current_page = self.selectedViewController ?? UIViewController()
         }
         
         let dev = LKRoot.shared_device
@@ -40,7 +38,7 @@ class UIEnteryS: UITabBarController {
         generator.impactOccurred()
         
         let willing = selectedViewController
-        if willing == last_tapped_view_controller {
+        if willing == LKRoot.current_page {
             for this in willing?.view.subviews ?? [] where this as? UIScrollView != nil {
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .curveEaseInOut, animations: {
@@ -51,7 +49,7 @@ class UIEnteryS: UITabBarController {
             }
             return
         }
-        last_tapped_view_controller = selectedViewController
+        LKRoot.current_page = selectedViewController ?? UIViewController()
         
         guard let view = item.value(forKey: "_view") as? UIView else { return }
         for item in view.subviews {

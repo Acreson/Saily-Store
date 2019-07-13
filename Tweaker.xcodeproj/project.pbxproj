@@ -59,6 +59,7 @@
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
 		B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */; };
 		B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48731FE22D6558500BADE62 /* UIManageL.swift */; };
+		B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
 		B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKButtonStackTVCell.swift; sourceTree = "<group>"; };
 		B48731FE22D6558500BADE62 /* UIManageL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManageL.swift; sourceTree = "<group>"; };
+		B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackages.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				ABE6DCF3229E8C2A00D18D9E /* DMNewsCards.swift */,
 				ABE6DD02229ECC2700D18D9E /* DMNewsRepos.swift */,
 				B40B4C1F22D7637600373449 /* DMPackageRepos.swift */,
+				B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */,
 				ABE6DD04229ED2A000D18D9E /* DMSettings.swift */,
 			);
 			name = DataModel;
@@ -596,6 +599,7 @@
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */,
 				B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */,
+				B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */,
 				AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */,
 				ABFBA824229D801E0070A17E /* LKHeader.swift in Sources */,
 				B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */,

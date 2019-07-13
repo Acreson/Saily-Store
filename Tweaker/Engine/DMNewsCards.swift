@@ -10,7 +10,6 @@
 // 是主键，具有唯一性。
 
 // MARK: RAM
-
 class DMNewsCard {
     
     public var type: card_type                     = .photo_full

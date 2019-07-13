@@ -19,6 +19,7 @@ target 'Tweaker' do
   pod 'IHProgressHUD'
   pod 'UIImageColors'
   pod 'SwiftMessages' # https://github.com/SwiftKickMobile/SwiftMessages
+  pod 'SWCompression'
   pod 'SwiftyMarkdown'
   pod 'LTMorphingLabel'
   pod 'JJFloatingActionButton'

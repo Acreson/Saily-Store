@@ -15,3 +15,4 @@
 @_exported import Alamofire
 @_exported import IHProgressHUD
 @_exported import StatusAlert
+@_exported import SWCompression

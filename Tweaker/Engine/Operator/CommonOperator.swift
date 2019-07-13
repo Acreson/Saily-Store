@@ -9,6 +9,7 @@
 enum operation_result: Int {
     case success = 0x0
     case failed  = 0x1
+    case another_in_progress = 0x2
     case unkown  = 0x666
 }
 

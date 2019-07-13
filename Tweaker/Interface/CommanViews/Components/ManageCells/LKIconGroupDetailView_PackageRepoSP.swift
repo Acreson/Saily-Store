@@ -33,7 +33,7 @@ extension manage_views {
         
         func apart_init(father: UIView?) {
             
-            LKRoot.container_manage_cell_status["PackageRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] = is_collapsed
             
             let RN_ANCHOR_O = 24
             let RN_ANCHOR_I = 16
@@ -98,11 +98,13 @@ extension manage_views {
             
             // 图标组
             re_sync()
-            var icon_addrs = [String]()
-            for item in LKRoot.container_package_repo_DBSync {
-                icon_addrs.append(item.icon)
+            if LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] == "FALSE" {
+                var icon_addrs = [String]()
+                for item in LKRoot.container_package_repo_DBSync {
+                    icon_addrs.append(item.icon)
+                }
+                icon_stack.images_address = icon_addrs
             }
-            icon_stack.images_address = icon_addrs
             icon_stack.apart_init()
             contentView.addSubview(icon_stack)
             icon_stack.snp.makeConstraints { (x) in
@@ -206,10 +208,26 @@ extension manage_views {
         }
         
         func update_status() {
-            LKRoot.container_manage_cell_status["PackageRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] = is_collapsed
         }
         
         @objc func expend_self() {
+            
+            
+            if LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] == "TRUE" {
+                UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                    self.expend_button.setTitle("请等待首次刷新进程完成".localized(), for: .normal)
+                    self.expend_button.setTitleColor(.red, for: .normal)
+                })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    UIView.transition(with: self.expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                        self.expend_button.setTitle("点击来展开全部软件源 ▼".localized(), for: .normal)
+                        self.expend_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+                    })
+                }
+                return
+            }
+            
             re_sync()
             table_view.reloadData()
             table_view.snp.remakeConstraints { (x) in
@@ -241,6 +259,7 @@ extension manage_views {
             generator.impactOccurred()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.expend_button.alpha = 0
@@ -248,6 +267,7 @@ extension manage_views {
                     self.icon_stack.alpha = 0
                     self.table_view.alpha = 1
                 }, completion: { (_) in
+                    LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.expend_button.isHidden = true
                     self.icon_stack.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
@@ -272,6 +292,7 @@ extension manage_views {
             UIApplication.shared.beginIgnoringInteractionEvents()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.collapse_button.alpha = 0
@@ -279,6 +300,7 @@ extension manage_views {
                     self.icon_stack.alpha = 1
                     self.table_view.alpha = 0
                 }, completion: { (_) in
+                    LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.collapse_button.isHidden = true
                     self.table_view.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
@@ -401,9 +423,11 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
         self.icon_stack.ever_inited = 0
         DispatchQueue.main.async {
             (self.from_father_view as? UITableView)?.beginUpdates()
+            LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
             UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                 (self.from_father_view as? UITableView)?.endUpdates()
             }, completion: { (_) in
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                 self.table_view.snp.remakeConstraints { (x) in
                     x.top.equalTo(self.table_view_container.snp.top)
                     x.left.equalTo(self.contentView.snp.left).offset(8)

@@ -7,7 +7,6 @@
 //
 
 // MARK: RAM
-
 class DMPackageRepos {
     
     public var name                 = String()

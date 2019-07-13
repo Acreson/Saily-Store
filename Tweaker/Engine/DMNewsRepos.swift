@@ -7,7 +7,6 @@
 //
 
 // MARK: RAM
-
 class DMNewsRepo {
     
     public var name                 = String()

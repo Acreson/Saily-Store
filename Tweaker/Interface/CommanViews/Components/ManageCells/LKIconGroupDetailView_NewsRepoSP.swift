@@ -58,7 +58,7 @@ extension manage_views {
         
         func apart_init(father: UIView?) {
             
-            LKRoot.container_manage_cell_status["NewsRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] = is_collapsed
             
             let RN_ANCHOR_O = 24
             let RN_ANCHOR_I = 16
@@ -122,12 +122,14 @@ extension manage_views {
             }
             
             // 图标组
-            var icon_addrs = [String]()
-            for item in LKRoot.container_news_repo_DBSync {
-                icon_addrs.append(item.icon)
+            if LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] == "FALSE" {
+                var icon_addrs = [String]()
+                for item in LKRoot.container_news_repo_DBSync {
+                    icon_addrs.append(item.icon)
+                }
+                icon_stack.images_address = icon_addrs
+                icon_stack.apart_init()
             }
-            icon_stack.images_address = icon_addrs
-            icon_stack.apart_init()
             contentView.addSubview(icon_stack)
             icon_stack.snp.makeConstraints { (x) in
                 x.right.equalTo(self.contentView.snp.right).offset(RN_ANCHOR_I)
@@ -203,12 +205,12 @@ extension manage_views {
         }
         
         func update_status() {
-            LKRoot.container_manage_cell_status["NewsRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] = is_collapsed
         }
         
         @objc func expend_self() {
             
-            if !(LKRoot.container_gobal_signal["NewsRepos"] ?? false) {
+            if LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] == "TRUE" {
                 UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
                     self.expend_button.setTitle("请等待首页刷新进程完成".localized(), for: .normal)
                     self.expend_button.setTitleColor(.red, for: .normal)
@@ -237,6 +239,7 @@ extension manage_views {
                 icon_addrs.append(item.icon)
             }
             icon_stack.images_address = icon_addrs
+            icon_stack.ever_inited = 1
             icon_stack.apart_init()
             
             if !is_collapsed {
@@ -255,6 +258,7 @@ extension manage_views {
             generator.impactOccurred()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.expend_button.alpha = 0
@@ -262,6 +266,7 @@ extension manage_views {
                     self.icon_stack.alpha = 0
                     self.table_view.alpha = 1
                 }, completion: { (_) in
+                    LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.expend_button.isHidden = true
                     self.icon_stack.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
@@ -286,6 +291,7 @@ extension manage_views {
             UIApplication.shared.beginIgnoringInteractionEvents()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.collapse_button.alpha = 0
@@ -293,6 +299,7 @@ extension manage_views {
                     self.icon_stack.alpha = 1
                     self.table_view.alpha = 0
                 }, completion: { (_) in
+                    LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.collapse_button.isHidden = true
                     self.table_view.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
@@ -407,7 +414,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
     }
     
     func update_user_interface(_ CallB: @escaping () -> Void) {
-        LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
+        LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] = "TRUE"
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
         self.re_sync()
         var icon_addrs = [String]()
@@ -418,9 +425,11 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         self.icon_stack.ever_inited = 0
         DispatchQueue.main.async {
             (self.from_father_view as? UITableView)?.beginUpdates()
+            LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
             UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                 (self.from_father_view as? UITableView)?.endUpdates()
             }, completion: { (_) in
+                LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                 self.table_view.snp.remakeConstraints { (x) in
                     x.top.equalTo(self.table_view_container.snp.top)
                     x.left.equalTo(self.contentView.snp.left).offset(8)
@@ -637,16 +646,16 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
 //        blocker.addTarget(self, action: #selector(remove_popup), for: .touchUpInside)
     }
     
-    @objc func remove_popup(sender: Any?) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
-                view.alpha = 0
-            }
-        }, completion: { (_) in
-            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
-                view.removeFromSuperview()
-            }
-        })
-    }
+//    @objc func remove_popup(sender: Any?) {
+//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+//            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
+//                view.alpha = 0
+//            }
+//        }, completion: { (_) in
+//            for view in self.from_father_view?.superview?.subviews ?? [] where view.tag == view_tags.pop_up.rawValue {
+//                view.removeFromSuperview()
+//            }
+//        })
+//    }
 }
 

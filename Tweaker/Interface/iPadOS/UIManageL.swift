@@ -6,3 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+class UIManageL: UIViewController {
+    
+}

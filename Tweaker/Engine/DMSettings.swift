@@ -10,8 +10,6 @@
 // 不要啊啊啊啊啊啊啊
 
 // MARK: DATABASE
-
-
 class DBMSettings: WCDBSwift.TableCodable {
     
     var fake_UDID: String?

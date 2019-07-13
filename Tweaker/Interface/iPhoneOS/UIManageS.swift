@@ -15,6 +15,18 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        if LKRoot.container_string_store["REQ_REFRESH_UI_MANAGE"] == "FALSE" {
+            LKRoot.container_string_store["REQ_REFRESH_UI_MANAGE"] = "FALSE"
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            DispatchQueue.main.async {
+                self.table_view.beginUpdates()
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.table_view.endUpdates()
+                }, completion: { (_) in
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                })
+            }
+        }
     }
 
     override func viewDidLoad() {
@@ -65,7 +77,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ret.backgroundColor = .clear
         case 1:
             let header = manage_views.LKActiveShineCell()
-            header.apart_init()
+            header.apart_init(father: table_view)
             ret.contentView.addSubview(header)
             header.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
@@ -100,19 +112,20 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: return 108
         case 1:
-            if (LKRoot.container_string_store["STR_SIG_PROGRESS_NUM"] ?? "SIGCLEAR") == "SIGCLEAR" {
-                return 0
-            } else {
-                return 22
-            }
+            return 18
+//            if (LKRoot.container_string_store["STR_SIG_PROGRESS"] ?? "SIGCLEAR") == "SIGCLEAR" {
+//                return 0
+//            } else {
+//                return 22
+//            }
         case 2:
-            if LKRoot.container_manage_cell_status["NewsRepo"] ?? true {
+            if LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] ?? true {
                 return 180
             } else {
                 return 180 + CGFloat(LKRoot.container_news_repo_DBSync.count + 1) * 62 - 32
             }
         case 3:
-            if LKRoot.container_manage_cell_status["PackageRepo"] ?? true {
+            if LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] ?? true {
                 return 187
             } else {
                 return 187 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
