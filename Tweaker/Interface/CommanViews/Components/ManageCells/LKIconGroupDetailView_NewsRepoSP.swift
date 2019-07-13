@@ -361,7 +361,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             
             IHProgressHUD.show()
             LKRoot.queue_dispatch.async {
-                LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (_) in
+                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
                     self.update_user_interface {
                         let statusAlert = StatusAlert()
                         statusAlert.image = UIImage(named: "Done")
@@ -464,7 +464,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 new.link = read
                 new.sort_id = LKRoot.container_news_repo.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
-                LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
+                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
                     DispatchQueue.main.async {
                         if ret != 0 || LKRoot.container_gobal_signal["request_refresh_add_repos"] ?? false == true {
                             LKRoot.container_gobal_signal["request_refresh_add_repos"] = false

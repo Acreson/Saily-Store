@@ -8,4 +8,8 @@
 
 extension app_opeerator {
 
+    func PR_sync_and_download(CallB: @escaping (Int) -> Void) {
+        
+    }
+    
 }

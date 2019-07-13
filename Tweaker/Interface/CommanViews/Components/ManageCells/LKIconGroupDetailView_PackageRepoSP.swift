@@ -25,7 +25,7 @@ extension manage_views {
         
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID")
+            table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_PackageRepoSP_TVID")
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -34,7 +34,7 @@ extension manage_views {
         
         func apart_init(father: UIView?) {
             
-            LKRoot.container_manage_cell_status["NewsRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["PackageRepo"] = is_collapsed
             
             let RN_ANCHOR_O = 24
             let RN_ANCHOR_I = 16
@@ -296,7 +296,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             ret.backgroundColor = .clear
             return ret
         }
-        let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_NewsRepoSP_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
+        let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_PackageRepoSP_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         ret.icon.sd_setImage(with: URL(string: sync_news_repos[indexPath.row].icon), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
             if err != nil || img == nil {
                 ret.icon.image = UIImage(named: "AppIcon")
@@ -360,7 +360,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             
             IHProgressHUD.show()
             LKRoot.queue_dispatch.async {
-                LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (_) in
+                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (_) in
                     self.update_user_interface {
                         let statusAlert = StatusAlert()
                         statusAlert.image = UIImage(named: "Done")
@@ -377,7 +377,6 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     }
     
     func update_user_interface(CallB: @escaping () -> Void) {
-        LKRoot.container_gobal_signal["request_refresh_UI_Hommy"] = true
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
         self.sync_news_repos = LKRoot.container_news_repo
         var icon_addrs = [String]()
@@ -463,7 +462,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                 new.link = read
                 new.sort_id = LKRoot.container_news_repo.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
-                LKRoot.ins_common_operator.NP_sync_and_download(CallB: { (ret) in
+                LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
                     DispatchQueue.main.async {
                         if ret != 0 || LKRoot.container_gobal_signal["request_refresh_add_repos"] ?? false == true {
                             LKRoot.container_gobal_signal["request_refresh_add_repos"] = false
@@ -520,25 +519,6 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     func touched_cell(which: IndexPath) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
-        //        print("[i] 用户选择了新闻源: " + sync_news_repos[which.row].link)
-        //        let cell = table_view.cellForRow(at: which)?.contentView ?? UIView()
-        //        let blocker = common_views.LKResponderBlockButton()
-        //        let dv = common_views.LKNewsRepoDetails()
-        //        dv.apart_init()
-        //        from_father_view?.superview?.addSubview(dv)
-        //        blocker.apart_init(father: from_father_view?.superview ?? UIView())
-        //        dv.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-        //        dv.setRadiusINT(radius: LKRoot.settings?.card_radius ?? 8)
-        //        dv.snp.makeConstraints { (x) in
-        //            x.left.equalTo(cell.snp.left)
-        //            x.right.equalTo(cell.snp.right)
-        //            x.top.equalTo(cell.snp.bottom).offset(48)
-        //            x.height.equalTo(128)
-        //        }
-        //        from_father_view?.superview?.bringSubviewToFront(dv)
-        //        dv.tag = view_tags.pop_up.rawValue
-        //        dv.clipsToBounds = false
-        //        blocker.addTarget(self, action: #selector(remove_popup), for: .touchUpInside)
     }
     
     @objc func remove_popup(sender: Any?) {

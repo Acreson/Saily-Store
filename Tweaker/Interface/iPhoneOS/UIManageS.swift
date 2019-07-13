@@ -38,6 +38,18 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 5
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return do_the_height_math(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return do_the_height_math(indexPath: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        table_view.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = UITableViewCell()
         switch indexPath.row {
@@ -52,10 +64,28 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 1:
+            let header = manage_views.LKActiveShineCell()
+            header.apart_init()
+            ret.contentView.addSubview(header)
+            header.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
+        case 2:
             let news_repo_manager = manage_views.LKIconGroupDetailView_NewsRepoSP()
             news_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(news_repo_manager)
             news_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
+        case 3:
+            let package_repo_manager = manage_views.LKIconGroupDetailView_PackageRepoSP()
+            package_repo_manager.apart_init(father: tableView)
+            ret.contentView.addSubview(package_repo_manager)
+            package_repo_manager.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
             ret.backgroundView?.backgroundColor = .clear
@@ -66,26 +96,26 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return ret
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return do_the_height_math(indexPath: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return do_the_height_math(indexPath: indexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        table_view.deselectRow(at: indexPath, animated: true)
-    }
-    
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0: return 108
         case 1:
+            if (LKRoot.container_string_store["STR_SIG_PROGRESS_NUM"] ?? "SIGCLEAR") == "SIGCLEAR" {
+                return 0
+            } else {
+                return 22
+            }
+        case 2:
             if LKRoot.container_manage_cell_status["NewsRepo"] ?? true {
                 return 180
             } else {
                 return 180 + CGFloat(LKRoot.container_news_repo.count + 1) * 62 - 32
+            }
+        case 3:
+            if LKRoot.container_manage_cell_status["PackageRepo"] ?? true {
+                return 180
+            } else {
+                return 180 + CGFloat(LKRoot.container_package_repo.count + 1) * 62 - 32
             }
         default: return 180
         }

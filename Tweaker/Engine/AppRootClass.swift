@@ -34,11 +34,12 @@ class app_root_class {
     public let queue_alamofire                                  = DispatchQueue(label: "com.lakr233.alamofire.queue", qos: .utility, attributes: .concurrent)
     
     // 缓存view好像没啥用
-//    var container_cache_uiview = [UIView]()                 // 视图缓存咯
-    var container_string_store = [String : String]()
-    var container_news_repo    = [DMNewsRepo]()             // 新闻源缓存
-    var container_manage_cell_status = [String : Bool]()    // 管理页面是否展开
-    var container_gobal_signal = [String : Bool]()          // 全剧刷新状态缓存 是否需要刷新
+//    var container_cache_uiview = [UIView]()                               // 视图缓存咯
+    var container_string_store              = [String : String]()           // ???
+    var container_news_repo                 = [DMNewsRepo]()                // 新闻源缓存
+    var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
+    var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
+    var container_gobal_signal              = [String : Bool]()             // 全剧刷新状态缓存 是否需要刷新
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展

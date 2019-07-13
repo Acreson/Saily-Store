@@ -8,7 +8,7 @@
 
 extension app_opeerator {
     
-    func NP_sync_and_download(CallB: @escaping (Int) -> Void) {
+    func NR_sync_and_download(CallB: @escaping (Int) -> Void) {
         // 从数据库读取列表
         guard let repos: [DBMNewsRepo] = try? LKRoot.root_db?.getObjects(on: [DBMNewsRepo.Properties.link, DBMNewsRepo.Properties.sort_id, DBMNewsRepo.Properties.content],
                                                                          fromTable: common_data_handler.table_name.LKNewsRepos.rawValue,
@@ -91,7 +91,7 @@ extension app_opeerator {
                                         with: new_update,
                                         where: DBMNewsRepo.Properties.link == item.link!)
             // 解包
-            NP_content_invoker(content_str: item.content ?? "", target_RAM: new, master_link: new.link)
+            NR_content_invoker(content_str: item.content ?? "", target_RAM: new, master_link: new.link)
             // 下载卡片内容
             var dl_url_str = new.link
 //            var got_a_link = false
@@ -170,14 +170,14 @@ extension app_opeerator {
             }
             net_semaphore_2.wait()
             signal_ed_130 = true
-            new.cards = NP_cards_content_invoker(content_str: read_cards ?? "", master_link: item.link ?? "")
+            new.cards = NR_cards_content_invoker(content_str: read_cards ?? "", master_link: item.link ?? "")
             // 放内存
             LKRoot.container_news_repo.append(new)
         } // for
         CallB(operation_result.success.rawValue)
-    } // NP_sync_and_download
+    } // NR_sync_and_download
 
-    func NP_content_invoker(content_str: String, target_RAM: DMNewsRepo, master_link: String) {
+    func NR_content_invoker(content_str: String, target_RAM: DMNewsRepo, master_link: String) {
         for_sign: for line in content_str.split(separator: "\n") {
             // 写入可写属性
             var read_opt: String?
@@ -230,9 +230,9 @@ extension app_opeerator {
             default: print("[?] 这啥玩意？" + name)
             }
         }
-    } // NP_content_invoker
+    } // NR_content_invoker
     
-    func NP_cards_content_invoker(content_str: String, master_link: String) -> [DMNewsCard] {
+    func NR_cards_content_invoker(content_str: String, master_link: String) -> [DMNewsCard] {
         
         var ins_card = DMNewsCard()
         var ret = [DMNewsCard]()
@@ -316,9 +316,9 @@ extension app_opeerator {
             }
         }
         return ret
-    } // NP_cards_content_invoker
+    } // NR_cards_content_invoker
     
-    func NP_download_card_contents(target: DMNewsCard, master_link: String, result_str: @escaping (String) -> Void) {
+    func NR_download_card_contents(target: DMNewsCard, master_link: String, result_str: @escaping (String) -> Void) {
         guard let dl_url = URL(string: target.content ?? "") else {
             print("[Resumable - fatalError] 无法内容创建下载链接。")
             return
@@ -385,7 +385,7 @@ extension app_opeerator {
         
         result_str(ret_str_fixed )
         
-    } // NP_download_card_contents
+    } // NR_download_card_contents
     
 }
 

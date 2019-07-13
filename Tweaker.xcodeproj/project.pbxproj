@@ -54,6 +54,7 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
+		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
 		B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */; };
@@ -115,6 +116,7 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
+		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
 		B470FA9122D4515700C4A215 /* LKButtonStackTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKButtonStackTVCell.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 		B46EE49822D5E053000C6F6D /* ManageCells */ = {
 			isa = PBXGroup;
 			children = (
+				B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */,
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 				B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */,
 				B46EE49E22D611CD000C6F6D /* LKRepoView.swift */,
@@ -576,6 +579,7 @@
 				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
+				B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,
 				ABE6DD03229ECC2700D18D9E /* DMNewsRepos.swift in Sources */,
 				B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */,
