@@ -110,9 +110,9 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0: return 108
+        case 0: return 110
         case 1:
-            return 18
+            return 16
 //            if (LKRoot.container_string_store["STR_SIG_PROGRESS"] ?? "SIGCLEAR") == "SIGCLEAR" {
 //                return 0
 //            } else {
@@ -120,15 +120,15 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //            }
         case 2:
             if LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] ?? true {
-                return 180
+                return 164
             } else {
-                return 180 + CGFloat(LKRoot.container_news_repo_DBSync.count + 1) * 62 - 32
+                return 164 + CGFloat(LKRoot.container_news_repo_DBSync.count + 1) * 62 - 32
             }
         case 3:
             if LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] ?? true {
-                return 187
+                return 171
             } else {
-                return 187 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
+                return 171 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
             }
         default: return 180
         }

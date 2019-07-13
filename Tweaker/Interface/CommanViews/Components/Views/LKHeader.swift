@@ -77,7 +77,7 @@ extension common_views {
             x.left.equalTo(main_title.snp.left)
             x.right.equalTo(head_icon.snp.right)
             x.top.equalTo(main_title.snp.bottom).offset(12)
-            x.height.equalTo(0.233)
+            x.height.equalTo(0.5)
         }
         
         return ret_view

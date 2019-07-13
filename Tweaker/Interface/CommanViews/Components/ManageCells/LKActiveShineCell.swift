@@ -31,7 +31,10 @@ extension manage_views {
             dark.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
             addSubview(dark)
             dark.snp.makeConstraints { (x) in
-                x.edges.equalTo(self.snp.edges)
+                x.top.equalTo(self.snp.top)
+                x.bottom.equalTo(self.snp.bottom).offset(12)
+                x.left.equalTo(self.snp.left)
+                x.right.equalTo(self.snp.right)
             }
             animation(id: UUID().uuidString)
             timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(timer_call), userInfo: nil, repeats: true)
