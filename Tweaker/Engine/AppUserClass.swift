@@ -8,9 +8,14 @@
 
 class app_user_class {
     
+    let user_name = ""
+    let user_pass = ""
+    
+    let user_icon = UIImage(named: "AccountHeadIconPlaceHolder")!
+    
     func return_user_icon() -> UIImage {
         // 晚点写
-        return UIImage(named: "AccountHeadIconPlaceHolder") ?? UIImage()
+        return user_icon
     }
     
 }

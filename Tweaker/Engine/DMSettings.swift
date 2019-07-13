@@ -23,14 +23,10 @@ class DBMSettings: WCDBSwift.TableCodable {
     enum CodingKeys: String, CodingTableKey { // swiftlint:disable:next nesting
         typealias Root = DBMSettings
         
-        // swiftlint:disable:next redundant_string_enum_value
-        case fake_UDID = "fake_UDID"
-        // swiftlint:disable:next redundant_string_enum_value
-        case real_UDID = "real_UDID"
-        // swiftlint:disable:next redundant_string_enum_value
-        case network_timeout = "network_timeout"
-        // swiftlint:disable:next redundant_string_enum_value
-        case card_radius = "card_radius"
+        case fake_UDID 
+        case real_UDID 
+        case network_timeout 
+        case card_radius 
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         

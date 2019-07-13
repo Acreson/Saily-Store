@@ -90,7 +90,12 @@ class app_root_class {
                 if ret != operation_result.success.rawValue {
                     return
                 }
-                
+                self.ins_common_operator.PR_download_all_package { (ret) in
+                    if ret != operation_result.success.rawValue {
+                        return
+                    }
+                    
+                }
             }
         }
     }
@@ -141,6 +146,5 @@ class app_root_class {
     }
     
 }
-
 
 

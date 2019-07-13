@@ -101,10 +101,29 @@ extension app_opeerator {
             }
         }
         return ret
-    }
+    } // PR_release_wrapper
     
-    func PR_download_all_package() {
-        
-    }
+    func PR_download_all_package(_ CallB: @escaping (Int) -> Void) {
+        if LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] == "YES" {
+            return
+        }
+        // 上锁！
+        LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "YES"
+        var container = [String : String]()
+        for item in LKRoot.container_package_repo {
+            container[item.link] = ""
+            
+        }
+        LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "NO"
+    } // PR_download_all_package
     
 }
+
+/*
+ 
+ 9 to 8 I feel so grate
+ 7 to 6 need my hair fix
+ 5 to 4 what you waiting for
+ 3 2 1 let go have fun
+ 
+ */
