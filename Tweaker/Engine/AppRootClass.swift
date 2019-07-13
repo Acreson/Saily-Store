@@ -87,6 +87,9 @@ class app_root_class {
         // 发送到下载处理引擎
         queue_dispatch.async {
             self.ins_common_operator.PR_sync_and_download { (ret) in
+                if ret != operation_result.success.rawValue {
+                    return
+                }
                 
             }
         }

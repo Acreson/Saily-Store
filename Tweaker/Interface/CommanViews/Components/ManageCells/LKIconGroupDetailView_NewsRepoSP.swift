@@ -491,12 +491,12 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             LKRoot.queue_dispatch.async {
                 let new = DBMNewsRepo()
                 new.link = read
-                new.sort_id = LKRoot.container_news_repo.count
+                new.sort_id = LKRoot.container_news_repo_DBSync.count
                 try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
                 LKRoot.ins_common_operator.NR_sync_and_download(CallB: { (ret) in
                     DispatchQueue.main.async {
-                        if ret != 0 || (LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"] ?? "").contains(new.link ?? "") {
-                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH"] = ""
+                        if ret != 0 || (LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_NP"] ?? "").contains(new.link ?? "") {
+                            LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_NP"] = ""
                             IHProgressHUD.dismiss()
                             print("[*] 刷新失败")
                             let statusAlert = StatusAlert()
