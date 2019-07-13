@@ -20,7 +20,8 @@ class app_root_class {
     var ever_went_background = false
     
     var is_iPad = false
-    var shared_device = UIDevice()
+    // swiftlint:disable:next discouraged_direct_init
+    let shared_device = UIDevice()
     
     public var root_path: String?
     public var root_db: Database?
@@ -38,13 +39,15 @@ class app_root_class {
 //    var container_cache_uiview = [UIView]()                               // 视图缓存咯
     var container_string_store              = [String : String]()           // ???
     var container_news_repo                 = [DMNewsRepo]()                // 新闻源缓存
-    var container_news_repo_sync            = [DMNewsRepo]()                // 包换未刷新的源
+    var container_news_repo_DBSync          = [DMNewsRepo]()                // 包含未刷新的源
     var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
+    var container_package_repo_DBSync       = [DMPackageRepos]()            // 包含未刷新的源
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
     var container_gobal_signal              = [String : Bool]()             // 全剧刷新状态缓存 是否需要刷新
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展
+    let ins_networking = networking()                       // 网络处理
     let ins_user_manager = app_user_class()                 // 用户管理
     let ins_common_operator = app_opeerator()               // 通用处理
     
@@ -82,8 +85,10 @@ class app_root_class {
         ins_color_manager.iOS13_init()
         
         // 发送到下载处理引擎
-        ins_common_operator.PR_sync_and_download { (ret) in
-            
+        queue_dispatch.async {
+            self.ins_common_operator.PR_sync_and_download { (ret) in
+                
+            }
         }
     }
     
@@ -119,7 +124,7 @@ class app_root_class {
                              "https://repo.chariz.io/",
                              "https://repo.nepeta.me/",
                              "https://repo.dynastic.co/",
-                             "http://repo.packix.com"]
+                             "http://repo.packix.com/"]
         var insert = [DBMPackageRepos]()
         var index = 0
         for item in default_links {

@@ -77,6 +77,12 @@ extension String {
         return frame.size.height
     }
     
+    func cleanRN() -> String {
+        var newString = self.replacingOccurrences(of: "\r\n", with: "\n", options: .literal, range: nil)
+        newString = newString.replacingOccurrences(of: "\r", with: "\n", options: .literal, range: nil)
+        return newString
+    }
+    
 }
 
 extension Substring {

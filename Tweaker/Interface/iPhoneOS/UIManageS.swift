@@ -109,7 +109,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if LKRoot.container_manage_cell_status["NewsRepo"] ?? true {
                 return 180
             } else {
-                return 180 + CGFloat(LKRoot.container_news_repo_sync.count + 1) * 62 - 32
+                return 180 + CGFloat(LKRoot.container_news_repo_DBSync.count + 1) * 62 - 32
             }
         case 3:
             if LKRoot.container_manage_cell_status["PackageRepo"] ?? true {

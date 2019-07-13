@@ -21,8 +21,6 @@ extension manage_views {
         let table_view = UITableView()
         let icon_stack = common_views.LKIconStack()
         
-        var sync_news_repos = [DMNewsRepo]()
-        
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_PackageRepoSP_TVID")
@@ -99,9 +97,9 @@ extension manage_views {
             
             // 图标组
             var icon_addrs = [String]()
-//            for item in sync_news_repos {
-//                icon_addrs.append(item.icon)
-//            }
+            for item in LKRoot.container_package_repo_DBSync {
+                icon_addrs.append(item.icon)
+            }
             icon_stack.images_address = icon_addrs
             icon_stack.apart_init()
             contentView.addSubview(icon_stack)
@@ -170,7 +168,7 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
-            if sync_news_repos.count == 0 {
+            if LKRoot.container_package_repo_DBSync.count == 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.expend_self()
                 }
@@ -178,8 +176,12 @@ extension manage_views {
             
         }
         
+        func re_sync() {
+            
+        }
+        
         func update_status() {
-            LKRoot.container_manage_cell_status["NewsRepo"] = is_collapsed
+            LKRoot.container_manage_cell_status["PackageRepo"] = is_collapsed
         }
         
         @objc func expend_self() {
@@ -200,7 +202,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row >= sync_news_repos.count {
+        if indexPath.row >= LKRoot.container_package_repo_DBSync.count {
             let ret = cell_views.LK2ButtonStackTVCell()
             ret.button1.setTitle("添加".localized(), for: .normal)
             ret.button2.setTitle("分享".localized(), for: .normal)
@@ -217,7 +219,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row >= sync_news_repos.count {
+        if indexPath.row >= LKRoot.container_package_repo_DBSync.count {
             return 43
         }
         return 62
@@ -225,13 +227,13 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
-        if indexPath.row < sync_news_repos.count {
+        if indexPath.row < LKRoot.container_package_repo_DBSync.count {
             touched_cell(which: indexPath)
         }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.row < sync_news_repos.count {
+        if indexPath.row < LKRoot.container_package_repo_DBSync.count {
             return true
         }
         return false
