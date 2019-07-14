@@ -45,6 +45,7 @@ class app_root_class {
     var container_package_repo_DBSync       = [DMPackageRepos]()            // 包含未刷新的源
     var container_package_repo_download     = [String : String]()           // 软件源缓存
     var container_packages                  = [DBMPackage]()                // 软件包缓存
+    var container_recent_update             = [DBMPackage]()                // 最近更新缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题

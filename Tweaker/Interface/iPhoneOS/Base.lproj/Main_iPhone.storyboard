@@ -88,10 +88,10 @@
             </objects>
             <point key="canvasLocation" x="1954" y="996"/>
         </scene>
-        <!--View Controller-->
+        <!--SearchS-->
         <scene sceneID="VpU-Hq-wdh">
             <objects>
-                <viewController id="clt-8o-aHa" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UISearchS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="clt-8o-aHa" customClass="UISearchS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lEf-qp-4Vv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

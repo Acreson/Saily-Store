@@ -36,6 +36,14 @@ class app_opeerator {
         return test_result
     }
     
+    func version_cmp(vers: [String]) -> String {
+        var newest = vers.first ?? ""
+        for item in vers where newest.compare(item, options: [.numeric, .literal]) == .orderedDescending {
+            newest = item
+        }
+        return newest
+    }
+    
 }
 
 class networking {

@@ -59,6 +59,7 @@ class color_sheet {
         "main_title_one"                : #colorLiteral(red: 0.2860272825, green: 0.611161828, blue: 1, alpha: 1),    // UIColor(hex: 0x3B86FF),
         "main_title_two"                : #colorLiteral(red: 0.6999540329, green: 0.7014504075, blue: 0.9883304238, alpha: 1),    // UIColor(hex: 0xA3A0FB),
         "main_title_three"              : #colorLiteral(red: 0.3324531913, green: 0.3323239088, blue: 0.4404206276, alpha: 1),    // UIColor(hex: 0x43425D),
+        "main_title_four"               : #colorLiteral(red: 0.9294117647, green: 0.6274509804, blue: 0.9843137255, alpha: 1),    // UIColor(hex: 0xEDA0FB),
         
         "main_text"                     : #colorLiteral(red: 0.3324531913, green: 0.3323239088, blue: 0.4404206276, alpha: 1),    // UIColor(hex: 0x43425D),
         "sub_text"                      : #colorLiteral(red: 0.739910701, green: 0.7917402324, blue: 0.8039215803, alpha: 1),    // UIColor(hex: 0xBDCACD),
@@ -90,6 +91,7 @@ class color_sheet {
         "main_title_one"                : #colorLiteral(red: 0.6019103168, green: 0.7831955467, blue: 1, alpha: 1),    // UIColor(hex: 0x3B86FF),
         "main_title_two"                : #colorLiteral(red: 0.7969101558, green: 0.7979034286, blue: 0.9883304238, alpha: 1),    // UIColor(hex: 0xA3A0FB),
         "main_title_three"              : #colorLiteral(red: 0.7168041425, green: 0.7165253958, blue: 0.9495933219, alpha: 1),    // UIColor(hex: 0x43425D),
+        "main_title_four"               : #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1),    // UIColor(hex: 0x43425D),
         
         "main_text"                     : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         "sub_text"                      : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),

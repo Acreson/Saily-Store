@@ -45,7 +45,6 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
@@ -102,6 +101,15 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
+        case 4:
+            let package_repo_manager = manage_views.LKIconGroupDetailView_RecentUpdate()
+            package_repo_manager.apart_init(father: tableView)
+            ret.contentView.addSubview(package_repo_manager)
+            package_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
         default:
             ret.backgroundColor = .clear
         }
@@ -129,6 +137,15 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 return 171
             } else {
                 return 171 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
+            }
+        case 4:
+            if LKRoot.container_manage_cell_status["RU_IS_COLLAPSED"] ?? true {
+                return 157
+            } else {
+                if LKRoot.container_recent_update.count > 12 {
+                    return 157 + 12 * 62
+                }
+                return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
             }
         default: return 180
         }

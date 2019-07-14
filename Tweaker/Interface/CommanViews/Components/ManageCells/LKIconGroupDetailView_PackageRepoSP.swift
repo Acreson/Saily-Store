@@ -42,7 +42,7 @@ extension manage_views {
                 from_father_view = father!
             }
             
-            sync()
+            re_sync()
             
             contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
@@ -97,7 +97,6 @@ extension manage_views {
             }
             
             // 图标组
-            re_sync()
             if LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] == "FALSE" {
                 var icon_addrs = [String]()
                 for item in LKRoot.container_package_repo_DBSync {
