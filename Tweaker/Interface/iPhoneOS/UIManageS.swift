@@ -47,6 +47,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         table_view.isScrollEnabled = false
         table_view.bounces = false
         contentView.delegate = self
+        contentView.showsVerticalScrollIndicator = false
+        contentView.showsHorizontalScrollIndicator = false
         view.addSubview(contentView)
         contentView.addSubview(table_view)
         contentView.snp.makeConstraints { (x) in

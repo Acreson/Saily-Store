@@ -372,7 +372,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             let statusAlert = StatusAlert()
             statusAlert.image = UIImage(named: "Done")
             statusAlert.title = "成功".localized()
-            statusAlert.message = (LKRoot.container_package_repo_DBSync[index.row].name) + "的地址已经复制到剪贴板".localized()
+            statusAlert.message = (LKRoot.container_package_repo_DBSync[index.row].name) + " 的地址已经复制到剪贴板".localized()
             statusAlert.canBePickedOrDismissed = true
             statusAlert.showInKeyWindow()
         }
