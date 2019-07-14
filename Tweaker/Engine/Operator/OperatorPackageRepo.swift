@@ -159,7 +159,7 @@ extension app_opeerator {
         return ret
     } // PR_release_wrapper
     
-    // 在call之前要先更换session然后手动解锁 LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "NO"
+    // 在 call 之前要先更换 session 然后手动解锁 LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "NO"
     func PR_download_all_package(session_id: String, sync_all: Bool, _ CallB: @escaping (Int) -> Void) {
         if LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] == "YES" || session_id != LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_SYNC"] {
             CallB(operation_result.another_in_progress.rawValue)
@@ -432,7 +432,7 @@ extension app_opeerator {
             return
         }
         LKRoot.container_packages.removeAll()
-        for key_pair_value in packages {
+        for key_pair_value in packages where PR_should_add_this(package: key_pair_value.value) {
             LKRoot.container_packages.append(key_pair_value.value)
             try? LKRoot.root_db?.insertOrReplace(objects: key_pair_value.value, intoTable: common_data_handler.table_name.LKPackages.rawValue)
         }
@@ -443,6 +443,15 @@ extension app_opeerator {
         CallB(operation_result.success.rawValue)
     }
     
+    func PR_should_add_this(package: DBMPackage) -> Bool {
+        for v1 in package.version {
+            for v2 in v1.value where v2.value["_internal_SIG_begin_update"] == "0x1" {
+                return true
+            }
+        }
+        return false
+    }
+    
 }
 
 /*
@@ -451,5 +460,10 @@ extension app_opeerator {
  7 to 6 need my hair fix
  5 to 4 what you waiting for
  3 2 1 let go have fun
+
+ just don't get mad when you trying to do things with database
+ tell yourself you love it, you can habdle it!
+ 
+ 操你妈了个逼的数据库老子再也不想碰一下
  
  */
