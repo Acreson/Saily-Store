@@ -44,6 +44,7 @@ class app_root_class {
     var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
     var container_package_repo_DBSync       = [DMPackageRepos]()            // 包含未刷新的源
     var container_package_repo_download     = [String : String]()           // 软件源缓存
+    var container_packages                  = [DBMPackage]()                // 软件包缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
@@ -98,6 +99,7 @@ class app_root_class {
         try? root_db?.create(table: common_data_handler.table_name.LKNewsRepos.rawValue, of: DBMNewsRepo.self)
         try? root_db?.create(table: common_data_handler.table_name.LKSettings.rawValue, of: DBMSettings.self)
         try? root_db?.create(table: common_data_handler.table_name.LKPackageRepos.rawValue, of: DBMPackageRepos.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKPackages.rawValue, of: DBMPackage.self)
         let new_setting = DBMSettings()
         new_setting.card_radius = 8
         // 伪造UDID

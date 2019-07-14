@@ -126,7 +126,7 @@ extension app_opeerator {
 //            new.icon = (item.link ?? "") + "CydiaIcon@3x.png"
             new.icon = (item.link ?? "") + "CydiaIcon.png"
             new.item = out
-            new.name = out["ORIGIN"] ?? "无名氏".localized()
+            new.name = out["ORIGIN"] ?? "未知错误".localized()
             new.desstr = out["DESCRIPTION"] ?? ""
             LKRoot.container_package_repo.append(new)
             let db = new.to_data_base()
@@ -276,17 +276,172 @@ extension app_opeerator {
         CallB(operation_result.success.rawValue)
         
         LKRoot.queue_dispatch.async {
-            self.PR_package_wrapper({ (_) in
-            })
+            let session = UUID().uuidString
+            LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] = session
+            self.PR_package_wrapper(session: session) { (_) in
+            }
         }
     } // PR_download_all_package
     
-    func PR_package_wrapper(_ CallB: @escaping (Int) -> Void) {
+    func PR_package_wrapper(session: String, _ CallB: @escaping (Int) -> Void) {
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "正在刷新软件包列表，这可能需要一些时间。".localized()
+        // 上锁
+        if LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] == "TRUE" || LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
+            return
+        }
+        LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "TRUE"
+        guard let package_from_database: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue) else {
+            print("[E] 无法从 LKPackages 中获得数据，终止同步。")
+            LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "FALSE"
+            CallB(operation_result.failed.rawValue)
+            return
+        }
+        
+        // 获取时间
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
+        let now = formatter.string(from: date)
+        
+        let update_sig = DBMPackage()
+        update_sig.signal = "BEGIN_UPDATE"
+        try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKPackages.rawValue,
+                                    on: [DBMPackage.Properties.signal],
+                                    with: update_sig)
+        
+        // 炒鸡快炸膘！   id          内容咯
+        var packages = [String : DBMPackage]()
+        // 更新快查表
+        print("[*] 开始更新软件包快查表")
+        for item in package_from_database {
+            let new = item
+            //                  v1        v2       v3
+            var new_version = [String : [String : [String : String]]]()
+            for v1 in new.version {
+                for v2 in v1.value {
+                    var new_value = v2.value
+                    new_value["_internal_SIG_begin_update"] = "0x0"
+                    new_version[v1.key] = [v2.key : new_value]
+                }
+            }
+            new.version = new_version
+            packages[item.id] = new
+        }
+        
+        print("[*] 开始更新软件包")
+        for item in LKRoot.container_package_repo_download where item.value != "" {
+            var read_in = item.value
+            read_in.append("\n\n")
+            // 进行解包
+            do {
+                // 临时结构体
+                var info_head = ""
+                var info_body = ""
+                var in_head = true
+                var line_break = false
+                var has_a_maohao = false
+                var this_package = [String : String]()
+                // 开始遍历数据
+                for char in read_in {
+                    let c = char.description
+                    inner: if c == ":" {
+                        line_break = false
+                        in_head = false
+                        if has_a_maohao {
+                            info_body += ":"
+                        } else {
+                            has_a_maohao = true
+                        }
+                    } else if c == "\n" {
+                        if line_break == true {
+                            // 两行空行，新数据包 判断软件包是否存在 如果存在则更新version字段
+                            // 先加一个属性
+                            this_package["_internal_SIG_begin_update"] = "0x1"
+                            if this_package["PACKAGE"] == nil || this_package["VERSION"] == nil {
+                                //                            print("[*] 丢弃没有id的软件包")
+                            } else if packages[this_package["PACKAGE"]!] != nil {
+                                // 存在软件包
+                                if packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] == nil {
+                                    // 不存在！
+                                    packages[this_package["PACKAGE"]!]!.latest_update_time = now
+                                }
+                                // 直接添加 version 不检查 version 是否存在因为它不存在就奇怪了
+                                let v1 = [item.key: this_package] // 【软件源地址 ： 【属性 ： 属性值】】
+                                packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] = v1
+                                // 因为存在软件包 所以我们更新一下 SIG 字段
+                                packages[this_package["PACKAGE"]!]!.signal = ""
+                            } else {
+                                // 不存在软件包 创建软件包
+                                let new = DBMPackage()
+                                new.id = this_package["PACKAGE"]!
+                                // latest_update_time 我们去写入数据库的时候更新
+                                let v1 = [item.key: this_package] // 【软件源地址 ： 【属性 ： 属性值】】
+                                // 新软件包的更新 sig 不需要修改
+                                new.latest_update_time = now
+                                new.version[this_package["VERSION"]!] = v1
+                                packages[this_package["PACKAGE"]!] = new
+                            }
+                            this_package = [String : String]()
+                            has_a_maohao = false
+                            break inner
+                        }
+                        line_break = true
+                        in_head = true
+                        if info_head == "" || info_body == "" {
+                            has_a_maohao = false
+                            break inner
+                        }
+                        while info_head.hasPrefix("\n") {
+                            info_head = String(info_head.dropFirst())
+                        }
+                        info_body = String(info_body.dropFirst())
+                        while info_body.hasPrefix(" ") {
+                            info_body = String(info_body.dropFirst())
+                        }
+                        this_package[info_head.uppercased()] = info_body
+                        info_head = ""
+                        info_body = ""
+                        if in_head {
+                            info_head += c
+                        }
+                    } else {
+                        line_break = false
+                        if in_head {
+                            info_head += c
+                        } else {
+                            info_body += c
+                        }
+                    }
+                }
+                
+            } // do
+            if LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
+                return
+            }
+        }
+        // 终于完成了啊哈哈哈哈哈哈哈哈 咳咳准备数据库
+        
+        // 删除全部没有找到的软件包
+        if LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
+            return
+        }
+        try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKPackages.rawValue,
+                                    where: DBMPackage.Properties.signal == "BEGIN_UPDATE")
+        // 写入更新
+        if LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
+            return
+        }
+        LKRoot.container_packages.removeAll()
+        for key_pair_value in packages {
+            LKRoot.container_packages.append(key_pair_value.value)
+            try? LKRoot.root_db?.insertOrReplace(objects: key_pair_value.value, intoTable: common_data_handler.table_name.LKPackages.rawValue)
+        }
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
+        LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "FALSE"
+        print("[*] 更新软件包完成")
+        CallB(operation_result.success.rawValue)
     }
-    
     
 }
 

@@ -16,6 +16,7 @@ extension common_data_handler {
         case LKSettings
         case LKNewsRepos
         case LKPackageRepos
+        case LKPackages
     }
     
 }
