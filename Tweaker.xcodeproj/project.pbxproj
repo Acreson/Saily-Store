@@ -51,6 +51,8 @@
 		B40B4C1E22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */; };
 		B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1F22D7637600373449 /* DMPackageRepos.swift */; };
 		B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */; };
+		B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */; };
+		B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */; };
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
@@ -118,6 +120,8 @@
 		B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_PackageRepoSP.swift; sourceTree = "<group>"; };
 		B40B4C1F22D7637600373449 /* DMPackageRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackageRepos.swift; sourceTree = "<group>"; };
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
+		B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Settings.swift; sourceTree = "<group>"; };
+		B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 				ABFBA812229D7DC40070A17E /* UIImageExtensions.swift */,
 				ABFBA816229D7DC40070A17E /* UIDeviceExtensions.swift */,
 				ABFBA80F229D7DC40070A17E /* UITableViewExtensions.swift */,
+				B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */,
 				ABFBA811229D7DC40070A17E /* UIViewControllerExtensions.swift */,
 				ABFBA813229D7DC40070A17E /* UINavigationControllerExtensions.swift */,
 			);
@@ -343,6 +348,7 @@
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 				B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */,
 				B493CC2822DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift */,
+				B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */,
 				B46EE49E22D611CD000C6F6D /* LKRepoView.swift */,
 				B493CC2622DB4B6700D31A47 /* LKSearchView.swift */,
 			);
@@ -593,6 +599,7 @@
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
 				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
+				B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
 				B493CC2522DB44F800D31A47 /* UISearchS.swift in Sources */,
 				B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */,
@@ -609,6 +616,7 @@
 				ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */,
 				B493CC2922DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */,
 				ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */,
+				B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
 				B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */,

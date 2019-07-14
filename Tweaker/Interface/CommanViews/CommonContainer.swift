@@ -27,6 +27,13 @@ class manage_views {
     // 啥都不用干
 }
 
+class manage_view_reg {
+    let nr = manage_views.LKIconGroupDetailView_NewsRepoSP()
+    let pr = manage_views.LKIconGroupDetailView_PackageRepoSP()
+    let ru = manage_views.LKIconGroupDetailView_RecentUpdate()
+    let se = manage_views.LKIconGroupDetailView_Settings()
+}
+
 class cell_views {
     // 啥都不用干
 }

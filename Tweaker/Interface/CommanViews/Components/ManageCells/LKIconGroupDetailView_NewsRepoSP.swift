@@ -11,6 +11,8 @@ extension manage_views {
     // swiftlint:disable:next type_body_length
     class LKIconGroupDetailView_NewsRepoSP: UIView, UITableViewDataSource {
         
+        var initd = false
+        
         var is_collapsed = true
         let contentView = UIView()
         let table_view_container = UIView()
@@ -58,6 +60,7 @@ extension manage_views {
         
         func apart_init(father: UIView?) {
             
+            initd = true
             LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] = is_collapsed
             
             let RN_ANCHOR_O = 24
@@ -530,12 +533,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                 }
             }
         }))
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            topController.present(alert, animated: true, completion: nil)
-        }
+        alert.presentToCurrentViewController()
         
     }
     
@@ -617,12 +615,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
             }))
             alert.addAction(UIAlertAction(title: "了解", style: .default, handler: { (_) in
             }))
-            if var topController = UIApplication.shared.keyWindow?.rootViewController {
-                while let presentedViewController = topController.presentedViewController {
-                    topController = presentedViewController
-                }
-                topController.present(alert, animated: true, completion: nil)
-            }
+            alert.presentToCurrentViewController()
         }
         
 //        print("[i] 用户选择了新闻源: " + LKRoot.container_news_repo_DBSync[which.row].link)

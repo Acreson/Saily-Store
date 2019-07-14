@@ -10,6 +10,8 @@ extension manage_views {
     
     class LKIconGroupDetailView_RecentUpdate: UIView, UITableViewDataSource {
         
+        var initd = false
+        
         var is_collapsed = true
         let contentView = UIView()
         let table_view_container = UIView()
@@ -31,6 +33,8 @@ extension manage_views {
         }
         
         func apart_init(father: UIView?) {
+            
+            initd = true
             
             LKRoot.container_manage_cell_status["RU_IS_COLLAPSED"] = is_collapsed
             
@@ -169,14 +173,10 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
-            if LKRoot.container_package_repo_DBSync.count == 0 {
+            if LKRoot.container_recent_update.count != 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     self.expend_self()
                 }
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.expend_self()
             }
             
         }
@@ -201,8 +201,21 @@ extension manage_views {
             if !is_collapsed {
                 return
             }
-            is_collapsed = false
             re_sync()
+            if LKRoot.container_recent_update.count < 1 {
+                UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                    self.expend_button.setTitle("没有最近更新的软件包".localized(), for: .normal)
+                    self.expend_button.setTitleColor(.red, for: .normal)
+                })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    UIView.transition(with: self.expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                        self.expend_button.setTitle("点击来展开最近更新 ▼".localized(), for: .normal)
+                        self.expend_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_two"), for: .normal)
+                    })
+                }
+                return
+            }
+            is_collapsed = false
             table_view.reloadData()
             table_view.snp.remakeConstraints { (x) in
                 x.top.equalTo(self.table_view_container.snp.top)

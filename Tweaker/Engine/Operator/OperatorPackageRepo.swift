@@ -441,6 +441,29 @@ extension app_opeerator {
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
         LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "FALSE"
+        
+        LKRoot.manager_reg.ru.re_sync()
+        if LKRoot.manager_reg.ru.initd && !LKRoot.manager_reg.ru.is_collapsed {
+            DispatchQueue.main.async {
+                UIApplication.shared.beginIgnoringInteractionEvents()
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                LKRoot.manager_reg.ru.collapse_self()
+            }
+            if LKRoot.container_recent_update.count > 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    LKRoot.manager_reg.ru.expend_self()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                }
+            }
+        }
+        
         print("[*] 更新软件包完成")
         CallB(operation_result.success.rawValue)
     }

@@ -82,7 +82,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -120,7 +120,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 2:
-            let news_repo_manager = manage_views.LKIconGroupDetailView_NewsRepoSP()
+            let news_repo_manager = LKRoot.manager_reg.nr
             news_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(news_repo_manager)
             news_repo_manager.snp.makeConstraints { (x) in
@@ -129,7 +129,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 3:
-            let package_repo_manager = manage_views.LKIconGroupDetailView_PackageRepoSP()
+            let package_repo_manager = LKRoot.manager_reg.pr
             package_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(package_repo_manager)
             package_repo_manager.snp.makeConstraints { (x) in
@@ -138,7 +138,16 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 4:
-            let package_repo_manager = manage_views.LKIconGroupDetailView_RecentUpdate()
+            let package_repo_manager = LKRoot.manager_reg.ru
+            package_repo_manager.apart_init(father: tableView)
+            ret.contentView.addSubview(package_repo_manager)
+            package_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
+            ret.backgroundView?.backgroundColor = .clear
+            ret.backgroundColor = .clear
+        case 5:
+            let package_repo_manager = LKRoot.manager_reg.se
             package_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(package_repo_manager)
             package_repo_manager.snp.makeConstraints { (x) in
@@ -154,7 +163,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     func sum_the_height() -> CGFloat {
         var ret = CGFloat(0)
-        for i in 0..<5 {
+        for i in 0...5 {
             ret += do_the_height_math(indexPath: IndexPath(row: i, section: 0))
         }
         if LKRoot.safe_area_needed {
@@ -194,6 +203,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 }
                 return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
             }
+        case 5:
+            return 728
         default: return 180
         }
     }

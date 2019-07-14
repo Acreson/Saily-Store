@@ -38,6 +38,7 @@ class UIEnteryS: UITabBarController {
         generator.impactOccurred()
         
         let willing = selectedViewController
+        LKRoot.current_page = selectedViewController ?? UIViewController()
         if willing == LKRoot.current_page {
             for this in willing?.view.subviews ?? [] where this as? UIScrollView != nil {
                 UIApplication.shared.beginIgnoringInteractionEvents()
@@ -49,7 +50,6 @@ class UIEnteryS: UITabBarController {
             }
             return
         }
-        LKRoot.current_page = selectedViewController ?? UIViewController()
         
         guard let view = item.value(forKey: "_view") as? UIView else { return }
         for item in view.subviews {

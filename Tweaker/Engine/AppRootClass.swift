@@ -30,6 +30,7 @@ class app_root_class {
     public var safe_area_needed: Bool = false
     public var this_is_an_iPhone: Bool = false
     public var current_page = UIViewController()
+    public var manager_reg = manage_view_reg()
     
     public let queue_operation                                  = OperationQueue()
     public let queue_operation_single_thread                    = OperationQueue()

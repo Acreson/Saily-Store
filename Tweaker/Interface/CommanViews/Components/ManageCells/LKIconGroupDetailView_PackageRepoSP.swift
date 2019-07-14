@@ -11,6 +11,8 @@ extension manage_views {
     // swiftlint:disable:next type_body_length
     class LKIconGroupDetailView_PackageRepoSP: UIView, UITableViewDataSource {
         
+        var initd = false
+        
         var is_collapsed = true
         let contentView = UIView()
         let table_view_container = UIView()
@@ -32,6 +34,8 @@ extension manage_views {
         }
         
         func apart_init(father: UIView?) {
+            
+            initd = true
             
             LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] = is_collapsed
             
@@ -526,12 +530,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                 }
             }
         }))
-        if var topController = UIApplication.shared.keyWindow?.rootViewController {
-            while let presentedViewController = topController.presentedViewController {
-                topController = presentedViewController
-            }
-            topController.present(alert, animated: true, completion: nil)
-        }
+        alert.presentToCurrentViewController()
     }
     
     @objc func share_button_recall(sender: Any?) {
