@@ -24,7 +24,7 @@ class UIHommyS: UIViewController {
         view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        if LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] == "FALSE" {
+        if LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] == "TRUE" {
             for view in view.subviews {
                 view.removeFromSuperview()
             }
