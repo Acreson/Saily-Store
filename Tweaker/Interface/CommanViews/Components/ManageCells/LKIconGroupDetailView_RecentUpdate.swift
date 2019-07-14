@@ -8,7 +8,6 @@
 
 extension manage_views {
     
-    // swiftlint:disable:next type_body_length
     class LKIconGroupDetailView_RecentUpdate: UIView, UITableViewDataSource {
         
         var is_collapsed = true
@@ -184,7 +183,8 @@ extension manage_views {
         
         func re_sync() {
             guard let pack: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue,
-                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending)]) else {
+                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending)],
+                                                                           limit: 128) else {
                                                                             print("[E] 无法从 LKPackages 中获得数据，终止同步。")
                                                                             return
             }

@@ -6,10 +6,13 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var table_view: UITableView = UITableView()
     var header_view: UIView?
+    var timer : Timer?
+    
+    var contentView = UIScrollView()
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
@@ -39,9 +42,40 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         table_view.backgroundView?.backgroundColor = .clear
         table_view.backgroundColor = .clear
         self.view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-        view.addSubview(table_view)
+        contentView.contentSize.height = sum_the_height()
+        contentView.contentSize.width = UIScreen.main.bounds.width
+        table_view.isScrollEnabled = false
+        table_view.bounces = false
+        contentView.delegate = self
+        view.addSubview(contentView)
+        contentView.addSubview(table_view)
+        contentView.snp.makeConstraints { (x) in
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.width.equalTo(UIScreen.main.bounds.width)
+            x.top.equalTo(self.view.snp.top)
+            x.bottom.equalTo(self.view.snp.bottom)
+        }
+        
         table_view.snp.makeConstraints { (x) in
-            x.edges.equalTo(self.view.snp.edges)
+            if LKRoot.safe_area_needed {
+                x.top.equalTo(contentView.snp.top).offset(38)
+            } else {
+                x.top.equalTo(contentView.snp.top)
+            }
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.width.equalTo(UIScreen.main.bounds.width)
+            x.height.equalTo(2333)
+        }
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timer_call), userInfo: nil, repeats: true)
+        timer?.fire()
+    }
+    
+    var last_size = CGFloat(0)
+    @objc func timer_call() {
+        if last_size != sum_the_height() {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                self.contentView.contentSize.height = self.sum_the_height()
+            }, completion: nil)
         }
     }
     
@@ -112,6 +146,17 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             ret.backgroundColor = .clear
         default:
             ret.backgroundColor = .clear
+        }
+        return ret
+    }
+    
+    func sum_the_height() -> CGFloat {
+        var ret = CGFloat(0)
+        for i in 0..<5 {
+            ret += do_the_height_math(indexPath: IndexPath(row: i, section: 0))
+        }
+        if LKRoot.safe_area_needed {
+            ret += 38
         }
         return ret
     }

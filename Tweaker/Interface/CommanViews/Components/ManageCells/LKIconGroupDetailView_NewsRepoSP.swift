@@ -341,7 +341,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
         ret.title.text = LKRoot.container_news_repo_DBSync[indexPath.row].name
         ret.link.text = LKRoot.container_news_repo_DBSync[indexPath.row].link
-        //        ret.link.text = "https://never.steal.my/internal/links *)"
+//                ret.link.text = "https://never.steal.my/internal/links *)"
         ret.backgroundColor = .clear
         return ret
     }
