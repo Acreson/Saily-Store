@@ -123,11 +123,13 @@ class app_root_class {
         default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
         try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
-        let default_links = ["https://apt.bingner.com/",
-                             "https://repo.chariz.io/",
-                             "https://repo.nepeta.me/",
-                             "https://repo.dynastic.co/",
-                             "http://repo.packix.com/"]
+        let default_links = [
+            "https://apt.bingner.com/",
+            "https://repo.chariz.io/",
+            "https://repo.nepeta.me/",
+            "https://repo.dynastic.co/"
+        ]
+//                             "http://repo.packix.com/"] Always error when debugging.
         var insert = [DBMPackageRepos]()
         var index = 0
         for item in default_links {
