@@ -183,7 +183,9 @@ extension manage_views {
         
         func re_sync() {
             guard let pack: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue,
-                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending)],
+                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending),
+                                                                                     DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                     DBMPackage.Properties.id.asOrder(by: .ascending)],
                                                                            limit: 128) else {
                                                                             print("[E] 无法从 LKPackages 中获得数据，终止同步。")
                                                                             return

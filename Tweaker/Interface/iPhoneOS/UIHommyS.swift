@@ -83,9 +83,9 @@ class UIHommyS: UIViewController {
         
     } // viewDidLoad
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    } // prefersStatusBarHidden
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    } // prefersStatusBarHidden
     
     func build_loading(in_where: UIView) {
         let loading = UIActivityIndicatorView()

@@ -370,6 +370,7 @@ extension app_opeerator {
                                 packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] = v1
                                 // 因为存在软件包 所以我们更新一下 SIG 字段
                                 packages[this_package["PACKAGE"]!]!.signal = ""
+                                packages[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = this_package["NAME"] ?? ""
                             } else {
                                 // 不存在软件包 创建软件包
                                 let new = DBMPackage()
@@ -379,6 +380,7 @@ extension app_opeerator {
                                 // 新软件包的更新 sig 不需要修改
                                 new.latest_update_time = now
                                 new.version[this_package["VERSION"]!] = v1
+                                new.one_of_the_package_name_lol = this_package["NAME"] ?? ""
                                 packages[this_package["PACKAGE"]!] = new
                             }
                             this_package = [String : String]()
