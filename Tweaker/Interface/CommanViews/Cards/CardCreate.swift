@@ -24,7 +24,7 @@ class UICardView: UIView {
 
 extension common_views {
     
-    func NPCD_create_card(info: DMNewsCard) -> UICardView {
+    func NPCD_create_card(info: DMNewsCard, should_border_if_dark: Bool) -> UICardView {
         let ret = UICardView()
         ret.clipsToBounds = true
         let top_v_insert = UIView()
@@ -102,7 +102,7 @@ extension common_views {
         case .photo_half_with_banner_down_light:
             do {
                 
-                if LKRoot.settings?.use_dark_mode ?? false {
+                if (LKRoot.settings?.use_dark_mode ?? false) && should_border_if_dark {
                     ret.borderWidth = 1
                     ret.borderColor = .gray
                 }
@@ -261,7 +261,7 @@ extension common_views {
         case .river_view_static, .river_view_animate:
             do {
                 
-                if LKRoot.settings?.use_dark_mode ?? false {
+                if (LKRoot.settings?.use_dark_mode ?? false) && should_border_if_dark {
                     ret.borderWidth = 1
                     ret.borderColor = .gray
                 }
@@ -273,7 +273,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
-                    sub_title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
+                    sub_title.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 }
                 let title = UITextView()
                 title.text = info.main_title_string
@@ -283,7 +283,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
                 } else {
-                    title.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
+                    title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 }
                 title.textContainer.maximumNumberOfLines = 2
                 title.textContainer.lineBreakMode = .byWordWrapping

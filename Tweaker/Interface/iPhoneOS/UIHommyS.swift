@@ -273,7 +273,7 @@ class UIHommyS: UIViewController {
                                     x.width.equalTo(card_width)
                                     x.height.equalTo(360 - 20)
                                 })
-                                let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card)
+                                let new_card = LKRoot.ins_view_manager.NPCD_create_card(info: card, should_border_if_dark: true)
                                 new_card.setRadiusINT(radius: LKRoot.settings?.card_radius)
                                 new_card_container.addSubview(new_card)
                                 new_card.snp.makeConstraints({ (x) in
@@ -429,7 +429,7 @@ class UIHommyS: UIViewController {
             }
             
             // 创建一个一摸一样的卡片
-            let nc_view = LKRoot.ins_view_manager.NPCD_create_card(info: button.card_info)
+            let nc_view = LKRoot.ins_view_manager.NPCD_create_card(info: button.card_info, should_border_if_dark: false)
             nc_view.bounds = button.bounds
             nc_view.tag = view_tags.must_remove.rawValue
             // 计算卡片位置
