@@ -6,8 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-let ALL_AT_ASSETS = ["ATAdministration", "ATAdult", "ATAlkaline", "ATAll Packages", "ATApp Addons", "ATApplications", "ATApps", "ATArchiving", "ATBrowse Repositories", "ATCarrier Bundles", "ATChariz", "ATControl Center (Modules)", "ATCydgets", "ATData Storage", "ATDefault", "ATDeveloper", "ATDevelopment", "ATeBooks", "ATEducation", "ATEntertainment", "ATFonts", "ATGames", "ATHunspell_Dictionaries", "ATInstalled Packages", "ATJava", "ATKeyboards", "ATLocalization", "ATLockInfo Addons", "ATLockscreen", "ATMessaging", "ATModMyi (Archive)", "ATMultimedia", "ATNavigation", "ATNetwork", "ATPackaging", "ATPackix", "ATPreference Bundle", "ATProductivity", "ATRecent Packages", "ATRepositories", "ATRingtones", "ATSaurik", "ATScripting", "ATSecurity", "ATSocial", "ATSoundboards", "ATSystem", "ATTerminal", "ATTest", "ATText Editors", "ATThemes", "ATTools", "ATToys", "ATTweaks", "ATUpdated Packages", "ATUtilities", "ATWallpapers", "ATWidgets", "ATZeppelin"]
-
 extension manage_views {
     
     class LKIconGroupDetailView_RandomPackage: UIView, UITableViewDataSource {
@@ -23,7 +21,6 @@ extension manage_views {
         let expend_button = UIButton()
         let collapse_button = UIButton()
         let table_view = UITableView()
-        let icon_stack = common_views.LKIconStack()
         
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -62,7 +59,7 @@ extension manage_views {
             
             // 标题
             let title_view = UILabel()
-            title_view.text = "给你惊喜".localized()
+            title_view.text = "给你惊喜 🎁".localized()
             title_view.textColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
             title_view.font = .boldSystemFont(ofSize: 28)
             contentView.addSubview(title_view)
@@ -98,20 +95,6 @@ extension manage_views {
                 x.left.equalTo(self.contentView.snp.left)
                 x.right.equalTo(self.contentView.snp.right)
                 x.height.equalTo(0.5)
-            }
-            
-            // 图标组
-            icon_stack.images_address.removeAll()
-            icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-            icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-            icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-            icon_stack.apart_init()
-            contentView.addSubview(icon_stack)
-            icon_stack.snp.makeConstraints { (x) in
-                x.right.equalTo(self.contentView.snp.right).offset(RN_ANCHOR_I)
-                x.top.equalTo(self.contentView.snp.top).offset(12)
-                x.width.equalTo(2)
-                x.height.equalTo(33)
             }
             
             contentView.addSubview(table_view_container)
@@ -237,19 +220,10 @@ extension manage_views {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.expend_button.alpha = 0
                     self.collapse_button.alpha = 1
-                    self.icon_stack.alpha = 0
                     self.table_view.alpha = 1
                 }, completion: { (_) in
                     LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.expend_button.isHidden = true
-                    self.icon_stack.isHidden = true
-                    
-                    self.icon_stack.images_address.removeAll()
-                    self.icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-                    self.icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-                    self.icon_stack.images_address.append(ALL_AT_ASSETS.randomElement()!)
-                    self.icon_stack.apart_init()
-                    
                     UIApplication.shared.endIgnoringInteractionEvents()
                 })
             }
@@ -267,8 +241,6 @@ extension manage_views {
             // 起始状态
             expend_button.alpha = 0
             expend_button.isHidden = false
-            icon_stack.alpha = 0
-            icon_stack.isHidden = false
             UIApplication.shared.beginIgnoringInteractionEvents()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
@@ -277,7 +249,6 @@ extension manage_views {
                     (self.from_father_view as? UITableView)?.endUpdates()
                     self.collapse_button.alpha = 0
                     self.expend_button.alpha = 1
-                    self.icon_stack.alpha = 1
                     self.table_view.alpha = 0
                 }, completion: { (_) in
                     LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
@@ -334,6 +305,7 @@ extension manage_views.LKIconGroupDetailView_RandomPackage: UITableViewDelegate 
                 ret.icon.image = UIImage(named: "ATCydiaSource")
             }
         }
+        ret.backgroundColor = .clear
         return ret
     }
     

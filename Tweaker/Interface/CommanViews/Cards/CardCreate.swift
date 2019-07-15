@@ -24,7 +24,7 @@ class UICardView: UIView {
 
 extension common_views {
     
-    func NPCD_create_card(info: DMNewsCard, should_border_if_dark: Bool) -> UICardView {
+    func NRCD_create_card(info: DMNewsCard, should_border_if_dark: Bool) -> UICardView {
         let ret = UICardView()
         ret.clipsToBounds = true
         let top_v_insert = UIView()

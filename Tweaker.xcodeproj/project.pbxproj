@@ -71,6 +71,7 @@
 		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */; };
 		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
 		B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */; };
+		B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,6 +146,7 @@
 		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Installed.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
 		B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppTapp.xcassets; sourceTree = "<group>"; };
+		B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKNonWorkSearchBar.swift; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,6 +359,7 @@
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
+				B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */,
 				B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */,
 			);
 			path = Views;
@@ -624,6 +627,7 @@
 				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
 				B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */,
+				B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
 				B493CC2522DB44F800D31A47 /* UISearchS.swift in Sources */,
 				B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */,

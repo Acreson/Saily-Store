@@ -25,7 +25,7 @@ class UICardDetailView: UIView {
 
 extension common_views {
     
-    func NPCD_create_card_detail(info: String) -> UICardDetailView {
+    func NRCD_create_card_detail(info: String) -> UICardDetailView {
         let ret = UICardDetailView()
         
         var last_view = UIView()
@@ -78,7 +78,7 @@ extension common_views {
                 if content_body.hasSuffix("\n") {
                     content_body = content_body.dropLast().to_String()
                 }
-                let return_this_shit = NPCD_create_card_detail_build_single(type: content_head, body: content_body, vfsl: content_vfsl)
+                let return_this_shit = NRCD_create_card_detail_build_single(type: content_head, body: content_body, vfsl: content_vfsl)
                 ret.addSubview(return_this_shit.0)
                 return_this_shit.0.snp.makeConstraints { (x) in
                     x.top.equalTo(last_view.snp.bottom).offset(8)
@@ -95,7 +95,7 @@ extension common_views {
         }
         
         // 底层分割
-        let return_this_shit = NPCD_create_card_detail_build_single(type: .text, body: "\n\n\n", vfsl: [])
+        let return_this_shit = NRCD_create_card_detail_build_single(type: .text, body: "\n\n\n", vfsl: [])
         ret.addSubview(return_this_shit.0)
         return_this_shit.0.snp.makeConstraints { (x) in
             x.top.equalTo(last_view.snp.bottom).offset(8)
@@ -111,7 +111,7 @@ extension common_views {
         return ret
     }
     
-    func NPCD_create_card_detail_build_single(type: card_detail_type, body: String, vfsl: [String]) -> (UIView, CGFloat) {
+    func NRCD_create_card_detail_build_single(type: card_detail_type, body: String, vfsl: [String]) -> (UIView, CGFloat) {
         let ret = UIView()
         var lenth = CGFloat(2)
         
@@ -245,5 +245,5 @@ extension common_views {
         }
         
         return (ret, lenth)
-    } // NPCD_create_card_detail_build_single
+    } // NRCD_create_card_detail_build_single
 }

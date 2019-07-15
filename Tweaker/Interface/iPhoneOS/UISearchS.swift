@@ -102,16 +102,55 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         case 0:        // 处理一下头条
             let header = LKRoot.ins_view_manager.create_AS_home_header_view(title_str: "搜索中心".localized(),
                                                                             sub_str: "在这里，寻找可能".localized(),
-                                                                            image_str: "NAMED:Search")
+                                                                            image_str: "NAMED:SearchIcon",
+                                                                            sep_enabled: false)
             ret.contentView.addSubview(header)
             header.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
             ret.backgroundColor = .clear
         case 1:
+            let fake_search = common_views.LKNonWorkSearchBar()
+            fake_search.apart_init(txt: "查找插件/文章".localized())
+            let real_search = UIButton()
+            ret.addSubview(fake_search)
+            ret.addSubview(real_search)
+            real_search.addTarget(self, action: #selector(real_search_call), for: .touchUpInside)
+            fake_search.snp.makeConstraints { (x) in
+                x.left.equalTo(ret.snp.left).offset(24)
+                x.right.equalTo(ret.snp.right).offset(-24)
+                x.top.equalTo(ret.snp.top) // .offset(2)
+                x.bottom.equalTo(ret.snp.bottom) // .offset(-2)
+            }
+            real_search.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.snp.edges)
+            }
             ret.backgroundColor = .clear
         case 2:
-            ret.backgroundColor = .random
+            if !(LKRoot.settings?.use_dark_mode ?? false) {
+                let img = UIImageView(image: UIImage(named: "DownShade"))
+                img.contentMode = .scaleToFill
+                ret.addSubview(img)
+                img.alpha = 0.1666
+                img.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(-28)
+                    x.right.equalTo(ret.snp.right).offset(28)
+                    x.centerY.equalTo(ret.snp.centerY)
+                    x.height.equalTo(10)
+                }
+            } else {
+                let img = UIImageView(image: UIImage(named: "Gary"))
+                img.contentMode = .scaleToFill
+                img.alpha = 0.3
+                ret.addSubview(img)
+                img.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(-28)
+                    x.right.equalTo(ret.snp.right).offset(28)
+                    x.centerY.equalTo(ret.snp.centerY)
+                    x.height.equalTo(0.5)
+                }
+            }
+            ret.backgroundColor = .clear
         case 3:
             let package_repo_manager = LKRoot.manager_reg.rp
             package_repo_manager.apart_init(father: tableView)
@@ -141,7 +180,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0: return 110
-        case 1: return 20
+        case 1: return 35
         case 2: return 40
         case 3:
             if LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] ?? true {
@@ -159,6 +198,10 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             return CGFloat(count) * 62 + 1024
         default: return 0
         }
+    }
+    
+    @objc func real_search_call() {
+        
     }
     
 }

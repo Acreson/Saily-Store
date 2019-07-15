@@ -202,6 +202,7 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
                 all_button.setTitle("查看最近更新的全部软件包".localized(), for: .normal)
                 all_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_one"), for: .normal)
             }
+            new.backgroundColor = .clear
             all_button.setTitleColor(.darkGray, for: .highlighted)
             all_button.titleLabel?.font = .boldSystemFont(ofSize: 16)
             new.addSubview(all_button)

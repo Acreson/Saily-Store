@@ -8,7 +8,7 @@
 
 extension common_views {
     
-    func create_AS_home_header_view(title_str: String, sub_str: String, image_str: String) -> UIView {
+    func create_AS_home_header_view(title_str: String, sub_str: String, image_str: String, sep_enabled: Bool = true) -> UIView {
                                                     // 创建 View
         let ret_view = UIView()
         let sub_title = UILabel()
@@ -18,9 +18,12 @@ extension common_views {
         ret_view.addSubview(sub_title)
         ret_view.addSubview(main_title)
         ret_view.addSubview(head_icon)
-        ret_view.addSubview(seperator)
+        if sep_enabled {
+            ret_view.addSubview(seperator)
+        }
                                                     // 写入内容
         var sub_title_text = sub_str
+        
         if sub_str == "LKSIG-DATE" {
             sub_title_text = ""
             // 获取日期
@@ -71,13 +74,15 @@ extension common_views {
             x.height.equalTo(40)
         }
         
-        seperator.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        seperator.alpha = 0.5
-        seperator.snp.makeConstraints { (x) in
-            x.left.equalTo(main_title.snp.left)
-            x.right.equalTo(head_icon.snp.right)
-            x.top.equalTo(main_title.snp.bottom).offset(12)
-            x.height.equalTo(0.5)
+        if sep_enabled {
+            seperator.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            seperator.alpha = 0.5
+            seperator.snp.makeConstraints { (x) in
+                x.left.equalTo(main_title.snp.left)
+                x.right.equalTo(head_icon.snp.right)
+                x.top.equalTo(main_title.snp.bottom).offset(12)
+                x.height.equalTo(0.5)
+            }
         }
         
         return ret_view
