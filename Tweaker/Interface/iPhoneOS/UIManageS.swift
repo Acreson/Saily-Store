@@ -138,7 +138,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 4:
-            let package_repo_manager = LKRoot.manager_reg.ru
+            let package_repo_manager = LKRoot.manager_reg.ya
             package_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(package_repo_manager)
             package_repo_manager.snp.makeConstraints { (x) in
@@ -195,14 +195,15 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 return 171 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
             }
         case 4:
-            if LKRoot.container_manage_cell_status["RU_IS_COLLAPSED"] ?? true {
-                return 157
-            } else {
-                if LKRoot.container_recent_update.count > 12 {
-                    return 157 + 12 * 62
-                }
-                return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
-            }
+            return 157
+//            if LKRoot.container_manage_cell_status["YA_IS_COLLAPSED"] ?? true {
+//                return 157
+//            } else {
+//                if LKRoot.container_recent_update.count > 12 {
+//                    return 157 + 12 * 62
+//                }
+//                return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
+//            }
         case 5:
             return 728 + 633
         default: return 180

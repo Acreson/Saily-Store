@@ -65,9 +65,12 @@
 		B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48731FE22D6558500BADE62 /* UIManageL.swift */; };
 		B493CC2522DB44F800D31A47 /* UISearchS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2422DB44F800D31A47 /* UISearchS.swift */; };
 		B493CC2722DB4B6700D31A47 /* LKSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2622DB4B6700D31A47 /* LKSearchView.swift */; };
-		B493CC2922DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2822DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift */; };
 		B493CC2B22DB519B00D31A47 /* OperatorGetPackageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */; };
 		B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */; };
+		B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */; };
+		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */; };
+		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
+		B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -136,9 +139,12 @@
 		B48731FE22D6558500BADE62 /* UIManageL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIManageL.swift; sourceTree = "<group>"; };
 		B493CC2422DB44F800D31A47 /* UISearchS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchS.swift; sourceTree = "<group>"; };
 		B493CC2622DB4B6700D31A47 /* LKSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSearchView.swift; sourceTree = "<group>"; };
-		B493CC2822DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
 		B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetPackageInfo.swift; sourceTree = "<group>"; };
 		B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackages.swift; sourceTree = "<group>"; };
+		B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
+		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Installed.swift; sourceTree = "<group>"; };
+		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
+		B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppTapp.xcassets; sourceTree = "<group>"; };
 		B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tweaker.release.xcconfig"; path = "Target Support Files/Pods-Tweaker/Pods-Tweaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,6 +277,7 @@
 			children = (
 				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
 				ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */,
+				B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */,
 				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
 			);
 			path = AssSets;
@@ -361,7 +368,9 @@
 				B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */,
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 				B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */,
-				B493CC2822DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift */,
+				B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */,
+				B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */,
+				B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */,
 				B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */,
 				B46EE49E22D611CD000C6F6D /* LKRepoView.swift */,
 				B493CC2622DB4B6700D31A47 /* LKSearchView.swift */,
@@ -453,6 +462,7 @@
 				04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */,
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
+				B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */,
 				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
 				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
@@ -628,7 +638,6 @@
 				B493CC2722DB4B6700D31A47 /* LKSearchView.swift in Sources */,
 				ABFBA818229D7DC40070A17E /* Global.swift in Sources */,
 				ABFBA81F229D7DC40070A17E /* UILabelExtensions.swift in Sources */,
-				B493CC2922DB4C2200D31A47 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */,
 				ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */,
 				B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
@@ -650,10 +659,13 @@
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
+				B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift in Sources */,
 				AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */,
 				ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,
+				B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */,
 				ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */,
+				B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */,
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
 				ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */,
 				ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */,

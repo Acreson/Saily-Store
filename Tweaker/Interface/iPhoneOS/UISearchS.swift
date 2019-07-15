@@ -6,10 +6,13 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var table_view: UITableView = UITableView()
     var header_view: UIView?
+    var timer : Timer?
+    
+    var contentView = UIScrollView()
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
@@ -27,14 +30,58 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource {
         table_view.backgroundView?.backgroundColor = .clear
         table_view.backgroundColor = .clear
         self.view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-        view.addSubview(table_view)
+        contentView.contentSize.height = sum_the_height()
+        contentView.contentSize.width = UIScreen.main.bounds.width
+        table_view.isScrollEnabled = false
+        table_view.bounces = false
+        contentView.delegate = self
+        contentView.showsVerticalScrollIndicator = false
+        contentView.showsHorizontalScrollIndicator = false
+        view.addSubview(contentView)
+        contentView.addSubview(table_view)
+        contentView.snp.makeConstraints { (x) in
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.width.equalTo(UIScreen.main.bounds.width)
+            x.top.equalTo(self.view.snp.top)
+            x.bottom.equalTo(self.view.snp.bottom)
+        }
+        
         table_view.snp.makeConstraints { (x) in
-            x.edges.equalTo(self.view.snp.edges)
+            if LKRoot.safe_area_needed {
+                x.top.equalTo(contentView.snp.top).offset(38)
+            } else {
+                x.top.equalTo(contentView.snp.top)
+            }
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.width.equalTo(UIScreen.main.bounds.width)
+            x.height.equalTo(2333)
+        }
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timer_call), userInfo: nil, repeats: true)
+        timer?.fire()
+    }
+    
+    var last_size = CGFloat(0)
+    @objc func timer_call() {
+        if last_size != sum_the_height() {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                self.contentView.contentSize.height = self.sum_the_height()
+            }, completion: nil)
         }
     }
     
+    func sum_the_height() -> CGFloat {
+        var ret = CGFloat(0)
+        for i in 0...5 {
+            ret += do_the_height_math(indexPath: IndexPath(row: i, section: 0))
+        }
+        if LKRoot.safe_area_needed {
+            ret += 38
+        }
+        return ret - 960
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,15 +107,29 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource {
             header.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
-            ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 1:
-            ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 2:
+            ret.backgroundColor = .random
+        case 3:
+            let package_repo_manager = LKRoot.manager_reg.rp
+            package_repo_manager.apart_init(father: tableView)
+            ret.contentView.addSubview(package_repo_manager)
+            package_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
-        case 3:
+        case 4:
+            ret.backgroundColor = .clear
+        case 5:
+            let package_repo_manager = LKRoot.manager_reg.ru
+            package_repo_manager.apart_init(father: tableView)
+            ret.contentView.addSubview(package_repo_manager)
+            package_repo_manager.snp.makeConstraints { (x) in
+                x.edges.equalTo(ret.contentView.snp.edges)
+            }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         default:
@@ -80,8 +141,23 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0: return 110
-        case 1: return 40
-        default: return 180
+        case 1: return 20
+        case 2: return 40
+        case 3:
+            if LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] ?? true {
+                return 171
+            } else {
+                return 171 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
+            }
+        case 4: return 20
+        case 5:
+            var count = LKRoot.container_recent_update.count
+            if count > LKRoot.manager_reg.ru.limit {
+                count = LKRoot.manager_reg.ru.limit
+            }
+            count += 1
+            return CGFloat(count) * 62 + 1024
+        default: return 0
         }
     }
     

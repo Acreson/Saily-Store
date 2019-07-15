@@ -49,6 +49,8 @@ class app_root_class {
     var container_packages_DBSync           = [DBMPackage]()                // 软件包缓存
     var container_recent_update             = [DBMPackage]()                // 最近更新缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
+    var container_packages_installed_DBSync = [DBMPackage]()                // 已安装软件包
+    var container_packages_randomfun_DBSync = [DBMPackage]()                // 已安装软件包
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展

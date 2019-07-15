@@ -30,7 +30,9 @@ class manage_views {
 class manage_view_reg {
     let nr = manage_views.LKIconGroupDetailView_NewsRepoSP()
     let pr = manage_views.LKIconGroupDetailView_PackageRepoSP()
+    let ya = manage_views.LKIconGroupDetailView_Installed()
     let ru = manage_views.LKIconGroupDetailView_RecentUpdate()
+    let rp = manage_views.LKIconGroupDetailView_RandomPackage()
     let se = manage_views.LKIconGroupDetailView_Settings()
 }
 

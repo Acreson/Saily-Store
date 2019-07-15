@@ -140,7 +140,16 @@ extension app_opeerator {
         let session = UUID().uuidString
         LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_SYNC"] = session
         CallB(operation_result.success.rawValue)
-        LKRoot.queue_dispatch.async {
+        LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 1) {
+            // 重新刷新以免失败的软件源继续参与刷新
+            if let repo: [DBMPackageRepos] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackageRepos.rawValue,
+                                                                             orderBy: [DBMPackageRepos.Properties.sort_id.asOrder(by: .ascending)]) {
+                var new = [DMPackageRepos]()
+                for item in LKRoot.container_package_repo where self.PR_should_add_this_repo(repo: item, root_db: repo) {
+                    new.append(item)
+                }
+                LKRoot.container_package_repo = new
+            }
             self.PR_download_all_package(session_id: session, sync_all: sync_all) { (_) in
                 
             }
@@ -444,24 +453,15 @@ extension app_opeerator {
         LKRoot.container_string_store["REQUEST_SEARCH_TAB_REBUILD"] = "TRUE"
         
         LKRoot.manager_reg.ru.re_sync()
-        if LKRoot.manager_reg.ru.initd && !LKRoot.manager_reg.ru.is_collapsed {
+        if LKRoot.manager_reg.ru.initd {
             DispatchQueue.main.async {
-                UIApplication.shared.beginIgnoringInteractionEvents()
+                LKRoot.manager_reg.ru.update_interface()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                LKRoot.manager_reg.ru.collapse_self()
-            }
-            if LKRoot.container_recent_update.count > 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                    LKRoot.manager_reg.ru.expend_self()
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    UIApplication.shared.endIgnoringInteractionEvents()
-                }
-            } else {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                    UIApplication.shared.endIgnoringInteractionEvents()
-                }
+        }
+        LKRoot.manager_reg.rp.re_sync()
+        if LKRoot.manager_reg.rp.initd {
+            DispatchQueue.main.async {
+                LKRoot.manager_reg.rp.update_interface()
             }
         }
         
@@ -475,6 +475,13 @@ extension app_opeerator {
         
         print("[*] 更新软件包完成")
         CallB(operation_result.success.rawValue)
+    }
+    
+    func PR_should_add_this_repo(repo: DMPackageRepos, root_db: [DBMPackageRepos]) -> Bool {
+        for item in root_db where (item.link ?? UUID().uuidString) == repo.link {
+            return true
+        }
+        return false
     }
     
     func PR_should_add_this(package: DBMPackage) -> Bool {
