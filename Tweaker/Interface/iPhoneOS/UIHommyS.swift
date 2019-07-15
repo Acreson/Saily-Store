@@ -18,6 +18,7 @@ class UIHommyS: UIViewController {
     var card_view: UICardView?
     var card_text_view: UIView?
     var card_details_vseffect_view: UIView?
+    var close_image = UIImageView()
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
@@ -454,11 +455,16 @@ class UIHommyS: UIViewController {
             close_image.contentMode = .center
             UIApplication.shared.keyWindow!.addSubview(close_image)
             close_image.snp.makeConstraints { (x) in
-                x.top.equalTo(self.view.snp.top).offset(18)
+                if LKRoot.safe_area_needed {
+                    x.top.equalTo(self.view.snp.top).offset(36)
+                } else {
+                    x.top.equalTo(self.view.snp.top).offset(18)
+                }
                 x.right.equalTo(self.view.snp.right).offset(-18)
                 x.width.equalTo(28)
                 x.height.equalTo(28)
                 close_image.setRadiusCGF(radius: 14)
+                self.close_image = close_image
             }
             let close_button = UIButton()
             close_button.addTarget(self, action: #selector(close_button_handler(sender:)), for: .touchUpInside)
@@ -681,6 +687,7 @@ class UIHommyS: UIViewController {
                                                                   width: 500, height: UIScreen.main.bounds.height - 66)
                     self.card_details_scroll_view?.contentOffset = .init(x: 0, y: 0)
                     //                    self.card_details_scroll_view?.alpha = 0
+                    self.close_image.alpha = 0
                 })
             }
         } else {

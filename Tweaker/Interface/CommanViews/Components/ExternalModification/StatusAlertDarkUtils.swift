@@ -22,7 +22,7 @@ import UIKit
         case showMultiple
     }
     
-    @objc(StatusAlertAppearance)
+//    @objc(StatusAlertAppearance)
     public final class Appearance: NSObject {
         
         @objc public static let common: Appearance = Appearance()
@@ -70,7 +70,7 @@ import UIKit
         case bottom
     }
     
-    @objc (StatusAlertSizesAndDistances)
+//    @objc (StatusAlertSizesAndDistances)
     public final class SizesAndDistances: NSObject {
         
         @objc public static let common: SizesAndDistances = SizesAndDistances()

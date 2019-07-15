@@ -441,6 +441,7 @@ extension app_opeerator {
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
         LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "FALSE"
+        LKRoot.container_string_store["REQUEST_SEARCH_TAB_REBUILD"] = "TRUE"
         
         LKRoot.manager_reg.ru.re_sync()
         if LKRoot.manager_reg.ru.initd && !LKRoot.manager_reg.ru.is_collapsed {
@@ -463,6 +464,10 @@ extension app_opeerator {
                 }
             }
         }
+        
+        // 同步一次数据
+        let read_again: [DBMPackage]? = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue)
+        LKRoot.container_packages = read_again ?? []
         
         print("[*] 更新软件包完成")
         CallB(operation_result.success.rawValue)

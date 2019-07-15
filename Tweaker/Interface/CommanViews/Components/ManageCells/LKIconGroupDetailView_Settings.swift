@@ -248,7 +248,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 x.right.equalTo(ret.contentView.snp.right).offset(-60)
             }
             let switcher = UISwitch()
-            switcher.tintColor = .black
+            switcher.tintColor = .white
             switcher.onTintColor = .black
             switcher.transform = CGAffineTransform(scaleX: 0.66, y: 0.66)
             switcher.setOn(LKRoot.settings?.use_dark_mode ?? false, animated: true)

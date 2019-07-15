@@ -101,7 +101,13 @@ extension common_views {
             }
         case .photo_half_with_banner_down_light:
             do {
-                ret.backgroundColor = .white
+                
+                if LKRoot.settings?.use_dark_mode ?? false {
+                    ret.borderWidth = 1
+                    ret.borderColor = .gray
+                }
+                
+                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
                 // 底下的文字
                 let des_str = UILabel()
                 des_str.text = info.description_string
@@ -109,7 +115,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.description_string_color) {
                     des_str.textColor = color
                 } else {
-                    des_str.textColor = .gray
+                    des_str.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 }
                 
                 ret.addSubview(des_str)
@@ -125,7 +131,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
-                    sub_title.textColor = .gray
+                    sub_title.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 }
                 let title = UITextView()
                 title.text = info.main_title_string
@@ -135,7 +141,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
                 } else {
-                    title.textColor = .black
+                    title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 }
                 title.textContainer.maximumNumberOfLines = 2
                 title.textContainer.lineBreakMode = .byWordWrapping
@@ -254,14 +260,20 @@ extension common_views {
             }
         case .river_view_static, .river_view_animate:
             do {
-                ret.backgroundColor = .white
+                
+                if LKRoot.settings?.use_dark_mode ?? false {
+                    ret.borderWidth = 1
+                    ret.borderColor = .gray
+                }
+                
+                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
                 sub_title.font = .boldSystemFont(ofSize: 12)
                 if let color = UIColor(hexString: info.sub_title_string_color) {
                     sub_title.textColor = color
                 } else {
-                    sub_title.textColor = .gray
+                    sub_title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
                 }
                 let title = UITextView()
                 title.text = info.main_title_string
@@ -271,7 +283,7 @@ extension common_views {
                 if let color = UIColor(hexString: info.main_title_string) {
                     title.textColor = color
                 } else {
-                    title.textColor = .black
+                    title.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
                 }
                 title.textContainer.maximumNumberOfLines = 2
                 title.textContainer.lineBreakMode = .byWordWrapping
