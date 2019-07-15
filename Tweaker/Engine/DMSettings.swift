@@ -15,6 +15,8 @@ class DBMSettings: WCDBSwift.TableCodable {
     var fake_UDID: String?
     var real_UDID: String?
     
+    var use_dark_mode = false
+    
     var network_timeout: Int?
     var card_radius: Int = 8
     
@@ -24,7 +26,8 @@ class DBMSettings: WCDBSwift.TableCodable {
         case fake_UDID 
         case real_UDID 
         case network_timeout 
-        case card_radius 
+        case card_radius
+        case use_dark_mode
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         

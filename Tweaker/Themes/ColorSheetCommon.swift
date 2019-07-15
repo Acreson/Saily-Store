@@ -15,11 +15,14 @@ class color_sheet {
     enum color_sheet_id: Int {
         case light = 0x00
         case dark_blue = 0x10
-        case dark_black = 0x11
     }
     
-    func iOS13_init() {
-        // 处理一下事情
+    func reFit() {
+        if LKRoot.settings?.use_dark_mode ?? false {
+            current_color_sheet = .dark_blue
+        } else {
+            current_color_sheet = .light
+        }
     }
     
     func read_a_color(_ which: String) -> UIColor {

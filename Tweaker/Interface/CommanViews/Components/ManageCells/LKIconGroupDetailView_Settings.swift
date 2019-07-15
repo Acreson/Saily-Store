@@ -251,6 +251,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             switcher.tintColor = .black
             switcher.onTintColor = .black
             switcher.transform = CGAffineTransform(scaleX: 0.66, y: 0.66)
+            switcher.setOn(LKRoot.settings?.use_dark_mode ?? false, animated: true)
             ret.contentView.addSubview(switcher)
             switcher.snp.makeConstraints { (x) in
                 x.centerY.equalTo(new.snp.centerY).offset(-0.5)
@@ -431,6 +432,8 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     }
     
     @objc func refresh_np() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         UIApplication.shared.beginIgnoringInteractionEvents()
         IHProgressHUD.show()
         LKRoot.queue_dispatch.async {
@@ -448,6 +451,8 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     }
     
     @objc func refresh_pack() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         UIApplication.shared.beginIgnoringInteractionEvents()
         IHProgressHUD.show()
         LKRoot.queue_dispatch.async {
@@ -473,6 +478,8 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     }
     
     @objc func import_news_repo() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         let read = String().readClipBoard().cleanRN()
         var read_out = [String]()
         var msg_str = "准备导入如下的新闻源\n".localized()
@@ -531,6 +538,8 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     }
     
     @objc func import_package_repo() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         let read = String().readClipBoard().cleanRN()
         var read_out = [String]()
         var msg_str = "准备导入如下的软件源\n".localized()
@@ -580,11 +589,67 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         alert.presentToCurrentViewController()
     }
     
-    @objc func switch_dark_mode() {
-        
+    @objc func switch_dark_mode(sender: UISwitch) {
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred()
+        LKRoot.settings?.use_dark_mode = sender.isOn
+        let new = DBMSettings()
+        new.use_dark_mode = sender.isOn
+        try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKSettings.rawValue, on: [DBMSettings.Properties.use_dark_mode], with: new)
+        let alert = UIAlertController(title: "成功".localized(), message: "你的操作已经保存，请考虑重新启动本软件来应用设置。".localized(), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "重启".localized(), style: .destructive, handler: { (_) in
+            exit(0)
+        }))
+        alert.addAction(UIAlertAction(title: "稍后", style: .default, handler: nil))
+        alert.presentToCurrentViewController()
     }
     
     @objc func set_gobal_round_rate() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        let alert = UIAlertController(title: "全局圆角".localized(),
+                                      message: "请在这里输入一个整数".localized(),
+                                      preferredStyle: .alert)
+        var inputTextField: UITextField?
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "8"
+            inputTextField = textField
+        })
+        alert.addAction(UIAlertAction(title: "取消".localized(), style: .cancel, handler: { (_) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "确认".localized(), style: .destructive, handler: { (_) in
+            let read = inputTextField?.text ?? "8"
+            if let int = Int(read) {
+                if int > 20 || int < 0 {
+                    let statusAlert = StatusAlert()
+                    statusAlert.image = UIImage(named: "Warning")
+                    statusAlert.title = "失败".localized()
+                    statusAlert.message = "请输入一个小于 20 并大于 0 的值。".localized()
+                    statusAlert.canBePickedOrDismissed = true
+                    statusAlert.showInKeyWindow()
+                } else {
+                    let new = DBMSettings()
+                    new.card_radius = int
+                    try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKSettings.rawValue, on: [DBMSettings.Properties.card_radius], with: new)
+                    let alert = UIAlertController(title: "成功".localized(), message: "你的操作已经保存，请考虑重新启动本软件来应用设置。".localized(), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "重启".localized(), style: .destructive, handler: { (_) in
+                        exit(0)
+                    }))
+                    alert.addAction(UIAlertAction(title: "稍后", style: .default, handler: nil))
+                    alert.presentToCurrentViewController()
+                }
+            } else {
+                let statusAlert = StatusAlert()
+                statusAlert.image = UIImage(named: "Warning")
+                statusAlert.title = "失败".localized()
+                statusAlert.message = "请输入一个整数".localized()
+                statusAlert.canBePickedOrDismissed = true
+                statusAlert.showInKeyWindow()
+            }
+        }))
+        alert.presentToCurrentViewController()
         
     }
     

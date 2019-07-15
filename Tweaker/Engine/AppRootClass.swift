@@ -85,8 +85,8 @@ class app_root_class {
             settings = read_try?.first!
         }
 
-        // iOS 13 黑暗模式初始化
-        ins_color_manager.iOS13_init()
+        // 黑暗模式初始化
+        ins_color_manager.reFit()
         
         // 发送到下载处理引擎
         queue_dispatch.async {
