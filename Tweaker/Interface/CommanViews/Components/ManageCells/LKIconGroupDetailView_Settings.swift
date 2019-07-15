@@ -336,7 +336,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             return ret
         case 12:
             let new = UIButton()
-            new.setTitle("获取 - 设备信息".localized(), for: .normal)
+            new.setTitle("查看 - 设备信息".localized(), for: .normal)
             new.titleLabel?.font = .systemFont(ofSize: 18)
             new.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_three"), for: .normal)
             new.setTitleColor(touched_color, for: .highlighted)
@@ -353,7 +353,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             return ret
         case 13:
             let new = UIButton()
-            new.setTitle("获取 - 软件信息".localized(), for: .normal)
+            new.setTitle("查看 - 软件信息".localized(), for: .normal)
             new.titleLabel?.font = .systemFont(ofSize: 18)
             new.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_three"), for: .normal)
             new.setTitleColor(touched_color, for: .highlighted)
@@ -370,7 +370,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             return ret
         case 14:
             let new = UIButton()
-            new.setTitle("帮助 - 联系开发者".localized(), for: .normal)
+            new.setTitle("查看 - 软件帮助手册".localized(), for: .normal)
             new.titleLabel?.font = .systemFont(ofSize: 18)
             new.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_three"), for: .normal)
             new.setTitleColor(touched_color, for: .highlighted)
@@ -605,6 +605,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     }
     
     @objc func set_gobal_round_rate() {
+        
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
         
@@ -655,6 +656,52 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
     
     @objc func set_gobal_timeout() {
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
+        let alert = UIAlertController(title: "网络超时".localized(),
+                                      message: "请在这里输入一个整数".localized(),
+                                      preferredStyle: .alert)
+        var inputTextField: UITextField?
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.placeholder = "8"
+            inputTextField = textField
+        })
+        alert.addAction(UIAlertAction(title: "取消".localized(), style: .cancel, handler: { (_) in
+            
+        }))
+        alert.addAction(UIAlertAction(title: "确认".localized(), style: .destructive, handler: { (_) in
+            let read = inputTextField?.text ?? "8"
+            if let int = Int(read) {
+                if int > 180 || int < 0 {
+                    let statusAlert = StatusAlert()
+                    statusAlert.image = UIImage(named: "Warning")
+                    statusAlert.title = "失败".localized()
+                    statusAlert.message = "请输入一个小于 180 并大于 0 的值。".localized()
+                    statusAlert.canBePickedOrDismissed = true
+                    statusAlert.showInKeyWindow()
+                } else {
+                    let new = DBMSettings()
+                    new.network_timeout = int
+                    try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKSettings.rawValue, on: [DBMSettings.Properties.network_timeout], with: new)
+                    LKRoot.settings?.network_timeout = int
+                    let statusAlert = StatusAlert()
+                    statusAlert.image = UIImage(named: "Done")
+                    statusAlert.title = "成功".localized()
+                    statusAlert.message = "你的操作已经保存。".localized()
+                    statusAlert.canBePickedOrDismissed = true
+                    statusAlert.showInKeyWindow()
+                }
+            } else {
+                let statusAlert = StatusAlert()
+                statusAlert.image = UIImage(named: "Warning")
+                statusAlert.title = "失败".localized()
+                statusAlert.message = "请输入一个整数".localized()
+                statusAlert.canBePickedOrDismissed = true
+                statusAlert.showInKeyWindow()
+            }
+        }))
+        alert.presentToCurrentViewController()
     }
     
     @objc func get_device_udid() {
