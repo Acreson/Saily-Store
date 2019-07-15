@@ -6,7 +6,6 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
-// swiftlint:disable:next type_body_length
 class UIHommyL: UIViewController {
     
 }

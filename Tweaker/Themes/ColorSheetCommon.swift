@@ -37,10 +37,10 @@ class color_sheet {
                 return .black
             }
             return ret
-        default:
-            print("[***] 还没写实现，赶紧补一下吧。")
+//        default:
+//            print("[***] 还没写实现，赶紧补一下吧。")
         }
-        return .black
+//        return .black
     }
  
     let CS_light = [

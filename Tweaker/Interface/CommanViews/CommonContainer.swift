@@ -37,3 +37,21 @@ class manage_view_reg {
 class cell_views {
     // 啥都不用干
 }
+
+func presentStatusAlert(imgName: String, title: String, msg: String) {
+    if LKRoot.settings?.use_dark_mode ?? false {
+        let statusAlert = StatusAlertDark()
+        statusAlert.image = UIImage(named: imgName)
+        statusAlert.title = title
+        statusAlert.message = msg
+        statusAlert.canBePickedOrDismissed = true
+        statusAlert.showInKeyWindow()
+    } else {
+        let statusAlert = StatusAlert()
+        statusAlert.image = UIImage(named: imgName)
+        statusAlert.title = title
+        statusAlert.message = msg
+        statusAlert.canBePickedOrDismissed = true
+        statusAlert.showInKeyWindow()
+    }
+}

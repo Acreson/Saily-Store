@@ -53,6 +53,8 @@
 		B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */; };
 		B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */; };
 		B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */; };
+		B411A86922DBFE15004CB35B /* StatusAlertDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86722DBFE15004CB35B /* StatusAlertDark.swift */; };
+		B411A86A22DBFE15004CB35B /* StatusAlertDarkUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86822DBFE15004CB35B /* StatusAlertDarkUtils.swift */; };
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
@@ -122,6 +124,8 @@
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
 		B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Settings.swift; sourceTree = "<group>"; };
 		B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
+		B411A86722DBFE15004CB35B /* StatusAlertDark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusAlertDark.swift; sourceTree = "<group>"; };
+		B411A86822DBFE15004CB35B /* StatusAlertDarkUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusAlertDarkUtils.swift; sourceTree = "<group>"; };
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
@@ -210,6 +214,7 @@
 				B46EE49722D5E04B000C6F6D /* Views */,
 				B46EE49822D5E053000C6F6D /* ManageCells */,
 				B470FA9322D4515D00C4A215 /* LKTVCell */,
+				B411A86622DBFE0D004CB35B /* ExternalModification */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -328,6 +333,15 @@
 				ABE6DCF1229E8BD600D18D9E /* Cards */,
 			);
 			path = CommanViews;
+			sourceTree = "<group>";
+		};
+		B411A86622DBFE0D004CB35B /* ExternalModification */ = {
+			isa = PBXGroup;
+			children = (
+				B411A86722DBFE15004CB35B /* StatusAlertDark.swift */,
+				B411A86822DBFE15004CB35B /* StatusAlertDarkUtils.swift */,
+			);
+			path = ExternalModification;
 			sourceTree = "<group>";
 		};
 		B46EE49722D5E04B000C6F6D /* Views */ = {
@@ -630,6 +644,7 @@
 				AB198F83229EDEB8003A78BE /* OperatorNewsRepo.swift in Sources */,
 				AB198F81229EDC74003A78BE /* CommonOperator.swift in Sources */,
 				ABE6DCF8229E8F1200D18D9E /* CardTypeControl.swift in Sources */,
+				B411A86922DBFE15004CB35B /* StatusAlertDark.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
@@ -643,6 +658,7 @@
 				ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */,
 				ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */,
 				B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */,
+				B411A86A22DBFE15004CB35B /* StatusAlertDarkUtils.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

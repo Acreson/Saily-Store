@@ -350,12 +350,9 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
         
         let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
             LKRoot.container_recent_update[index.row].id.pushClipBoard()
-            let statusAlert = StatusAlert()
-            statusAlert.image = UIImage(named: "Done")
-            statusAlert.title = "成功".localized()
-            statusAlert.message = "这个软件包的名字已经复制到剪贴板".localized()
-            statusAlert.canBePickedOrDismissed = true
-            statusAlert.showInKeyWindow()
+            presentStatusAlert(imgName: "Done",
+                               title: "成功".localized(),
+                               msg: "这个软件包的名字已经复制到剪贴板".localized())
         }
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_four")
         

@@ -373,12 +373,9 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
         
         let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
             LKRoot.container_package_repo_DBSync[index.row].link.pushClipBoard()
-            let statusAlert = StatusAlert()
-            statusAlert.image = UIImage(named: "Done")
-            statusAlert.title = "成功".localized()
-            statusAlert.message = (LKRoot.container_package_repo_DBSync[index.row].name) + " 的地址已经复制到剪贴板".localized()
-            statusAlert.canBePickedOrDismissed = true
-            statusAlert.showInKeyWindow()
+            presentStatusAlert(imgName: "Done",
+                               title: "成功".localized(),
+                               msg: (LKRoot.container_package_repo_DBSync[index.row].name) + " 的地址已经复制到剪贴板".localized())
         }
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_one")
         
@@ -401,12 +398,9 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             LKRoot.queue_dispatch.async {
                 LKRoot.ins_common_operator.PR_sync_and_download(sync_all: false) { (_)  in
                     self.update_user_interface {
-                        let statusAlert = StatusAlert()
-                        statusAlert.image = UIImage(named: "Done")
-                        statusAlert.title = "删除成功".localized()
-                        statusAlert.message = "你已经成功的移除了这个软件源".localized()
-                        statusAlert.canBePickedOrDismissed = true
-                        statusAlert.showInKeyWindow()
+                        presentStatusAlert(imgName: "Done",
+                                           title: "删除成功".localized(),
+                                           msg: "你已经成功的移除了这个软件源".localized())
                     }
                 }
             }
@@ -473,22 +467,16 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
             var read = inputTextField?.text ?? ""
             if read == "" || !(read.contains(".") && read.contains(":")) || URL(string: read) == nil { // iPv6 -> :
                 print("[i] 这用户输入不合法嗨呀好气呀！")
-                let statusAlert = StatusAlert()
-                statusAlert.image = UIImage(named: "Warning")
-                statusAlert.title = "添加失败".localized()
-                statusAlert.message = "请检查输入内容并在试一次".localized()
-                statusAlert.canBePickedOrDismissed = true
-                statusAlert.showInKeyWindow()
+                presentStatusAlert(imgName: "Warning",
+                                   title: "添加失败".localized(),
+                                   msg: "请检查输入内容并在试一次".localized())
                 return
             }
             for repo in LKRoot.container_package_repo_DBSync where repo.link == read {
                 print("[*] 这个软件源已经存在了撒咱们撤")
-                let statusAlert = StatusAlert()
-                statusAlert.image = UIImage(named: "Exists")
-                statusAlert.title = "⚠️".localized()
-                statusAlert.message = "这个地址已经存在".localized()
-                statusAlert.canBePickedOrDismissed = true
-                statusAlert.showInKeyWindow()
+                presentStatusAlert(imgName: "Exists",
+                                   title: "⚠️".localized(),
+                                   msg: "这个地址已经存在".localized())
                 return
             }
             //             开始处理咯
@@ -508,23 +496,17 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
                             LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_PR"] = ""
                             IHProgressHUD.dismiss()
                             print("[*] 刷新失败")
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "Warning")
-                            statusAlert.title = "刷新失败".localized()
-                            statusAlert.message = "请检查源地址或网络连接并在试一次。".localized()
-                            statusAlert.canBePickedOrDismissed = true
-                            statusAlert.showInKeyWindow()
+                            presentStatusAlert(imgName: "Warning",
+                                               title: "刷新失败".localized(),
+                                               msg: "请检查源地址或网络连接并在试一次。".localized())
                             try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKPackageRepos.rawValue, where: DBMPackageRepos.Properties.link == read)
                             UIApplication.shared.endIgnoringInteractionEvents()
                             return
                         }
                         self.update_user_interface {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "Done")
-                            statusAlert.title = "添加成功".localized()
-                            statusAlert.message = (LKRoot.container_package_repo_DBSync.last?.name ?? "") + " 已经添加到你的仓库".localized()
-                            statusAlert.canBePickedOrDismissed = true
-                            statusAlert.showInKeyWindow()
+                            presentStatusAlert(imgName: "Done",
+                                               title: "添加成功".localized(),
+                                               msg: (LKRoot.container_package_repo_DBSync.last?.name ?? "") + " 已经添加到你的仓库".localized())
                         }
                     }
                 }

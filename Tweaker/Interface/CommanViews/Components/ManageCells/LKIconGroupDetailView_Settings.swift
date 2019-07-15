@@ -439,12 +439,9 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         LKRoot.queue_dispatch.async {
             LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                 LKRoot.manager_reg.nr.update_user_interface {
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "Done")
-                    statusAlert.title = " ".localized()
-                    statusAlert.message = "你已经成功的刷新了新闻源".localized()
-                    statusAlert.canBePickedOrDismissed = true
-                    statusAlert.showInKeyWindow()
+                    presentStatusAlert(imgName: "Done",
+                                       title: " ".localized(),
+                                       msg: "你已经成功的刷新了新闻源".localized())
                 }
             }
         }
@@ -458,12 +455,9 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         LKRoot.queue_dispatch.async {
             LKRoot.ins_common_operator.PR_sync_and_download(sync_all: true) { (_) in
                 LKRoot.manager_reg.pr.update_user_interface {
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "Done")
-                    statusAlert.title = "刷新软件源成功".localized()
-                    statusAlert.message = "软件包的更新将在后台进行。".localized()
-                    statusAlert.canBePickedOrDismissed = true
-                    statusAlert.showInKeyWindow()
+                    presentStatusAlert(imgName: "Done",
+                                       title: "刷新软件源成功".localized(),
+                                       msg: "软件包的更新将在后台进行。".localized())
                 }
             }
         }
@@ -489,12 +483,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             msg_str.append("\n")
         }
         if read_out.count < 1 {
-            let statusAlert = StatusAlert()
-            statusAlert.image = UIImage(named: "Warning")
-            statusAlert.title = "失败".localized()
-            statusAlert.message = "没有在剪贴板中找到有效的新闻源地址".localized()
-            statusAlert.canBePickedOrDismissed = true
-            statusAlert.showInKeyWindow()
+            presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "没有在剪贴板中找到有效的新闻源地址".localized())
             return
         }
         
@@ -514,12 +503,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                     DispatchQueue.main.async {
                         LKRoot.manager_reg.nr.update_user_interface {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "Done")
-                            statusAlert.title = "导入成功".localized()
-                            statusAlert.message = "请考虑手动检查导入的完整性".localized()
-                            statusAlert.canBePickedOrDismissed = true
-                            statusAlert.showInKeyWindow()
+                            presentStatusAlert(imgName: "Done", title: "导入成功".localized(), msg: "请考虑手动检查导入的完整性".localized())
                         }
                     }
                 }
@@ -549,12 +533,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             msg_str.append("\n")
         }
         if read_out.count < 1 {
-            let statusAlert = StatusAlert()
-            statusAlert.image = UIImage(named: "Warning")
-            statusAlert.title = "失败".localized()
-            statusAlert.message = "没有在剪贴板中找到有效的软件源地址".localized()
-            statusAlert.canBePickedOrDismissed = true
-            statusAlert.showInKeyWindow()
+            presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "没有在剪贴板中找到有效的新闻源地址".localized())
             return
         }
         
@@ -574,12 +553,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 LKRoot.ins_common_operator.PR_sync_and_download(sync_all: true) { (_) in
                     DispatchQueue.main.async {
                         LKRoot.manager_reg.pr.update_user_interface {
-                            let statusAlert = StatusAlert()
-                            statusAlert.image = UIImage(named: "Done")
-                            statusAlert.title = "导入成功".localized()
-                            statusAlert.message = "请考虑手动检查导入的完整性".localized()
-                            statusAlert.canBePickedOrDismissed = true
-                            statusAlert.showInKeyWindow()
+                            presentStatusAlert(imgName: "Done", title: "导入成功".localized(), msg: "请考虑手动检查导入的完整性".localized())
                         }
                     }
                 }
@@ -624,12 +598,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             let read = inputTextField?.text ?? "8"
             if let int = Int(read) {
                 if int > 20 || int < 0 {
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "Warning")
-                    statusAlert.title = "失败".localized()
-                    statusAlert.message = "请输入一个小于 20 并大于 0 的值。".localized()
-                    statusAlert.canBePickedOrDismissed = true
-                    statusAlert.showInKeyWindow()
+                    presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "请输入一个小于 20 并大于 0 的值。".localized())
                 } else {
                     let new = DBMSettings()
                     new.card_radius = int
@@ -642,12 +611,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                     alert.presentToCurrentViewController()
                 }
             } else {
-                let statusAlert = StatusAlert()
-                statusAlert.image = UIImage(named: "Warning")
-                statusAlert.title = "失败".localized()
-                statusAlert.message = "请输入一个整数".localized()
-                statusAlert.canBePickedOrDismissed = true
-                statusAlert.showInKeyWindow()
+                presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "请输入一个整数".localized())
             }
         }))
         alert.presentToCurrentViewController()
@@ -674,31 +638,16 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             let read = inputTextField?.text ?? "8"
             if let int = Int(read) {
                 if int > 180 || int < 0 {
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "Warning")
-                    statusAlert.title = "失败".localized()
-                    statusAlert.message = "请输入一个小于 180 并大于 0 的值。".localized()
-                    statusAlert.canBePickedOrDismissed = true
-                    statusAlert.showInKeyWindow()
+                    presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "请输入一个小于 20 并大于 0 的值。".localized())
                 } else {
                     let new = DBMSettings()
                     new.network_timeout = int
                     try? LKRoot.root_db?.update(table: common_data_handler.table_name.LKSettings.rawValue, on: [DBMSettings.Properties.network_timeout], with: new)
                     LKRoot.settings?.network_timeout = int
-                    let statusAlert = StatusAlert()
-                    statusAlert.image = UIImage(named: "Done")
-                    statusAlert.title = "成功".localized()
-                    statusAlert.message = "你的操作已经保存。".localized()
-                    statusAlert.canBePickedOrDismissed = true
-                    statusAlert.showInKeyWindow()
+                    presentStatusAlert(imgName: "Done", title: "成功".localized(), msg: "你的操作已经保存。".localized())
                 }
             } else {
-                let statusAlert = StatusAlert()
-                statusAlert.image = UIImage(named: "Warning")
-                statusAlert.title = "失败".localized()
-                statusAlert.message = "请输入一个整数".localized()
-                statusAlert.canBePickedOrDismissed = true
-                statusAlert.showInKeyWindow()
+                presentStatusAlert(imgName: "Warning", title: "失败".localized(), msg: "请输入一个整数".localized())
             }
         }))
         alert.presentToCurrentViewController()
