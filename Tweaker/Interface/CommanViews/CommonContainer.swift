@@ -56,7 +56,7 @@ func presentStatusAlert(imgName: String, title: String, msg: String) {
     }
 }
 
-func presentSwiftMessage(title: String, body: String, button_text: String) {
+func presentSwiftMessage(title: String, body: String) {
     let view = MessageView.viewFromNib(layout: .cardView)
     view.configureTheme(.success)
     view.configureDropShadow()

@@ -18,3 +18,6 @@
 @_exported import SwiftMessages
 @_exported import IHProgressHUD
 
+#if DEBUG
+@_exported import DoraemonKit
+#endif

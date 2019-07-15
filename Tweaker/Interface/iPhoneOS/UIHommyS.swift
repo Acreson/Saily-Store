@@ -187,9 +187,6 @@ class UIHommyS: UIViewController {
                         // 调整主容器大小
                         self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128 + 98
                         
-                        let debugger = LKRoot.container_news_repo
-                        print(debugger)
-                        
                         // 第一个源的瞄点
                         var last_view = UIView()
                         if self.header_view != nil {
@@ -315,6 +312,15 @@ class UIHommyS: UIViewController {
                         })
                         
                         LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
+                        
+                        #if DEBUG
+                        let button = UIButton()
+                        button.addTarget(self, action: #selector(self.debugger_call), for: .touchUpInside)
+                        self.container?.addSubview(button)
+                        button.snp.makeConstraints({ (x) in
+                            x.edges.equalTo(label.snp.edges)
+                        })
+                        #endif
                         
                     }
                 } else {
@@ -718,5 +724,15 @@ class UIHommyS: UIViewController {
         
     }
     
+    #if DEBUG
+    var touched = 0
+    @objc func debugger_call() {
+        touched += 1
+        if touched > 10 {
+            presentSwiftMessage(title: "你好开发者", body: "已经为你启用多啦Kit")
+            DoraemonManager.shareInstance().install()
+        }
+    }
+    #endif
 }
 

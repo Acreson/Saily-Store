@@ -470,7 +470,7 @@ extension app_opeerator {
         LKRoot.container_packages = read_again ?? []
         
         DispatchQueue.main.async {
-            presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized(), button_text: "了解".localized())
+            presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized())
         }
         
         print("[*] 更新软件包完成")
