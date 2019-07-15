@@ -17,11 +17,11 @@ class app_opeerator {
     
     // 检查联网
     func test_network() -> Int {
-        let test_url = URL(string: "https://www.apple.com/")!
+        let test_url = URL(string: "https://www.bing.com/")!
         let test_network_semaphore = DispatchSemaphore(value: 0)
         var test_result = operation_result.failed.rawValue
         print("[*] 准备从 " + test_url.absoluteString + " 请求数据。")
-        AF.request(test_url, method: .post).response(queue: LKRoot.queue_alamofire) { (respond) in
+        AF.request(test_url, method: .head).response(queue: LKRoot.queue_alamofire) { (respond) in
             switch respond.result {
             case .success: test_result = operation_result.success.rawValue
             default: break
