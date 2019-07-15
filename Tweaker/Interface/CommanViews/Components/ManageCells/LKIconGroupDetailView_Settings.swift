@@ -16,7 +16,7 @@ extension manage_views {
         let table_view_container = UIView()
         
         let table_view = UITableView()
-        let icon_stack = common_views.LKIconStack()
+        let icon = UIImageView()
         
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -30,15 +30,14 @@ extension manage_views {
             
             initd = true
             
-            let RN_ANCHOR_O = 24
+            let RN_ANCHOR_O = 0
             let RN_ANCHOR_I = 16
             
-            contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
-                x.top.equalTo(self.snp.top).offset(RN_ANCHOR_O - 8)
+                x.top.equalTo(self.snp.top).offset(35)
                 x.bottom.equalTo(self.snp.bottom).offset(-RN_ANCHOR_O + 8)
                 x.left.equalTo(self.snp.left).offset(RN_ANCHOR_O)
                 x.right.equalTo(self.snp.right).offset(-RN_ANCHOR_O)
@@ -86,15 +85,14 @@ extension manage_views {
             }
             
             // 图标组
-//            icon_stack.images_address = ["AppIcon", "Setting"]
-            icon_stack.images_address = ["Setting"]
-            icon_stack.apart_init()
-            contentView.addSubview(icon_stack)
-            icon_stack.snp.makeConstraints { (x) in
-                x.right.equalTo(self.contentView.snp.right).offset(RN_ANCHOR_I)
+            icon.image = UIImage(named: "Setting")
+            icon.contentMode = .scaleAspectFit
+            contentView.addSubview(icon)
+            icon.snp.makeConstraints { (x) in
+                x.right.equalTo(self.contentView.snp.right).offset(-28)
                 x.top.equalTo(self.contentView.snp.top).offset(12)
-                x.width.equalTo(2)
-                x.height.equalTo(33)
+                x.width.equalTo(50)
+                x.height.equalTo(50)
             }
 
             contentView.addSubview(table_view_container)

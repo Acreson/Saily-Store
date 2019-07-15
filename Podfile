@@ -35,5 +35,6 @@ target 'Tweaker' do
   pod 'DoraemonKit/WithLoad', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithLogger', '~> 1.1.7', :configurations => ['Debug']
   
-
+  # Don't forget to set cornerRadius at SwiftMessagesSegue.swift to 8
+  
 end

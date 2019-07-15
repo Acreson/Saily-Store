@@ -63,6 +63,6 @@ func presentSwiftMessage(title: String, body: String) {
     view.configureContent(title: title, body: body)
     view.button?.isHidden = true
     view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    (view.backgroundView as? CornerRoundingView)?.setRadiusCGF(radius: 10)
+//    (view.backgroundView as? CornerRoundingView)?.cornerRadius = CGFloat(LKRoot.settings?.card_radius ?? 8)
     SwiftMessages.show(view: view)
 }

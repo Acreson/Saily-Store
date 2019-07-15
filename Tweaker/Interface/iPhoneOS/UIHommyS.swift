@@ -728,8 +728,11 @@ class UIHommyS: UIViewController {
     var touched = 0
     @objc func debugger_call() {
         touched += 1
+        if touched > 11 {
+            return
+        }
         if touched > 10 {
-            presentSwiftMessage(title: "你好开发者", body: "已经为你启用多啦Kit")
+            presentSwiftMessage(title: "你好开发者", body: "已经为你启用了多啦Kit")
             DoraemonManager.shareInstance().install()
         }
     }
