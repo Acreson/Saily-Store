@@ -125,6 +125,19 @@ extension manage_views {
             table_view.reloadData()
             table_view.endUpdates()
             
+            // Color Egg Don't Modify This
+            let egg = UILabel(text: "你可真是个厉害的小可爱")
+            egg.font = .boldSystemFont(ofSize: 16)
+            egg.textColor = LKRoot.ins_color_manager.read_a_color("main_operations_allow")
+            egg.textAlignment = .center
+            addSubview(egg)
+            egg.snp.makeConstraints { (x) in
+                x.bottom.equalTo(self.snp.bottom).offset(-28)
+                x.left.equalTo(self.snp.left)
+                x.right.equalTo(self.snp.right)
+                x.height.equalTo(23)
+            }
+            
         }
        
     }

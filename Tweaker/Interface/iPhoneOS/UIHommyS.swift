@@ -185,7 +185,7 @@ class UIHommyS: UIViewController {
                         }
                         
                         // 调整主容器大小
-                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128 + 66
+                        self.container?.contentSize.height = CGFloat(LKRoot.container_news_repo.count * 425) + 128 + 98
                         
                         let debugger = LKRoot.container_news_repo
                         print(debugger)

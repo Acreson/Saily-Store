@@ -469,6 +469,10 @@ extension app_opeerator {
         let read_again: [DBMPackage]? = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue)
         LKRoot.container_packages = read_again ?? []
         
+        DispatchQueue.main.async {
+            presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized(), button_text: "了解".localized())
+        }
+        
         print("[*] 更新软件包完成")
         CallB(operation_result.success.rawValue)
     }

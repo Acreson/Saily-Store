@@ -169,7 +169,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if LKRoot.safe_area_needed {
             ret += 38
         }
-        return ret
+        return ret - 666
     }
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
@@ -204,7 +204,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
             }
         case 5:
-            return 728
+            return 728 + 633
         default: return 180
         }
     }
