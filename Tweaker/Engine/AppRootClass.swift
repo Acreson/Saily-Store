@@ -49,7 +49,7 @@ class app_root_class {
     var container_packages_DBSync           = [DBMPackage]()                // 软件包缓存
     var container_recent_update             = [DBMPackage]()                // 最近更新缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
-    var container_packages_installed_DBSync = [DBMPackage]()                // 已安装软件包
+    var container_packages_installed_DBSync = [String : DBMPackage]()       // 已安装软件包
     var container_packages_randomfun_DBSync = [DBMPackage]()                // 已安装软件包
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
@@ -87,6 +87,15 @@ class app_root_class {
         } else {
             settings = read_try?.first!
         }
+        
+        // 复制完整的 dpkg 记录信息
+        let installed_update_session = UUID().uuidString
+        LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE_SESSION"] = installed_update_session
+        ins_common_operator.YA_build_installed_list(session: installed_update_session) { (ret) in
+            if ret == operation_result.failed.rawValue {
+                print("[E] 无法从 dpkg 获取安装的数据。")
+            }
+        }
 
         // 黑暗模式初始化
         ins_color_manager.reFit()
@@ -108,6 +117,7 @@ class app_root_class {
         try? root_db?.create(table: common_data_handler.table_name.LKSettings.rawValue, of: DBMSettings.self)
         try? root_db?.create(table: common_data_handler.table_name.LKPackageRepos.rawValue, of: DBMPackageRepos.self)
         try? root_db?.create(table: common_data_handler.table_name.LKPackages.rawValue, of: DBMPackage.self)
+        try? root_db?.create(table: common_data_handler.table_name.LKRecentInstalled.rawValue, of: DBMPackage.self)
         let new_setting = DBMSettings()
         new_setting.card_radius = 8
         // 伪造UDID

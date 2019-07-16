@@ -21,6 +21,13 @@ extension app_opeerator {
     
     func PR_sync_and_download(sync_all: Bool, _ CallB: @escaping (Int) -> Void) {
 
+        if test_network() == operation_result.failed.rawValue {
+            print("[E] 拒绝刷新软件源 - 网络不存在")
+            LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""
+            CallB(operation_result.failed.rawValue)
+            return
+        }
+        
         LKRoot.container_string_store["REFRESH_IN_POGRESS_PR"] = "TRUE"
         LKRoot.container_string_store["REFRESH_CONTAIN_BAD_REFRESH_PR"] = ""
         
@@ -432,12 +439,6 @@ extension app_opeerator {
         }
         // 终于完成了啊哈哈哈哈哈哈哈哈 咳咳准备数据库
         
-        // 删除全部没有找到的软件包
-        if LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
-            return
-        }
-        try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKPackages.rawValue,
-                                    where: DBMPackage.Properties.signal == "BEGIN_UPDATE")
         // 写入更新
         if LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_DATABASE"] != session {
             return
@@ -447,6 +448,9 @@ extension app_opeerator {
             LKRoot.container_packages.append(key_pair_value.value)
             try? LKRoot.root_db?.insertOrReplace(objects: key_pair_value.value, intoTable: common_data_handler.table_name.LKPackages.rawValue)
         }
+        // 删除全部没有找到的软件包
+        try? LKRoot.root_db?.delete(fromTable: common_data_handler.table_name.LKPackages.rawValue,
+                                    where: DBMPackage.Properties.signal == "BEGIN_UPDATE")
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "SIGCLEAR"
         LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "FALSE"

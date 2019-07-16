@@ -452,7 +452,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 LKRoot.manager_reg.nr.update_user_interface {
                     presentStatusAlert(imgName: "Done",
                                        title: " ".localized(),
-                                       msg: "你已经成功的刷新了新闻源".localized())
+                                       msg: "已尝试刷新新闻源。".localized())
                 }
             }
         }
@@ -467,7 +467,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             LKRoot.ins_common_operator.PR_sync_and_download(sync_all: true) { (_) in
                 LKRoot.manager_reg.pr.update_user_interface {
                     presentStatusAlert(imgName: "Done",
-                                       title: "刷新软件源成功".localized(),
+                                       title: "已尝试刷新软件源".localized(),
                                        msg: "软件包的更新将在后台进行。".localized())
                 }
             }
