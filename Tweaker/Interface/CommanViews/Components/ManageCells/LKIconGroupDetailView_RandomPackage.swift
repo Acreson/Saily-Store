@@ -44,7 +44,7 @@ extension manage_views {
             re_sync(is_user_commanded: false)
             
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
-            contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+//            contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
                 x.top.equalTo(self.snp.top).offset(0)
@@ -239,6 +239,8 @@ extension manage_views {
                     LKRoot.container_string_store["in_progress_UI_manage_update"] = "FALSE"
                     self.expend_button.isHidden = true
                     UIApplication.shared.endIgnoringInteractionEvents()
+                    (readTopViewController() as? UISearchS)?.timer_call()
+                    //                    (readTopViewController() as? UISearchL)?.timer_call()
                 })
             }
         }

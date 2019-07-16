@@ -16,6 +16,9 @@
    <Group
       location = "group:IO"
       name = "IO">
+      <FileRef
+         location = "group:../Aiolos/Aiolos.xcodeproj">
+      </FileRef>
       <Group
          location = "group:Contents"
          name = "Contents">

@@ -69,6 +69,10 @@ func presentStatusAlert(imgName: String, title: String, msg: String) {
 }
 
 func presentSwiftMessage(title: String, body: String) {
+    var config = SwiftMessages.Config()
+    config.presentationStyle = .top
+    config.presentationContext = .window(windowLevel: .statusBar)
+    config.interactiveHide = false
     let view = MessageView.viewFromNib(layout: .cardView)
     view.configureTheme(.success)
     view.configureDropShadow()
@@ -76,5 +80,5 @@ func presentSwiftMessage(title: String, body: String) {
     view.button?.isHidden = true
     view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
 //    (view.backgroundView as? CornerRoundingView)?.cornerRadius = CGFloat(LKRoot.settings?.card_radius ?? 8)
-    SwiftMessages.show(view: view)
+    SwiftMessages.show(config: config, view: view)
 }

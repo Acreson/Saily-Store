@@ -167,7 +167,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if LKRoot.safe_area_needed {
             ret += 38
         }
-        return ret - 670
+        return ret - 700
     }
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {

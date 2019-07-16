@@ -8,6 +8,12 @@
 
 class UIEnteryS: UITabBarController {
 
+    
+    public let nav1 = UINavigationController()
+    public let nav2 = UINavigationController()
+    public let nav3 = UINavigationController()
+    public let nav4 = UINavigationController()
+    
     public let home = UIHommyS()
     public let mana = UIManageS()
     public let sear = UISearchS()
@@ -24,12 +30,27 @@ class UIEnteryS: UITabBarController {
         tabBar.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         tabBar.barTintColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         
-        home.tabBarItem = UITabBarItem(title: "发现".localized(), image: UIImage(named: "News"), tag: 0)
-        mana.tabBarItem = UITabBarItem(title: "管理".localized(), image: UIImage(named: "Packages_Received"), tag: 1)
-        sear.tabBarItem = UITabBarItem(title: "搜索".localized(), image: UIImage(named: "Searchs"), tag: 2)
-        mine.tabBarItem = UITabBarItem(title: "世界".localized(), image: UIImage(named: "Discover"), tag: 3)
+        nav1.tabBarItem = UITabBarItem(title: "发现".localized(), image: UIImage(named: "News"), tag: 0)
+        nav2.tabBarItem = UITabBarItem(title: "管理".localized(), image: UIImage(named: "Packages_Received"), tag: 1)
+        nav3.tabBarItem = UITabBarItem(title: "搜索".localized(), image: UIImage(named: "Searchs"), tag: 2)
+        nav4.tabBarItem = UITabBarItem(title: "世界".localized(), image: UIImage(named: "Discover"), tag: 3)
         
-        viewControllers = [home, mana, sear, mine]
+        nav1.viewControllers = [home]
+        nav2.viewControllers = [mana]
+        nav3.viewControllers = [sear]
+        nav4.viewControllers = [mine]
+        
+        nav1.setNavigationBarHidden(true, animated: false)
+        nav2.setNavigationBarHidden(true, animated: false)
+        nav3.setNavigationBarHidden(true, animated: false)
+        nav4.setNavigationBarHidden(true, animated: false)
+        
+        nav1.navigationBar.isHidden = true
+        nav2.navigationBar.isHidden = true
+        nav3.navigationBar.isHidden = true
+        nav4.navigationBar.isHidden = true
+        
+        viewControllers = [nav1, nav2, nav3, nav4]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             LKRoot.current_page = self.selectedViewController ?? UIViewController()

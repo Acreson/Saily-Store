@@ -126,6 +126,7 @@
 		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
 		B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKItemListViewController.swift; sourceTree = "<group>"; };
 		B4046A6722DE7D6700DF3835 /* UIMineS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMineS.swift; sourceTree = "<group>"; };
+		B4046A9022DE895C00DF3835 /* Aiolos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Aiolos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_PackageRepoSP.swift; sourceTree = "<group>"; };
 		B40B4C1F22D7637600373449 /* DMPackageRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackageRepos.swift; sourceTree = "<group>"; };
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
@@ -386,8 +387,8 @@
 				B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */,
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 				B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */,
-				B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */,
 				B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */,
+				B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */,
 				B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */,
 				B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */,
 				B46EE49E22D611CD000C6F6D /* LKRepoView.swift */,
@@ -408,6 +409,7 @@
 		ED82C75B30A614C976CA3647 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4046A9022DE895C00DF3835 /* Aiolos.framework */,
 				546D4B5972CE967C97CFEE39 /* Pods_Tweaker.framework */,
 			);
 			name = Frameworks;

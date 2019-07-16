@@ -27,9 +27,23 @@ class LKPackageListController: UIViewController {
         table_view.snp.makeConstraints { (x) in
             x.edges.equalTo(self.view.snp.edges)
         }
+        
+        if LKRoot.settings?.use_dark_mode ?? false {
+            navigationController?.navigationBar.barStyle = .blackOpaque
+        } else {
+            navigationController?.navigationBar.barStyle = .default
+        }
+        
+        self.navigationItem.hidesBackButton = true
+        let newBackButton = UIBarButtonItem(title: "返回".localized(), style: .done, target: self, action: #selector(back(sender:)))
+        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
-    
+    @objc func back(sender: UIBarButtonItem) {
+        self.dismiss(animated: true) {
+            
+        }
+    }
 }
 
 extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {

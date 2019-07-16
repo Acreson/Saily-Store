@@ -75,7 +75,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if LKRoot.safe_area_needed {
             ret += 38
         }
-        return ret - 960
+        return ret - 999
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,28 +125,15 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             }
             ret.backgroundColor = .clear
         case 2:
-            if !(LKRoot.settings?.use_dark_mode ?? false) {
-                let img = UIImageView(image: UIImage(named: "DownShade"))
-                img.contentMode = .scaleToFill
-                ret.addSubview(img)
-                img.alpha = 0.06    
-                img.snp.makeConstraints { (x) in
-                    x.left.equalTo(ret.snp.left).offset(-28)
-                    x.right.equalTo(ret.snp.right).offset(28)
-                    x.centerY.equalTo(ret.snp.centerY)
-                    x.height.equalTo(10)
-                }
-            } else {
-                let img = UIImageView(image: UIImage(named: "Gary"))
-                img.contentMode = .scaleToFill
-                img.alpha = 0.3
-                ret.addSubview(img)
-                img.snp.makeConstraints { (x) in
-                    x.left.equalTo(ret.snp.left).offset(-28)
-                    x.right.equalTo(ret.snp.right).offset(28)
-                    x.centerY.equalTo(ret.snp.centerY)
-                    x.height.equalTo(0.5)
-                }
+            let sep = UIView()
+            sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
+            sep.alpha = 0.3
+            ret.addSubview(sep)
+            sep.snp.makeConstraints { (x) in
+                x.bottom.equalTo(ret.snp.bottom).offset(-2)
+                x.height.equalTo(0.5)
+                x.left.equalTo(ret.snp.left)
+                x.right.equalTo(ret.snp.right)
             }
             ret.backgroundColor = .clear
         case 3:
@@ -159,6 +146,16 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 4:
+            let sep = UIView()
+            sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_untint")
+            sep.alpha = 0.3
+            ret.addSubview(sep)
+            sep.snp.makeConstraints { (x) in
+                x.centerY.equalTo(ret.snp.centerY)
+                x.height.equalTo(0.5)
+                x.left.equalTo(ret.snp.left)
+                x.right.equalTo(ret.snp.right)
+            }
             ret.backgroundColor = .clear
         case 5:
             let package_repo_manager = LKRoot.manager_reg.ru
@@ -179,14 +176,14 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         switch indexPath.row {
         case 0: return 110
         case 1: return 35
-        case 2: return 40
+        case 2: return 28
         case 3:
             if LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] ?? true {
-                return 147
+                return 140
             } else {
-                return 147 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
+                return 140 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
             }
-        case 4: return 30
+        case 4: return 18
         case 5:
             var count = LKRoot.container_recent_update.count
             if count > LKRoot.manager_reg.ru.limit {

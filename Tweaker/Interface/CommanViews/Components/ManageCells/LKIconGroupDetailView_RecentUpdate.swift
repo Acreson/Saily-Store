@@ -20,7 +20,7 @@ extension manage_views {
         var from_father_view: UIView?
 
         let table_view = UITableView()
-        var limit = 24
+        var limit = 9
 
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -43,7 +43,7 @@ extension manage_views {
             }
 
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
-            contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+//            contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
                 x.top.equalTo(self.snp.top).offset(RN_ANCHOR_O - 8)
@@ -292,24 +292,16 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
                 }
                 new.items = read
                 DispatchQueue.main.async {
-                    new.table_view.reloadData()
-                    UIApplication.shared.endIgnoringInteractionEvents()
                     IHProgressHUD.dismiss()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    let newnav = UINavigationController(rootViewController: new)
+                    newnav.navigationBar.prefersLargeTitles = true
+                    new.title = "全部最近更新".localized()
                     
-                    var config = SwiftMessages.Config()
-                    config.presentationStyle = .bottom
-                    config.presentationContext = .window(windowLevel: .statusBar)
-                    config.duration = .forever
-                    config.dimMode = .gray(interactive: true)
-                    config.interactiveHide = false
-                    config.preferredStatusBarStyle = .lightContent
-                    SwiftMessages.show(config: config, view: new.view)
-                    
+                    readTopViewController()?.present(newnav, animated: true, completion: {
+                    })
                 }
             }
-            
-            
-            
             
         }
     }
