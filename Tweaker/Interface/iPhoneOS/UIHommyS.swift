@@ -22,7 +22,7 @@ class UIHommyS: UIViewController {
     
     // 控制 NAV
     override func viewWillAppear(_ animated: Bool) {
-        view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+        view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         if LKRoot.container_string_store["REQ_REFRESH_UI_HOME"] == "TRUE" {
@@ -399,7 +399,7 @@ class UIHommyS: UIViewController {
             vs_effect!.tag = view_tags.must_remove.rawValue
             color_backend.tag = view_tags.must_remove.rawValue
             cover_backend.tag = view_tags.must_remove.rawValue
-            color_backend.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            color_backend.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
             color_backend.alpha = 0
             cover_backend.addSubview(color_backend)
             cover_backend.addSubview(vs_effect!)
@@ -451,7 +451,7 @@ class UIHommyS: UIViewController {
             // 内容本体
             let text_container = UIView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height + 66, width: UIScreen.main.bounds.width, height: 188))
             container_d.addSubview(text_container)
-            text_container.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            text_container.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
             
             // 关闭按钮
             let close_image = UIImageView(image: UIImage(named: "CloseButton"))
@@ -541,7 +541,7 @@ class UIHommyS: UIViewController {
                     
                     // 底部返回按钮
                     let some = UIView()
-                    some.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+                    some.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
                     container_d.addSubview(some)
                     some.snp.makeConstraints({ (x) in
                         x.top.equalTo(text_container.snp.bottom).offset(0.233)

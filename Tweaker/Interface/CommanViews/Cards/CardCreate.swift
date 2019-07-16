@@ -107,7 +107,7 @@ extension common_views {
                     ret.borderColor = .gray
                 }
                 
-                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
                 // 底下的文字
                 let des_str = UILabel()
                 des_str.text = info.description_string
@@ -266,7 +266,7 @@ extension common_views {
                     ret.borderColor = .gray
                 }
                 
-                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+                ret.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
                 // 俩标题
                 let sub_title = UILabel(text: info.sub_title_string)
                 sub_title.font = .boldSystemFont(ofSize: 12)

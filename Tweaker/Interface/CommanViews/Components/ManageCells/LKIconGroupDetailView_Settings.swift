@@ -33,7 +33,7 @@ extension manage_views {
             let RN_ANCHOR_O = 0
             let RN_ANCHOR_I = 16
             
-            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in

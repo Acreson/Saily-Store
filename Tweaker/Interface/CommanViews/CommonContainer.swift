@@ -40,6 +40,16 @@ class cell_views {
     // 啥都不用干
 }
 
+func readTopViewController() -> UIViewController? {
+    if var topController = UIApplication.shared.keyWindow?.rootViewController {
+        while let presentedViewController = topController.presentedViewController {
+            topController = presentedViewController
+        }
+        return topController
+    }
+    return nil
+}
+
 func presentStatusAlert(imgName: String, title: String, msg: String) {
     if LKRoot.settings?.use_dark_mode ?? false {
         let statusAlert = StatusAlertDark()

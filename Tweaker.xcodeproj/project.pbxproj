@@ -49,6 +49,7 @@
 		ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommyS.swift */; };
 		ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA83B229D99EB0070A17E /* AppUserClass.swift */; };
 		B4046A6522DE2FAE00DF3835 /* LKItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */; };
+		B4046A6822DE7D6700DF3835 /* UIMineS.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4046A6722DE7D6700DF3835 /* UIMineS.swift */; };
 		B40B4C1E22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */; };
 		B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1F22D7637600373449 /* DMPackageRepos.swift */; };
 		B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */; };
@@ -104,8 +105,6 @@
 		ABFBA800229D7B3D0070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABFBA803229D7B460070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		ABFBA806229D7B4F0070A17E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		ABFBA80B229D7B580070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPhone.strings"; sourceTree = "<group>"; };
-		ABFBA80C229D7B5F0070A17E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main_iPad.strings"; sourceTree = "<group>"; };
 		ABFBA80E229D7DC40070A17E /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		ABFBA80F229D7DC40070A17E /* UITableViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewExtensions.swift; sourceTree = "<group>"; };
 		ABFBA810229D7DC40070A17E /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -126,6 +125,7 @@
 		ABFBA839229D943C0070A17E /* UIHommyS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyS.swift; sourceTree = "<group>"; };
 		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
 		B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKItemListViewController.swift; sourceTree = "<group>"; };
+		B4046A6722DE7D6700DF3835 /* UIMineS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIMineS.swift; sourceTree = "<group>"; };
 		B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_PackageRepoSP.swift; sourceTree = "<group>"; };
 		B40B4C1F22D7637600373449 /* DMPackageRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackageRepos.swift; sourceTree = "<group>"; };
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
@@ -307,6 +307,7 @@
 				ABFBA839229D943C0070A17E /* UIHommyS.swift */,
 				ABE6DD00229EBBB600D18D9E /* UIManageS.swift */,
 				B493CC2422DB44F800D31A47 /* UISearchS.swift */,
+				B4046A6722DE7D6700DF3835 /* UIMineS.swift */,
 			);
 			path = iPhoneOS;
 			sourceTree = "<group>";
@@ -691,6 +692,7 @@
 				B4046A6522DE2FAE00DF3835 /* LKItemListViewController.swift in Sources */,
 				B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */,
 				B411A86A22DBFE15004CB35B /* StatusAlertDarkUtils.swift in Sources */,
+				B4046A6822DE7D6700DF3835 /* UIMineS.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -719,7 +721,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				ABFBA803229D7B460070A17E /* Base */,
-				ABFBA80C229D7B5F0070A17E /* zh-Hans */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -728,7 +729,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				ABFBA806229D7B4F0070A17E /* Base */,
-				ABFBA80B229D7B580070A17E /* zh-Hans */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";

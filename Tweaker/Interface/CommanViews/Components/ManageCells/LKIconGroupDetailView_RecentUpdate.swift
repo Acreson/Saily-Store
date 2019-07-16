@@ -42,7 +42,7 @@ extension manage_views {
                 from_father_view = father!
             }
 
-            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
@@ -204,6 +204,7 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
             new.backgroundColor = .clear
             all_button.setTitleColor(.darkGray, for: .highlighted)
             all_button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+            all_button.addTarget(self, action: #selector(send_to_list), for: .touchUpInside)
             new.addSubview(all_button)
             all_button.snp.makeConstraints { (x) in
                 x.edges.equalTo(new.snp.edges)
@@ -273,6 +274,44 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
 
     func touched_cell(which: IndexPath) {
 
+    }
+    
+    @objc func send_to_list(sender: Any?) {
+        if (sender as? UIButton)?.title(for: .normal) == "查看最近更新的全部软件包".localized() {
+            // 准备发送新的 vc
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            IHProgressHUD.show()
+            let new = LKPackageListController()
+            LKRoot.queue_dispatch.async {
+                guard let read: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue,
+                                                                               orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending),
+                                                                                         DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                         DBMPackage.Properties.id.asOrder(by: .ascending)]) else {
+                                                                                            print("[E] 无法取得最近更新的列表，我们撤。")
+                                                                                            return
+                }
+                new.items = read
+                DispatchQueue.main.async {
+                    new.table_view.reloadData()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    IHProgressHUD.dismiss()
+                    
+                    var config = SwiftMessages.Config()
+                    config.presentationStyle = .bottom
+                    config.presentationContext = .window(windowLevel: .statusBar)
+                    config.duration = .forever
+                    config.dimMode = .gray(interactive: true)
+                    config.interactiveHide = false
+                    config.preferredStatusBarStyle = .lightContent
+                    SwiftMessages.show(config: config, view: new.view)
+                    
+                }
+            }
+            
+            
+            
+            
+        }
     }
 
 }

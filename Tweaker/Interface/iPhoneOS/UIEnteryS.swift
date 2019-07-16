@@ -8,6 +8,11 @@
 
 class UIEnteryS: UITabBarController {
 
+    public let home = UIHommyS()
+    public let mana = UIManageS()
+    public let sear = UISearchS()
+    public let mine = UIMineS()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,6 +23,13 @@ class UIEnteryS: UITabBarController {
         tabBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
         tabBar.backgroundColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
         tabBar.barTintColor = LKRoot.ins_color_manager.read_a_color("tabbar_background")
+        
+        home.tabBarItem = UITabBarItem(title: "发现".localized(), image: UIImage(named: "News"), tag: 0)
+        mana.tabBarItem = UITabBarItem(title: "管理".localized(), image: UIImage(named: "Packages_Received"), tag: 1)
+        sear.tabBarItem = UITabBarItem(title: "搜索".localized(), image: UIImage(named: "Searchs"), tag: 2)
+        mine.tabBarItem = UITabBarItem(title: "世界".localized(), image: UIImage(named: "Discover"), tag: 3)
+        
+        viewControllers = [home, mana, sear, mine]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             LKRoot.current_page = self.selectedViewController ?? UIViewController()

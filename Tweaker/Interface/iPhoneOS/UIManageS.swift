@@ -41,7 +41,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         table_view.allowsSelection = false
         table_view.backgroundView?.backgroundColor = .clear
         table_view.backgroundColor = .clear
-        self.view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+        self.view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
         contentView.contentSize.height = sum_the_height()
         contentView.contentSize.width = UIScreen.main.bounds.width
         table_view.isScrollEnabled = false
@@ -60,6 +60,9 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         }
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timer_call), userInfo: nil, repeats: true)
         timer?.fire()
+        DispatchQueue.main.async {
+            self.timer_call()
+        }
     }
     
     var last_size = CGFloat(0)

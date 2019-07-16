@@ -6,27 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--发现-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="UIHommyS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="UIHommyS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="发现" image="News" id="efM-eE-DOU"/>
-                    <navigationItem key="navigationItem" id="tam-RO-dIU"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1954" y="327"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="jd7-SW-0qI">
             <objects>
@@ -60,110 +42,11 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="KCL-Z5-ULY"/>
-                        <segue destination="htO-DB-OIi" kind="relationship" relationship="viewControllers" id="pvj-E1-uDB"/>
-                        <segue destination="DLb-iY-RTn" kind="relationship" relationship="viewControllers" id="860-I0-8s7"/>
-                        <segue destination="56T-xO-pmK" kind="relationship" relationship="viewControllers" id="rxe-qh-L0P"/>
-                    </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qGV-MD-MBR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="973.91304347826099" y="663.61607142857144"/>
         </scene>
-        <!--管理-->
-        <scene sceneID="25N-dS-WN5">
-            <objects>
-                <viewController storyboardIdentifier="UIManage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="htO-DB-OIi" customClass="UIManageS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tk4-EL-sxI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="WGZ-E2-6Cr"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="管理" image="Packages_Received" id="mhv-XA-JAE"/>
-                    <navigationItem key="navigationItem" id="z1c-fb-lA3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DhF-DA-eoJ" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1954" y="996"/>
-        </scene>
-        <!--SearchS-->
-        <scene sceneID="VpU-Hq-wdh">
-            <objects>
-                <viewController storyboardIdentifier="UISearchS" useStoryboardIdentifierAsRestorationIdentifier="YES" id="clt-8o-aHa" customClass="UISearchS" customModule="Tweaker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lEf-qp-4Vv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="ooM-28-vLW"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="PSe-bL-lFe"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1UP-tx-MAi" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2832" y="1676"/>
-        </scene>
-        <!--搜索-->
-        <scene sceneID="YYe-Id-OBG">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DLb-iY-RTn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="搜索" image="Searchs" id="rFn-2J-92u"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="veH-gf-HRu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="clt-8o-aHa" kind="relationship" relationship="rootViewController" id="WcG-iU-Ixv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QZl-s2-E8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1954" y="1676"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="QwF-ct-z57">
-            <objects>
-                <viewController id="Ya9-75-hC8" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="6Q5-ta-ghn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="HXE-DZ-dg0"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="njS-Nu-NtY"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3L9-QP-NTL" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2832" y="2342"/>
-        </scene>
-        <!--世界-->
-        <scene sceneID="lsF-9q-3Jk">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="56T-xO-pmK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="世界" image="Discover" id="6lh-wZ-OGm"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h0h-MB-3qE">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Ya9-75-hC8" kind="relationship" relationship="rootViewController" id="IbY-Wv-wjt"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Goj-LM-VMS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1954" y="2342"/>
-        </scene>
     </scenes>
-    <resources>
-        <image name="Discover" width="22" height="22"/>
-        <image name="News" width="22" height="22"/>
-        <image name="Packages_Received" width="23" height="23"/>
-        <image name="Searchs" width="22" height="22"/>
-    </resources>
     <color key="tintColor" red="0.039215686270000001" green="0.66666666669999997" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

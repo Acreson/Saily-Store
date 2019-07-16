@@ -50,7 +50,7 @@ extension manage_views {
             re_sync()
             
             contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
-            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
+            contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in

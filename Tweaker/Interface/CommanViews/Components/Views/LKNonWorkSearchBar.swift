@@ -23,8 +23,8 @@ extension common_views {
             border.setRadiusINT(radius: 4)
             shadow.backgroundColor = LKRoot.ins_color_manager.read_a_color("shadow")
             shadow.alpha = 0.2
-            border.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
-            border.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("main_back_ground"))
+            border.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
+            border.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("main_background"))
             
             if LKRoot.settings?.use_dark_mode ?? false {
                 border.backgroundColor = .darkGray
