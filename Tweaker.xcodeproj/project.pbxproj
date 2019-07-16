@@ -48,6 +48,7 @@
 		ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABFBA837229D8DC70070A17E /* Localizable.strings */; };
 		ABFBA83A229D943C0070A17E /* UIHommyS.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA839229D943C0070A17E /* UIHommyS.swift */; };
 		ABFBA83C229D99EB0070A17E /* AppUserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFBA83B229D99EB0070A17E /* AppUserClass.swift */; };
+		B4046A6522DE2FAE00DF3835 /* LKItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */; };
 		B40B4C1E22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */; };
 		B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1F22D7637600373449 /* DMPackageRepos.swift */; };
 		B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */; };
@@ -124,6 +125,7 @@
 		ABFBA838229D8E3A0070A17E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		ABFBA839229D943C0070A17E /* UIHommyS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHommyS.swift; sourceTree = "<group>"; };
 		ABFBA83B229D99EB0070A17E /* AppUserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserClass.swift; sourceTree = "<group>"; };
+		B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKItemListViewController.swift; sourceTree = "<group>"; };
 		B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_PackageRepoSP.swift; sourceTree = "<group>"; };
 		B40B4C1F22D7637600373449 /* DMPackageRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackageRepos.swift; sourceTree = "<group>"; };
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				B46EE49722D5E04B000C6F6D /* Views */,
+				B4046A6622DE2FB200DF3835 /* ViewController */,
 				B46EE49822D5E053000C6F6D /* ManageCells */,
 				B470FA9322D4515D00C4A215 /* LKTVCell */,
 				B411A86622DBFE0D004CB35B /* ExternalModification */,
@@ -345,6 +348,14 @@
 				ABE6DCF1229E8BD600D18D9E /* Cards */,
 			);
 			path = CommanViews;
+			sourceTree = "<group>";
+		};
+		B4046A6622DE2FB200DF3835 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		B411A86622DBFE0D004CB35B /* ExternalModification */ = {
@@ -677,6 +688,7 @@
 				ABFBA7F3229D78720070A17E /* UIEnteryL.swift in Sources */,
 				ABC2C89322A5AC0C005E2F8F /* UIHommyL.swift in Sources */,
 				ABE6DCF4229E8C2A00D18D9E /* DMNewsCards.swift in Sources */,
+				B4046A6522DE2FAE00DF3835 /* LKItemListViewController.swift in Sources */,
 				B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */,
 				B411A86A22DBFE15004CB35B /* StatusAlertDarkUtils.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,

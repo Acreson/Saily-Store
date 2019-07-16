@@ -462,7 +462,6 @@ extension app_opeerator {
                 LKRoot.manager_reg.ru.update_interface()
             }
         }
-        LKRoot.manager_reg.rp.re_sync()
         if LKRoot.manager_reg.rp.initd {
             DispatchQueue.main.async {
                 LKRoot.manager_reg.rp.update_interface()

@@ -42,7 +42,6 @@ extension manage_views {
                 from_father_view = father!
             }
 
-            contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)

@@ -143,12 +143,37 @@ class app_root_class {
         default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
         try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
+//        #if DEBUG                                                                                       // 压力测试源
+//        let default_links =  [
+//            "http://qaq.loc/repos/",
+//            "https://apt.bingner.com/",
+//            "http://build.frida.re/",
+//            "https://repo.chariz.io/",
+//            "https://sparkdev.me/",
+//            "https://repo.nepeta.me/",
+//            "https://cydia.akemi.ai/",
+//            "http://apt.keevi.cc/",
+//            "https://repo.chimera.sh/",
+//            "https://apt.uozi.org/",
+//            "https://apt.wxhbts.com/",
+//            "https://apt.cydiakk.com/",
+//            "http://apt.hackcn.net/",
+//            "http://repounclutter.coolstar.org/",
+//            "https://cydia.kiiimo.org/",
+//            "https://apt.abcydia.com/",
+//            "http://julioverne.github.io/",
+//            "http://jakeashacks.ga/cydia/",
+//            "http://www.alonemonkey.com/cydiarepo/",
+//            "https://repo.dynastic.co/"
+//        ]
+//        #else
         let default_links = [
             "https://apt.bingner.com/",
             "https://repo.chariz.io/",
             "https://repo.nepeta.me/",
             "https://repo.dynastic.co/"
         ]
+//        #endif
 //                             "http://repo.packix.com/"] Always error when debugging.
         var insert = [DBMPackageRepos]()
         var index = 0

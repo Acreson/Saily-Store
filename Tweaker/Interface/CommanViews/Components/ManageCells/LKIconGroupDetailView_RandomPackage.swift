@@ -37,24 +37,20 @@ extension manage_views {
             
             LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] = is_collapsed
             
-            let RN_ANCHOR_O = 24
-            let RN_ANCHOR_I = 16
-            
             if father != nil {
                 from_father_view = father!
             }
             
-            re_sync()
+            re_sync(is_user_commanded: false)
             
-            contentView.setRadiusINT(radius: LKRoot.settings?.card_radius)
             contentView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_back_ground")
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
-                x.top.equalTo(self.snp.top).offset(RN_ANCHOR_O - 8)
-                x.bottom.equalTo(self.snp.bottom).offset(-RN_ANCHOR_O + 8)
-                x.left.equalTo(self.snp.left).offset(RN_ANCHOR_O)
-                x.right.equalTo(self.snp.right).offset(-RN_ANCHOR_O)
+                x.top.equalTo(self.snp.top).offset(0)
+                x.bottom.equalTo(self.snp.bottom).offset(0)
+                x.left.equalTo(self.snp.left).offset(0)
+                x.right.equalTo(self.snp.right).offset(0)
             }
             
             // 标题
@@ -65,7 +61,7 @@ extension manage_views {
             contentView.addSubview(title_view)
             title_view.snp.makeConstraints { (x) in
                 x.top.equalTo(self.contentView.snp.top).offset(6)
-                x.left.equalTo(self.contentView.snp.left).offset(RN_ANCHOR_I)
+                x.left.equalTo(self.contentView.snp.left).offset(20)
                 x.height.equalTo(46)
                 x.width.equalTo(188)
             }
@@ -80,8 +76,8 @@ extension manage_views {
             contentView.addSubview(sub_title_view)
             sub_title_view.snp.makeConstraints { (x) in
                 x.top.equalTo(title_view.snp.bottom).offset(-4)
-                x.left.equalTo(self.contentView.snp.left).offset(RN_ANCHOR_I - 4)
-                x.right.equalTo(self.contentView.snp.right).offset(-RN_ANCHOR_I + 4)
+                x.left.equalTo(self.contentView.snp.left).offset(16             )
+                x.right.equalTo(self.contentView.snp.right).offset(4)
                 x.height.equalTo(47)
             }
             
@@ -129,7 +125,7 @@ extension manage_views {
             contentView.addSubview(collapse_button)
             collapse_button.snp.makeConstraints { (x) in
                 x.centerY.equalTo(title_view.snp.centerY)
-                x.right.equalTo(self.contentView.snp.right).offset(-RN_ANCHOR_I)
+                x.right.equalTo(self.contentView.snp.right).offset(-20)
             }
             
             collapse_button.bringSubviewToFront(contentView)
@@ -155,14 +151,32 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.expend_self()
+            }
+            
         }
         
-        func re_sync() {
+        func re_sync(is_user_commanded: Bool) {
+            
+            if !is_user_commanded && LKRoot.container_packages.count > 0 {
+                var newBuild = [DBMPackage]()
+                for item in LKRoot.container_packages_randomfun_DBSync where LKRoot.container_packages[item.id] != nil {
+                    newBuild.append(item)
+                }
+                LKRoot.container_packages_randomfun_DBSync = newBuild
+                if LKRoot.container_packages_randomfun_DBSync.count < 3 {
+                    for _ in 1...(3 - LKRoot.container_packages_randomfun_DBSync.count) {
+                        LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
+                    }
+                }
+                return
+            }
+            
             LKRoot.container_packages_randomfun_DBSync.removeAll()
             if LKRoot.container_packages.count < 1 {
                 return
             }
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
             LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
             LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
             LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
@@ -174,7 +188,7 @@ extension manage_views {
         
         @objc func expend_self() {
             
-            re_sync()
+            re_sync(is_user_commanded: true)
             
             if LKRoot.container_packages_randomfun_DBSync.count < 1 {
                 UIView.transition(with: expend_button, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -260,7 +274,7 @@ extension manage_views {
         }
         
         func update_interface() {
-            re_sync()
+            re_sync(is_user_commanded: false)
             if LKRoot.container_packages_randomfun_DBSync.count < 1 {
                 collapse_self()
             } else if !is_collapsed {

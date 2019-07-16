@@ -40,21 +40,11 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         view.addSubview(contentView)
         contentView.addSubview(table_view)
         contentView.snp.makeConstraints { (x) in
-            x.centerX.equalTo(self.view.snp.centerX)
-            x.width.equalTo(UIScreen.main.bounds.width)
-            x.top.equalTo(self.view.snp.top)
-            x.bottom.equalTo(self.view.snp.bottom)
+            x.edges.equalTo(self.view.snp.edges)
         }
         
         table_view.snp.makeConstraints { (x) in
-            if LKRoot.safe_area_needed {
-                x.top.equalTo(contentView.snp.top).offset(38)
-            } else {
-                x.top.equalTo(contentView.snp.top)
-            }
-            x.centerX.equalTo(self.view.snp.centerX)
-            x.width.equalTo(UIScreen.main.bounds.width)
-            x.height.equalTo(2333)
+            x.edges.equalTo(self.contentView.snp.edges)
         }
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timer_call), userInfo: nil, repeats: true)
         timer?.fire()
@@ -65,6 +55,11 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if last_size != sum_the_height() {
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                 self.contentView.contentSize.height = self.sum_the_height()
+                self.table_view.snp.remakeConstraints({ (x) in
+                    x.edges.equalTo(self.contentView)
+                    x.width.equalTo(UIScreen.main.bounds.width)
+                    x.height.equalTo(self.sum_the_height())
+                })
             }, completion: nil)
         }
     }
@@ -131,7 +126,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 let img = UIImageView(image: UIImage(named: "DownShade"))
                 img.contentMode = .scaleToFill
                 ret.addSubview(img)
-                img.alpha = 0.1666
+                img.alpha = 0.06    
                 img.snp.makeConstraints { (x) in
                     x.left.equalTo(ret.snp.left).offset(-28)
                     x.right.equalTo(ret.snp.right).offset(28)
@@ -184,11 +179,11 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         case 2: return 40
         case 3:
             if LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] ?? true {
-                return 171
+                return 147
             } else {
-                return 171 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
+                return 147 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
             }
-        case 4: return 20
+        case 4: return 30
         case 5:
             var count = LKRoot.container_recent_update.count
             if count > LKRoot.manager_reg.ru.limit {

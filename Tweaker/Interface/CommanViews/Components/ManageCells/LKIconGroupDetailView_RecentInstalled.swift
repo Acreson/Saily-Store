@@ -156,7 +156,7 @@ extension manage_views {
             table_view.isHidden = true
             table_view.isScrollEnabled = false
             table_view_container.addSubview(table_view)
-            table_view.snp.makeConstraints { (x) in
+            table_view.snp.remakeConstraints { (x) in
                 x.top.equalTo(self.table_view_container.snp.top)
                 x.left.equalTo(contentView.snp.left).offset(8)
                 x.right.equalTo(contentView.snp.right).offset(-8)
