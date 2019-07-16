@@ -45,11 +45,12 @@ class app_root_class {
     var container_package_repo              = [DMPackageRepos]()            // 软件源缓存
     var container_package_repo_DBSync       = [DMPackageRepos]()            // 包含未刷新的源
     var container_package_repo_download     = [String : String]()           // 软件源缓存
-    var container_packages                  = [DBMPackage]()                // 软件包缓存
-    var container_packages_DBSync           = [DBMPackage]()                // 软件包缓存
+    var container_packages                  = [String : DBMPackage]()       // 软件包缓存
+    var container_packages_DBSync           = [String : DBMPackage]()       // 软件包缓存
     var container_recent_update             = [DBMPackage]()                // 最近更新缓存
     var container_manage_cell_status        = [String : Bool]()             // 管理页面是否展开
     var container_packages_installed_DBSync = [String : DBMPackage]()       // 已安装软件包
+    var container_recent_installed          = [DBMPackage]()                // 最近安装缓存
     var container_packages_randomfun_DBSync = [DBMPackage]()                // 已安装软件包
     
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
@@ -102,7 +103,9 @@ class app_root_class {
         
         // 启动时同步一次数据
         let package_from_database: [DBMPackage]? = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue)
-        container_packages = package_from_database ?? []
+        for item in package_from_database ?? [] {
+            container_packages[item.id] = item
+        }
         
         // 发送到下载处理引擎
         queue_dispatch.async {

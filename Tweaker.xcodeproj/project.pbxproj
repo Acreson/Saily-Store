@@ -69,7 +69,7 @@
 		B493CC2B22DB519B00D31A47 /* OperatorGetPackageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */; };
 		B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */; };
 		B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */; };
-		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */; };
+		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */; };
 		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
 		B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */; };
 		B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */; };
@@ -145,7 +145,7 @@
 		B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetPackageInfo.swift; sourceTree = "<group>"; };
 		B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackages.swift; sourceTree = "<group>"; };
 		B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
-		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Installed.swift; sourceTree = "<group>"; };
+		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentInstalled.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
 		B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppTapp.xcassets; sourceTree = "<group>"; };
 		B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKNonWorkSearchBar.swift; sourceTree = "<group>"; };
@@ -375,7 +375,7 @@
 				B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */,
 				B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */,
 				B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */,
-				B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift */,
+				B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */,
 				B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */,
 				B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */,
 				B46EE49E22D611CD000C6F6D /* LKRepoView.swift */,
@@ -667,7 +667,7 @@
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				ABFBA82A229D833B0070A17E /* CommonContainer.swift in Sources */,
-				B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_Installed.swift in Sources */,
+				B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift in Sources */,
 				AB53B64F22A021D800492BAB /* CardCreate.swift in Sources */,
 				ABE6DCF6229E8C5300D18D9E /* DMCommon.swift in Sources */,
 				AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */,

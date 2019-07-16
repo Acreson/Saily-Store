@@ -445,7 +445,7 @@ extension app_opeerator {
         }
         LKRoot.container_packages.removeAll()
         for key_pair_value in packages where PR_should_add_this(package: key_pair_value.value) {
-            LKRoot.container_packages.append(key_pair_value.value)
+            LKRoot.container_packages[key_pair_value.key] = key_pair_value.value
             try? LKRoot.root_db?.insertOrReplace(objects: key_pair_value.value, intoTable: common_data_handler.table_name.LKPackages.rawValue)
         }
         // 删除全部没有找到的软件包
@@ -471,7 +471,11 @@ extension app_opeerator {
         
         // 同步一次数据
         let read_again: [DBMPackage]? = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue)
-        LKRoot.container_packages = read_again ?? []
+        var sync_again = [String : DBMPackage]()
+        for item in read_again ?? [] {
+            sync_again[item.id] = item
+        }
+        LKRoot.container_packages = sync_again
         
         DispatchQueue.main.async {
             presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized())

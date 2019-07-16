@@ -195,15 +195,11 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 return 171 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
             }
         case 4:
-            return 157
-//            if LKRoot.container_manage_cell_status["YA_IS_COLLAPSED"] ?? true {
-//                return 157
-//            } else {
-//                if LKRoot.container_recent_update.count > 12 {
-//                    return 157 + 12 * 62
-//                }
-//                return 157 + CGFloat(LKRoot.container_recent_update.count) * 62
-//            }
+            if LKRoot.container_manage_cell_status["YA_IS_COLLAPSED"] ?? true {
+                return 157
+            } else {
+                return 157 + CGFloat(LKRoot.container_recent_installed.count + 1) * 62 - 32
+            }
         case 5:
             return 728 + 633
         default: return 180

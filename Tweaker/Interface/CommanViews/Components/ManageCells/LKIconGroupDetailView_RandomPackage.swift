@@ -162,10 +162,10 @@ extension manage_views {
             if LKRoot.container_packages.count < 1 {
                 return
             }
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!)
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!)
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!)
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!)
+            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
+            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
+            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
+            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
         }
         
         func update_status() {

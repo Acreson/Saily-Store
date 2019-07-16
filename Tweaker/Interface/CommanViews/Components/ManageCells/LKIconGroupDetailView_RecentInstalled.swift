@@ -1,5 +1,5 @@
 //
-//  LKIconGroupDetailView_Installed.swift
+//  LKIconGroupDetailView_RecentInstalled.swift
 //  Tweaker
 //
 //  Created by Lakr Aream on 2019/7/16.
@@ -8,7 +8,7 @@
 
 extension manage_views {
     
-    class LKIconGroupDetailView_Installed: UIView, UITableViewDataSource {
+    class LKIconGroupDetailView_RecentInstalled: UIView, UITableViewDataSource {
         
         var initd = false
         
@@ -23,9 +23,11 @@ extension manage_views {
         let table_view = UITableView()
         let icon_stack = common_views.LKIconStack()
         
+        let limit = 8
+        
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-            table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_Installed_TVID")
+            table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_RecentInstalled_TVID")
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -60,8 +62,8 @@ extension manage_views {
             
             // 标题
             let title_view = UILabel()
-            title_view.text = "已安装".localized()
-            title_view.textColor = LKRoot.ins_color_manager.read_a_color("main_operations_allow")
+            title_view.text = "最近安装".localized()
+            title_view.textColor = LKRoot.ins_color_manager.read_a_color("main_title_four")
             title_view.font = .boldSystemFont(ofSize: 28)
             contentView.addSubview(title_view)
             title_view.snp.makeConstraints { (x) in
@@ -123,7 +125,7 @@ extension manage_views {
             // 展开按钮
             expend_button.setTitle("点击来展开一些最近的安装 ▼".localized(), for: .normal)
             expend_button.titleLabel?.font = .boldSystemFont(ofSize: 12)
-            expend_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_operations_allow"), for: .normal)
+            expend_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
             expend_button.setTitleColor(.gray, for: .highlighted)
             contentView.addSubview(expend_button)
             expend_button.snp.remakeConstraints { (x) in
@@ -137,7 +139,7 @@ extension manage_views {
             // 关闭按钮
             collapse_button.setTitle("收起 ▲".localized(), for: .normal)
             collapse_button.titleLabel?.font = .boldSystemFont(ofSize: 12)
-            collapse_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_operations_allow"), for: .normal)
+            collapse_button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
             collapse_button.setTitleColor(.gray, for: .highlighted)
             collapse_button.isHidden = true
             contentView.addSubview(collapse_button)
@@ -171,8 +173,16 @@ extension manage_views {
             
         }
         
-        func re_sync() {
-            
+        func re_sync(lim: Int? = nil) {
+            guard let pack: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKRecentInstalled.rawValue,
+                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending),
+                                                                                     DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                     DBMPackage.Properties.id.asOrder(by: .ascending)],
+                                                                           limit: lim ?? self.limit) else {
+                                                                            print("[E] 无法从 LKPackages 中获得数据，终止同步。")
+                                                                            return
+            }
+            LKRoot.container_recent_installed = pack
         }
         
         func update_status() {
@@ -187,8 +197,7 @@ extension manage_views {
                 x.top.equalTo(self.table_view_container.snp.top)
                 x.left.equalTo(contentView.snp.left).offset(8)
                 x.right.equalTo(contentView.snp.right).offset(-8)
-//                x.height.equalTo((LKRoot.---.count + 1) * 62 + 5 - 32)
-                x.height.equalTo(108)
+                x.height.equalTo((LKRoot.container_recent_installed.count + 1) * 62 + 5 - 32)
             }
 
             if !is_collapsed {
@@ -259,71 +268,87 @@ extension manage_views {
     
 }
 
-extension manage_views.LKIconGroupDetailView_Installed: UITableViewDelegate {
+extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return LKRoot.---.count + 1
-        return 0
+        return LKRoot.container_recent_installed.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.row >= LKRoot.---.count {
-//            let ret = cell_views.LK2ButtonStackTVCell()
-//            ret.button1.setTitle("整理导出".localized(), for: .normal)
-//            ret.button2.setTitle("查看全部".localized(), for: .normal)
-//            ret.button1.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_operations_allow"), for: .normal)
-//            ret.button2.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_operations_allow"), for: .normal)
-//            ret.button1.addTarget(self, action: #selector(export_button_recall(sender:)), for: .touchUpInside)
-//            ret.button2.addTarget(self, action: #selector(share_button_recall), for: .touchUpInside)
-//            ret.backgroundColor = .clear
-//            return ret
-//        }
-        let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_Installed_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
-//        ret.icon.sd_setImage(with: URL(string: LKRoot.---[indexPath.row].icon), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-//            if err != nil || img == nil {
-//                if let image = UIImage(named: LKRoot.---[indexPath.row].icon) {
-//                    ret.icon.image = image
-//                } else {
-//                    ret.icon.image = UIImage(named: "AppIcon")
-//                }
-//            }
-//        }
-//        ret.title.text = LKRoot.---[indexPath.row].name
-//        ret.link.text = LKRoot.---[indexPath.row].link
+        if indexPath.row >= LKRoot.container_recent_installed.count {
+            let ret = cell_views.LK2ButtonStackTVCell()
+            ret.button1.setTitle("导出全部".localized(), for: .normal)
+            ret.button2.setTitle("查看全部".localized(), for: .normal)
+            ret.button1.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
+            ret.button2.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
+            ret.button1.addTarget(self, action: #selector(export_button_recall(sender:)), for: .touchUpInside)
+            ret.button2.addTarget(self, action: #selector(share_button_recall), for: .touchUpInside)
+            ret.backgroundColor = .clear
+            return ret
+        }
+        let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_RecentInstalled_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
+        var pack = LKRoot.container_recent_installed[indexPath.row]
+        if let packer = LKRoot.container_packages[pack.id] {
+            pack = packer
+        }
+        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
+        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
+        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)
+        if icon_link.hasPrefix("http") {
+            ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+                if err != nil || img == nil {
+                    ret.icon.image = UIImage(named: "Error")
+                }
+            }
+        } else if icon_link.hasPrefix("NAMED:") {
+            let link = icon_link.dropFirst("NAMED:".count).to_String()
+            ret.icon.sd_setImage(with: URL(string: link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+                if err != nil || img == nil {
+                    ret.icon.image = UIImage(named: "Error")
+                }
+            }
+        } else {
+            if let some = UIImage(contentsOfFile: icon_link) {
+                ret.icon.image = some
+            } else {
+                ret.icon.image = UIImage(named: "ATCydiaSource")
+            }
+        }
         ret.backgroundColor = .clear
         return ret
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.row >= LKRoot.---.count {
-//            return 43
-//        }
+        if indexPath.row >= LKRoot.container_recent_installed.count {
+            return 43
+        }
         return 62
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
-//        if indexPath.row < LKRoot.---.count {
-//            touched_cell(which: indexPath)
-//        }
+        if indexPath.row < LKRoot.container_recent_installed.count {
+            touched_cell(which: indexPath)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//        if indexPath.row < LKRoot.---.count {
-//            return true
-//        }
+        if indexPath.row < LKRoot.container_recent_installed.count {
+            return true
+        }
         return false
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
-//            LKRoot.---[index.row].link.pushClipBoard()
-//            presentStatusAlert(imgName: "Done",
-//                               title: "成功".localized(),
-//                               msg: (LKRoot.---[index.row].name) + " 的地址已经复制到剪贴板".localized())
+            LKRoot.container_recent_installed[index.row].id.pushClipBoard()
+            presentStatusAlert(imgName: "Done",
+                               title: "成功".localized(),
+                               msg: "这个软件包的名字已经复制到剪贴板".localized())
         }
-        share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_operations_allow")
+        share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_four")
         
         let delete = UITableViewRowAction(style: .normal, title: "卸载".localized()) { _, index in
         }
@@ -345,7 +370,7 @@ extension manage_views.LKIconGroupDetailView_Installed: UITableViewDelegate {
                     x.top.equalTo(self.table_view_container.snp.top)
                     x.left.equalTo(self.contentView.snp.left).offset(8)
                     x.right.equalTo(self.contentView.snp.right).offset(-8)
-                    //                    x.height.equalTo((LKRoot.---.count + 1) * 62 + 5 - 32)
+                    x.height.equalTo((LKRoot.container_recent_installed.count + 1) * 62 + 5 - 32)
                     x.height.equalTo(108)
                 }
                 self.icon_stack.apart_init()
@@ -358,10 +383,22 @@ extension manage_views.LKIconGroupDetailView_Installed: UITableViewDelegate {
     }
     
     @objc func export_button_recall(sender: Any?) {
+        var read = ""
+        var rs = [String]()
+        for item in LKRoot.container_packages_installed_DBSync {
+            rs.append(item.key)
+        }
+        rs.sort()
+        for item in rs {
+            read.append(item)
+            read.append("\n")
+        }
+        read.pushClipBoard()
         
     }
     
     @objc func share_button_recall(sender: Any?) {
+        
     }
     
     func touched_cell(which: IndexPath) {
