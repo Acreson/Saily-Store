@@ -390,11 +390,20 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         }
         rs.sort()
         for item in rs {
-            read.append(item)
+            read.append("- " + item)
+            var vn = LKRoot.container_packages[item]?.one_of_the_package_name_lol ?? "none"
+            vn = "Visible name: " + vn
+            var ver = LKRoot.container_packages_installed_DBSync[item]?.version.first?.value.first?.value["VERSION"] ?? "NaN"
+            ver = "Version: " + ver
+            read.append("\n")
+            read.append(vn)
+            read.append("\n")
+            read.append(ver)
+            read.append("\n")
             read.append("\n")
         }
         read.pushClipBoard()
-        
+        presentStatusAlert(imgName: "Done", title: "完成".localized(), msg: "你的全部软件包列表已复制到剪贴板。".localized())
     }
     
     @objc func share_button_recall(sender: Any?) {

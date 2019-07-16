@@ -612,7 +612,7 @@ class UIHommyS: UIViewController {
                         UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                             self.card_details_scroll_view?.layoutIfNeeded()
                             if LKRoot.safe_area_needed {
-                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 505 + new_container.lenth)
+                                self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 555 + new_container.lenth)
                             } else {
                                 self.card_details_scroll_view?.contentSize = CGSize(width: 0, height: 500 + new_container.lenth)
                             }
