@@ -22,6 +22,7 @@ class LKPackageDetail: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.prefersLargeTitles = false
         
 //        (Tweaker.DBMPackage) self.item = 0x0000600002af9f80 {
 //            id = "com.lakr233.SailyTest"
