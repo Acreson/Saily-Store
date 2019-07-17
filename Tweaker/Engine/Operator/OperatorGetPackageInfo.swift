@@ -20,14 +20,14 @@ extension app_opeerator {
         return version.first?.value["ICON"] ?? ""
     }
     
-    func PAK_read_newest_version(pack: DBMPackage) -> [String : [String : String]] {
+    func PAK_read_newest_version(pack: DBMPackage) -> (String, [String : [String : String]]) {
         // 先获得全部 version 的数组
         var vers = [String]()
         for item in pack.version {
             vers.append(item.key)
         }
         let newest = version_cmp(vers: vers)
-        return pack.version[newest] ?? PAK_return_error_vision()
+        return (newest, (pack.version[newest] ?? PAK_return_error_vision()))
     }
     
     func PAK_return_error_vision() -> [String : [String : String]] {

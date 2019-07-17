@@ -213,7 +213,7 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
         }
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_RecentUpdate_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = LKRoot.container_recent_update[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
         ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
         ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
         let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)

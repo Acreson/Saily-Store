@@ -63,7 +63,7 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = tableView.dequeueReusableCell(withIdentifier: cell_id, for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = items[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
         ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
         ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
         if ret.link.text == "" {

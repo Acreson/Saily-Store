@@ -297,7 +297,7 @@ extension manage_views.LKIconGroupDetailView_RandomPackage: UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_RandomPackage_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = LKRoot.container_packages_randomfun_DBSync[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
         ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
         ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
         let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)

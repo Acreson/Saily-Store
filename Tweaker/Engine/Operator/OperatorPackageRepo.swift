@@ -102,7 +102,7 @@ extension app_opeerator {
                         str = """
                         Label: 未知错误
                         Description: 获取软件源元数据错误
-                        """
+                        """.localized()
                     }
                 }
                 read_release = str ?? ""
@@ -115,7 +115,7 @@ extension app_opeerator {
                     read_release = """
                     Label: 未知错误
                     Description: 获取软件源元数据错误
-                    """
+                    """.localized()
                     finished = true
                     sem.signal()
                 }
@@ -384,7 +384,19 @@ extension app_opeerator {
                                 }
                                 // 直接添加 version 不检查 version 是否存在因为它不存在就奇怪了
                                 let v1 = [item.key: this_package] // 【软件源地址 ： 【属性 ： 属性值】】
-                                packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] = v1
+                                if packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] != nil {
+                                    // 存在 version 先对比一下存不存在这个源地址
+//                                    if packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!]![item.key] != nil {
+                                       // 同一个源 咱们覆盖
+                                        packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!]![item.key] = this_package
+//                                    } else {
+//                                        // 不是同一个源 添加 操作相同所以就一起呗
+//                                        packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!]![item.key] = this_package
+//                                    }
+                                } else {
+                                    // 不存在这个 version 咯
+                                    packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] = v1
+                                }
                                 // 因为存在软件包 所以我们更新一下 SIG 字段
                                 packages[this_package["PACKAGE"]!]!.signal = ""
                                 packages[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = this_package["NAME"] ?? ""
