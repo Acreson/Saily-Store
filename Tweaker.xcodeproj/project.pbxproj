@@ -54,6 +54,7 @@
 		B40B4C1E22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */; };
 		B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C1F22D7637600373449 /* DMPackageRepos.swift */; };
 		B40B4C2222D769D200373449 /* OperatorPackageRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */; };
+		B40CBF8422DFA00F005401B6 /* LKSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40CBF8322DFA00F005401B6 /* LKSettings.swift */; };
 		B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */; };
 		B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */; };
 		B411A86922DBFE15004CB35B /* StatusAlertDark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B411A86722DBFE15004CB35B /* StatusAlertDark.swift */; };
@@ -133,6 +134,7 @@
 		B40B4C1D22D75E7000373449 /* LKIconGroupDetailView_PackageRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_PackageRepoSP.swift; sourceTree = "<group>"; };
 		B40B4C1F22D7637600373449 /* DMPackageRepos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackageRepos.swift; sourceTree = "<group>"; };
 		B40B4C2122D769D200373449 /* OperatorPackageRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorPackageRepo.swift; sourceTree = "<group>"; };
+		B40CBF8322DFA00F005401B6 /* LKSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSettings.swift; sourceTree = "<group>"; };
 		B411A85E22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_Settings.swift; sourceTree = "<group>"; };
 		B411A86222DBF0F0004CB35B /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
 		B411A86722DBFE15004CB35B /* StatusAlertDark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusAlertDark.swift; sourceTree = "<group>"; };
@@ -360,8 +362,9 @@
 		B4046A6622DE2FB200DF3835 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */,
+				B40CBF8322DFA00F005401B6 /* LKSettings.swift */,
 				B4046A9222DEA63900DF3835 /* LKPackageDetail.swift */,
+				B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				B411A86A22DBFE15004CB35B /* StatusAlertDarkUtils.swift in Sources */,
 				B4046A6822DE7D6700DF3835 /* UIMineS.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
+				B40CBF8422DFA00F005401B6 /* LKSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -173,6 +173,9 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.expend_self()
+            }
         }
         
         func re_sync(lim: Int? = nil) {
@@ -415,55 +418,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         if let packer = LKRoot.container_packages[pack.id] {
             pack = packer
         }
-        
-        // [String : [String : String]] 最新版本号下的 软件源 ：详细信息
-        let ver = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
-        
-        // 检查软件包合法性
-        if ver.1.count < 1 || ver.1.first?.key == "-1" || ver.1.first?.key == "" {
-            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包不合法，请尝试刷新数据。".localized())
-            return
-        }
-    
-        if ver.1.count == 1 {
-            // 只有一个软件源提供这个软件包
-            let new = LKPackageDetail()
-            new.item = pack
-            
-            (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav2.pushViewController(new)
-        } else {
-            // 有多个软件源提供这个软件包
-            var alert = UIAlertController(title: "⚠️", message: "这个软件包同时被多个软件源提供。请选择一个查看详情".localized(), preferredStyle: .alert)
-            if !LKRoot.is_iPad {
-                alert = UIAlertController(title: "⚠️", message: "这个软件包同时被多个软件源提供。请选择一个查看详情".localized(), preferredStyle: .actionSheet)
-            }
-            for item in ver.1 {
-                let link = item.key
-                var name = ""
-                for repo in LKRoot.container_package_repo where repo.link == link {
-                    name = repo.name
-                    if name == "未知错误".localized() {
-                        name = link
-                    }
-                }
-                alert.addAction(UIAlertAction(title: name, style: .default, handler: { (_) in
-                    // 合成软件包并发送到新 vc
-                    let new = LKPackageDetail()
-                    let packer = pack
-                    packer.version.removeAll()
-                    packer.version[ver.0] = [item.key : item.value]
-                    new.item = packer
-                    (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav2.pushViewController(new)
-                }))
-            }
-            alert.addAction(UIAlertAction(title: "取消".localized(), style: .default, handler: { (_) in
-                
-            }))
-            readTopViewController()?.present(alert, animated: true, completion: {
-                
-            })
-        }
-        
+        presentPackage(pack: pack)
     }
     
     @objc func see_all() {
@@ -523,8 +478,10 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
                 DispatchQueue.main.async {
                     IHProgressHUD.dismiss()
                     UIApplication.shared.endIgnoringInteractionEvents()
-                    (self.son_of_bith_vc as? LKPackageListController)?.items = list
-                    (self.son_of_bith_vc as? LKPackageListController)?.table_view.reloadData()
+                    if let vc = (self.son_of_bith_vc as? LKPackageListController) {
+                        vc.items = list
+                        vc.table_view.reloadData()
+                    }
                 }
             }
         }))
@@ -549,8 +506,10 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
                 DispatchQueue.main.async {
                     IHProgressHUD.dismiss()
                     UIApplication.shared.endIgnoringInteractionEvents()
-                    (self.son_of_bith_vc as? LKPackageListController)?.items = list
-                    (self.son_of_bith_vc as? LKPackageListController)?.table_view.reloadData()
+                    if let vc = (self.son_of_bith_vc as? LKPackageListController) {
+                        vc.items = list
+                        vc.table_view.reloadData()
+                    }
                 }
             }
             

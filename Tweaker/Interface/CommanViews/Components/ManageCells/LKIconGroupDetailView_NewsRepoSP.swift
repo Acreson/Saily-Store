@@ -199,10 +199,8 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
-            if LKRoot.container_news_repo_DBSync.count == 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.expend_self()
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.expend_self()
             }
             
         }
