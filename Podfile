@@ -14,6 +14,7 @@ target 'Tweaker' do
   
   pod 'SwifterSwift'
 
+  pod 'Hero'
   pod 'SnapKit'
   pod 'StatusAlert', '~> 1.1.1'
   pod 'IHProgressHUD'
@@ -22,6 +23,7 @@ target 'Tweaker' do
   pod 'SWCompression'
   pod 'SwiftyMarkdown'
   pod 'LTMorphingLabel'
+  #  pod 'EasyTransitions'
   pod 'JJFloatingActionButton'
   pod 'NVActivityIndicatorView'
   

@@ -23,7 +23,9 @@ extension manage_views {
         let table_view = UITableView()
         let icon_stack = common_views.LKIconStack()
         
-        let limit = 8
+        var son_of_bith_vc = UIViewController()
+        
+        let limit = 5
         
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
@@ -103,7 +105,7 @@ extension manage_views {
             
             // 图标组
 
-            icon_stack.images_address = ["ATCydiaSource"]
+            icon_stack.images_address = ["NAMED:ATCydiaSource"]
             icon_stack.apart_init()
             contentView.addSubview(icon_stack)
             icon_stack.snp.makeConstraints { (x) in
@@ -282,7 +284,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
             ret.button1.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
             ret.button2.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_title_four"), for: .normal)
             ret.button1.addTarget(self, action: #selector(export_button_recall(sender:)), for: .touchUpInside)
-            ret.button2.addTarget(self, action: #selector(share_button_recall), for: .touchUpInside)
+            ret.button2.addTarget(self, action: #selector(see_all), for: .touchUpInside)
             ret.backgroundColor = .clear
             return ret
         }
@@ -295,6 +297,9 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
         ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
         let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)
+        if ret.link.text == "" {
+            ret.link.text = "软件包无可用描述。".localized()
+        }
         if icon_link.hasPrefix("http") {
             ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
                 if err != nil || img == nil {
@@ -358,7 +363,8 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
     
     func update_user_interface(_ CallB: @escaping () -> Void) {
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
-        self.re_sync()
+        re_sync()
+        table_view.reloadData()
         DispatchQueue.main.async {
             (self.from_father_view as? UITableView)?.beginUpdates()
             LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"
@@ -374,7 +380,6 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
                     x.height.equalTo(108)
                 }
                 self.icon_stack.apart_init()
-                self.table_view.reloadData()
                 UIApplication.shared.endIgnoringInteractionEvents()
                 IHProgressHUD.dismiss()
                 CallB()
@@ -406,13 +411,126 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         presentStatusAlert(imgName: "Done", title: "完成".localized(), msg: "你的全部软件包列表已复制到剪贴板。".localized())
     }
     
-    @objc func share_button_recall(sender: Any?) {
-        
-    }
-    
     func touched_cell(which: IndexPath) {
+        var pack = LKRoot.container_recent_installed[which.row]
+        if let packer = LKRoot.container_packages[pack.id] {
+            pack = packer
+        }
+        let ver = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        
+        // 检查软件包合法性
+        if ver.count < 1 || ver.first?.key == "-1" || ver.first?.key == "" {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包不合法，请尝试刷新数据。".localized())
+            return
+        }
+    
+        if ver.count == 1 {
+            // 只有一个软件源提供这个软件包
+            let new = LKPackageWeb()
+            new.item = pack
+            (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav2.pushViewController(new)
+        } else {
+            // 有多个软件源提供这个软件包
+            if LKRoot.is_iPad {
+                fatalError("可以补一下实现了")
+            } else {
+            }
+        }
         
     }
     
+    @objc func see_all() {
+        // 准备发送新的 vc
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        IHProgressHUD.show()
+        let new = LKPackageListController()
+        LKRoot.queue_dispatch.async {
+            guard let read: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKRecentInstalled.rawValue,
+                                                                           orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending),
+                                                                                     DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                     DBMPackage.Properties.id.asOrder(by: .ascending)]) else {
+                                                                                        print("[E] 无法取得最近更新的列表，我们撤。")
+                                                                                        return
+            }
+            var list = [DBMPackage]()
+            for item in read {
+                if let newer = LKRoot.container_packages[item.id] {
+                    list.append(newer)
+                } else {
+                    list.append(item)
+                }
+            }
+            new.items = list
+            DispatchQueue.main.async {
+                IHProgressHUD.dismiss()
+                UIApplication.shared.endIgnoringInteractionEvents()
+                new.title = "已安装".localized()
+                new.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "排序".localized(), style: .plain, target: self, action: #selector(self.sort_call))
+                self.son_of_bith_vc = new
+                (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav2.pushViewController(new)
+            }
+        }
+    }
+    
+    @objc func sort_call() {
+        let alert = UIAlertController(title: "排序方法".localized(), message: "您希望以怎样的方法进行排序？".localized(), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "日期".localized(), style: .default, handler: { (_) in
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            IHProgressHUD.show()
+            LKRoot.queue_dispatch.async {
+                guard let read: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKRecentInstalled.rawValue,
+                                                                               orderBy: [DBMPackage.Properties.latest_update_time.asOrder(by: .descending),
+                                                                                         DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                         DBMPackage.Properties.id.asOrder(by: .ascending)]) else {
+                                                                                            print("[E] 无法取得最近更新的列表，我们撤。")
+                                                                                            return
+                }
+                var list = [DBMPackage]()
+                for item in read {
+                    if let newer = LKRoot.container_packages[item.id] {
+                        list.append(newer)
+                    } else {
+                        list.append(item)
+                    }
+                }
+                DispatchQueue.main.async {
+                    IHProgressHUD.dismiss()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    (self.son_of_bith_vc as? LKPackageListController)?.items = list
+                    (self.son_of_bith_vc as? LKPackageListController)?.table_view.reloadData()
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "名称".localized(), style: .default, handler: { (_) in
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            IHProgressHUD.show()
+            LKRoot.queue_dispatch.async {
+                guard let read: [DBMPackage] = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKRecentInstalled.rawValue,
+                                                                               orderBy: [DBMPackage.Properties.one_of_the_package_name_lol.asOrder(by: .ascending),
+                                                                                         DBMPackage.Properties.id.asOrder(by: .ascending)]) else {
+                                                                                            print("[E] 无法取得最近更新的列表，我们撤。")
+                                                                                            return
+                }
+                var list = [DBMPackage]()
+                for item in read {
+                    if let newer = LKRoot.container_packages[item.id] {
+                        list.append(newer)
+                    } else {
+                        list.append(item)
+                    }
+                }
+                DispatchQueue.main.async {
+                    IHProgressHUD.dismiss()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    (self.son_of_bith_vc as? LKPackageListController)?.items = list
+                    (self.son_of_bith_vc as? LKPackageListController)?.table_view.reloadData()
+                }
+            }
+            
+        }))
+        readTopViewController()?.present(alert, animated: true, completion: {
+            
+        })
+    }
 }
 

@@ -113,9 +113,14 @@ extension common_views {
         
         func update_image() {
             for i in 0..<image_views.count {
-                image_views[i].sd_setImage(with: URL(string: images_address[i]), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                    if err != nil || img == nil {
-                        self.image_views[i].image = UIImage(named: self.images_address[i])
+                let img_info = images_address[i]
+                if img_info.hasPrefix("NAMED:") {
+                    self.image_views[i].image = UIImage(named: img_info.dropFirst("NAMED:".count).to_String().drop_space())
+                } else {
+                    image_views[i].sd_setImage(with: URL(string: img_info), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+                        if err != nil || img == nil {
+                            self.image_views[i].image = UIImage(named: self.images_address[i])
+                        }
                     }
                 }
             }

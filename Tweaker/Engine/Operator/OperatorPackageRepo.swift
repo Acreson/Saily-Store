@@ -161,6 +161,7 @@ extension app_opeerator {
                 
             }
         }
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""
     } // PR_sync_and_download
     
     func PR_release_wrapper(str: String) -> [String : String] {
@@ -479,7 +480,13 @@ extension app_opeerator {
         DispatchQueue.main.async {
             presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized())
         }
+        print("[*] 开始更新已安装")
+        let new_session = UUID().uuidString
+        YA_build_installed_list(session: new_session) { (_) in
+            
+        }
         
+        LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""
         print("[*] 更新软件包完成")
         CallB(operation_result.success.rawValue)
     }

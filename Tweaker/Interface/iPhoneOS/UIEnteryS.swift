@@ -50,6 +50,11 @@ class UIEnteryS: UITabBarController {
         nav3.navigationBar.isHidden = true
         nav4.navigationBar.isHidden = true
         
+        nav1.navigationBar.prefersLargeTitles = true
+        nav2.navigationBar.prefersLargeTitles = true
+        nav3.navigationBar.prefersLargeTitles = true
+        nav4.navigationBar.prefersLargeTitles = true
+        
         viewControllers = [nav1, nav2, nav3, nav4]
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

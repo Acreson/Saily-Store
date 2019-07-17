@@ -37,6 +37,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         contentView.delegate = self
         contentView.showsVerticalScrollIndicator = false
         contentView.showsHorizontalScrollIndicator = false
+        contentView.decelerationRate = .fast
         view.addSubview(contentView)
         contentView.addSubview(table_view)
         contentView.snp.makeConstraints { (x) in

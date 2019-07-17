@@ -294,15 +294,10 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
                 DispatchQueue.main.async {
                     IHProgressHUD.dismiss()
                     UIApplication.shared.endIgnoringInteractionEvents()
-                    let newnav = UINavigationController(rootViewController: new)
-                    newnav.navigationBar.prefersLargeTitles = true
-                    new.title = "全部最近更新".localized()
-                    
-                    readTopViewController()?.present(newnav, animated: true, completion: {
-                    })
+                    new.title = "最近更新".localized()
+                    (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav3.pushViewController(new)
                 }
             }
-            
         }
     }
 

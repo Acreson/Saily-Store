@@ -13,6 +13,16 @@ class LKPackageListController: UIViewController {
     var items = [DBMPackage]()
     let cell_id = UUID().uuidString
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +32,7 @@ class LKPackageListController: UIViewController {
         table_view.delegate = self
         table_view.dataSource = self
         table_view.backgroundColor = .clear
+        table_view.separatorColor = .clear
         
         view.addSubview(table_view)
         table_view.snp.makeConstraints { (x) in
@@ -34,9 +45,6 @@ class LKPackageListController: UIViewController {
             navigationController?.navigationBar.barStyle = .default
         }
         
-        self.navigationItem.hidesBackButton = true
-        let newBackButton = UIBarButtonItem(title: "返回".localized(), style: .done, target: self, action: #selector(back(sender:)))
-        self.navigationItem.leftBarButtonItem = newBackButton
     }
     
     @objc func back(sender: UIBarButtonItem) {
@@ -58,6 +66,9 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
         let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
         ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
         ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
+        if ret.link.text == "" {
+            ret.link.text = "软件包无可用描述。".localized()
+        }
         let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)
         if icon_link.hasPrefix("http") {
             ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
@@ -79,6 +90,11 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
                 ret.icon.image = UIImage(named: "ATCydiaSource")
             }
         }
+        
+        if indexPath.row == items.count - 1 {
+            ret.sep.alpha = 0
+        }
+        
         ret.backgroundColor = .clear
         return ret
     }
@@ -106,7 +122,7 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
                                title: "成功".localized(),
                                msg: "这个软件包的名字已经复制到剪贴板".localized())
         }
-        share.backgroundColor = .blue
+        share.backgroundColor = LKRoot.ins_color_manager.read_a_color("button_tint_color")
         
         return [share]
     }

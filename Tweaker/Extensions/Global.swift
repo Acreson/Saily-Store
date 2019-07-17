@@ -8,6 +8,7 @@
 
 // to use everywhere
 @_exported import UIKit
+@_exported import Hero
 @_exported import SnapKit
 @_exported import WCDBSwift
 @_exported import Alamofire
