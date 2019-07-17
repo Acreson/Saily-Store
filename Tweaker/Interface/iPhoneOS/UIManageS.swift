@@ -34,6 +34,14 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 防止导航抽风
+        let dummy = UIView()
+        view.addSubview(dummy)
+        dummy.snp.makeConstraints { (x) in
+            x.edges.equalTo(self.view.snp.edges)
+        }
+        
         table_view.separatorColor = .clear
         table_view.clipsToBounds = false
         table_view.delegate = self
