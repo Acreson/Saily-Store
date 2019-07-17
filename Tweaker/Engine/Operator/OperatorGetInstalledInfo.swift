@@ -15,6 +15,10 @@ extension app_opeerator {
     
     func YA_sync_dpkg_info() {
         try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/dpkg")
+        if FileManager.default.fileExists(atPath: LKRoot.root_path! + "/dpkg") {
+            print("[?] dpkg 同步出错了？")
+        }
+        try? FileManager.default.createDirectory(atPath: LKRoot.root_path! + "/dpkg", withIntermediateDirectories: true, attributes: nil)
         try? FileManager.default.copyItem(atPath: "/Library/dpkg", toPath: LKRoot.root_path! + "/dpkg")
         try? FileManager.default.copyItem(atPath: "/Library/dpkg/status", toPath: LKRoot.root_path! + "/dpkg/status")
     }
@@ -34,6 +38,7 @@ extension app_opeerator {
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = "正在刷新软件包列表，这可能需要一些时间。".localized()
         if LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE"] == "TRUE" || session != LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE_SESSION"] {
+            LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""
             return
         }
         LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE"] = "TRUE"
@@ -167,10 +172,9 @@ extension app_opeerator {
         
         LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE"] = "FALSE"
         
-        LKRoot.manager_reg.ya.re_sync()
         if LKRoot.manager_reg.ya.initd {
-            DispatchQueue.main.async {
-                LKRoot.manager_reg.ya.update_user_interface {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                LKRoot.manager_reg.ya.update_interface {
                     
                 }
             }

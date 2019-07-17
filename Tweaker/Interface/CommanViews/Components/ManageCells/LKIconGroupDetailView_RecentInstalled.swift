@@ -361,7 +361,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         return [share, delete]
     }
     
-    func update_user_interface(_ CallB: @escaping () -> Void) {
+    func update_interface(_ CallB: @escaping () -> Void) {
         // 刷新成功了 先展开表格，再更新iconStack，最后reload自己
         re_sync()
         table_view.reloadData()
@@ -377,7 +377,6 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
                     x.left.equalTo(self.contentView.snp.left).offset(8)
                     x.right.equalTo(self.contentView.snp.right).offset(-8)
                     x.height.equalTo((LKRoot.container_recent_installed.count + 1) * 62 + 5 - 32)
-                    x.height.equalTo(108)
                 }
                 self.icon_stack.apart_init()
                 UIApplication.shared.endIgnoringInteractionEvents()
@@ -428,7 +427,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
     
         if ver.1.count == 1 {
             // 只有一个软件源提供这个软件包
-            let new = LKPackageWeb()
+            let new = LKPackageDetail()
             new.item = pack
             
             (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav2.pushViewController(new)
@@ -449,7 +448,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
                 }
                 alert.addAction(UIAlertAction(title: name, style: .default, handler: { (_) in
                     // 合成软件包并发送到新 vc
-                    let new = LKPackageWeb()
+                    let new = LKPackageDetail()
                     let packer = pack
                     packer.version.removeAll()
                     packer.version[ver.0] = [item.key : item.value]

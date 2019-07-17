@@ -481,6 +481,14 @@ extension app_opeerator {
             }
         }
         
+        
+        print("[*] 开始更新已安装")
+        let new_session = UUID().uuidString
+        LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE_SESSION"] = new_session
+        YA_build_installed_list(session: new_session) { (_) in
+            
+        }
+        
         // 同步一次数据
         let read_again: [DBMPackage]? = try? LKRoot.root_db?.getObjects(fromTable: common_data_handler.table_name.LKPackages.rawValue)
         var sync_again = [String : DBMPackage]()
@@ -491,11 +499,6 @@ extension app_opeerator {
         
         DispatchQueue.main.async {
             presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized())
-        }
-        print("[*] 开始更新已安装")
-        let new_session = UUID().uuidString
-        YA_build_installed_list(session: new_session) { (_) in
-            
         }
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""
