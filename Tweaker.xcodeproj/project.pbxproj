@@ -62,6 +62,7 @@
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
 		B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */; };
+		B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4318BDB22DEF771008082FC /* Solid.xcassets */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
@@ -140,6 +141,7 @@
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
 		B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetInstalledInfo.swift; sourceTree = "<group>"; };
+		B4318BDB22DEF771008082FC /* Solid.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Solid.xcassets; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
 				ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */,
 				B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */,
+				B4318BDB22DEF771008082FC /* Solid.xcassets */,
 				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
 			);
 			path = AssSets;
@@ -490,6 +493,7 @@
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
 				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
 				ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */,
+				B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

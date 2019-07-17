@@ -288,8 +288,9 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
         if ver.1.count == 1 {
             // 只有一个软件源提供这个软件包
             let new = LKPackageDetail()
+            pack.version.removeAll()
+            pack.version[ver.0] = ver.1
             new.item = pack
-            
             (LKRoot.tabbar_view_controller as? UIEnteryS)?.nav3.pushViewController(new)
         } else {
             // 有多个软件源提供这个软件包

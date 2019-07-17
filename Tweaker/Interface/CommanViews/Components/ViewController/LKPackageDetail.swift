@@ -14,6 +14,8 @@ class LKPackageDetail: UIViewController {
     private var name = ""
     private var contentView = UIScrollView()
     
+    let banner_image = UIImageView()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -23,43 +25,6 @@ class LKPackageDetail: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = false
-        
-//        (Tweaker.DBMPackage) self.item = 0x0000600002af9f80 {
-//            id = "com.lakr233.SailyTest"
-//            latest_update_time = "2019.07.17 11:30:57"
-//            one_of_the_package_name_lol = "SailyTest"
-//            version = 1 key/value pair {
-//                [0] = {
-//                    key = "0.0.9"
-//                    value = 1 key/value pair {
-//                        [0] = {
-//                            key = "http://qaq.loc/repo/"
-//                            value = 18 key/value pairs {
-//                                [0] = (key = "ARCHITECTURE", value = "iphoneos-arm")
-//                                [1] = (key = "CONFLICTS", value = "com.lakr233.jw.SailyPackageManager")
-//                                [2] = (key = "PACKAGE", value = "com.lakr233.SailyTest")
-//                                [3] = (key = "MAINTAINER", value = "https://twitter.com/Lakr233")
-//                                [4] = (key = "PRIORITY", value = "nil")
-//                                [5] = (key = "DESCRIPTION", value = "Saily Package Manager Test Package")
-//                                [6] = (key = "ICON", value = "http://qaq.loc/repos/CydiaIcon.png")
-//                                [7] = (key = "DEPICTION", value = "https://github.com/Co2333/SailyPackageManager")
-//                                [8] = (key = "_internal_SIG_begin_update", value = "0x1")
-//                                [9] = (key = "SECTION", value = "SystemD")
-//                                [10] = (key = "AUTHOR", value = "Lakr Aream")
-//                                [11] = (key = "ESSENTIAL", value = "NO")
-//                                [12] = (key = "DEPENDS", value = "firmware (>= 5.0)")
-//                                [13] = (key = "VERSION", value = "0.0.9")
-//                                [14] = (key = "DEV", value = "Lakr Aream")
-//                                [15] = (key = "REPLACES", value = "com.lakr233.jw.SailyStartupDaemon")
-//                                [16] = (key = "HOMEPAGE", value = "https://twitter.com/Lakr233")
-//                                [17] = (key = "NAME", value = "SailyTest")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            signal = ""
-//        }
         
         if LKRoot.settings?.use_dark_mode ?? false {
             navigationController?.navigationBar.barStyle = .blackOpaque
@@ -91,12 +56,57 @@ class LKPackageDetail: UIViewController {
         // 更新一次名字
         if let namer = item.version.first!.value.first!.value["NAME"] {
             name = namer
-            title = name
+//            title = name
         }
         
+        // --------------------- 开始处理你的脸！
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        
         view.addSubview(contentView)
+        contentView.showsVerticalScrollIndicator = false
+        contentView.showsHorizontalScrollIndicator = false
         contentView.snp.makeConstraints { (x) in
             x.edges.equalTo(self.view.snp.edges)
+        }
+        contentView.contentSize = CGSize(width: 0, height: 1888)
+        
+        contentView.addSubview(banner_image)
+        banner_image.contentMode = .scaleAspectFill
+        banner_image.snp.makeConstraints { (x) in
+            if LKRoot.safe_area_needed {
+                x.top.lessThanOrEqualTo(self.contentView.snp.top).offset(-88)
+                x.top.lessThanOrEqualTo(self.view.snp.top).offset(0)
+                x.height.equalTo(233)
+            } else {
+                x.top.lessThanOrEqualTo(self.contentView.snp.top).offset(0)
+                x.top.lessThanOrEqualTo(self.view.snp.top).offset(0)
+                x.height.equalTo(166)
+            }
+            x.left.equalTo(view.snp.left)
+            x.right.equalTo(view.snp.right)
+        }
+        
+        if LKRoot.settings?.use_dark_mode ?? false {
+            banner_image.image = UIImage(named: "s.darkblue")
+        } else {
+            banner_image.image = UIImage(named: "BGBlue")
+        }
+        banner_image.clipsToBounds = true
+        
+        // image 和 navigation bar 的透明操作
+        let label = UILabel(text: "Hi")
+        contentView.addSubview(label)
+        label.textAlignment = .center
+        label.snp.makeConstraints { (x) in
+            if LKRoot.safe_area_needed {
+                x.top.equalTo(self.contentView.snp.top).offset(-88 + 233 + 28)
+            } else {
+                x.top.lessThanOrEqualTo(self.view.snp.top).offset(0 + 166 + 28)
+            }
+            x.left.equalTo(view.snp.left)
+            x.right.equalTo(view.snp.right)
         }
         
     }
