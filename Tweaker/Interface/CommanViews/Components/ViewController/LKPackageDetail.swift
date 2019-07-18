@@ -39,6 +39,18 @@ class LKPackageDetail: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -368,8 +380,6 @@ extension LKPackageDetail: UIScrollViewDelegate {
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: text_color]
         }
     }
-    
-    
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if contentView == scrollView {

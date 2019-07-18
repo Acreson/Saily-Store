@@ -105,9 +105,7 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         table_view.deselectRow(at: indexPath, animated: true)
-        if indexPath.row < LKRoot.container_package_repo_DBSync.count {
-            touched_cell(which: indexPath)
-        }
+        touched_cell(which: indexPath)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -128,7 +126,8 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func touched_cell(which: IndexPath) {
-        
+        let pack = items[which.row]
+        presentPackage(pack: pack)
     }
 }
 
