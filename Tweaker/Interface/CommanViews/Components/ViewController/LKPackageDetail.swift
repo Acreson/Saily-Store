@@ -255,7 +255,7 @@ class LKPackageDetail: UIViewController {
                     if let json = try JSONSerialization.jsonObject(with: read.data(using: .utf8)!, options: []) as? [String: Any] {
                         DispatchQueue.main.async {
                             IHProgressHUD.dismiss()
-                            self.doJsonSetupLevelRoot(json: json)
+                            self.doJsonSetupLevelRoot(json: json, origStr: read)
                         }
                     }
                 } catch {
@@ -349,68 +349,84 @@ extension LKPackageDetail: UIScrollViewDelegate {
 
 extension LKPackageDetail {
     
-    func doJsonSetupLevelRoot(json: [String : Any]) {
-        var nextLevelSetup: [[String : Any]]?
-        for item in json {
-            switch item.key {
-            case "headerImage":
-                self.banner_image.sd_setImage(with: URL(string: (item.value as? String) ?? "")) { (img, _, _, _) in
-                    if img != nil {
-                        self.img_initd = true
-                        let color = img!.getColors()?.background ?? .white
-                        self.banner_image.backgroundColor = color
-                        if color.red + color.blue + color.green > 2.6 {
-                            self.tint_color_consit = true
-                        }
+    func doJsonSetupLevelRoot(json: [String : Any], origStr: String) {
+        if let img_addr = json["headerImage"] as? String {
+            self.banner_image.sd_setImage(with: URL(string: img_addr)) { (img, _, _, _) in
+                if img != nil {
+                    self.img_initd = true
+                    let color = img!.getColors()?.background ?? .white
+                    self.banner_image.backgroundColor = color
+                    if color.red + color.blue + color.green > 2.6 {
+                        self.tint_color_consit = true
                     }
-                    self.updateColor()
                 }
-            case "minVersion":
-                _ = "谁他妈在乎您嘞".localized()
-            case "tintColor":
-                if let color = UIColor(hexString: (item.value as? String) ?? "") {
-                    self.theme_color = color
-                }
-                updateColor()
-            case "backgroundColor":
-                if let color = UIColor(hexString: (item.value as? String) ?? "") {
-                    self.theme_color_bak = color
-                }
-                updateColor()
-            case "tabs":
-                nextLevelSetup = item.value as? [[String : Any]]
-            case "class":
-                if (item.value as? String) != "DepictionTabView" {
-                    print("[?] 有意思咯 " + ((item.value as? String) ?? ""))
-                }
-            default:
-                print("[*] 丢弃数据： " + item.key)
-            }
-            if nextLevelSetup != nil {
-                doJsonSetUpLevelTabs(tabs: nextLevelSetup!)
             }
         }
+        
+        if let tint_color = json["tintColor"] as? String {
+            if let color = UIColor(hexString: tint_color) {
+                self.theme_color = color
+            }
+        }
+        
+        if let back_color = json["backgroundColor"] as? String {
+            if let color = UIColor(hexString: back_color) {
+                self.theme_color_bak = color
+            }
+        }
+        
+        if let tabs = json["tabs"] as? [[String : Any]] {
+            doJsonSetUpLevelTabs(tabs: tabs, origStr: origStr)
+        }
+    
     }
     
-    func doJsonSetUpLevelTabs(tabs: [[String: Any]]) {
+    func doJsonSetUpLevelTabs(tabs: [[String: Any]], origStr: String) {
         
-        
-        
+        // tab 好像不需要排序
+
         for tab in tabs {
+            var index = 0
             
+            index += 1
+            let header = common_views.LKSectionBeginHeader()
+            if let someString = tab["tintColor"] as? String {
+                header.theme_color = UIColor(hexString: someString)
+            } else {
+                header.theme_color = theme_color
+            }
+            if let someString = tab["tabname"] as? String {
+                if someString != "" {
+                    header.apart_init(section_name: someString)
+                } else {
+                    let read = "标签页 ".localized() + String(index)
+                    header.apart_init(section_name: read)
+                }
+            } else {
+                let read = "标签页 ".localized() + String(index)
+                header.apart_init(section_name: read)
+            }
+            contentView.addSubview(header)
+            header.snp.makeConstraints { (x) in
+                x.top.equalTo(self.currentAnchor.snp.bottom)
+                x.height.equalTo(40)
+                x.left.equalTo(self.view.snp.left)
+                x.right.equalTo(self.view.snp.right)
+            }
+
+            currentAnchor = header
             
-//            for view in tab {
-//                switch view.key {
-//
-//
-//
-//                default:
-//                    print("[*] 丢弃数据： " + view.key)
-//                }
-//            }
+            for view in tab {
+                
+                
+                
+            }
+            
         }
         
-        updateColor()
+        
+        
+        
         
     }
     

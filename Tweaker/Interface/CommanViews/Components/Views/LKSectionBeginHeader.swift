@@ -10,16 +10,45 @@ extension common_views {
     
     class LKSectionBeginHeader: UIView {
         
-        var theme_color = UIColor()
+        var theme_color: UIColor? = nil
         
-        private let round = UIView()
-        
+        private let label = UILabel()
+        private let line = UIView()
         
         func apart_init(section_name: String) {
+            addSubview(label)
+            addSubview(line)
             
-        }
-        
-        func update_color(color: UIColor? = nil) {
+            label.backgroundColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            label.textColor = .white
+            label.textAlignment = .center
+            label.font = .boldSystemFont(ofSize: 16)
+            label.text = section_name.localized()
+            label.setRadiusINT(radius: 2)
+            label.snp.makeConstraints { (x) in
+                x.left.equalTo(self.snp.left).offset(22)
+                x.top.equalTo(self.snp.top)
+                x.bottom.equalTo(self.snp.bottom)
+            }
+            
+            DispatchQueue.main.async {
+                self.label.snp.remakeConstraints { (x) in
+                    x.left.equalTo(self.snp.left).offset(22)
+                    x.top.equalTo(self.snp.top)
+                    x.height.equalTo(38)
+                    x.width.equalTo(self.label.frame.width + 60)
+                    x.bottom.equalTo(self.snp.bottom)
+                }
+            }
+            
+            line.backgroundColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            line.snp.makeConstraints { (x) in
+                x.left.equalTo(self.snp.left)
+                x.bottom.equalTo(label.snp.bottom)
+                x.right.equalTo(self.snp.right)
+                x.height.equalTo(2)
+            }
+            
             
         }
         
