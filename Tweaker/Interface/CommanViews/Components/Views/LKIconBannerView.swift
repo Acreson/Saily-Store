@@ -30,7 +30,6 @@ extension common_views {
             }
             
             button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-            button.titleLabel?.textColor = button.titleLabel?.backgroundColor?.invertColor() ?? .white
             button.setRadiusCGF(radius: 15)
             button.snp.makeConstraints { (x) in
                 x.centerY.equalTo(self.snp.centerY)

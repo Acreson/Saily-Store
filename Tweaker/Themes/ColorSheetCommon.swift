@@ -79,7 +79,7 @@ class color_sheet {
         
         "DARK_ENABLED"                  : .black,
         
-        "main_tint_color"               : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0x0AAADD),
+        "main_tint_color"               : #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1),    // UIColor(hex: 0x0AAADD),
         
         "tabbar_untint"                 : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1),    // UIColor(hex: 0x41464D),
         "tabbar_background"             : #colorLiteral(red: 0.01888785272, green: 0.05792274944, blue: 0.07932898116, alpha: 1),    // UIColor(hex: 0x050F14),
