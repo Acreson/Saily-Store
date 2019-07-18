@@ -25,13 +25,13 @@ extension UIView {
 extension UIView {
     
     func setRadiusCGF(radius: CGFloat? = nil) {
-        self.layer.cornerRadius = radius ?? self.frame.width / 2
+        self.layer.cornerRadius = radius ?? self.frame.height / 2
         self.layer.masksToBounds = true
     }
     
     func setRadiusINT(radius: Int? = nil) {
         if radius == nil {
-            self.layer.cornerRadius = self.frame.width / 2
+            self.layer.cornerRadius = self.frame.height / 2
         } else {
             let radius = CGFloat(radius ?? 8)
             self.layer.cornerRadius = radius

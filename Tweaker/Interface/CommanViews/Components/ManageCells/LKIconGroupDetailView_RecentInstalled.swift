@@ -303,9 +303,9 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
             pack = packer
         }
         let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
-        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(pack: pack, version: version)
-        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(pack: pack, version: version)
-        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(pack: pack, version: version)
+        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(version: version)
+        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(version: version)
+        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(version: version)
         if ret.link.text == "" {
             ret.link.text = "软件包无可用描述。".localized()
         }
@@ -326,7 +326,7 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
             if let some = UIImage(contentsOfFile: icon_link) {
                 ret.icon.image = some
             } else {
-                ret.icon.image = UIImage(named: "ATCydiaSource")
+                ret.icon.image = UIImage(named: TWEAK_DEFAULT_IMG_NAME)
             }
         }
         ret.backgroundColor = .clear

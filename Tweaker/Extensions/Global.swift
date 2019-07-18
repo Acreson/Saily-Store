@@ -13,6 +13,7 @@
 @_exported import WCDBSwift
 @_exported import Alamofire
 @_exported import SDWebImage
+@_exported import UIImageColors
 @_exported import StatusAlert
 @_exported import SwifterSwift
 @_exported import SWCompression

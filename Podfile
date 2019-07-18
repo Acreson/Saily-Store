@@ -14,7 +14,7 @@ target 'Tweaker' do
   
   pod 'SwifterSwift'
 
-  pod 'Hero'
+  # pod 'Hero'
   pod 'SnapKit'
   pod 'StatusAlert', '~> 1.1.1'
   pod 'IHProgressHUD'
@@ -23,15 +23,13 @@ target 'Tweaker' do
   pod 'SWCompression'
   pod 'SwiftyMarkdown'
   pod 'LTMorphingLabel'
-  #  pod 'EasyTransitions'
   pod 'JJFloatingActionButton'
-  pod 'NVActivityIndicatorView'
   
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'Reveal-SDK', :configurations => ['Debug']
-  pod 'MLeaksFinder', :configurations => ['Debug']
+  #  pod 'MLeaksFinder', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-  pod 'InAppViewDebugger', :configurations => ['Debug']
+  #  pod 'InAppViewDebugger', :configurations => ['Debug']
   pod 'DoraemonKit/Core', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithGPS', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithLoad', '~> 1.1.7', :configurations => ['Debug']

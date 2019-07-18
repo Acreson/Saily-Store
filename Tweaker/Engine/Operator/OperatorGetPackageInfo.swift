@@ -8,15 +8,34 @@
 
 extension app_opeerator {
     
-    func PAK_read_name(pack: DBMPackage, version: [String : [String : String]]) -> String {
-        return version.first?.value["NAME"] ?? version.first?.value["PACKAGE"] ?? ""
+    func PAK_read_name(version: [String : [String : String]]) -> String {
+        let name = version.first?.value["NAME"] ?? version.first?.value["PACKAGE"] ?? ""
+        if name.hasSuffix("for ShortLook") {
+            return name.dropLast("for ShortLook".count).to_String()
+        }
+        return name
     }
     
-    func PAK_read_description(pack: DBMPackage, version: [String : [String : String]]) -> String {
+    // 返回 名字 + 📧
+    func PAK_read_auth(version: [String : [String : String]]) -> (String, String) {
+        let v = version.first?.value["AUTHOR"]
+        if v != nil && v != "" {
+            if v!.contains("<") && v!.contains("@") && v!.contains(">") {
+                let ret = v!.split(separator: "<").first?.to_String().drop_space() ?? "没有作者信息".localized()
+                // 尝试获取email
+                let some = v!.split(separator: "<").last?.split(separator: ">").last?.to_String().drop_space() ?? ""
+                return (ret, some)
+            }
+            return (v!, "")
+        }
+        return ("没有作者信息".localized(), "")
+    }
+    
+    func PAK_read_description(version: [String : [String : String]]) -> String {
         return version.first?.value["DESCRIPTION"] ?? ""
     }
     
-    func PAK_read_icon_addr(pack: DBMPackage, version: [String : [String : String]]) -> String {
+    func PAK_read_icon_addr(version: [String : [String : String]]) -> String {
         return version.first?.value["ICON"] ?? ""
     }
     

@@ -94,15 +94,23 @@ extension UIColor {
         var percent = percent
         if percent < 0 {
             percent = 0
+            return self
         }
-        if percent > 1 {
-            percent = 1
+        if percent >= 1 {
+            return .white
         }
         return UIColor(hue: self.hsbaComponents.hue,
                        saturation: self.hsbaComponents.saturation * (1 - percent),
                        brightness: self.hsbaComponents.brightness,
                        alpha: self.hsbaComponents.brightness)
         
+    }
+    
+    //获取反色
+    func invertColor() -> UIColor {
+        var r:CGFloat = 0, g:CGFloat = 0, b:CGFloat = 0
+        self.getRed(&r, green: &g, blue: &b, alpha: nil)
+        return UIColor(red:1.0-r, green: 1.0-g, blue: 1.0-b, alpha: 1)
     }
     
 }
