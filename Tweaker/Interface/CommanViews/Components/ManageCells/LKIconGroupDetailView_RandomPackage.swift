@@ -34,6 +34,7 @@ extension manage_views {
         func apart_init(father: UIView?) {
             
             initd = true
+            😂 = false
             
             LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] = is_collapsed
             
@@ -186,6 +187,7 @@ extension manage_views {
             LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] = is_collapsed
         }
         
+        var 😂 = true
         @objc func expend_self() {
             
             re_sync(is_user_commanded: true)
@@ -225,8 +227,12 @@ extension manage_views {
             table_view.alpha = 0
             table_view.isHidden = false
             UIApplication.shared.beginIgnoringInteractionEvents()
-            let generator = UIImpactFeedbackGenerator(style: .medium)
-            generator.impactOccurred()
+            if 😂 {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+            } else {
+                😂 = true
+            }
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
                 LKRoot.container_string_store["in_progress_UI_manage_update"] = "TRUE"

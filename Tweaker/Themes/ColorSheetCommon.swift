@@ -47,7 +47,7 @@ class color_sheet {
         
         "DARK_ENABLED"                  : .clear,
         
-        "main_tint_color"               : #colorLiteral(red: 0, green: 0.7235050797, blue: 0.893548429, alpha: 1),    // UIColor(hex: 0x0AAADD),
+        "main_tint_color"               : #colorLiteral(red: 0, green: 0.729731217, blue: 0.893548429, alpha: 1),    // UIColor(hex: 0x0AAADD),
         
         "tabbar_untint"                 : #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1),    // UIColor(hex: 0x999999),
         "tabbar_background"             : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
@@ -55,7 +55,7 @@ class color_sheet {
         "table_view_title"              : #colorLiteral(red: 0.4117647059, green: 0.4117647059, blue: 0.4117647059, alpha: 1),    // UIColor(hex: 0x696969),
         "table_view_link"               : #colorLiteral(red: 0.6677469611, green: 0.6677629352, blue: 0.6677542925, alpha: 1),    // UIColor(hex: 0x9A9A9A),
         
-        "main_background"              : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
+        "main_background"               : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         
         "main_operations_attention"     : #colorLiteral(red: 1, green: 0.4896141291, blue: 0.4700677395, alpha: 1),    // UIColor(hex: 0xFF6565),
         "main_operations_allow"         : #colorLiteral(red: 0, green: 0.8103328347, blue: 0.3696507514, alpha: 1),    // UIColor(hex: 0x0AC94C),
@@ -87,7 +87,7 @@ class color_sheet {
         "table_view_title"              : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         "table_view_link"               : #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),    // UIColor(hex: 0xFFFFFF),
         
-        "main_background"              : #colorLiteral(red: 0.01888785272, green: 0.05792274944, blue: 0.07932898116, alpha: 1),    // UIColor(hex: 0x050F14),
+        "main_background"               : #colorLiteral(red: 0.01888785272, green: 0.05792274944, blue: 0.07932898116, alpha: 1),    // UIColor(hex: 0x050F14),
         
         "main_operations_attention"     : #colorLiteral(red: 1, green: 0.6846027185, blue: 0.6725238611, alpha: 1),    // UIColor(hex: 0xFF6565),
         "main_operations_allow"         : #colorLiteral(red: 0.4886365964, green: 0.8103328347, blue: 0.6353852546, alpha: 1),    // UIColor(hex: 0x0AC94C),

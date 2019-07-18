@@ -62,6 +62,7 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
+		B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */; };
 		B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */; };
 		B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4318BDB22DEF771008082FC /* Solid.xcassets */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
@@ -142,6 +143,7 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
+		B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconBannerView.swift; sourceTree = "<group>"; };
 		B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetInstalledInfo.swift; sourceTree = "<group>"; };
 		B4318BDB22DEF771008082FC /* Solid.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Solid.xcassets; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
+				B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
 				B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */,
 				B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */,
@@ -650,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */,
 				AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */,
 				B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */,
 				B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */,

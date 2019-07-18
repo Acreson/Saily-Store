@@ -9,7 +9,9 @@
 import UIKit
 
 extension UIImage {
+    
     func areaAverage() -> UIColor {
+        
         var bitmap = [UInt8](repeating: 0, count: 4)
         
         if #available(iOS 9.0, *) {
@@ -36,5 +38,30 @@ extension UIImage {
         // Compute result.
         let result = UIColor(red: CGFloat(bitmap[0]) / 255.0, green: CGFloat(bitmap[1]) / 255.0, blue: CGFloat(bitmap[2]) / 255.0, alpha: CGFloat(bitmap[3]) / 255.0)
         return result
+        
+    }
+    
+    func blur(offset: Int? = 10) -> UIImage? {
+        let context = CIContext(options: nil)
+        let inputImage = CIImage(image: self)
+        let originalOrientation = self.imageOrientation
+        let originalScale = self.scale
+        
+        let filter = CIFilter(name: "CIGaussianBlur")
+        filter?.setValue(inputImage, forKey: kCIInputImageKey)
+        filter?.setValue(offset, forKey: kCIInputRadiusKey)
+        let outputImage = filter?.outputImage
+        
+        var cgImage:CGImage?
+        
+        if let asd = outputImage {
+            cgImage = context.createCGImage(asd, from: (inputImage?.extent)!)
+        }
+        
+        if let cgImageA = cgImage {
+            return UIImage(cgImage: cgImageA, scale: originalScale, orientation: originalOrientation)
+        }
+        
+        return nil
     }
 }

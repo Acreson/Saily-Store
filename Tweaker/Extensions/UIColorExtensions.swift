@@ -86,60 +86,24 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, transparency: trans)
     }
     
-//    func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
-//        return self.adjust(by: abs(percentage) )
-//    }
-//    
-//    func darker(by percentage: CGFloat = 30.0) -> UIColor? {
-//        return self.adjust(by: -1 * abs(percentage) )
-//    }
-//    
-//    func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
-//        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
-//        if self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) {
-//            return UIColor(red: min(red + percentage/100, 1.0),
-//                           green: min(green + percentage/100, 1.0),
-//                           blue: min(blue + percentage/100, 1.0),
-//                           alpha: alpha)
-//        } else {
-//            return nil
-//        }
-//    }
+}
+
+extension UIColor {
+    
+    func transit2white(percent: CGFloat) -> UIColor {
+        var percent = percent
+        if percent < 0 {
+            percent = 0
+        }
+        if percent > 1 {
+            percent = 1
+        }
+        return UIColor(hue: self.hsbaComponents.hue,
+                       saturation: self.hsbaComponents.saturation * (1 - percent),
+                       brightness: self.hsbaComponents.brightness,
+                       alpha: self.hsbaComponents.brightness)
+        
+    }
     
 }
 
-
-
-// useless 你有他妈的uInt了
-
-//extension UIColor {
-//
-//    func toInt() -> Int? {
-//        var fRed : CGFloat = 0
-//        var fGreen : CGFloat = 0
-//        var fBlue : CGFloat = 0
-//        var fAlpha: CGFloat = 0
-//        if self.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha) {
-//            let iRed = Int(fRed * 255.0)
-//            let iGreen = Int(fGreen * 255.0)
-//            let iBlue = Int(fBlue * 255.0)
-//            let iAlpha = Int(fAlpha * 255.0)
-//
-//            //  (Bits 24-31 are alpha, 16-23 are red, 8-15 are green, 0-7 are blue).
-//            let a = iAlpha << 24
-//            let b = iRed << 16
-//            let c = iGreen << 8
-//            let d = iBlue
-//            let ret = a + b + c + d
-//            return ret
-//        } else {
-//            // Could not extract RGBA components:
-//            return nil
-//        }
-//    }
-//
-//    func toUInt() -> UInt {
-//        let ret = self.toInt() ?? 0
-//        return UInt(ret)
-//    }
-//}
