@@ -194,6 +194,7 @@ class LKPackageDetail: UIViewController {
         text.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
         text.font = .boldSystemFont(ofSize: 16)
         text.text = dep
+        text.isScrollEnabled = false
         text.isUserInteractionEnabled = false
         contentView.addSubview(text)
         text.snp.makeConstraints { (x) in
@@ -206,6 +207,7 @@ class LKPackageDetail: UIViewController {
         text2.backgroundColor = .clear
         text2.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
         text2.font = .boldSystemFont(ofSize: 10)
+        text2.isScrollEnabled = false
         text2.isUserInteractionEnabled = false
         var read = "因出现未知错误现提供软件包的原始信息：\n\n".localized()
         let depsss = item.version.first?.value.first?.value ?? ["未知错误".localized() : "无更多信息".localized()]
@@ -458,9 +460,9 @@ extension LKPackageDetail {
         using_bottom_margins()
         sum_content_height += 16
         
-        sum_content_height *= 4
-        
-        contentView.contentSize.height = CGFloat(sum_content_height)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
+            self.contentView.contentSize.height = CGFloat(self.sum_content_height)
+        }
         
         
     }
@@ -542,9 +544,13 @@ extension LKPackageDetail {
         let markdown = UITextView()
         markdown.backgroundColor = .clear
         markdown.font = .boldSystemFont(ofSize: 14)
-        let atr_text = SwiftyMarkdown(string: text).attributedString().mutableCopy() as? NSMutableAttributedString
-        atr_text?.setFontFace(font: .boldSystemFont(ofSize: 14))
-        markdown.attributedText = atr_text
+        if object["useRawFormat"] as? Bool ?? false || (text.contains("<") && text.contains("</")) {
+            markdown.attributedText = text.htmlToAttributedString
+        } else {
+            let atr_text = SwiftyMarkdown(string: text).attributedString().mutableCopy() as? NSMutableAttributedString
+            atr_text?.setFontFace(font: .boldSystemFont(ofSize: 14))
+            markdown.attributedText = atr_text
+        }
         markdown.isEditable = false
         markdown.isScrollEnabled = false
         markdown.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
@@ -824,5 +830,4 @@ extension LKPackageDetail /* AVPlayer Section*/ {
     }
     
 }
-
 

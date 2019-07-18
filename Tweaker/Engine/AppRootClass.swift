@@ -28,7 +28,6 @@ class app_root_class {
     
     public var settings: DBMSettings?
     public var safe_area_needed: Bool = false
-    public var this_is_an_iPhone: Bool = false
     public var current_page = UIViewController()
     public var manager_reg = manage_view_reg()
     

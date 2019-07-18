@@ -147,3 +147,39 @@ extension NSMutableAttributedString {
     }
     
 }
+
+extension NSAttributedString {
+    convenience init(data: Data, documentType: DocumentType, encoding: String.Encoding = .utf8) throws {
+        try self.init(data: data,
+                      options: [.documentType: documentType,
+                                .characterEncoding: encoding.rawValue],
+                      documentAttributes: nil)
+    }
+    convenience init(html data: Data) throws {
+        try self.init(data: data, documentType: .html)
+    }
+    convenience init(txt data: Data) throws {
+        try self.init(data: data, documentType: .plain)
+    }
+    convenience init(rtf data: Data) throws {
+        try self.init(data: data, documentType: .rtf)
+    }
+    convenience init(rtfd data: Data) throws {
+        try self.init(data: data, documentType: .rtfd)
+    }
+}
+
+extension StringProtocol {
+    var data: Data { return Data(utf8) }
+    var htmlToAttributedString: NSAttributedString? {
+        do {
+            return try .init(html: data)
+        } catch {
+            print("[E] Extension StringProtocol: html err:", error)
+            return nil
+        }
+    }
+    var htmlDataToString: String? {
+        return htmlToAttributedString?.string
+    }
+}
