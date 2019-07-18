@@ -26,19 +26,10 @@ extension common_views {
             label.text = section_name.localized()
             label.setRadiusINT(radius: 2)
             label.snp.makeConstraints { (x) in
-                x.left.equalTo(self.snp.left).offset(22)
+                x.left.equalTo(self.snp.left).offset(20.2)
                 x.top.equalTo(self.snp.top)
                 x.bottom.equalTo(self.snp.bottom)
-            }
-            
-            DispatchQueue.main.async {
-                self.label.snp.remakeConstraints { (x) in
-                    x.left.equalTo(self.snp.left).offset(22)
-                    x.top.equalTo(self.snp.top)
-                    x.height.equalTo(38)
-                    x.width.equalTo(self.label.frame.width + 60)
-                    x.bottom.equalTo(self.snp.bottom)
-                }
+                x.width.equalTo(188)
             }
             
             line.backgroundColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")

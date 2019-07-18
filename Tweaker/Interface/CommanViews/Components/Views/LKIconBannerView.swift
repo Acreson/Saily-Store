@@ -30,6 +30,7 @@ extension common_views {
             }
             
             button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+            button.titleLabel?.textColor = .white
             button.setRadiusCGF(radius: 15)
             button.snp.makeConstraints { (x) in
                 x.centerY.equalTo(self.snp.centerY)
@@ -39,7 +40,7 @@ extension common_views {
             }
             
             title.font = .boldSystemFont(ofSize: 22)
-            sub_title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
+            title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
             title.snp.makeConstraints { (x) in
                 x.left.equalTo(icon.snp.right).offset(22)
                 x.right.equalTo(button.snp.left).offset(-22)
