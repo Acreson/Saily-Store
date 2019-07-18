@@ -21,6 +21,8 @@ class LKPackageDetail: UIViewController {
 
     private var sum_content_height = 0
     
+    var webView: WKWebView = WKWebView()
+    
     let status_bar_cover = UIView()
     let banner_image = UIImageView()
     let banner_section = common_views.LKIconBannerView()
@@ -180,8 +182,7 @@ class LKPackageDetail: UIViewController {
         case "Sileo":
             setup_Sileo(dep: dep ?? "")
         case "Cydia":
-            IHProgressHUD.show()
-            
+            setup_Cydia(dep: dep ?? "")
         default:
             fatalError("你这是啥子情况啊？")
         }
@@ -244,6 +245,34 @@ class LKPackageDetail: UIViewController {
             }
             self.contentView.contentSize.height = CGFloat(400) + height + height2
         }
+    }
+    
+    var loadUrl = URL(string: "https://www.apple.com/")!
+    func setup_Cydia(dep: String) {
+        // 获取数据
+        if let url = URL(string: dep) {
+            IHProgressHUD.show()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                IHProgressHUD.dismiss()
+            }
+            contentView.addSubview(webView)
+            webView.snp.makeConstraints { (x) in
+                x.top.equalTo(self.currentAnchor.snp.bottom)
+                x.left.equalTo(self.view.snp.left)
+                x.right.equalTo(self.view.snp.right)
+                x.height.equalTo(666)
+            }
+            webView.navigationDelegate = self
+            webView.scrollView.isScrollEnabled = false
+            loadWebPage(url: url)
+            webView.allowsBackForwardNavigationGestures = false
+        } else {
+            setup_none(dep: "发生了未知错误。".localized())
+        }
+    }
+    
+    func loadWebPage(url: URL)  {
+        webView.load(LKRoot.ins_networking.read_request(url: url))
     }
     
     func setup_Sileo(dep: String) {
@@ -544,7 +573,7 @@ extension LKPackageDetail {
         let markdown = UITextView()
         markdown.backgroundColor = .clear
         markdown.font = .boldSystemFont(ofSize: 14)
-        if object["useRawFormat"] as? Bool ?? false || (text.contains("<") && text.contains("</")) {
+        if object["useRawFormat"] as? Bool ?? false || (text.contains("<") && text.contains("</")) || text.contains("<br") {
             markdown.attributedText = text.htmlToAttributedString
         } else {
             let atr_text = SwiftyMarkdown(string: text).attributedString().mutableCopy() as? NSMutableAttributedString
@@ -831,3 +860,36 @@ extension LKPackageDetail /* AVPlayer Section*/ {
     
 }
 
+extension LKPackageDetail: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        guard let url = (navigationResponse.response as? HTTPURLResponse)?.url else {
+            decisionHandler(.cancel)
+            return
+        }
+        if url != loadUrl {
+            loadUrl = url
+            decisionHandler(.cancel)
+            loadWebPage(url: url)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, _) in
+                    self.webView.snp.remakeConstraints({ (x) in
+                        x.top.equalTo(self.currentAnchor.snp.bottom)
+                        x.left.equalTo(self.view.snp.left)
+                        x.right.equalTo(self.view.snp.right)
+                        x.height.equalTo(height as? CGFloat ?? 0)
+                    })
+                    self.contentView.contentSize.height = 233 + (height as? CGFloat ?? 0)
+                })
+            }
+            
+        })
+    }
+}

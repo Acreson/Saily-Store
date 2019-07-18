@@ -6,6 +6,8 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+import WebKit
+
 enum operation_result: Int {
     case success = 0x0
     case failed  = 0x1
@@ -81,6 +83,15 @@ class networking {
             "Accept-Encoding" : "gzip, deflate"
         ]
         return header
+    }
+    
+    func read_request(url: URL) -> URLRequest {
+        var req = URLRequest(url: url)
+        req.addValue(UA_Default, forHTTPHeaderField: "User-Agent")
+        req.addValue(LKRoot.shared_device.systemVersion, forHTTPHeaderField: "X-Firmware")
+        req.addValue(LKRoot.settings?.readUDID() ?? "", forHTTPHeaderField: "X-Unique-ID")
+        req.addValue(LKRoot.shared_device._id_str(), forHTTPHeaderField: "X-Machine")
+        return req
     }
     
 }
