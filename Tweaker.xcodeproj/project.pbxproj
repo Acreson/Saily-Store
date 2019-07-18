@@ -64,6 +64,7 @@
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
 		B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */; };
 		B42F9C5322E02D2500557BB1 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5222E02D2500557BB1 /* AppDefine.swift */; };
+		B42F9C5522E055F600557BB1 /* LKSectionBeginHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */; };
 		B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */; };
 		B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4318BDB22DEF771008082FC /* Solid.xcassets */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
@@ -146,6 +147,7 @@
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
 		B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconBannerView.swift; sourceTree = "<group>"; };
 		B42F9C5222E02D2500557BB1 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
+		B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSectionBeginHeader.swift; sourceTree = "<group>"; };
 		B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetInstalledInfo.swift; sourceTree = "<group>"; };
 		B4318BDB22DEF771008082FC /* Solid.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Solid.xcassets; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
 				B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */,
+				B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
 				B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */,
 				B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */,
@@ -667,6 +670,7 @@
 				B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */,
 				B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,
+				B42F9C5522E055F600557BB1 /* LKSectionBeginHeader.swift in Sources */,
 				B493CC2522DB44F800D31A47 /* UISearchS.swift in Sources */,
 				B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */,
 				ABFBA820229D7DC40070A17E /* UIDeviceExtensions.swift in Sources */,

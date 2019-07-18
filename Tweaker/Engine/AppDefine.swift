@@ -7,3 +7,4 @@
 //
 
 let TWEAK_DEFAULT_IMG_NAME = "ATCydiaSource"
+let USE_SILEO_DEPICTION = true
