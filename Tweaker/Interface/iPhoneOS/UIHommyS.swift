@@ -307,7 +307,7 @@ class UIHommyS: UIViewController {
                         label.font = .boldSystemFont(ofSize: 12)
                         self.container?.addSubview(label)
                         label.snp.makeConstraints({ (x) in
-                            x.top.equalTo(last_view.snp.bottom).offset(42)
+                            x.top.equalTo(last_view.snp.bottom).offset(24)
                             x.centerX.equalTo(self.view.snp.centerX)
                         })
                         
