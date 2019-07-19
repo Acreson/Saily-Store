@@ -17,8 +17,9 @@ class UIMineS: UIViewController {
         label.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
         view.addSubview(label)
         label.snp.makeConstraints { (x) in
-            x.center.equalTo(self.view.center)
-            x.width.equalTo(233)
+            x.left.equalTo(self.view.snp.left).offset(66)
+            x.centerY.equalTo(self.view.snp.centerY).offset(-58)
+            x.width.equalTo(288)
             x.height.equalTo(30)
         }
         let label2 = UILabel(text: "我们将重新定义首页分享".localized())
@@ -26,9 +27,9 @@ class UIMineS: UIViewController {
         label2.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
         view.addSubview(label2)
         label2.snp.makeConstraints { (x) in
+            x.left.equalTo(self.view.snp.left).offset(66)
             x.top.equalTo(label.snp.bottom)
-            x.centerX.equalTo(self.view.snp.centerX)
-            x.width.equalTo(233)
+            x.width.equalTo(288)
             x.height.equalTo(44)
         }
         
