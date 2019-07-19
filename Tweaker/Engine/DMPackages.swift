@@ -34,4 +34,16 @@ class DBMPackage: WCDBSwift.TableCodable {
         }
     }
     
+    func copy() -> DBMPackage {
+        
+        let ret = DBMPackage()
+        ret.id = self.id
+        ret.latest_update_time = self.latest_update_time
+        ret.one_of_the_package_name_lol = self.one_of_the_package_name_lol
+        ret.version = self.version
+        ret.signal = self.signal
+        return ret
+        
+    }
+    
 }

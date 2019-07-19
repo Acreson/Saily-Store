@@ -221,8 +221,8 @@ class LKPackageDetail: UIViewController {
         contentView.addSubview(text)
         text.snp.makeConstraints { (x) in
             x.top.equalTo(self.banner_section.snp.bottom).offset(38)
-            x.left.equalTo(self.view.snp.left).offset(38)
-            x.right.equalTo(self.view.snp.right).offset(-38)
+            x.left.equalTo(self.view.snp.left).offset(18)
+            x.right.equalTo(self.view.snp.right).offset(-18)
             x.height.equalTo(666)
         }
         let text2 = UITextView()
@@ -233,7 +233,7 @@ class LKPackageDetail: UIViewController {
         text2.isUserInteractionEnabled = false
         var read = "因出现未知错误现提供软件包的原始信息：\n\n".localized()
         let depsss = item.version.first?.value.first?.value ?? ["未知错误".localized() : "无更多信息".localized()]
-        for item in depsss.keys.sorted() {
+        for item in depsss.keys.sorted() where !item.contains("_internal") {
             read.append(item)
             read.append(": ")
             read.append("\n")
@@ -245,8 +245,8 @@ class LKPackageDetail: UIViewController {
         contentView.addSubview(text2)
         text2.snp.makeConstraints { (x) in
             x.top.equalTo(text.snp.bottom).offset(38)
-            x.left.equalTo(self.view.snp.left).offset(38)
-            x.right.equalTo(self.view.snp.right).offset(-38)
+            x.left.equalTo(self.view.snp.left).offset(18)
+            x.right.equalTo(self.view.snp.right).offset(-18)
             x.height.equalTo(666)
         }
         DispatchQueue.main.async {
@@ -944,7 +944,7 @@ extension LKPackageDetail: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+        self.webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, _) in
             if complete != nil {
                 self.webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, _) in
                     self.webView.snp.remakeConstraints({ (x) in

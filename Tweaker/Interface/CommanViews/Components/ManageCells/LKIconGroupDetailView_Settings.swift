@@ -130,7 +130,7 @@ extension manage_views {
             egg.textAlignment = .center
             addSubview(egg)
             egg.snp.makeConstraints { (x) in
-                x.bottom.equalTo(self.snp.bottom).offset(-28)
+                x.bottom.equalTo(self.snp.bottom).offset(666)
                 x.left.equalTo(self.snp.left)
                 x.right.equalTo(self.snp.right)
                 x.height.equalTo(23)

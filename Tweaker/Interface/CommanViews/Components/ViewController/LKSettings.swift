@@ -11,10 +11,13 @@ class LKSettingsController: UIViewController {
     let some = LKRoot.manager_reg.se
     let contentView = UIScrollView()
     
-    var sum_height = 1024
+    var sum_height = UIScreen.main.bounds.height + 99
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if LKRoot.settings?.use_dark_mode ?? false {
+            navigationController?.navigationBar.barStyle = .blackTranslucent
+        }
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")

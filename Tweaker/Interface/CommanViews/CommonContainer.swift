@@ -91,6 +91,8 @@ func presentSwiftMessage(title: String, body: String) {
 
 func presentPackage(pack: DBMPackage) {
     
+    let pack = pack.copy()
+    
     UIApplication.shared.beginIgnoringInteractionEvents()
 //    IHProgressHUD.show()
     let new = LKPackageDetail()
@@ -99,6 +101,10 @@ func presentPackage(pack: DBMPackage) {
         
         // [String : [String : String]] 最新版本号下的 软件源 ：详细信息
         let ver = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
+        
+        // 丢弃旧版本
+        pack.version.removeAll()
+        pack.version[ver.0] = ver.1
         
         // 检查软件包合法性
         if ver.1.count < 1 || ver.1.first?.key == "-1" || ver.1.first?.key == "" {
