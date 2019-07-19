@@ -51,9 +51,12 @@ class LKPackageDetail: UIViewController {
             self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
             self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-            self.navigationController?.navigationBar.backgroundColor = UIColor(red: self.theme_color_bak.red,
-                                                                               green: self.theme_color_bak.green,
-                                                                               blue: self.theme_color_bak.blue,
+            let red = self.theme_color.redRead()
+            let green = self.theme_color.greenRead()
+            let blue = self.theme_color.blueRead()
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: red,
+                                                                               green: green,
+                                                                               blue: blue,
                                                                                alpha: 1)
         }, completion: nil)
         
@@ -161,13 +164,19 @@ class LKPackageDetail: UIViewController {
             if img != nil && !self.img_initd {
                 let color = img!.getColors()?.background ?? .white
                 self.banner_image.backgroundColor = color
-                if color.red + color.blue + color.green > 2.6 {
+                let red = color.redRead()
+                let blue = color.blueRead()
+                let green = color.greenRead()
+                if red + blue + green > 2.6 {
                     self.tint_color_consit = true
                 }
             } else {
                 let color = UIImage(named: TWEAK_DEFAULT_IMG_NAME)?.getColors()?.background ?? .white
                 self.banner_image.backgroundColor = color
-                if color.red + color.blue + color.green > 2.6 {
+                let red = color.redRead()
+                let blue = color.blueRead()
+                let green = color.greenRead()
+                if red + blue + green > 2.6 {
                     self.tint_color_consit = true
                 }
             }
@@ -361,13 +370,16 @@ extension LKPackageDetail: UIScrollViewDelegate {
                 calc = 1
             }
             let bannerc = self.theme_color_bak
-            self.navigationController?.navigationBar.backgroundColor = UIColor(red: bannerc.red,
-                                                                               green: bannerc.green,
-                                                                               blue: bannerc.blue,
+            let red = bannerc.redRead()
+            let green = bannerc.greenRead()
+            let blue = bannerc.blueRead()
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: red,
+                                                                               green: blue,
+                                                                               blue: blue,
                                                                                alpha: calc)
-            self.status_bar_cover.backgroundColor = UIColor(red: bannerc.red,
-                                                            green: bannerc.green,
-                                                            blue: bannerc.blue,
+            self.status_bar_cover.backgroundColor = UIColor(red: red,
+                                                            green: green,
+                                                            blue: blue,
                                                             alpha: calc)
             var text_color: UIColor
             if !self.tint_color_consit {
@@ -385,7 +397,7 @@ extension LKPackageDetail: UIScrollViewDelegate {
             } else {
                 text_color = theme_color
             }
-            text_color = UIColor(red: Int(text_color.red), green: Int(text_color.green), blue: Int(text_color.blue), transparency: calc) ?? text_color
+            text_color = UIColor(red: Int(text_color.redRead()), green: Int(text_color.greenRead()), blue: Int(text_color.blueRead()), transparency: calc) ?? text_color
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: text_color]
         }
     }
@@ -415,7 +427,10 @@ extension LKPackageDetail {
                     self.img_initd = true
                     let color = img!.getColors()?.background ?? .white
                     self.banner_image.backgroundColor = color
-                    if color.red + color.blue + color.green > 2.6 {
+                    let red = color.redRead()
+                    let blue = color.blueRead()
+                    let green = color.blueRead()
+                    if red + blue + green > 2.6 {
                         self.tint_color_consit = true
                     }
                 }

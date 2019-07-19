@@ -86,6 +86,18 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, transparency: trans)
     }
     
+    // Error on release build. shit.
+    func redRead() -> CGFloat {
+        return CGFloat(self.rgbComponents.red)
+    }
+    func blueRead() -> CGFloat {
+        return CGFloat(self.rgbComponents.blue)
+    }
+    func greenRead() -> CGFloat {
+        return CGFloat(self.rgbComponents.green)
+    }
+    
+    
 }
 
 extension UIColor {

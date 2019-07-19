@@ -30,9 +30,12 @@ class LKSettingsController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
             let some = LKRoot.ins_color_manager.read_a_color("main_background")
-            self.navigationController?.navigationBar.backgroundColor = UIColor(red: some.red,
-                                                                               green: some.green,
-                                                                               blue: some.blue,
+            let red = some.redRead()
+            let green = some.greenRead()
+            let blue = some.blueRead()
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: red,
+                                                                               green: green,
+                                                                               blue: blue,
                                                                                alpha: 1)
         }, completion: nil)
         
