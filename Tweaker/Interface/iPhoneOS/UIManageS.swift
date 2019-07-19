@@ -174,8 +174,14 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             image.image = UIImage(named: "Settings")
             plh.addSubview(image)
             image.snp.makeConstraints { (x) in
-                x.edges.equalTo(button).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+                x.edges.equalTo(button.snp.edges).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
             }
+            let realButton = UIButton()
+            ret.contentView.addSubview(realButton)
+            realButton.snp.makeConstraints { (x) in
+                x.edges.equalTo(plh.snp.edges)
+            }
+            realButton.addTarget(self, action: #selector(sendSettingController(sender:)), for: .touchUpInside)
             ret.contentView.layoutAll()
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
@@ -183,6 +189,11 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundColor = .clear
         }
         return ret
+    }
+    
+    @objc func sendSettingController(sender: Any) {
+        let setting = LKSettingsController()
+        presentViewController(some: setting)
     }
     
     func sum_the_height() -> CGFloat {
