@@ -113,7 +113,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                                                                             image_str: "NAMED:AccountHeadIconPlaceHolder")
             ret.contentView.addSubview(header)
             header.snp.makeConstraints { (x) in
-                x.edges.equalTo(ret.contentView.snp.edges)
+                x.edges.equalTo(ret.contentView.snp.edges).inset(UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
@@ -145,21 +145,38 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 4:
-            let package_repo_manager = LKRoot.manager_reg.ya
-            package_repo_manager.apart_init(father: tableView)
-            ret.contentView.addSubview(package_repo_manager)
-            package_repo_manager.snp.makeConstraints { (x) in
+            let recent_installed = LKRoot.manager_reg.ya
+            recent_installed.apart_init(father: tableView)
+            ret.contentView.addSubview(recent_installed)
+            recent_installed.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 5:
-            let package_repo_manager = LKRoot.manager_reg.se
-            package_repo_manager.apart_init(father: tableView)
-            ret.contentView.addSubview(package_repo_manager)
-            package_repo_manager.snp.makeConstraints { (x) in
+            let plh = UIView()
+            ret.contentView.addSubview(plh)
+            plh.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
+            plh.setRadiusINT(radius: 19)
+            plh.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+            let button = UIButton()
+            ret.contentView.addSubview(button)
+            button.snp.makeConstraints { (x) in
                 x.edges.equalTo(ret.contentView.snp.edges)
             }
+            plh.snp.makeConstraints { (x) in
+                x.center.equalTo(ret.contentView.snp.center)
+                x.width.equalTo(38)
+                x.height.equalTo(38)
+            }
+            let image = UIImageView()
+            image.contentMode = .scaleAspectFit
+            image.image = UIImage(named: "Settings")
+            plh.addSubview(image)
+            image.snp.makeConstraints { (x) in
+                x.edges.equalTo(button).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            }
+            ret.contentView.layoutAll()
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         default:
@@ -176,12 +193,12 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         if LKRoot.safe_area_needed {
             ret += 38
         }
-        return ret - 700
+        return ret
     }
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0: return 110
+        case 0: return 150
         case 1:
             return 16
 //            if (LKRoot.container_string_store["STR_SIG_PROGRESS"] ?? "SIGCLEAR") == "SIGCLEAR" {
@@ -208,7 +225,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                 return 157 + CGFloat(LKRoot.container_recent_installed.count + 1) * 62 - 32
             }
         case 5:
-            return 728 + 633
+            return 68
         default: return 180
         }
     }

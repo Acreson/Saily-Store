@@ -10,7 +10,7 @@ extension common_views {
     
     class LKSectionBeginHeader: UIView {
         
-        var theme_color: UIColor? = nil
+        var theme_color: UIColor?
         
         private let label = UILabel()
         private let line = UIView()
@@ -19,25 +19,24 @@ extension common_views {
             addSubview(label)
             addSubview(line)
             
-            label.backgroundColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
-            label.textColor = .white
+            label.textColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
             label.textAlignment = .center
-            label.font = .boldSystemFont(ofSize: 16)
+            label.font = .boldSystemFont(ofSize: 22)
             label.text = section_name.localized()
             label.setRadiusINT(radius: 2)
             label.snp.makeConstraints { (x) in
-                x.left.equalTo(self.snp.left).offset(20.2)
-                x.top.equalTo(self.snp.top)
-                x.bottom.equalTo(self.snp.bottom)
+                x.centerX.equalTo(self.snp.centerX)
+                x.centerY.equalTo(self.snp.centerY)
+                x.height.equalTo(25)
                 x.width.equalTo(188)
             }
             
             line.backgroundColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
             line.snp.makeConstraints { (x) in
                 x.left.equalTo(self.snp.left)
-                x.bottom.equalTo(label.snp.bottom)
+                x.bottom.equalTo(self.snp.bottom)
                 x.right.equalTo(self.snp.right)
-                x.height.equalTo(2)
+                x.height.equalTo(0.5)
             }
             
             

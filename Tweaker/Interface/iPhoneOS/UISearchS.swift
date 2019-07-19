@@ -111,7 +111,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
                                                                             sep_enabled: false)
             ret.contentView.addSubview(header)
             header.snp.makeConstraints { (x) in
-                x.edges.equalTo(ret.contentView.snp.edges)
+                x.edges.equalTo(ret.contentView.snp.edges).inset(UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0))
             }
             ret.backgroundColor = .clear
         case 1:
@@ -181,7 +181,7 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     func do_the_height_math(indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0: return 110
+        case 0: return 150
         case 1: return 35
         case 2: return 28
         case 3:

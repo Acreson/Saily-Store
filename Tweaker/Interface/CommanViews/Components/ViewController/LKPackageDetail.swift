@@ -11,6 +11,7 @@ import AVFoundation
 import SwiftyMarkdown
 import JJFloatingActionButton
 
+// swiftlint:disable:next type_body_length
 class LKPackageDetail: UIViewController {
     
     public var item: DBMPackage = DBMPackage()
@@ -37,18 +38,29 @@ class LKPackageDetail: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .white
+        updateColor()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+            self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
+            self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+            self.navigationController?.navigationBar.backgroundColor = UIColor(red: self.theme_color_bak.red,
+                                                                               green: self.theme_color_bak.green,
+                                                                               blue: self.theme_color_bak.blue,
+                                                                               alpha: 1)
+        }, completion: nil)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
     }
     
     override func viewDidLoad() {
@@ -100,9 +112,6 @@ class LKPackageDetail: UIViewController {
         }
         
         // --------------------- 开始处理你的脸！
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = .white
         
         theme_color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
         theme_color_bak = LKRoot.ins_color_manager.read_a_color("main_background")
@@ -459,7 +468,7 @@ extension LKPackageDetail {
             contentView.addSubview(header)
             header.snp.makeConstraints { (x) in
                 x.top.equalTo(self.currentAnchor.snp.bottom)
-                x.height.equalTo(33)
+                x.height.equalTo(50)
                 x.left.equalTo(self.view.snp.left)
                 x.right.equalTo(self.view.snp.right)
             }
@@ -625,6 +634,54 @@ extension LKPackageDetail {
     
     func setup_ImageView(object: [String : Any]) {
         
+        guard let width = object["width"] as? Double else {
+            return
+        }
+        
+        guard let height = object["height"] as? Double else {
+            return
+        }
+        
+        guard let url_str = object["URL"] as? String else {
+            return
+        }
+        
+        guard let url = URL(string: url_str) else {
+            return
+        }
+        
+        guard let radius = object["cornerRadius"] as? Double else {
+            return
+        }
+        
+        let horizPadding = object["horizontalPadding"] as? Double
+        
+        if let somePadding = horizPadding {
+            using_bottom_margins(height: Int(somePadding))
+            sum_content_height += Int(somePadding)
+        }
+        
+        let image = UIImageView()
+        contentView.addSubview(image)
+        image.snp.makeConstraints { (x) in
+            x.centerX.equalTo(self.view.center)
+            x.top.equalTo(self.currentAnchor.snp.bottom)
+            x.width.equalTo(width)
+            x.height.equalTo(height)
+        }
+        sum_content_height += Int(height)
+        image.sd_setImage(with: url, completed: nil)
+        image.setRadiusCGF(radius: CGFloat(radius))
+        currentAnchor = image
+        
+        if let somePadding = horizPadding {
+            using_bottom_margins(height: Int(somePadding))
+            sum_content_height += Int(somePadding)
+        }
+        
+        if let somePadding = horizPadding {
+            using_bottom_margins(height: Int(somePadding))
+        }
     }
     
     func setup_ScreenshotsView(object: [String : Any]) {
