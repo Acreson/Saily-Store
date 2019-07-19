@@ -192,6 +192,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     @objc func sendSettingController(sender: Any) {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
         let setting = LKSettingsController()
         presentViewController(some: setting)
     }

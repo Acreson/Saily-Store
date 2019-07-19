@@ -400,6 +400,7 @@ extension app_opeerator {
                                 // 因为存在软件包 所以我们更新一下 SIG 字段
                                 packages[this_package["PACKAGE"]!]!.signal = ""
                                 packages[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = this_package["NAME"] ?? ""
+                                packages[this_package["PACKAGE"]!]!.one_of_the_package_section_lol = this_package["SECTION"] ?? ""
                             } else {
                                 // 不存在软件包 创建软件包
                                 let new = DBMPackage()

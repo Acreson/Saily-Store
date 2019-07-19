@@ -63,33 +63,7 @@ extension LKPackageListController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = tableView.dequeueReusableCell(withIdentifier: cell_id, for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = items[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
-        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(version: version)
-        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(version: version)
-        if ret.link.text == "" {
-            ret.link.text = "软件包无可用描述。".localized()
-        }
-        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(version: version)
-        if icon_link.hasPrefix("http") {
-            ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else if icon_link.hasPrefix("NAMED:") {
-            let link = icon_link.dropFirst("NAMED:".count).to_String()
-            ret.icon.sd_setImage(with: URL(string: link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else {
-            if let some = UIImage(contentsOfFile: icon_link) {
-                ret.icon.image = some
-            } else {
-                ret.icon.image = UIImage(named: TWEAK_DEFAULT_IMG_NAME)
-            }
-        }
+        cell_views.LKTVCellPutPackage(cell: ret, pack: pack)
         
         if indexPath.row == items.count - 1 {
             ret.sep.alpha = 0

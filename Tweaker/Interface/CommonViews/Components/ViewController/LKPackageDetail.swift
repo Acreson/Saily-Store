@@ -51,9 +51,9 @@ class LKPackageDetail: UIViewController {
             self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
             self.navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
-            let red = self.theme_color.redRead()
-            let green = self.theme_color.greenRead()
-            let blue = self.theme_color.blueRead()
+            let red = self.theme_color_bak.redRead()
+            let green = self.theme_color_bak.greenRead()
+            let blue = self.theme_color_bak.blueRead()
             self.navigationController?.navigationBar.backgroundColor = UIColor(red: red,
                                                                                green: green,
                                                                                blue: blue,
@@ -70,6 +70,8 @@ class LKPackageDetail: UIViewController {
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: .mixWithOthers)
 
         
@@ -85,8 +87,8 @@ class LKPackageDetail: UIViewController {
         if item.version.count != 1 {
             presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包信息校验失败，请尝试刷新。".localized())
             title = "错误".localized()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             return
         }
@@ -94,8 +96,8 @@ class LKPackageDetail: UIViewController {
         if item.version.first!.value.count != 1 {
             presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包信息校验失败，请尝试刷新。".localized())
             title = "错误".localized()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.navigationController?.popViewController(animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
             }
             return
         }
@@ -160,27 +162,27 @@ class LKPackageDetail: UIViewController {
         // 获取图标
         let d1 = UIImageView()
         let icon_addr = item.version.first?.value.first?.value["ICON"] ?? ""
-        d1.sd_setImage(with: URL(string: icon_addr)) { (img, _, _, _) in
-            if img != nil && !self.img_initd {
+        d1.sd_setImage(with: URL(string: icon_addr)) { [weak self] (img, _, _, _) in
+            if img != nil && !(self?.img_initd ?? false) {
                 let color = img!.getColors()?.background ?? .white
-                self.banner_image.backgroundColor = color
+                self?.banner_image.backgroundColor = color
                 let red = color.redRead()
                 let blue = color.blueRead()
                 let green = color.greenRead()
                 if red + blue + green > 2.6 {
-                    self.tint_color_consit = true
+                    self?.tint_color_consit = true
                 }
             } else {
                 let color = UIImage(named: TWEAK_DEFAULT_IMG_NAME)?.getColors()?.background ?? .white
-                self.banner_image.backgroundColor = color
+                self?.banner_image.backgroundColor = color
                 let red = color.redRead()
                 let blue = color.blueRead()
                 let green = color.greenRead()
                 if red + blue + green > 2.6 {
-                    self.tint_color_consit = true
+                    self?.tint_color_consit = true
                 }
             }
-            self.updateColor()
+            self?.updateColor()
         }
         
         contentView.addSubview(banner_section)
@@ -309,7 +311,7 @@ class LKPackageDetail: UIViewController {
         // 获取数据
         if let url = URL(string: dep) {
             IHProgressHUD.show()
-            AF.request(url, method: .get, headers: nil).response(queue: LKRoot.queue_dispatch) { (responed) in
+            AF.request(url, method: .get, headers: nil).response(queue: LKRoot.queue_dispatch) { [weak self] (responed) in
                 var read = String(data: responed.data ?? Data(), encoding: .utf8) ?? ""
                 if read == "" {
                     read = String(data: responed.data ?? Data(), encoding: .ascii) ?? ""
@@ -317,7 +319,7 @@ class LKPackageDetail: UIViewController {
                 if read == "" {
                     DispatchQueue.main.async {
                         IHProgressHUD.dismiss()
-                        self.setup_none(dep: "获取描述数据失败，请检查网络连接。".localized())
+                        self?.setup_none(dep: "获取描述数据失败，请检查网络连接。".localized())
                     }
                     return
                 }
@@ -325,13 +327,13 @@ class LKPackageDetail: UIViewController {
                     if let json = try JSONSerialization.jsonObject(with: read.data(using: .utf8)!, options: []) as? [String: Any] {
                         DispatchQueue.main.async {
                             IHProgressHUD.dismiss()
-                            self.doJsonSetupLevelRoot(json: json, origStr: read)
+                            self?.doJsonSetupLevelRoot(json: json)
                         }
                     }
                 } catch {
                     DispatchQueue.main.async {
                         IHProgressHUD.dismiss()
-                        self.setup_none(dep: "获取描述数据失败，请检查网络连接。".localized())
+                        self?.setup_none(dep: "获取描述数据失败，请检查网络连接。".localized())
                     }
                     return
                 }
@@ -420,18 +422,18 @@ extension LKPackageDetail: UIScrollViewDelegate {
 
 extension LKPackageDetail {
     
-    func doJsonSetupLevelRoot(json: [String : Any], origStr: String) {
+    func doJsonSetupLevelRoot(json: [String : Any]) {
         if let img_addr = json["headerImage"] as? String {
-            self.banner_image.sd_setImage(with: URL(string: img_addr)) { (img, _, _, _) in
+            self.banner_image.sd_setImage(with: URL(string: img_addr)) { [weak self] (img, _, _, _) in
                 if img != nil {
-                    self.img_initd = true
+                    self?.img_initd = true
                     let color = img!.getColors()?.background ?? .white
-                    self.banner_image.backgroundColor = color
+                    self?.banner_image.backgroundColor = color
                     let red = color.redRead()
                     let blue = color.blueRead()
                     let green = color.blueRead()
                     if red + blue + green > 2.6 {
-                        self.tint_color_consit = true
+                        self?.tint_color_consit = true
                     }
                 }
             }
@@ -450,46 +452,37 @@ extension LKPackageDetail {
         }
         
         if let tabs = json["tabs"] as? [[String : Any]] {
-            doJsonSetUpLevelTabs(tabs: tabs, origStr: origStr)
+            doJsonSetUpLevelTabs(tabs: tabs)
         }
     
     }
     
-    func doJsonSetUpLevelTabs(tabs: [[String: Any]], origStr: String) {
+    func doJsonSetUpLevelTabs(tabs: [[String: Any]]) {
         
         // tab 好像不需要排序
 
         for tab in tabs {
-            var index = 0
             
-            index += 1
-            let header = common_views.LKSectionBeginHeader()
-            if let someString = tab["tintColor"] as? String {
-                header.theme_color = UIColor(hexString: someString)
-            } else {
-                header.theme_color = theme_color
-            }
             if let someString = tab["tabname"] as? String {
-                if someString != "" {
-                    header.apart_init(section_name: someString)
+                let header = common_views.LKSectionBeginHeader()
+                if let someString = tab["tintColor"] as? String {
+                    header.theme_color = UIColor(hexString: someString)
                 } else {
-                    let read = "标签页 ".localized() + String(index)
-                    header.apart_init(section_name: read)
+                    header.theme_color = theme_color
                 }
-            } else {
-                let read = "标签页 ".localized() + String(index)
-                header.apart_init(section_name: read)
+                header.apart_init(section_name: someString)
+                contentView.addSubview(header)
+                header.snp.makeConstraints { (x) in
+                    x.top.equalTo(self.currentAnchor.snp.bottom)
+                    x.height.equalTo(50)
+                    x.left.equalTo(self.view.snp.left)
+                    x.right.equalTo(self.view.snp.right)
+                }
+                currentAnchor = header
+                using_bottom_margins(height: 4)
+                sum_content_height += 37
             }
-            contentView.addSubview(header)
-            header.snp.makeConstraints { (x) in
-                x.top.equalTo(self.currentAnchor.snp.bottom)
-                x.height.equalTo(50)
-                x.left.equalTo(self.view.snp.left)
-                x.right.equalTo(self.view.snp.right)
-            }
-            currentAnchor = header
-            using_bottom_margins(height: 4)
-            sum_content_height += 37
+            
             
             for view in tab["views"] as? [[String : Any]] ?? [] {
                 // (lldb) po ((tab["views"] as! [[String : Any]]))[0]
@@ -511,6 +504,7 @@ extension LKPackageDetail {
                     case "DepictionAdmobView": setup_AdmobView(object: view)
                     case "DepictionRatingView": setup_RatingView(object: view)
                     case "DepictionReviewView": setup_ReviewView(object: view)
+                    case "DepictionStackView": doJsonSetUpLevelTabs(tabs: [view]) // This is for you: Nepeta
                     default: print("[?] 这嘛子玩意嘛： " + class_name)
                     }
                 } else {
@@ -523,8 +517,8 @@ extension LKPackageDetail {
         using_bottom_margins()
         sum_content_height += 16
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
-            self.contentView.contentSize.height = CGFloat(self.sum_content_height)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) { [weak self] in
+            self?.contentView.contentSize.height = CGFloat(self?.sum_content_height ?? 0)
         }
         
         

@@ -213,30 +213,7 @@ extension manage_views.LKIconGroupDetailView_RecentUpdate: UITableViewDelegate {
         }
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_RecentUpdate_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = LKRoot.container_recent_update[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
-        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(version: version)
-        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(version: version)
-        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(version: version)
-        if icon_link.hasPrefix("http") {
-            ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else if icon_link.hasPrefix("NAMED:") {
-            let link = icon_link.dropFirst("NAMED:".count).to_String()
-            ret.icon.sd_setImage(with: URL(string: link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else {
-            if let some = UIImage(contentsOfFile: icon_link) {
-                ret.icon.image = some
-            } else {
-                ret.icon.image = UIImage(named: TWEAK_DEFAULT_IMG_NAME)
-            }
-        }
+        cell_views.LKTVCellPutPackage(cell: ret, pack: pack)
         ret.backgroundColor = .clear
         return ret
     }

@@ -23,9 +23,12 @@ extension manage_views {
         let collapse_button = UIButton()
         let table_view = UITableView()
         
+        var session = ""
+        
         init() {
             super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
             table_view.register(cell_views.LKIconTVCell.self, forCellReuseIdentifier: "LKIconGroupDetailView_RandomPackage_TVID")
+            session = UUID().uuidString
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -80,7 +83,7 @@ extension manage_views {
                 x.top.equalTo(title_view.snp.bottom).offset(-4)
                 x.left.equalTo(self.contentView.snp.left).offset(16             )
                 x.right.equalTo(self.contentView.snp.right).offset(4)
-                x.height.equalTo(47)
+                x.height.lessThanOrEqualTo(47)
             }
             
             // 分割线
@@ -160,6 +163,8 @@ extension manage_views {
         }
         
         func re_sync(is_user_commanded: Bool) {
+            
+            session = UUID().uuidString
             
             if !is_user_commanded && LKRoot.container_packages.count > 0 {
                 var newBuild = [DBMPackage]()
@@ -312,30 +317,7 @@ extension manage_views.LKIconGroupDetailView_RandomPackage: UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKIconGroupDetailView_RandomPackage_TVID", for: indexPath) as? cell_views.LKIconTVCell ?? cell_views.LKIconTVCell()
         let pack = LKRoot.container_packages_randomfun_DBSync[indexPath.row]
-        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
-        ret.title.text = LKRoot.ins_common_operator.PAK_read_name(version: version)
-        ret.link.text = LKRoot.ins_common_operator.PAK_read_description(version: version)
-        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(version: version)
-        if icon_link.hasPrefix("http") {
-            ret.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else if icon_link.hasPrefix("NAMED:") {
-            let link = icon_link.dropFirst("NAMED:".count).to_String()
-            ret.icon.sd_setImage(with: URL(string: link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
-                if err != nil || img == nil {
-                    ret.icon.image = UIImage(named: "Error")
-                }
-            }
-        } else {
-            if let some = UIImage(contentsOfFile: icon_link) {
-                ret.icon.image = some
-            } else {
-                ret.icon.image = UIImage(named: TWEAK_DEFAULT_IMG_NAME)
-            }
-        }
+        cell_views.LKTVCellPutPackage(cell: ret, pack: pack)
         ret.backgroundColor = .clear
         return ret
     }

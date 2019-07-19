@@ -24,7 +24,7 @@ extension common_views {
             icon.setRadiusINT(radius: 12)
             icon.snp.makeConstraints { (x) in
                 x.centerY.equalTo(self.snp.centerY)
-                x.left.equalTo(self.snp.left).offset(22)
+                x.left.equalTo(self.snp.left).offset(18)
                 x.width.equalTo(55)
                 x.height.equalTo(55)
             }
@@ -33,7 +33,7 @@ extension common_views {
             button.setRadiusCGF(radius: 15)
             button.snp.makeConstraints { (x) in
                 x.centerY.equalTo(self.snp.centerY)
-                x.right.equalTo(self.snp.right).offset(-22)
+                x.right.equalTo(self.snp.right).offset(-18)
                 x.width.equalTo(66)
                 x.height.equalTo(30)
             }
@@ -41,8 +41,8 @@ extension common_views {
             title.font = .boldSystemFont(ofSize: 22)
             title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
             title.snp.makeConstraints { (x) in
-                x.left.equalTo(icon.snp.right).offset(22)
-                x.right.equalTo(button.snp.left).offset(-22)
+                x.left.equalTo(icon.snp.right).offset(18)
+                x.right.equalTo(button.snp.left).offset(-18)
                 x.top.equalTo(icon.snp.top).offset(4)
                 x.height.equalTo(24)
             }
@@ -51,8 +51,8 @@ extension common_views {
             sub_title.textColor = LKRoot.ins_color_manager.read_a_color("sub_text")
             sub_title.snp.makeConstraints { (x) in
                 x.top.equalTo(title.snp.bottom).offset(4)
-                x.left.equalTo(icon.snp.right).offset(22)
-                x.right.equalTo(button.snp.left).offset(-22)
+                x.left.equalTo(icon.snp.right).offset(18)
+                x.right.equalTo(button.snp.left).offset(-18)
                 x.bottom.equalTo(icon.snp.bottom)
             }
             
