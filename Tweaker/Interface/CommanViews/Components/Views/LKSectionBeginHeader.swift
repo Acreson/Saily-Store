@@ -22,7 +22,7 @@ extension common_views {
             label.textColor = theme_color ?? LKRoot.ins_color_manager.read_a_color("main_tint_color")
             label.textAlignment = .center
             label.font = .boldSystemFont(ofSize: 22)
-            label.text = section_name.localized()
+            label.text = section_name
             label.setRadiusINT(radius: 2)
             label.snp.makeConstraints { (x) in
                 x.centerX.equalTo(self.snp.centerX)

@@ -8,6 +8,7 @@
 
 extension manage_views {
     
+    // swiftlint:disable:next type_body_length
     class LKIconGroupDetailView_RandomPackage: UIView, UITableViewDataSource {
         
         var initd = false
@@ -178,9 +179,17 @@ extension manage_views {
             if LKRoot.container_packages.count < 1 {
                 return
             }
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
-            LKRoot.container_packages_randomfun_DBSync.append(LKRoot.container_packages.randomElement()!.value)
+            for _ in 0...4 {
+                let some = LKRoot.container_packages.randomElement()!.value
+                var f = false
+                for item in LKRoot.container_packages_randomfun_DBSync where item.id == some.id {
+                    f = true
+                }
+                if !f {
+                    LKRoot.container_packages_randomfun_DBSync.append(some)
+                }
+            }
+            
         }
         
         func update_status() {

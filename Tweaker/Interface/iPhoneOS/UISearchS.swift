@@ -186,9 +186,9 @@ class UISearchS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         case 2: return 28
         case 3:
             if LKRoot.container_manage_cell_status["RP_IS_COLLAPSED"] ?? true {
-                return 140
+                return 127
             } else {
-                return 140 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
+                return 127 + CGFloat(LKRoot.container_packages_randomfun_DBSync.count) * 62
             }
         case 4: return 18
         case 5:
