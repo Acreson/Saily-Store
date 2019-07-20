@@ -39,7 +39,6 @@ extension manage_views {
         func apart_init(father: UIView?) {
             
             initd = true
-            😂 = false
             
             LKRoot.container_manage_cell_status["YA_IS_COLLAPSED"] = is_collapsed
             

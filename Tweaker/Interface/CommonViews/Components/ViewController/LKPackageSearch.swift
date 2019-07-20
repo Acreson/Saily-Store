@@ -61,7 +61,7 @@ class LKPackageSearch: UIViewController {
         
         self.searchBar(self.search_bar, textDidChange: "")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.search_bar.becomeFirstResponder()
         }
         
