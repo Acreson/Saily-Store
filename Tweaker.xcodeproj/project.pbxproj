@@ -80,6 +80,10 @@
 		B4B2415922E265F600048604 /* LKTVCellPutPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415822E265F600048604 /* LKTVCellPutPackage.swift */; };
 		B4B2415B22E287B500048604 /* LKPackageSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415A22E287B500048604 /* LKPackageSearch.swift */; };
 		B4B2415E22E288DD00048604 /* LKPackageCLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415D22E288DD00048604 /* LKPackageCLCell.swift */; };
+		B4B2416122E365F300048604 /* AppDaemonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2416022E365F300048604 /* AppDaemonUtils.swift */; };
+		B4B2416422E3676300048604 /* LKCoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2416322E3676300048604 /* LKCoreBridge.m */; };
+		B4B2416D22E369F800048604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B2416C22E369F800048604 /* Foundation.framework */; };
+		B4B2417722E369F800048604 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2417622E369F800048604 /* main.m */; };
 		B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */; };
 		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */; };
 		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
@@ -167,6 +171,17 @@
 		B4B2415822E265F600048604 /* LKTVCellPutPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKTVCellPutPackage.swift; sourceTree = "<group>"; };
 		B4B2415A22E287B500048604 /* LKPackageSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageSearch.swift; sourceTree = "<group>"; };
 		B4B2415D22E288DD00048604 /* LKPackageCLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageCLCell.swift; sourceTree = "<group>"; };
+		B4B2416022E365F300048604 /* AppDaemonUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDaemonUtils.swift; sourceTree = "<group>"; };
+		B4B2416222E3676200048604 /* Tweaker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tweaker-Bridging-Header.h"; sourceTree = "<group>"; };
+		B4B2416322E3676300048604 /* LKCoreBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKCoreBridge.m; sourceTree = "<group>"; };
+		B4B2416622E367CD00048604 /* LKCoreBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKCoreBridge.h; sourceTree = "<group>"; };
+		B4B2416B22E369F800048604 /* Tweaker.Daemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tweaker.Daemon; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4B2416C22E369F800048604 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B4B2417122E369F800048604 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		B4B2417222E369F800048604 /* monkeydev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monkeydev.entitlements; sourceTree = "<group>"; };
+		B4B2417522E369F800048604 /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
+		B4B2417622E369F800048604 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B4B2417922E369F800048604 /* Tweaker.Daemon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tweaker.Daemon-Prefix.pch"; sourceTree = "<group>"; };
 		B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
 		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentInstalled.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
@@ -181,6 +196,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C1EC5EB292959B61CC11BB5 /* Pods_Tweaker.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4B2416822E369F800048604 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4B2416D22E369F800048604 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				AB081F93229D4BDC00ACA4DD /* Tweaker */,
+				B4B2416E22E369F800048604 /* Tweaker.Daemon */,
 				AB081F92229D4BDC00ACA4DD /* Products */,
 				35F0FD9C7EF0DEEACEA4981B /* Pods */,
 				ED82C75B30A614C976CA3647 /* Frameworks */,
@@ -210,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				AB081F91229D4BDC00ACA4DD /* Tweaker.app */,
+				B4B2416B22E369F800048604 /* Tweaker.Daemon */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,7 +311,9 @@
 				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
 				ABFBA831229D88790070A17E /* AppRootClass.swift */,
 				ABFBA83B229D99EB0070A17E /* AppUserClass.swift */,
+				B4B2416022E365F300048604 /* AppDaemonUtils.swift */,
 				B42F9C5222E02D2500557BB1 /* AppDefine.swift */,
+				B4B2416522E3676A00048604 /* CoreBridge */,
 				AB198F7F229EDC64003A78BE /* Operator */,
 			);
 			path = Engine;
@@ -452,11 +479,74 @@
 			path = LKCLCell;
 			sourceTree = "<group>";
 		};
+		B4B2416522E3676A00048604 /* CoreBridge */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2416222E3676200048604 /* Tweaker-Bridging-Header.h */,
+				B4B2416622E367CD00048604 /* LKCoreBridge.h */,
+				B4B2416322E3676300048604 /* LKCoreBridge.m */,
+			);
+			path = CoreBridge;
+			sourceTree = "<group>";
+		};
+		B4B2416E22E369F800048604 /* Tweaker.Daemon */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417222E369F800048604 /* monkeydev.entitlements */,
+				B4B2417622E369F800048604 /* main.m */,
+				B4B2416F22E369F800048604 /* Package */,
+				B4B2417822E369F800048604 /* Supporting Files */,
+			);
+			path = Tweaker.Daemon;
+			sourceTree = "<group>";
+		};
+		B4B2416F22E369F800048604 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417022E369F800048604 /* DEBIAN */,
+				B4B2417322E369F800048604 /* usr */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		B4B2417022E369F800048604 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417122E369F800048604 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		B4B2417322E369F800048604 /* usr */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417422E369F800048604 /* bin */,
+			);
+			name = usr;
+			sourceTree = "<group>";
+		};
+		B4B2417422E369F800048604 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417522E369F800048604 /* 0xdeadfa11 */,
+			);
+			name = bin;
+			sourceTree = "<group>";
+		};
+		B4B2417822E369F800048604 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417922E369F800048604 /* Tweaker.Daemon-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		ED82C75B30A614C976CA3647 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				B4046A9022DE895C00DF3835 /* Aiolos.framework */,
 				546D4B5972CE967C97CFEE39 /* Pods_Tweaker.framework */,
+				B4B2416C22E369F800048604 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -485,6 +575,23 @@
 			productReference = AB081F91229D4BDC00ACA4DD /* Tweaker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B4B2416A22E369F800048604 /* Tweaker.Daemon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4B2417A22E369F800048604 /* Build configuration list for PBXNativeTarget "Tweaker.Daemon" */;
+			buildPhases = (
+				B4B2416722E369F800048604 /* Sources */,
+				B4B2416822E369F800048604 /* Frameworks */,
+				B4B2416922E369F800048604 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tweaker.Daemon;
+			productName = Tweaker.Daemon;
+			productReference = B4B2416B22E369F800048604 /* Tweaker.Daemon */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -496,6 +603,10 @@
 				ORGANIZATIONNAME = "Lakr Aream";
 				TargetAttributes = {
 					AB081F90229D4BDC00ACA4DD = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+					};
+					B4B2416A22E369F800048604 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
 				};
@@ -515,6 +626,7 @@
 			projectRoot = "";
 			targets = (
 				AB081F90229D4BDC00ACA4DD /* Tweaker */,
+				B4B2416A22E369F800048604 /* Tweaker.Daemon */,
 			);
 		};
 /* End PBXProject section */
@@ -680,6 +792,23 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\");\nbuildNumber=$(($buildNumber + 1));\n/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\";\n";
 		};
+		B4B2416922E369F800048604 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -717,6 +846,7 @@
 				B411A86322DBF0F0004CB35B /* UIAlertControllerExtensions.swift in Sources */,
 				ABFBA81C229D7DC40070A17E /* UIImageExtensions.swift in Sources */,
 				ABFBA81D229D7DC40070A17E /* UINavigationControllerExtensions.swift in Sources */,
+				B4B2416422E3676300048604 /* LKCoreBridge.m in Sources */,
 				B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */,
@@ -732,6 +862,7 @@
 				B411A86922DBFE15004CB35B /* StatusAlertDark.swift in Sources */,
 				ABFBA830229D87170070A17E /* ColorSheetCommon.swift in Sources */,
 				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
+				B4B2416122E365F300048604 /* AppDaemonUtils.swift in Sources */,
 				B4046A9322DEA63900DF3835 /* LKPackageDetail.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
@@ -754,6 +885,14 @@
 				B4046A6822DE7D6700DF3835 /* UIMineS.swift in Sources */,
 				ABFBA81B229D7DC40070A17E /* UIViewControllerExtensions.swift in Sources */,
 				B40CBF8422DFA00F005401B6 /* LKSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4B2416722E369F800048604 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B4B2417722E369F800048604 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +1067,7 @@
 			baseConfigurationReference = 722A7FEC3BC40B5C09F0D0FB /* Pods-Tweaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
 				INFOPLIST_FILE = "$(SRCROOT)/Tweaker/Info.plist";
@@ -938,6 +1078,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lakr233.Tweaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tweaker/Engine/Tweaker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -948,6 +1090,7 @@
 			baseConfigurationReference = B93A251A269A4588E99F3FED /* Pods-Tweaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8LGRDQBWN3;
 				INFOPLIST_FILE = "$(SRCROOT)/Tweaker/Info.plist";
@@ -958,8 +1101,90 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lakr233.Tweaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tweaker/Engine/Tweaker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		B4B2417B22E369F800048604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = Tweaker.Daemon/monkeydev.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8LGRDQBWN3;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweaker.Daemon/Tweaker.Daemon-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				INSTALL_PATH = /usr/bin;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = "";
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = YES;
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				MonkeyDevkillProcessOnInstall = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"Tweaker.Daemon\\\"\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		B4B2417C22E369F800048604 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_ENTITLEMENTS = Tweaker.Daemon/monkeydev.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 8LGRDQBWN3;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweaker.Daemon/Tweaker.Daemon-Prefix.pch";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				INSTALL_PATH = /usr/bin;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = "";
+				MonkeyDevDevicePassword = "";
+				MonkeyDevDevicePort = "";
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = YES;
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				MonkeyDevkillProcessOnInstall = "";
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"Tweaker.Daemon\\\"\"";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -980,6 +1205,15 @@
 			buildConfigurations = (
 				AB081FA4229D4BDD00ACA4DD /* Debug */,
 				AB081FA5229D4BDD00ACA4DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B4B2417A22E369F800048604 /* Build configuration list for PBXNativeTarget "Tweaker.Daemon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4B2417B22E369F800048604 /* Debug */,
+				B4B2417C22E369F800048604 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

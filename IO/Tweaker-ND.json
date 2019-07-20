@@ -1,0 +1,79 @@
+{
+    "class": "DepictionTabView",
+    "tabs": [
+        {
+            "class": "DepictionStackView",
+            "tabname": "Details",
+            "views": [
+                {
+                    "useBoldText": true,
+                    "title": "Tweaker.Daemon",
+                    "class": "DepictionSubheaderView",
+                    "useBottomMargin": false
+                },
+                {
+                    "useSpacing": true,
+                    "markdown": "Tweaker Privileged Operator",
+                    "class": "DepictionMarkdownView"
+                },
+                {
+                    "spacing": 8,
+                    "class": "DepictionSpacerView"
+                },
+                {
+                    "itemSize": "{160, 275.41333333333336}",
+                    "screenshots": [
+                        {
+                            "accessibilityText": "Screenshot0",
+                            "url": ""
+                        }
+                    ],
+                    "class": "DepictionScreenshotsView",
+                    "itemCornerRadius": 6
+                },
+                {
+                    "useBoldText": true,
+                    "markdown": "This daemon will take care of your tweaker installer. If you ever removed this, bad things will happen. Pay attention to your operations with this package.",
+                    "title": "markdown-description",
+                    "class": "DepictionMarkdownView",
+                    "useBottomMargin": false
+                },
+                {
+                    "class": "DepictionSeparatorView"
+                },
+                {
+                    "class": "DepictionTableTextView",
+                    "title": "Version",
+                    "text": "0.1-1"
+                },
+                {
+                    "class": "DepictionTableTextView",
+                    "title": "Released",
+                    "text": "07-20-2019"
+                },
+                {
+                    "class": "DepictionTableTextView",
+                    "title": "Price",
+                    "text": "Free"
+                },
+                {
+                    "spacing": 8,
+                    "class": "DepictionSpacerView"
+                },
+                {
+                    "class": "DepictionTableTextView",
+                    "title": "Developer",
+                    "text": "Lakr Aream"
+                },
+                {
+                    "spacing": 8,
+                    "class": "DepictionSpacerView"
+                }
+            ]
+        }
+    ],
+    "minVersion": "0.1",
+    "headerImage": "https://github.com/LakrAream/Tweak-Store/raw/master/Tweaker/AssSets/AppIcons.xcassets/AppIcon.appiconset/icon-1024.png",
+    "tintColor": "#0657bb"
+}
+

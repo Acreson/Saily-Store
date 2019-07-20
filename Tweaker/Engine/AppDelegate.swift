@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LKRoot.initializing()
         
+        LKDaemonUtils.initializing()
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window!.backgroundColor = #colorLiteral(red: 0.2882809639, green: 0.5985316038, blue: 0.9432967305, alpha: 1)
         self.window!.makeKeyAndVisible()

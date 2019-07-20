@@ -17,6 +17,9 @@
       location = "group:IO"
       name = "IO">
       <FileRef
+         location = "group:Tweaker-ND.json">
+      </FileRef>
+      <FileRef
          location = "group:../Aiolos/Aiolos.xcodeproj">
       </FileRef>
       <Group
