@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/ouo/Documents/GitHub/Tweak-Store/Saily.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:LocalizedFinder/LocalizedFinder.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:IO"
+      name = "IO">
+      <FileRef
+         location = "group:/Users/ouo/Documents/GitHub/Tweak-Store/IO/Saily-ND.json">
+      </FileRef>
+      <Group
+         location = "group:Contents"
+         name = "Contents">
+         <FileRef
+            location = "group:0x01">
+         </FileRef>
+         <FileRef
+            location = "group:0x02">
+         </FileRef>
+         <FileRef
+            location = "group:0x03">
+         </FileRef>
+         <FileRef
+            location = "group:0x04">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Resource"
+         name = "Resource">
+         <FileRef
+            location = "group:ssh_example.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:corellium.jpg">
+         </FileRef>
+         <FileRef
+            location = "group:design.png">
+         </FileRef>
+         <FileRef
+            location = "group:colorsheet.png">
+         </FileRef>
+         <FileRef
+            location = "group:Jailbroken-iPhone.png">
+         </FileRef>
+         <FileRef
+            location = "group:icon.png">
+         </FileRef>
+         <FileRef
+            location = "group:renet.png">
+         </FileRef>
+         <FileRef
+            location = "group:ssh.png">
+         </FileRef>
+         <FileRef
+            location = "group:night.png">
+         </FileRef>
+         <FileRef
+            location = "group:welcome.png">
+         </FileRef>
+      </Group>
+      <FileRef
+         location = "group:Info">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/lakr/Documents/GitHub/Tweak-Store/IO/Base">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Saily.xcodeproj">
+   </FileRef>
+</Workspace>

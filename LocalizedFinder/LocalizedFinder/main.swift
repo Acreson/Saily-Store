@@ -10,7 +10,7 @@ import Foundation
 
 print("Searching...")
 
-let rdir = "/Users/ouo/Documents/GitHub/Tweak-Store/Tweaker"
+let rdir = "/Users/ouo/Documents/GitHub/Tweak-Store/Saily"
 let lb = "\n"
 let quo = "\""
 

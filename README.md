@@ -1,4 +1,4 @@
-# Tweak-Store  
+# Saily-Store  
 
 The most magical package manager forever. (Experimental Branch)   
 
