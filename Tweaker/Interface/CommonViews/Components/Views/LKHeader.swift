@@ -57,7 +57,7 @@ extension common_views {
         main_title.snp.makeConstraints { (x) in
             x.top.equalTo(sub_title.snp.bottom).offset(0)
             x.left.equalTo(sub_title.snp.left).offset(-1)
-            x.width.equalTo(138)
+            x.width.equalTo(288)
             x.height.equalTo(48)
         }
         

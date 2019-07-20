@@ -15,11 +15,15 @@
 - (void)call_to_daemon_with:(NSString *)string {
     NSLog(@"[*] 准备向远端发送数据 %@", string);
     UIPasteboard *sender = [UIPasteboard generalPasteboard];
-    NSString *priv = [[NSString alloc] initWithString: [sender string]];
-    [sender setString:string];
-    notify_post([@"com.Lakr233.Tweaker.MsgPas.UIPasteBoard.read" UTF8String]);
-    usleep(233333);
-    [sender setString:priv];
+    if ([sender string] != NULL) {
+        NSString *priv = [[NSString alloc] initWithString: [sender string]];
+        [sender setString:string];
+        notify_post([@"com.Lakr233.Tweaker.MsgPas.UIPasteBoard.read" UTF8String]);
+        usleep(233333);
+        [sender setString:priv];
+    } else {
+        notify_post([@"com.Lakr233.Tweaker.MsgPas.UIPasteBoard.read" UTF8String]);
+    }
 }
 
 // https://stackoverflow.com/questions/3184235/how-to-redirect-the-nslog-output-to-file-instead-of-console

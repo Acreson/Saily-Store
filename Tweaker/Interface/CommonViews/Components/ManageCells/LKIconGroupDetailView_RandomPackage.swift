@@ -68,7 +68,7 @@ extension manage_views {
                 x.top.equalTo(self.contentView.snp.top).offset(6)
                 x.left.equalTo(self.contentView.snp.left).offset(20)
                 x.height.equalTo(46)
-                x.width.equalTo(188)
+                x.width.equalTo(266)
             }
             
             // 描述
