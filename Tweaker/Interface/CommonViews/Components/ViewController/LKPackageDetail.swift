@@ -15,8 +15,22 @@ import JJFloatingActionButton
 class LKPackageDetail: UIViewController {
     
     public var item: DBMPackage = DBMPackage()
-    private var theme_color = UIColor()
-    private var theme_color_bak = UIColor()
+    private var theme_color = UIColor() {
+        willSet {
+        
+        }
+        didSet {
+            // Debug Propuse
+        }
+    }
+    private var theme_color_bak = UIColor() {
+        willSet {
+            
+        }
+        didSet {
+            // Debug Propuse
+        }
+    }
     private var tint_color_consit = false
     private var contentView = UIScrollView()
 
@@ -37,10 +51,16 @@ class LKPackageDetail: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if LKRoot.settings?.use_dark_mode ?? false {
+            navigationController?.navigationBar.barStyle = .blackOpaque
+        } else {
+            navigationController?.navigationBar.barStyle = .default
+        }
+        
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = theme_color
         updateColor()
     }
     
@@ -399,7 +419,10 @@ extension LKPackageDetail: UIScrollViewDelegate {
             } else {
                 text_color = theme_color
             }
-            text_color = UIColor(red: Int(text_color.redRead()), green: Int(text_color.greenRead()), blue: Int(text_color.blueRead()), transparency: calc) ?? text_color
+            text_color = UIColor(red: Int(text_color.redRead() * 255),
+                                 green: Int(text_color.greenRead() * 255),
+                                 blue: Int(text_color.blueRead() * 255),
+                                 transparency: calc) ?? text_color
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: text_color]
         }
     }

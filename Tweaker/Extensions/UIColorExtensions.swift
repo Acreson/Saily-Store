@@ -88,13 +88,13 @@ extension UIColor {
     
     // Error on release build. shit.
     func redRead() -> CGFloat {
-        return CGFloat(self.rgbComponents.red)
+        return CGFloat(self.rgbComponents.red) / 255
     }
     func blueRead() -> CGFloat {
-        return CGFloat(self.rgbComponents.blue)
+        return CGFloat(self.rgbComponents.blue) / 255
     }
     func greenRead() -> CGFloat {
-        return CGFloat(self.rgbComponents.green)
+        return CGFloat(self.rgbComponents.green) / 255
     }
     
     
