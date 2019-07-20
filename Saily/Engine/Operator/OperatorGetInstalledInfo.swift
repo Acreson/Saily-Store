@@ -95,6 +95,7 @@ extension app_opeerator {
                             //                            print("[*] 丢弃没有id的软件包")
                         } else if package[this_package["PACKAGE"]!] != nil {
                             // 存在软件包
+                            this_package["_internal_SIG_begin_update"] = "0x1"
                             // 直接添加 version 不检查 version 是否存在因为它不存在就奇怪了
                             let v1 = ["LOCAL": this_package] // 【软件源地址 ： 【属性 ： 属性值】】
                             package[this_package["PACKAGE"]!]!.version[this_package["VERSION"] ?? "0"] = v1
@@ -109,6 +110,7 @@ extension app_opeerator {
                             }
                         } else {
                             // 不存在软件包 创建软件包
+                            this_package["_internal_SIG_begin_update"] = "0x1"
                             let new = DBMPackage()
                             new.id = this_package["PACKAGE"]!
                             // latest_update_time 我们去写入数据库的时候更新
@@ -124,9 +126,6 @@ extension app_opeerator {
                                 }
                             }
                         }
-                        
-                        
-                        
                         this_package = [String : String]()
                         has_a_maohao = false
                         break inner
