@@ -324,6 +324,10 @@ class LKPackageDetail: UIViewController {
     }
     
     func loadWebPage(url: URL)  {
+        if LKRoot.settings?.use_dark_mode ?? false {
+            webView.alpha = 0.233
+        }
+        webView.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
         webView.load(LKRoot.ins_networking.read_request(url: url))
     }
     
@@ -976,19 +980,51 @@ extension LKPackageDetail: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, _) in
+        self.webView.evaluateJavaScript("document.readyState", completionHandler: { [weak self] (complete, _) in
             if complete != nil {
-                self.webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, _) in
-                    self.webView.snp.remakeConstraints({ (x) in
-                        x.top.equalTo(self.currentAnchor.snp.bottom)
-                        x.left.equalTo(self.view.snp.left)
-                        x.right.equalTo(self.view.snp.right)
+                self?.webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, _) in
+                    self?.webView.snp.remakeConstraints({ (x) in
+                        x.top.equalTo(self!.currentAnchor.snp.bottom)
+                        x.left.equalTo(self!.view.snp.left)
+                        x.right.equalTo(self!.view.snp.right)
                         x.height.equalTo(height as? CGFloat ?? 0)
                     })
-                    self.contentView.contentSize.height = 233 + (height as? CGFloat ?? 0)
+                    self?.contentView.contentSize.height = 233 + (height as? CGFloat ?? 0)
+                    if LKRoot.settings?.use_dark_mode ?? false {
+                        self?.webView.alpha = 1
+                    }
+                    self?.run_night_mode()
                 })
             }
             
         })
+    }
+    
+    func run_night_mode() {
+        if LKRoot.settings?.use_dark_mode ?? false {
+            let script = """
+var darkModeCss = `
+* {
+background-color: #000000 !important;
+color: #fff !important;
+}
+`
+var documentHead = document.head || document.getElementsByTagName('head')[0];
+var darkModeStyle = style = document.createElement('style');
+documentHead.appendChild(style);
+style.type = 'text/css';
+if (style.styleSheet){
+// This is required for IE8 and below.
+style.styleSheet.cssText = css;
+} else {
+style.appendChild(document.createTextNode(darkModeCss));
+}
+""" // Dark mode magic script
+            webView.evaluateJavaScript(script) { (result, _) in
+                if let result = result {
+                    print(result)
+                }
+            }
+        }
     }
 }

@@ -21,15 +21,11 @@
                     "class": "DepictionSpacerView"
                 },
                 {
-                    "itemSize": "{160, 275.41333333333336}",
-                    "screenshots": [
-                        {
-                            "accessibilityText": "Screenshot0",
-                            "url": ""
-                        }
-                    ],
-                    "class": "DepictionScreenshotsView",
-                    "itemCornerRadius": 6
+                    "URL": "http://qaq.loc/repo/Agent.jpg",
+                    "width": 357,
+                    "height": 550,
+                    "cornerRadius": 0,
+                    "class": "DepictionImageView"
                 },
                 {
                     "useBoldText": true,
