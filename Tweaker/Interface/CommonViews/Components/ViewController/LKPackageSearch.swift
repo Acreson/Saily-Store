@@ -59,9 +59,10 @@ class LKPackageSearch: UIViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = false
         
-        DispatchQueue.main.async {
+        self.searchBar(self.search_bar, textDidChange: "")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.search_bar.becomeFirstResponder()
-            self.searchBar(self.search_bar, textDidChange: "")
         }
         
     }

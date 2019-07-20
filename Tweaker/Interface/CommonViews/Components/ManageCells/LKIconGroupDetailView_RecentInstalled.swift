@@ -174,8 +174,6 @@ extension manage_views {
             expend_button.addTarget(self, action: #selector(expend_self), for: .touchUpInside)
             collapse_button.addTarget(self, action: #selector(collapse_self), for: .touchUpInside)
             
-            😂 = false
-            
         }
         
         func re_sync(lim: Int? = nil) {

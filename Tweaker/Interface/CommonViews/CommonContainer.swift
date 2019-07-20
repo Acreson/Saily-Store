@@ -185,4 +185,30 @@ func presentViewController(some: UIViewController, animated: Bool = true) {
     }
 }
 
+func presentSwiftMessageController(some: UIViewController) {
+    
+    let target: UIViewController
+    
+    if let nav = readTopViewController()?.navigationController {
+        target = nav
+    } else {
+        guard let t = readTopViewController() else {
+            return
+        }
+        target = t
+    }
+    
+    let segue = centerSMSegue(identifier: nil, source: target, destination: some)
+    segue.perform()
+    
+}
 
+class centerSMSegue: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .centered)
+        interactiveHide = false
+        dimMode = .gray(interactive: true)
+        messageView.configureNoDropShadow()
+    }
+}
