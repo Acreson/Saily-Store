@@ -77,8 +77,8 @@ func presentStatusAlert(imgName: String, title: String, msg: String) {
 func presentSwiftMessage(title: String, body: String) {
     var config = SwiftMessages.Config()
     config.presentationStyle = .top
-    config.presentationContext = .window(windowLevel: .statusBar)
-    config.interactiveHide = false
+    config.presentationContext = .window(windowLevel: .normal)
+    config.interactiveHide = true
     let view = MessageView.viewFromNib(layout: .cardView)
     view.configureTheme(.success)
     view.configureDropShadow()

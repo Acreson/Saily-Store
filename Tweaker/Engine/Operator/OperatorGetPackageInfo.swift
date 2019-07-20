@@ -16,6 +16,14 @@ extension app_opeerator {
         return name
     }
     
+    func PAK_read_auth_name(version: [String : [String : String]]) -> String {
+        let name = version.first?.value["AUTHOR"] ?? version.first?.value["PACKAGE"] ?? ""
+        if name.hasSuffix("for ShortLook") {
+            return name.dropLast("for ShortLook".count).to_String()
+        }
+        return name
+    }
+    
     // 返回 名字 + 📧
     func PAK_read_auth(version: [String : [String : String]]) -> (String, String) {
         let v = version.first?.value["AUTHOR"]

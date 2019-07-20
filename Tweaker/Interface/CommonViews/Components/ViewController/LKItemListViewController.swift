@@ -8,7 +8,6 @@
 
 class LKPackageListController: UIViewController {
     
-    
     let table_view = UITableView()
     var items = [DBMPackage]()
     let cell_id = UUID().uuidString
