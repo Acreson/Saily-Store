@@ -135,13 +135,13 @@ class app_root_class {
         settings = new_setting
         try? root_db?.insert(objects: [new_setting], intoTable: common_data_handler.table_name.LKSettings.rawValue)
         // 写入新闻源地址
-        let default_news_repos_tweaker = DBMNewsRepo()
-        default_news_repos_tweaker.link = "https://lakraream.github.io/Saily/"
-        default_news_repos_tweaker.sort_id = 0
+        let default_news_repos_saily = DBMNewsRepo()
+        default_news_repos_saily.link = "https://lakraream.github.io/Saily/"
+        default_news_repos_saily.sort_id = 0
         let default_news_repos_aream = DBMNewsRepo()
         default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
-        try? root_db?.insert(objects: [default_news_repos_tweaker, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
+        try? root_db?.insert(objects: [default_news_repos_saily, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
 //        #if DEBUG                                                                                       // 压力测试源
 //        let default_links =  [
 //            "http://qaq.loc/repos/",
