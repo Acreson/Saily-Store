@@ -382,7 +382,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
         }
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
         
-        let delete = UITableViewRowAction(style: .normal, title: "删除") { _, index in
+        let delete = UITableViewRowAction(style: .normal, title: "删除".localized()) { _, index in
             self.re_sync()
             UIApplication.shared.beginIgnoringInteractionEvents()
             var out = [DBMNewsRepo]()
@@ -591,7 +591,7 @@ extension manage_views.LKIconGroupDetailView_NewsRepoSP: UITableViewDelegate {
                     }
                 }
             }))
-            alert.addAction(UIAlertAction(title: "了解", style: .default, handler: { (_) in
+            alert.addAction(UIAlertAction(title: "了解".localized(), style: .default, handler: { (_) in
             }))
             alert.presentToCurrentViewController()
         }

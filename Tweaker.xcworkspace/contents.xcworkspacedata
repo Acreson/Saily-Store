@@ -13,14 +13,14 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:LocalizedFinder/LocalizedFinder.xcodeproj">
+   </FileRef>
    <Group
       location = "group:IO"
       name = "IO">
       <FileRef
          location = "group:Tweaker-ND.json">
-      </FileRef>
-      <FileRef
-         location = "group:../Aiolos/Aiolos.xcodeproj">
       </FileRef>
       <Group
          location = "group:Contents"

@@ -1,0 +1,6 @@
+# Install permission
+chown root:wheel /Library/LaunchDaemons/com.lakr233.Tweaker-Daemon.plist
+chmod 0644 /Library/LaunchDaemons/com.lakr233.Tweaker-Daemon.plist
+chmod +x /usr/bin/Tweaker.Daemon
+# Load Daemon
+launchctl load /Library/LaunchDaemons/com.lakr233.Tweaker-Daemon.plist

@@ -383,7 +383,7 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
         }
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_one")
         
-        let delete = UITableViewRowAction(style: .normal, title: "删除") { _, index in
+        let delete = UITableViewRowAction(style: .normal, title: "删除".localized()) { _, index in
             self.re_sync()
             var out = [DBMPackageRepos]()
             var i = 0

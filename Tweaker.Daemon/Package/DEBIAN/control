@@ -1,6 +1,6 @@
 Package: com.lakr233.Tweaker-Daemon
 Name: Tweaker.Daemon
-Version: 0.1-1
+Version: 0.1-2
 Description: Tweaker Privileged Operator
 Section: System
 Depends: firmware (>= 10.0)

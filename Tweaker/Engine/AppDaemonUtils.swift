@@ -11,7 +11,7 @@ let LKDaemonUtils = app_daemon_utils()
 class app_daemon_utils {
     
     var session = ""
-    var object = LKCBObject()
+    let object = LKCBObject()
     
     func initializing() {
         
@@ -20,7 +20,7 @@ class app_daemon_utils {
         }
         session = UUID().uuidString
         
-        
+        object.call_to_daemon_(with: "init:path:" + LKRoot.root_path!)
         
     }
     

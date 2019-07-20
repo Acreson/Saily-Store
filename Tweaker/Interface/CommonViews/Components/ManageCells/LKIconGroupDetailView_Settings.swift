@@ -124,7 +124,7 @@ extension manage_views {
             table_view.endUpdates()
             
             // Color Egg Don't Modify This
-            let egg = UILabel(text: "你可真是个厉害的小可爱")
+            let egg = UILabel(text: "你可真是个厉害的小可爱".localized())
             egg.font = .boldSystemFont(ofSize: 16)
             egg.textColor = LKRoot.ins_color_manager.read_a_color("main_operations_allow")
             egg.textAlignment = .center
@@ -499,7 +499,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         }
         
         let alert = UIAlertController(title: "即将导入".localized(), message: msg_str, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "执行", style: .destructive, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "执行".localized(), style: .destructive, handler: { (_) in
             IHProgressHUD.show()
             UIApplication.shared.beginIgnoringInteractionEvents()
             LKRoot.queue_dispatch.async {
@@ -520,7 +520,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "取消".localized(), style: .default, handler: nil))
         alert.presentToCurrentViewController()
     }
     
@@ -549,7 +549,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         }
         
         let alert = UIAlertController(title: "即将导入".localized(), message: msg_str, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "执行", style: .destructive, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "执行".localized(), style: .destructive, handler: { (_) in
             IHProgressHUD.show()
             UIApplication.shared.beginIgnoringInteractionEvents()
             LKRoot.queue_dispatch.async {
@@ -570,7 +570,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "取消", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "取消".localized(), style: .default, handler: nil))
         alert.presentToCurrentViewController()
     }
     
@@ -585,7 +585,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
         alert.addAction(UIAlertAction(title: "重启".localized(), style: .destructive, handler: { (_) in
             exit(0)
         }))
-        alert.addAction(UIAlertAction(title: "稍后", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "稍后".localized(), style: .default, handler: nil))
         alert.presentToCurrentViewController()
     }
     
@@ -618,7 +618,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
                     alert.addAction(UIAlertAction(title: "重启".localized(), style: .destructive, handler: { (_) in
                         exit(0)
                     }))
-                    alert.addAction(UIAlertAction(title: "稍后", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "稍后".localized(), style: .default, handler: nil))
                     alert.presentToCurrentViewController()
                 }
             } else {

@@ -84,6 +84,13 @@
 		B4B2416422E3676300048604 /* LKCoreBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2416322E3676300048604 /* LKCoreBridge.m */; };
 		B4B2416D22E369F800048604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4B2416C22E369F800048604 /* Foundation.framework */; };
 		B4B2417722E369F800048604 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2417622E369F800048604 /* main.m */; };
+		B4B2418122E37A3900048604 /* com.lakr233.Tweaker-Daemon.plist in Resources */ = {isa = PBXBuildFile; fileRef = B4B2418022E37A3900048604 /* com.lakr233.Tweaker-Daemon.plist */; };
+		B4B2418622E37A8900048604 /* postinst in Resources */ = {isa = PBXBuildFile; fileRef = B4B2418222E37A8800048604 /* postinst */; };
+		B4B2418722E37A8900048604 /* prerm in Resources */ = {isa = PBXBuildFile; fileRef = B4B2418322E37A8800048604 /* prerm */; };
+		B4B2418822E37A8900048604 /* postrm in Resources */ = {isa = PBXBuildFile; fileRef = B4B2418422E37A8800048604 /* postrm */; };
+		B4B2418922E37A8900048604 /* preinst in Resources */ = {isa = PBXBuildFile; fileRef = B4B2418522E37A8900048604 /* preinst */; };
+		B4B2418B22E37B9500048604 /* Operator.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2418A22E37B9500048604 /* Operator.m */; };
+		B4B2418E22E37BB700048604 /* Linstener.m in Sources */ = {isa = PBXBuildFile; fileRef = B4B2418D22E37BB700048604 /* Linstener.m */; };
 		B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */; };
 		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */; };
 		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
@@ -182,6 +189,15 @@
 		B4B2417522E369F800048604 /* 0xdeadfa11 */ = {isa = PBXFileReference; lastKnownFileType = text; name = 0xdeadfa11; path = Package/usr/bin/0xdeadfa11; sourceTree = "<group>"; };
 		B4B2417622E369F800048604 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B4B2417922E369F800048604 /* Tweaker.Daemon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tweaker.Daemon-Prefix.pch"; sourceTree = "<group>"; };
+		B4B2418022E37A3900048604 /* com.lakr233.Tweaker-Daemon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "com.lakr233.Tweaker-Daemon.plist"; sourceTree = "<group>"; };
+		B4B2418222E37A8800048604 /* postinst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = postinst; path = Package/DEBIAN/postinst; sourceTree = "<group>"; };
+		B4B2418322E37A8800048604 /* prerm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = prerm; path = Package/DEBIAN/prerm; sourceTree = "<group>"; };
+		B4B2418422E37A8800048604 /* postrm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = postrm; path = Package/DEBIAN/postrm; sourceTree = "<group>"; };
+		B4B2418522E37A8900048604 /* preinst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = preinst; path = Package/DEBIAN/preinst; sourceTree = "<group>"; };
+		B4B2418A22E37B9500048604 /* Operator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Operator.m; sourceTree = "<group>"; };
+		B4B2418C22E37B9F00048604 /* Operator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Operator.h; sourceTree = "<group>"; };
+		B4B2418D22E37BB700048604 /* Linstener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Linstener.m; sourceTree = "<group>"; };
+		B4B2418F22E37BC600048604 /* Linstener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Linstener.h; sourceTree = "<group>"; };
 		B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
 		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentInstalled.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
@@ -494,6 +510,10 @@
 			children = (
 				B4B2417222E369F800048604 /* monkeydev.entitlements */,
 				B4B2417622E369F800048604 /* main.m */,
+				B4B2418C22E37B9F00048604 /* Operator.h */,
+				B4B2418A22E37B9500048604 /* Operator.m */,
+				B4B2418F22E37BC600048604 /* Linstener.h */,
+				B4B2418D22E37BB700048604 /* Linstener.m */,
 				B4B2416F22E369F800048604 /* Package */,
 				B4B2417822E369F800048604 /* Supporting Files */,
 			);
@@ -503,6 +523,7 @@
 		B4B2416F22E369F800048604 /* Package */ = {
 			isa = PBXGroup;
 			children = (
+				B4B2417E22E37A3900048604 /* Library */,
 				B4B2417022E369F800048604 /* DEBIAN */,
 				B4B2417322E369F800048604 /* usr */,
 			);
@@ -513,6 +534,10 @@
 			isa = PBXGroup;
 			children = (
 				B4B2417122E369F800048604 /* control */,
+				B4B2418222E37A8800048604 /* postinst */,
+				B4B2418422E37A8800048604 /* postrm */,
+				B4B2418522E37A8900048604 /* preinst */,
+				B4B2418322E37A8800048604 /* prerm */,
 			);
 			name = DEBIAN;
 			sourceTree = "<group>";
@@ -539,6 +564,23 @@
 				B4B2417922E369F800048604 /* Tweaker.Daemon-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B4B2417E22E37A3900048604 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2417F22E37A3900048604 /* LaunchDaemons */,
+			);
+			name = Library;
+			path = Package/Library;
+			sourceTree = "<group>";
+		};
+		B4B2417F22E37A3900048604 /* LaunchDaemons */ = {
+			isa = PBXGroup;
+			children = (
+				B4B2418022E37A3900048604 /* com.lakr233.Tweaker-Daemon.plist */,
+			);
+			path = LaunchDaemons;
 			sourceTree = "<group>";
 		};
 		ED82C75B30A614C976CA3647 /* Frameworks */ = {
@@ -582,6 +624,7 @@
 				B4B2416722E369F800048604 /* Sources */,
 				B4B2416822E369F800048604 /* Frameworks */,
 				B4B2416922E369F800048604 /* ShellScript */,
+				B4B2417D22E378D900048604 /* Update Cydia Source */,
 			);
 			buildRules = (
 			);
@@ -636,14 +679,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B2418722E37A8900048604 /* prerm in Resources */,
 				ABFBA802229D7B460070A17E /* Main_iPad.storyboard in Resources */,
+				B4B2418122E37A3900048604 /* com.lakr233.Tweaker-Daemon.plist in Resources */,
+				B4B2418822E37A8900048604 /* postrm in Resources */,
 				04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */,
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
+				B4B2418622E37A8900048604 /* postinst in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
 				B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */,
 				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
 				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
+				B4B2418922E37A8900048604 /* preinst in Resources */,
 				ABFBA7EA229D6DF70070A17E /* TabBars.xcassets in Resources */,
 				B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */,
 			);
@@ -807,7 +855,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/opt/MonkeyDev/bin/md --xcbp";
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp\n";
+		};
+		B4B2417D22E378D900048604 /* Update Cydia Source */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Cydia Source";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm /Volumes/Hikari/Kirina/repo/debs/*.deb\ncp $SOURCE_ROOT/Packages/*.deb /Volumes/Hikari/Kirina/repo/debs\n/Volumes/Hikari/Kirina/repo/update.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -892,7 +958,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4B2418E22E37BB700048604 /* Linstener.m in Sources */,
 				B4B2417722E369F800048604 /* main.m in Sources */,
+				B4B2418B22E37B9500048604 /* Operator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

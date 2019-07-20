@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 
 @interface LKCBObject : NSObject
+
+- (void)call_to_daemon_with:(NSString *)string;
+- (void)redirectConsoleLogToDocumentFolder;
 
 @end
 

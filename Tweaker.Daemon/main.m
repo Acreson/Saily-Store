@@ -8,13 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Operator.h"
+#import "Linstener.h"
+
 int main (int argc, const char * argv[])
 {
 
     @autoreleasepool
-    {	
-    	// insert code here...
-    	NSLog(@"Hello, World!");	
+    {
+        regLinsteners();
+        CFRunLoopRun(); // keep it running in background
+        return 0;
     }
 	return 0;
 }
