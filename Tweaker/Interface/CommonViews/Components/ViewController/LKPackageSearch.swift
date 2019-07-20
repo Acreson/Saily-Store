@@ -163,7 +163,7 @@ extension LKPackageSearch: UICollectionViewDelegateFlowLayout, UICollectionViewD
         let ret = collectionView.dequeueReusableCell(withClass: UICollectionViewCell.self, for: indexPath)
         let cell = cell_views.LKPackageCLCell()
         
-        for item in ret.subviews {
+        for item in ret.contentView.subviews {
             item.removeFromSuperview()
         }
         
