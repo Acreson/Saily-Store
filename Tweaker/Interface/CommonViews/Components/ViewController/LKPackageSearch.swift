@@ -54,6 +54,13 @@ class LKPackageSearch: UIViewController {
         search_bar.sizeToFit()
         search_bar.isTranslucent = false
         search_bar.backgroundImage = UIImage()
+        
+        if LKRoot.settings?.use_dark_mode ?? false {
+            search_bar.barStyle = .black
+        }
+        search_bar.tintColor = LKRoot.ins_color_manager.read_a_color("main_text")
+        let textFieldInsideSearchBar = search_bar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
         search_bar.delegate = self
         navigationItem.titleView = search_bar
         

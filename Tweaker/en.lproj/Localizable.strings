@@ -139,8 +139,8 @@
 "日" = "";
 "软件包不合法，请尝试刷新数据。" = "Failed to validate package";
 "这个软件包同时被多个软件源提供。请选择一个查看详情" = "This package was provided by multiple sources, choose one to continue";
-"正在下载软件包，这可能需要一些时间。" = "Downloading Packages - This Should Take Some Times";
-"正在刷新软件包列表，这可能需要一些时间。" = "Rebuilding Packages Node - This Should Take Some Times";
+"正在下载软件包，这可能需要一些时间。" = "Downloading Packages";
+"正在刷新软件包列表，这可能需要一些时间。" = "Rebuilding Packages Node";
 "软件包刷新已经完成！" = "Refresh was done";
 "LKRP-TITLE| |加载失败\nLKRP-SUBTITLE| |请重试\n" = "LKRP-TITLE| |Failed to load\nLKRP-SUBTITLE| |Unknown Error\n";
 "--> Begin Section |text_inherit_saying|错误|\n尝试下载卡片内容失败了。\n---> End Section" = "--> Begin Section |text_inherit_saying|Error|\nFailed to download card content.\n---> End Section";
