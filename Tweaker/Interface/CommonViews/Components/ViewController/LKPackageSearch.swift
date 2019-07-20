@@ -14,6 +14,7 @@ class LKPackageSearch: UIViewController {
     let collection_view = UICollectionView(frame: CGRect(), collectionViewLayout: UICollectionViewFlowLayout())
     var search_result = [String]()
     var search_bar: UISearchBar = UISearchBar()
+    var last_search = ""
     
     var searchSession = ""
     
@@ -70,16 +71,51 @@ class LKPackageSearch: UIViewController {
 extension LKPackageSearch: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.last_search = searchText
         let session = UUID().uuidString
         searchSession = session
         LKRoot.queue_dispatch.asyncAfter(deadline: .now() + 0.123) { [weak self] in
-            self?.do_search(session: session, text: searchText)
+            self?.do_search(session: session, text: searchText, use_id: false)
         }
     }
     
-    func do_search(session: String, text: String) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {search_result.removeAll()
+        
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        IHProgressHUD.show()
+        
+        LKRoot.queue_dispatch.async { [weak self] in
+            if let text = self?.last_search {
+                var item1 = [String]()
+                var item2 = [String]()
+                for item in LKRoot.container_packages where self?.do_they_match(pack: item.value, text: text , use_id: false) ?? false {
+                    item1.append(item.key)
+                }
+                for item in LKRoot.container_packages where self?.do_they_match(pack: item.value, text: text, use_id: true) ?? false {
+                    item2.append(item.key)
+                }
+                item1.sort()
+                item2.sort()
+                self?.search_result.removeAll()
+                for item in item1 {
+                    self?.search_result.append(item)
+                }
+            }
+            DispatchQueue.main.async { [weak self] in
+                UIApplication.shared.endIgnoringInteractionEvents()
+                IHProgressHUD.dismiss()
+                self?.collection_view.reloadData {
+                    
+                }
+            }
+        }
+        
+        
+    }
+    
+    func do_search(session: String, text: String, use_id: Bool) {
         search_result.removeAll()
-        for item in LKRoot.container_packages where do_they_match(pack: item.value, text: text) {
+        for item in LKRoot.container_packages where do_they_match(pack: item.value, text: text, use_id: use_id) {
             search_result.append(item.key)
             if session != self.searchSession {
                 return
@@ -91,13 +127,20 @@ extension LKPackageSearch: UISearchBarDelegate {
         }
     }
     
-    func do_they_match(pack: DBMPackage, text: String) -> Bool {
+    func do_they_match(pack: DBMPackage, text: String, use_id: Bool = false) -> Bool {
         
         let text = text.uppercased()
         
-        if pack.one_of_the_package_name_lol.uppercased().hasPrefix(text) || pack.id.uppercased().hasPrefix(text) {
-            return true
+        if use_id {
+            if pack.id.uppercased().hasPrefix(text) {
+                return true
+            }
+        } else {
+            if pack.one_of_the_package_name_lol.uppercased().hasPrefix(text) {
+                return true
+            }
         }
+        
         
         let ver = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
         if text.uppercased().hasPrefix("r:".uppercased()) {
