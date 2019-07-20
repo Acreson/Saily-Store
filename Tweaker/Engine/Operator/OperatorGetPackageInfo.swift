@@ -61,4 +61,25 @@ extension app_opeerator {
         return ["-1" : ["PACKAGE" : "错误的软件包识别码", "NAME" : "未知错误", "DESCRIPTION" : "在获取这个软件包时出现了意外错误。", "ICON" : "NAMED:Error"]]
     }
     
+    func PAK_versions_sort(versions: [String : [String : [String : String]]]) -> [String] {
+        // 取出所有版本号
+        var versionNum = [String]()
+        for item in versions {
+            versionNum.append(item.key)
+        }
+        // 校验数据合法性
+        if versionNum.count < 2 {
+            return versionNum
+        }
+        for v1 in 0..<versionNum.count {
+            for v2 in v1..<(versionNum.count - 1) {
+                if versionNum[v2 + 1] == version_cmp(vers: [versionNum[v2], versionNum[v2 + 1]]) {
+                    versionNum.swapAt(v2, v2 + 1)
+                }
+            }
+        }
+        return versionNum
+        
+    }
+    
 }

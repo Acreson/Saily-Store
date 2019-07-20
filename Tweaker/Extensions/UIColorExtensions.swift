@@ -127,3 +127,34 @@ extension UIColor {
     
 }
 
+extension UIColor {
+    
+    // swiftlint:disable:next large_tuple
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return (red, green, blue, alpha)
+    }
+    
+    /// Return the better contrasting color, white or black
+    func contrastColor() -> UIColor {
+        let rgbArray = [rgba.red, rgba.green, rgba.blue]
+        
+        let luminanceArray = rgbArray.map({ value -> (CGFloat) in
+            if value < 0.03928 {
+                return (value / 12.92)
+            } else {
+                return (pow( (value + 0.55) / 1.055, 2.4) )
+            }
+        })
+        
+        let luminance = 0.2126 * luminanceArray[0] +
+            0.7152 * luminanceArray[1] +
+            0.0722 * luminanceArray[2]
+        
+        return luminance > 0.179 ? UIColor.black : UIColor.white
+    }
+    
+}

@@ -207,8 +207,8 @@ class LKRepoFeatured: UIViewController {
         contentView.addSubview(plh)
         plh.snp.makeConstraints { (x) in
             x.top.equalTo(self.currentAnchor.snp.bottom).offset(12)
-            x.left.equalTo(self.view.snp.left).offset(12)
-            x.right.equalTo(self.view.snp.right).offset(12)
+            x.left.equalTo(self.view.snp.left)
+            x.right.equalTo(self.view.snp.right)
             x.height.equalTo(itemSize.height)
         }
         
@@ -230,6 +230,7 @@ class LKRepoFeatured: UIViewController {
         
 //        createPanGestureRecognizer(targetView: content)
         
+        var index = 0
         inner: for banner in banners {
             guard let url = URL(string: banner["url"] as? String ?? "") else {
                 continue inner
@@ -240,23 +241,47 @@ class LKRepoFeatured: UIViewController {
             guard let title = banner["title"] as? String else {
                 continue inner
             }
-            contentSizeWidth += itemSize.width + 12
+            contentSizeWidth += itemSize.width + 16
             let img = UIImageView()
             content.addSubview(img)
             img.snp.makeConstraints { (x) in
                 x.top.equalTo(plh.snp.top)
                 x.bottom.equalTo(plh.snp.bottom)
-                x.left.equalTo(innerAnchor.snp.right).offset(12)
+                x.left.equalTo(innerAnchor.snp.right).offset(16)
                 x.width.equalTo(itemSize.width)
             }
-            img.sd_setImage(with: url, placeholderImage: UIImage(named: "Gary"))
+            img.sd_setImage(with: url, placeholderImage: UIImage(named: "Gary")) { (_, _, _, _) in
+                let label = UILabel()
+                label.textColor = .white
+                label.font = .boldSystemFont(ofSize: 22)
+                label.text = title
+                self.content.addSubview(label)
+                label.snp.makeConstraints({ (x) in
+                    x.left.equalTo(img.snp.left).offset(12)
+                    x.bottom.equalTo(img.snp.bottom).offset(-12)
+                    x.right.equalTo(img.snp.right).offset(-12)
+                    x.height.equalTo(22)
+                })
+            }
             img.setRadiusCGF(radius: CGFloat(radius))
             img.isUserInteractionEnabled = false
+            img.contentMode = .scaleAspectFill
             
+            let button = UIButton()
+            content.addSubview(button)
+            button.snp.makeConstraints { (x) in
+                x.edges.equalTo(img.snp.edges)
+            }
             
+            bannerPackage.append(package)
+            button.tag = index
+            button.addTarget(self, action: #selector(button2Package(sender:)), for: .touchUpInside)
+            index += 1
             
             innerAnchor = img
         }
+        
+        contentSizeWidth += 16
         
         content.showsVerticalScrollIndicator = false
         content.showsHorizontalScrollIndicator = false
@@ -264,17 +289,52 @@ class LKRepoFeatured: UIViewController {
         
     }
     
-//    // The Pan Gesture
-//    func createPanGestureRecognizer(targetView: UIScrollView) {
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(panGesture:)))
-//        targetView.addGestureRecognizer(panGesture)
-//    }
-//
-//    @objc func handlePanGesture(panGesture: UIPanGestureRecognizer) {
-//        let translation = panGesture.translation(in: self.view)
-//        panGesture.setTranslation(CGPoint(x: 0, y: 0), in: self.view)
-//        self.content.contentOffset.x += -translation.x
-//    }
+    @objc func button2Package(sender: UIButton) {
+        let tag = sender.tag
+        if tag < 0 || tag >= bannerPackage.count {
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "请尝试在设置页面刷新软件源".localized())
+            return
+        }
+        guard let pack = LKRoot.container_packages[bannerPackage[tag]]?.copy() else {
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "请尝试在设置页面刷新软件源".localized())
+            return
+        }
+        
+        let vers = pack.version
+        if vers.count < 1 {
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "请尝试在设置页面刷新软件源".localized())
+            return
+        }
+        pack.version.removeAll()
+        let versionSorted = LKRoot.ins_common_operator.PAK_versions_sort(versions: vers)
+        var result = [String : [String : [String : String]]]()
+        for item in versionSorted {
+            guard let versionInner = vers[item] else {
+                presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "请尝试在设置页面刷新软件源".localized())
+                return
+            }
+            for i in versionInner where i.key == repo?.link ?? "thisisanerrorlinkyouwonthave" {
+                let t = [i.key : i.value]
+                result[item] = t
+                break
+            }
+        }
+        
+        if result.count != 1 {
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "这个软件源可能不包含这个软件包".localized())
+            return
+        }
+        pack.version = result
+        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: {
+                presentPackage(pack: pack)
+            })
+        }
+        
+    }
+    
+    
     
 }
 
