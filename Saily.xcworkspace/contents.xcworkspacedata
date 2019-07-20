@@ -8,7 +8,7 @@
       location = "group:LICENSE">
    </FileRef>
    <FileRef
-      location = "group:/Users/ouo/Documents/GitHub/Tweak-Store/Saily.xcodeproj">
+      location = "group:Saily.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
@@ -79,7 +79,4 @@
          location = "group:/Users/lakr/Documents/GitHub/Tweak-Store/IO/Base">
       </FileRef>
    </Group>
-   <FileRef
-      location = "group:Saily.xcodeproj">
-   </FileRef>
 </Workspace>
