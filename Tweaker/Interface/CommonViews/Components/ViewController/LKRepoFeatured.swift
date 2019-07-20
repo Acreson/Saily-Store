@@ -6,12 +6,13 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+// swiftlint:disable:next type_body_length
 class LKRepoFeatured: UIViewController {
     
     var repo: DMPackageRepos?
     var contentView = UIScrollView()
     let content = UIScrollView()
-    var sum_height = 0
+    var sum_content_height = 0
     
     var currentAnchor = UIView()
     var bannerPackage = [String]()
@@ -71,7 +72,7 @@ class LKRepoFeatured: UIViewController {
             x.height.equalTo(55)
         }
         
-        sum_height += 55 + 22
+        sum_content_height += 55 + 22
         
         let label2 = UILabel()
         label2.text = repo?.link
@@ -108,7 +109,7 @@ class LKRepoFeatured: UIViewController {
             x.top.equalTo(icon.snp.bottom).offset(12)
         }
         
-        sum_height += 1
+        sum_content_height += 1
         
         let desstr = UITextView()
         desstr.backgroundColor = .clear
@@ -131,12 +132,12 @@ class LKRepoFeatured: UIViewController {
                 x.top.equalTo(sep.snp.bottom).offset(12)
                 x.height.equalTo(desstr.intrinsicContentSize.height)
             }
-            self.sum_height += Int(desstr.height)
+            self.sum_content_height += Int(desstr.height)
             UIApplication.shared.endIgnoringInteractionEvents()
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.contentView.contentSize.height = CGFloat(self.sum_height)
+            self.contentView.contentSize.height = CGFloat(self.sum_content_height)
         }
      
         self.currentAnchor = desstr
@@ -147,9 +148,21 @@ class LKRepoFeatured: UIViewController {
         
     }
     
+    func setupLakrFeatured() { // 😂
+        using_bottom_margins()
+        setup_SeparatorView()
+        
+        
+        
+        contentView.contentSize.height = CGFloat(sum_content_height)
+    }
+    
     func doSetupFeaturedJson() {
         
         guard let featured_url = URL(string: (repo?.link ?? "") + "sileo-featured.json" ) else {
+            DispatchQueue.main.async {
+                self.setupLakrFeatured()
+            }
             return
         }
         
@@ -157,6 +170,9 @@ class LKRepoFeatured: UIViewController {
         
         AF.request(featured_url, method: .get, headers: nil).response(queue: LKRoot.queue_dispatch) { (resp) in
             guard let data = resp.data else {
+                DispatchQueue.main.async {
+                    self.setupLakrFeatured()
+                }
                 return
             }
             var read = String(data: data, encoding: .utf8)
@@ -164,6 +180,9 @@ class LKRepoFeatured: UIViewController {
                 read = String(data: data, encoding: .ascii)
             }
             if read == nil || read == "" {
+                DispatchQueue.main.async {
+                    self.setupLakrFeatured()
+                }
                 return
             }
             
@@ -174,6 +193,9 @@ class LKRepoFeatured: UIViewController {
                     }
                 }
             } catch {
+                DispatchQueue.main.async {
+                    self.setupLakrFeatured()
+                }
                 return
             }
         }
@@ -185,16 +207,25 @@ class LKRepoFeatured: UIViewController {
         print("[*] 开始校验 FeaturedJson 数据")
         
         if json["class"] as? String != "FeaturedBannersView" {
+            DispatchQueue.main.async {
+                self.setupLakrFeatured()
+            }
             return
         }
         
         guard let banners = json["banners"] as? [[String : Any]] else {
+            DispatchQueue.main.async {
+                self.setupLakrFeatured()
+            }
             return
         }
         
         let itemSize = NSCoder.cgSize(for: json["itemSize"] as? String ?? "")
         
         if itemSize.width < 1 || itemSize.height < 1 {
+            DispatchQueue.main.async {
+                self.setupLakrFeatured()
+            }
             return
         }
         
@@ -227,8 +258,6 @@ class LKRepoFeatured: UIViewController {
             x.left.equalTo(content.snp.left)
             x.width.equalTo(0)
         }
-        
-//        createPanGestureRecognizer(targetView: content)
         
         var index = 0
         inner: for banner in banners {
@@ -283,10 +312,17 @@ class LKRepoFeatured: UIViewController {
         
         contentSizeWidth += 16
         
+        currentAnchor = plh
+        
         content.showsVerticalScrollIndicator = false
         content.showsHorizontalScrollIndicator = false
         content.contentSize = CGSize(width: contentSizeWidth, height: 0)
         
+        sum_content_height += Int(itemSize.height + 12)
+        
+        DispatchQueue.main.async {
+            self.setupLakrFeatured()
+        }
     }
     
     @objc func button2Package(sender: UIButton) {
@@ -308,7 +344,7 @@ class LKRepoFeatured: UIViewController {
         pack.version.removeAll()
         let versionSorted = LKRoot.ins_common_operator.PAK_versions_sort(versions: vers)
         var result = [String : [String : [String : String]]]()
-        for item in versionSorted {
+        all: for item in versionSorted {
             guard let versionInner = vers[item] else {
                 presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "请尝试在设置页面刷新软件源".localized())
                 return
@@ -316,7 +352,7 @@ class LKRepoFeatured: UIViewController {
             for i in versionInner where i.key == repo?.link ?? "thisisanerrorlinkyouwonthave" {
                 let t = [i.key : i.value]
                 result[item] = t
-                break
+                break all
             }
         }
         
@@ -334,7 +370,33 @@ class LKRepoFeatured: UIViewController {
         
     }
     
+    func using_bottom_margins(height: Int = 12) {
+        let d = UIView()
+        contentView.addSubview(d)
+        d.snp.makeConstraints { (x) in
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.width.equalTo(50)
+            x.top.equalTo(self.currentAnchor.snp.bottom)
+            x.height.equalTo(height)
+        }
+        currentAnchor = d
+        sum_content_height += height
+    }
     
+    func setup_SeparatorView() {
+        let sep = UIView()
+        sep.backgroundColor = .gray
+        sep.alpha = 0.233
+        contentView.addSubview(sep)
+        sep.snp.makeConstraints { (x) in
+            x.left.equalTo(self.view.snp.left).offset(18)
+            x.right.equalTo(self.view.snp.right).offset(-18)
+            x.top.equalTo(self.currentAnchor.snp.bottom)
+            x.height.equalTo(0.5)
+        }
+        sum_content_height += 1
+        self.currentAnchor = sep
+    }
     
 }
 

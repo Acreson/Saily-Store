@@ -73,7 +73,7 @@ extension app_opeerator {
         }
         for v1 in 0..<versionNum.count {
             for v2 in v1..<(versionNum.count - 1) {
-                if versionNum[v2 + 1] == version_cmp(vers: [versionNum[v2], versionNum[v2 + 1]]) {
+                if versionNum[v2] == version_cmp(vers: [versionNum[v2], versionNum[v2 + 1]]) {
                     versionNum.swapAt(v2, v2 + 1)
                 }
             }

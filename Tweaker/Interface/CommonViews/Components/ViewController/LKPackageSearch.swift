@@ -145,15 +145,15 @@ extension LKPackageSearch: UISearchBarDelegate {
         
         let ver = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack)
         if text.uppercased().hasPrefix("r:".uppercased()) {
-            // 搜索软件源
-            for obj in ver.1 where obj.key.contains(text.dropFirst(2).to_String()) {
+            // 搜索软件
+            for obj in ver.1 where obj.key.uppercased().contains(text.dropFirst(2).to_String()) {
                 return true
             }
         }
         
         if text.uppercased().hasPrefix("a:".uppercased()) {
             // 搜索作者
-            for obj in ver.1 where obj.value["AUTHOR"]?.contains(text.dropFirst(2).to_String()) ?? false {
+            for obj in ver.1 where obj.value["AUTHOR"]?.uppercased().contains(text.dropFirst(2).to_String()) ?? false {
                 return true
             }
         }
