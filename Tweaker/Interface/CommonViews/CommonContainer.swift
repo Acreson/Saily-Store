@@ -57,20 +57,22 @@ func readTopViewController() -> UIViewController? {
 }
 
 func presentStatusAlert(imgName: String, title: String, msg: String) {
-    if LKRoot.settings?.use_dark_mode ?? false {
-        let statusAlert = StatusAlertDark()
-        statusAlert.image = UIImage(named: imgName)
-        statusAlert.title = title
-        statusAlert.message = msg
-        statusAlert.canBePickedOrDismissed = true
-        statusAlert.showInKeyWindow()
-    } else {
-        let statusAlert = StatusAlert()
-        statusAlert.image = UIImage(named: imgName)
-        statusAlert.title = title
-        statusAlert.message = msg
-        statusAlert.canBePickedOrDismissed = true
-        statusAlert.showInKeyWindow()
+    DispatchQueue.main.async {
+        if LKRoot.settings?.use_dark_mode ?? false {
+            let statusAlert = StatusAlertDark()
+            statusAlert.image = UIImage(named: imgName)
+            statusAlert.title = title
+            statusAlert.message = msg
+            statusAlert.canBePickedOrDismissed = true
+            statusAlert.showInKeyWindow()
+        } else {
+            let statusAlert = StatusAlert()
+            statusAlert.image = UIImage(named: imgName)
+            statusAlert.title = title
+            statusAlert.message = msg
+            statusAlert.canBePickedOrDismissed = true
+            statusAlert.showInKeyWindow()
+        }
     }
 }
 
@@ -109,6 +111,9 @@ func presentPackage(pack: DBMPackage) {
         // 检查软件包合法性
         if ver.1.count < 1 || ver.1.first?.key == "-1" || ver.1.first?.key == "" {
             presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包不合法，请尝试刷新数据。".localized())
+            DispatchQueue.main.async {
+                UIApplication.shared.endIgnoringInteractionEvents()
+            }
             return
         }
         

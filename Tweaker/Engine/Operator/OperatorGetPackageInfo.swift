@@ -50,7 +50,7 @@ extension app_opeerator {
     func PAK_read_newest_version(pack: DBMPackage) -> (String, [String : [String : String]]) {
         // 先获得全部 version 的数组
         var vers = [String]()
-        for item in pack.version {
+        for item in pack.version where PAK_internal_sig_check_did_pass(object: item.value) {
             vers.append(item.key)
         }
         let newest = version_cmp(vers: vers)
@@ -58,13 +58,16 @@ extension app_opeerator {
     }
     
     func PAK_return_error_vision() -> [String : [String : String]] {
-        return ["-1" : ["PACKAGE" : "错误的软件包识别码", "NAME" : "未知错误", "DESCRIPTION" : "在获取这个软件包时出现了意外错误。", "ICON" : "NAMED:Error"]]
+        return ["-1" : ["PACKAGE" : "错误的软件包识别码".localized(),
+                        "NAME" : "未知错误".localized(),
+                        "DESCRIPTION" : "在获取这个软件包时出现了意外错误。".localized(),
+                        "ICON" : "NAMED:Error"]]
     }
     
     func PAK_versions_sort(versions: [String : [String : [String : String]]]) -> [String] {
         // 取出所有版本号
         var versionNum = [String]()
-        for item in versions {
+        for item in versions where PAK_internal_sig_check_did_pass(object: item.value) {
             versionNum.append(item.key)
         }
         // 校验数据合法性
@@ -80,6 +83,13 @@ extension app_opeerator {
         }
         return versionNum
         
+    }
+    
+    func PAK_internal_sig_check_did_pass(object: [String : [String : String]]) -> Bool {
+        for item in object.values where item["_internal_SIG_begin_update"] != "0x1" {
+            return false
+        }
+        return true
     }
     
 }

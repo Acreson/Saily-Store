@@ -143,6 +143,7 @@ extension manage_views {
         }
         
         func update_interface() {
+            re_sync()
             DispatchQueue.main.async {
                 (self.from_father_view as? UITableView)?.beginUpdates()
                 UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
