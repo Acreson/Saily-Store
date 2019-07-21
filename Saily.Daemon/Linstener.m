@@ -17,6 +17,9 @@ static void read_begin() {
 
 static void read_end() {
     NSLog(@"[*] 数据接受完成，内容为: %@", read_rdi);
+    if ([read_rdi hasPrefix:@"init:path:"]) {
+        setAppPath([read_rdi substringFromIndex:10]);
+    }
 }
 
 static void read_space() {
@@ -399,7 +402,7 @@ static void read_bl() {
     read_rdi = [read_rdi stringByAppendingString:@"~"];
 }
 
-void regLinsteners() {
+void regLinstenersOnMsgPass() {
     
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,

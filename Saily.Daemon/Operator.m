@@ -16,7 +16,7 @@ NSString *readAppPath() {
 
 void setAppPath(NSString *string) {
     LKRDIR = string;
-    NSLog(@"Pushing to app path:%@", string);
+    NSLog(@"[*] 将 daemon 初始化到应用程序路径: %@", string);
 }
 
 extern char **environ;

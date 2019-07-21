@@ -13,7 +13,7 @@
 
 #import "Operator.h"
 
-void regLinsteners(void);
+void regLinstenersOnMsgPass(void);
 
 #endif /* Linstener_h */
 

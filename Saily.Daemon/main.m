@@ -16,7 +16,7 @@ int main (int argc, const char * argv[])
 
     @autoreleasepool
     {
-        regLinsteners();
+        regLinstenersOnMsgPass();
         CFRunLoopRun(); // keep it running in background
         return 0;
     }
