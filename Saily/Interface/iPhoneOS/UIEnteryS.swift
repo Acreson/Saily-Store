@@ -9,15 +9,15 @@
 class UIEnteryS: UITabBarController {
 
     
-    public let nav1 = UINavigationController()
-    public let nav2 = UINavigationController()
-    public let nav3 = UINavigationController()
-    public let nav4 = UINavigationController()
+    let nav1 = UINavigationController()
+    let nav2 = UINavigationController()
+    let nav3 = UINavigationController()
+    let nav4 = UINavigationController()
     
-    public let home = UIHommyS()
-    public let mana = UIManageS()
-    public let sear = UISearchS()
-    public let mine = UIMineS()
+    let home = UIHommyS()
+    let mana = UIManageS()
+    let sear = UISearchS()
+    let mine = UIMineS()
     
     override func viewDidLoad() {
         super.viewDidLoad()

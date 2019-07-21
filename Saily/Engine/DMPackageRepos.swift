@@ -9,13 +9,13 @@
 // MARK: RAM
 class DMPackageRepos {
     
-    public var name                 = String()
-    public var link                 = String()
-    public var icon                 = String()
-    public var desstr               = String()
-    public var sort_ID              = Int()
+    var name                 = String()
+    var link                 = String()
+    var icon                 = String()
+    var desstr               = String()
+    var sort_ID              = Int()
     
-    public var item                 = [String : String]()
+    var item                 = [String : String]()
     
     func to_data_base() -> DBMPackageRepos {
         let new = DBMPackageRepos()

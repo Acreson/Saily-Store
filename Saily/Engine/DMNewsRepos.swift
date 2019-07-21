@@ -9,17 +9,17 @@
 // MARK: RAM
 class DMNewsRepo {
     
-    public var name                 = String()
-    public var link                 = String()
-    public var language             = [String]()
-    public var title                = String()
-    public var sub_title            = String()
-    public var icon                 = String()
+    var name                 = String()
+    var link                 = String()
+    var language             = [String]()
+    var title                = String()
+    var sub_title            = String()
+    var icon                 = String()
     
-    public var title_color          = String()
-    public var subtitle_color       = String()
+    var title_color          = String()
+    var subtitle_color       = String()
     
-    public var cards                = [DMNewsCard]()
+    var cards                = [DMNewsCard]()
     
 }
 

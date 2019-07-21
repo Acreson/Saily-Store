@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 #import "Operator.h"
+#include <notify.h>
 
 void regLinstenersOnMsgPass(void);
 

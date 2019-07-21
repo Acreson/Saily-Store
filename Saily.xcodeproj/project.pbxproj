@@ -68,6 +68,7 @@
 		B42FFC8422E1ABD40011F6C8 /* LKRepoFeatured.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */; };
 		B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */; };
 		B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4318BDB22DEF771008082FC /* Solid.xcassets */; };
+		B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
@@ -166,6 +167,7 @@
 		B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoFeatured.swift; sourceTree = "<group>"; };
 		B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetInstalledInfo.swift; sourceTree = "<group>"; };
 		B4318BDB22DEF771008082FC /* Solid.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Solid.xcassets; sourceTree = "<group>"; };
+		B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMInstalledInfo.swift; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				B40B4C1F22D7637600373449 /* DMPackageRepos.swift */,
 				B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */,
 				ABE6DD04229ED2A000D18D9E /* DMSettings.swift */,
+				B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */,
 			);
 			name = DataModel;
 			path = Engine;
@@ -875,6 +878,7 @@
 				B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */,
 				AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */,
 				B42F9C5322E02D2500557BB1 /* AppDefine.swift in Sources */,
+				B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */,
 				B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */,
 				B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,

@@ -18,8 +18,11 @@ extension app_opeerator {
         if FileManager.default.fileExists(atPath: LKRoot.root_path! + "/dpkg") {
             print("[?] dpkg 同步出错了？")
         }
-        try? FileManager.default.createDirectory(atPath: LKRoot.root_path! + "/dpkg", withIntermediateDirectories: true, attributes: nil)
         try? FileManager.default.copyItem(atPath: "/Library/dpkg", toPath: LKRoot.root_path! + "/dpkg")
+        if !FileManager.default.fileExists(atPath: LKRoot.root_path! + "/dpkg") {
+            print("[?] 无法直接拷贝 dpkg 存档，尝试拷贝 status")
+            try? FileManager.default.createDirectory(atPath: LKRoot.root_path! + "/dpkg", withIntermediateDirectories: true, attributes: nil)
+        }
         try? FileManager.default.copyItem(atPath: "/Library/dpkg/status", toPath: LKRoot.root_path! + "/dpkg/status")
     }
     

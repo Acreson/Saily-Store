@@ -14,6 +14,11 @@
 #include <mach/mach.h>
 
 void setAppPath(NSString *string);
-NSString *readAppPath();
+void run_cmd(char *cmd);
+NSString *readAppPath(void);
+void redirectConsoleLogToDocumentFolder(void);
+int read_status(void);
+void outDaemonStatus(void);
+void fix_permission(void);
 
 #endif /* Operator_h */

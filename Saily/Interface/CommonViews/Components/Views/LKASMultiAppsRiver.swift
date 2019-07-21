@@ -11,15 +11,15 @@ extension common_views {
     class ASMultiAppsView: UIView {
         
         // Sets
-        public var images               = [String]()
-        public var image_size           = CGSize()
-        public var image_gap            = CGFloat()
-        public var is_animate           = true
-        public var image_angle          = CGFloat()
-        public var image_radius         = CGFloat()
+        var images               = [String]()
+        var image_size           = CGSize()
+        var image_gap            = CGFloat()
+        var is_animate           = true
+        var image_angle          = CGFloat()
+        var image_radius         = CGFloat()
         
-        public var contentView          = UIView()
-        public var angle_wrapper        = UIView()
+        var contentView          = UIView()
+        var angle_wrapper        = UIView()
         
         func apart_init(card_width: CGFloat = 466, card_hight: CGFloat = 233,
                         images: [String] = [], animate: Bool = true,

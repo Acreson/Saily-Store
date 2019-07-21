@@ -6,6 +6,7 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+
 // MARK: DATABASE
 class DBMPackage: WCDBSwift.TableCodable {
     
@@ -51,3 +52,4 @@ class DBMPackage: WCDBSwift.TableCodable {
     }
     
 }
+

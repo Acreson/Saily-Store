@@ -92,4 +92,17 @@ extension app_opeerator {
         return true
     }
     
+    func PAK_read_current_status(packID: String) -> current_info {
+        
+        for pack in LKRoot.container_recent_installed where pack.id == packID {
+            
+            // 已经安装
+            
+            
+            
+        }
+        
+        return .unknown
+    }
+    
 }

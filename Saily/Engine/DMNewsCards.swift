@@ -12,21 +12,21 @@
 // MARK: RAM
 class DMNewsCard {
     
-    public var type: card_type                     = .photo_full
+    var type: card_type                     = .photo_full
     
-    public var content: String?                    = String()
+    var content: String?                    = String()
     
-    public var image_container                     = [String]()
+    var image_container                     = [String]()
     
-    public var main_title_string                   = String()
-    public var sub_title_string:       String?
-    public var last_update_string:     String?
-    public var description_string:     String?
+    var main_title_string                   = String()
+    var sub_title_string:       String?
+    var last_update_string:     String?
+    var description_string:     String?
     
-    public var main_title_string_color             = String()
-    public var sub_title_string_color              = String()
-    public var last_update_string_color            = String()
-    public var description_string_color            = String()
+    var main_title_string_color             = String()
+    var sub_title_string_color              = String()
+    var last_update_string_color            = String()
+    var description_string_color            = String()
     
 }
 

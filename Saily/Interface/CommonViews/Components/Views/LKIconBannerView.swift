@@ -10,10 +10,10 @@ extension common_views {
     
     class LKIconBannerView: UIView {
         
-        public let icon = UIImageView()
-        public let title = UILabel()
-        public let sub_title = UILabel()
-        public let button = UIButton()
+        let icon = UIImageView()
+        let title = UILabel()
+        let sub_title = UILabel()
+        let button = UIButton()
         
         func apart_init() {
             addSubview(icon)

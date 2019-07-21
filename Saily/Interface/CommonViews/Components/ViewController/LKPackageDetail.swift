@@ -14,7 +14,7 @@ import JJFloatingActionButton
 // swiftlint:disable:next type_body_length
 class LKPackageDetail: UIViewController {
     
-    public var item: DBMPackage = DBMPackage()
+    var item: DBMPackage = DBMPackage()
     private var theme_color = UIColor() {
         willSet {
         

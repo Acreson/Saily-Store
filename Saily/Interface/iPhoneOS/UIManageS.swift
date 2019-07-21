@@ -203,9 +203,9 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         for i in 0...5 {
             ret += do_the_height_math(indexPath: IndexPath(row: i, section: 0))
         }
-        if LKRoot.safe_area_needed {
+//        if LKRoot.safe_area_needed {
             ret += 38
-        }
+//        }
         return ret
     }
     

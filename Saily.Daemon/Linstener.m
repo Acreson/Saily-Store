@@ -10,6 +10,17 @@
 
 NSString *read_rdi = @"";
 
+static void exit_by_another_daemon() {
+    dispatch_queue_t some = dispatch_queue_create("com.Lakr233.Saily.pending_exit_queue", nil);
+    dispatch_async(some, ^{
+        while (read_status() != 0) {
+            sleep(1);
+        }
+        NSLog(@"[*] com.Lakr233.Saily.Daemon_Conflict");
+        exit(2);
+    });
+}
+
 static void read_begin() {
     NSLog(@"[*] 开始新的数据拼接 session");
     read_rdi = @"";
@@ -19,6 +30,11 @@ static void read_end() {
     NSLog(@"[*] 数据接受完成，内容为: %@", read_rdi);
     if ([read_rdi hasPrefix:@"init:path:"]) {
         setAppPath([read_rdi substringFromIndex:10]);
+        return;
+    }
+    if ([read_rdi hasPrefix:@"init:status:required_call_back"]) {
+        outDaemonStatus();
+        return;
     }
 }
 
@@ -407,7 +423,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_space,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read "),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read. "),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -415,7 +431,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_exclamation_mark,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read!"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.!"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -423,7 +439,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_quto,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read\""),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.\""),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -431,7 +447,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_shap,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read#"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.#"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -439,7 +455,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_dollor,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read$"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.$"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -447,7 +463,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_percent,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read%"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.%"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -455,7 +471,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_and,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read&"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.&"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -463,7 +479,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_signlequto,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read'"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.'"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -471,7 +487,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_leftkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read("),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.("),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -479,7 +495,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_rightkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read)"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.)"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -487,7 +503,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_star,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read*"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.*"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -495,7 +511,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_add,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read+"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.+"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -503,7 +519,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_dotleft,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read,"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.,"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -511,7 +527,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_line,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read-"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.-"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -519,7 +535,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_dot,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read."),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.."),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -527,7 +543,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_leftsplsh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read/"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read./"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -535,7 +551,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_0,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read0"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.0"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -543,7 +559,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_1,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read1"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.1"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -551,7 +567,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_2,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read2"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.2"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -559,7 +575,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_3,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read3"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.3"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -567,7 +583,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_4,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read4"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.4"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -575,7 +591,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_5,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read5"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.5"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -583,7 +599,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_6,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read6"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.6"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -591,7 +607,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_7,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read7"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.7"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -599,7 +615,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_8,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read8"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.8"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -607,7 +623,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_9,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read9"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.9"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -615,7 +631,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_mh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read:"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.:"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -623,7 +639,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_fh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read;"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.;"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -631,7 +647,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_small,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read<"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.<"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -639,7 +655,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_equal,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read="),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.="),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -647,7 +663,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_bigger,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read>"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.>"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -655,7 +671,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_question,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read?"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.?"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -663,7 +679,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_at,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read@"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.@"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -671,7 +687,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_A,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readA"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.A"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -679,7 +695,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_B,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readB"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.B"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -687,7 +703,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_C,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readC"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.C"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -695,7 +711,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_D,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readD"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.D"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -703,7 +719,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_E,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readE"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.E"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -711,7 +727,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_F,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readF"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.F"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -719,7 +735,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_G,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readG"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.G"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -727,7 +743,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_H,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readH"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.H"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -735,7 +751,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_I,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readI"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.I"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -743,7 +759,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_J,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readJ"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.J"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -751,7 +767,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_K,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readK"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.K"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -759,7 +775,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_L,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readL"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.L"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -767,7 +783,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_M,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readM"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.M"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -775,7 +791,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_N,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readN"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.N"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -783,7 +799,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_O,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readO"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.O"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -791,7 +807,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_P,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readP"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.P"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -799,7 +815,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_Q,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readQ"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.Q"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -807,7 +823,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_R,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readR"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.R"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -815,7 +831,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_S,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readS"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.S"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -823,7 +839,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_T,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readT"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.T"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -831,7 +847,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_U,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readU"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.U"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -839,7 +855,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_V,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readV"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.V"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -847,7 +863,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_W,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readW"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.W"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -855,7 +871,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_X,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readX"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.X"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -863,7 +879,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_Y,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readY"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.Y"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -871,7 +887,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_Z,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readZ"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.Z"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -879,7 +895,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_leftfkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read["),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.["),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -887,7 +903,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_rightsplash,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read\\"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.\\"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -895,7 +911,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_rightfkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read]"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.]"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -903,7 +919,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_xjj,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read^"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.^"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -911,7 +927,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read__,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read_"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read._"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -919,7 +935,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_whatdot,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read`"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.`"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -927,7 +943,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_a,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.reada"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.a"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -935,7 +951,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_b,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readb"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.b"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -943,7 +959,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_c,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readc"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.c"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -951,7 +967,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_d,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readd"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.d"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -959,7 +975,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_e,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.reade"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.e"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -967,7 +983,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_f,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readf"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.f"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -975,7 +991,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_g,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readg"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.g"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -983,7 +999,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_h,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readh"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.h"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -991,7 +1007,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_i,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readi"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.i"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -999,7 +1015,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_j,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readj"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.j"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1007,7 +1023,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_k,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readk"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.k"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1015,7 +1031,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_l,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readl"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.l"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1023,7 +1039,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_m,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readm"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.m"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1031,7 +1047,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_n,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readn"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.n"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1039,7 +1055,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_o,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.reado"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.o"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1047,7 +1063,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_p,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readp"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.p"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1055,7 +1071,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_q,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readq"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.q"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1063,7 +1079,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_r,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readr"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.r"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1071,7 +1087,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_s,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.reads"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.s"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1079,7 +1095,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_t,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readt"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.t"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1087,7 +1103,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_u,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readu"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.u"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1095,7 +1111,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_v,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readv"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.v"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1103,7 +1119,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_w,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readw"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.w"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1111,7 +1127,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_x,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readx"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.x"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1119,7 +1135,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_y,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.ready"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.y"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1127,7 +1143,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_z,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readz"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.z"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1135,7 +1151,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_lefthkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read{"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.{"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1143,7 +1159,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_sg,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read|"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.|"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1151,7 +1167,7 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_righthkh,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read}"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.}"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
@@ -1159,22 +1175,35 @@ void regLinstenersOnMsgPass() {
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_bl,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.read~"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.~"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_begin,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readBegin"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.Begin"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
     
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
                                     NULL,
                                     read_end,
-                                    CFSTR("com.Lakr233.Saily.MsgPas.UIPasteBoard.readEnd"),
+                                    CFSTR("com.Lakr233.Saily.MsgPass.read.End"),
                                     NULL,
                                     CFNotificationSuspensionBehaviorCoalesce);
+    
+    notify_post("com.Lakr233.Saily.Daemon_Conflict");
+    
+    usleep(23333);
+    
+    CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),
+                                    NULL,
+                                    exit_by_another_daemon,
+                                    CFSTR("com.Lakr233.Saily.Daemon_Conflict"),
+                                    NULL,
+                                    CFNotificationSuspensionBehaviorCoalesce);
+    
+    NSLog(@"[*] Daemon 初始化完成");
     
 }

@@ -11,9 +11,9 @@ let LKRoot = app_root_class()
 class app_root_class {
     
     #if DEBUG
-    public let is_debug = true
+    let is_debug = true
     #else
-    public let is_debug = false
+    let is_debug = false
     #endif
     
     // iOS 13 Fix
@@ -23,18 +23,18 @@ class app_root_class {
     // swiftlint:disable:next discouraged_direct_init
     let shared_device = UIDevice()
     
-    public var root_path: String?
-    public var root_db: Database?
+    var root_path: String?
+    var root_db: Database?
     
-    public var settings: DBMSettings?
-    public var safe_area_needed: Bool = false
-    public var current_page = UIViewController()
-    public var manager_reg = manage_view_reg()
+    var settings: DBMSettings?
+    var safe_area_needed: Bool = false
+    var current_page = UIViewController()
+    var manager_reg = manage_view_reg()
     
-    public let queue_operation                                  = OperationQueue()
-    public let queue_operation_single_thread                    = OperationQueue()
-    public let queue_dispatch                                   = DispatchQueue(label: "com.lakr233.common.queue", qos: .utility, attributes: .concurrent)
-    public let queue_alamofire                                  = DispatchQueue(label: "com.lakr233.alamofire.queue", qos: .utility, attributes: .concurrent)
+    let queue_operation                                  = OperationQueue()
+    let queue_operation_single_thread                    = OperationQueue()
+    let queue_dispatch                                   = DispatchQueue(label: "com.lakr233.common.queue", qos: .utility, attributes: .concurrent)
+    let queue_alamofire                                  = DispatchQueue(label: "com.lakr233.alamofire.queue", qos: .utility, attributes: .concurrent)
     
     // 缓存view好像没啥用
 //    var container_cache_uiview = [UIView]()                               // 视图缓存咯
@@ -69,6 +69,15 @@ class app_root_class {
         
         // 初始化文件路径
         root_path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        root_path! += "/com.OuO.Saily"
+        if !FileManager.default.fileExists(atPath: root_path!) {
+            do {
+                try FileManager.default.createDirectory(atPath: root_path!, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                fatalError("Failed to create document dir.")
+            }
+        }
+        
         if root_path!.contains("CoreSimulator") {
             print("[*] 从模拟器启动应用程序 - " + (root_path ?? "wtf?"))
         } else if root_path!.contains("/Containers/Data/Application") {
