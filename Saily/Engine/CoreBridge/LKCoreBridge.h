@@ -11,7 +11,7 @@
 
 @interface LKCBObject : NSObject
 
-- (void)call_to_daemon_with:(NSString *)string;
+- (void)call_to_daemon_with:(NSString *)str;
 - (void)redirectConsoleLogToDocumentFolder;
 
 @end

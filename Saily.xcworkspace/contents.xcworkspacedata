@@ -16,6 +16,9 @@
    <FileRef
       location = "group:LocalizedFinder/LocalizedFinder.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:ideaTest/ideaTest.xcodeproj">
+   </FileRef>
    <Group
       location = "group:IO"
       name = "IO">
