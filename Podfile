@@ -17,8 +17,9 @@ target 'Saily' do
   pod 'SnapKit'
   pod 'StatusAlert', '~> 1.1.1'
   pod 'IHProgressHUD'
-  pod 'SwiftMessages' # https://github.com/SwiftKickMobile/SwiftMessages
+  pod 'SwiftMessages'
   pod 'SwiftyMarkdown'
+  pod 'AHDownloadButton'
   
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'Reveal-SDK', :configurations => ['Debug']

@@ -62,7 +62,7 @@
 		B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */; };
 		B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289B22D30630002B1A96 /* LKIconStack.swift */; };
 		B42C289E22D30DC4002B1A96 /* LKIconTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */; };
-		B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */; };
+		B42F9C5122DFD2AC00557BB1 /* LKIconBannerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5022DFD2AC00557BB1 /* LKIconBannerSection.swift */; };
 		B42F9C5322E02D2500557BB1 /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5222E02D2500557BB1 /* AppDefine.swift */; };
 		B42F9C5522E055F600557BB1 /* LKSectionBeginHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */; };
 		B42FFC8422E1ABD40011F6C8 /* LKRepoFeatured.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */; };
@@ -163,7 +163,7 @@
 		B42C289922D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_NewsRepoSP.swift; sourceTree = "<group>"; };
 		B42C289B22D30630002B1A96 /* LKIconStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconStack.swift; sourceTree = "<group>"; };
 		B42C289D22D30DC4002B1A96 /* LKIconTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconTVCell.swift; sourceTree = "<group>"; };
-		B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconBannerView.swift; sourceTree = "<group>"; };
+		B42F9C5022DFD2AC00557BB1 /* LKIconBannerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconBannerSection.swift; sourceTree = "<group>"; };
 		B42F9C5222E02D2500557BB1 /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
 		B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKSectionBeginHeader.swift; sourceTree = "<group>"; };
 		B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoFeatured.swift; sourceTree = "<group>"; };
@@ -450,13 +450,13 @@
 		B46EE49722D5E04B000C6F6D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B432BD0F22E53DD3007B4727 /* LKFooter.swift */,
+				ABFBA823229D801E0070A17E /* LKHeader.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
-				B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */,
-				B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */,
 				AB1461AD22A26AD500C031FE /* LKASMultiAppsRiver.swift */,
+				B42F9C5022DFD2AC00557BB1 /* LKIconBannerSection.swift */,
 				B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */,
+				B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */,
 				B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */,
 			);
 			path = Views;
@@ -740,6 +740,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Saily/Pods-Saily-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AHDownloadButton/AHDownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
 				"${BUILT_PRODUCTS_DIR}/BitByteData/BitByteData.framework",
@@ -767,6 +768,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AHDownloadButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BitByteData.framework",
@@ -873,7 +875,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B42F9C5122DFD2AC00557BB1 /* LKIconBannerView.swift in Sources */,
+				B42F9C5122DFD2AC00557BB1 /* LKIconBannerSection.swift in Sources */,
 				AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */,
 				B42F9C5322E02D2500557BB1 /* AppDefine.swift in Sources */,
 				B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */,

@@ -30,10 +30,9 @@ class app_daemon_utils {
             fatalError("[E] LKDaemonUtils 只允许初始化一次 只允许拥有一个实例")
         }
         self.session = UUID().uuidString
+        self.initialized = true
+        print("[*] App_daemon_utils initialized.")
         LKRoot.queue_dispatch.async {
-            self.daemon_msg_pass(msg: "init:path:" + LKRoot.root_path!)
-            self.initialized = true
-            print("[*] App_daemon_utils initialized.")
             self.checkDaemonOnline { (ret) in
                 print("[*] 获取到 Dameon 状态： " + ret.rawValue)
                 self.status = ret
@@ -44,8 +43,9 @@ class app_daemon_utils {
     func daemon_msg_pass(msg: String) {
         if sender_lock == true {
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
-            print("[-] [-] [-] [-] [-] 发送器已上锁请检查线程安全!! [-] [-] [-] [-] [-] [-] ")
+            print("[-] [-] [-] [-] [-] 发送器已上锁请检查线程安全!! [-] [-] [-] [-] [-] [-]")
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
+            LKRoot.breakPoint()
             return
         }
         sender_lock = true
@@ -67,6 +67,8 @@ class app_daemon_utils {
     func checkDaemonOnline(_ complete: @escaping (daemon_status) -> Void) {
         try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/daemon.call/status.txt")
         LKRoot.queue_dispatch.async {
+            self.daemon_msg_pass(msg: "init:path:" + LKRoot.root_path!)
+            usleep(233)
             self.daemon_msg_pass(msg: "init:status:required_call_back")
             var cnt = 0
             while cnt < 666 {

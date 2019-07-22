@@ -15,11 +15,12 @@ import SwiftyMarkdown
 extension LKPackageDetail: UIScrollViewDelegate {
     
     func updateColor() {
-        self.banner_section.button.backgroundColor = self.theme_color
-        self.view.backgroundColor = self.theme_color_bak
-        //        for item in section_headers {
-        //            item.update_color(color: theme_color)
-        //        }
+        view.backgroundColor = self.theme_color_bak
+        banner_section.button.startDownloadButtonNonhighlightedTitleColor = .white
+        banner_section.button.startDownloadButtonNonhighlightedBackgroundColor = theme_color
+        banner_section.button.pendingCircleColor = .lightGray
+        banner_section.button.downloadingButtonHighlightedTrackCircleColor = theme_color
+        banner_section.button.downloadingButtonNonhighlightedTrackCircleColor = .lightGray
         scrollViewDidScroll(contentView)
     }
     
@@ -129,7 +130,7 @@ extension LKPackageDetail {
                 } else {
                     header.theme_color = theme_color
                 }
-                header.apart_init(section_name: someString)
+                header.apart_init(section_name: someString.uppercased())
                 contentView.addSubview(header)
                 header.snp.makeConstraints { (x) in
                     x.top.equalTo(self.currentAnchor.snp.bottom)

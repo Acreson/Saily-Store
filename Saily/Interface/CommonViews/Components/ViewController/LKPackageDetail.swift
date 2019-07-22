@@ -9,6 +9,7 @@
 import WebKit
 import AVFoundation
 import SwiftyMarkdown
+import AHDownloadButton
 
 // swiftlint:disable:next type_body_length
 class LKPackageDetail: UIViewController {
@@ -39,7 +40,7 @@ class LKPackageDetail: UIViewController {
     
     let status_bar_cover = UIView()
     let banner_image = UIImageView()
-    let banner_section = common_views.LKIconBannerView()
+    let banner_section = common_views.LKIconBannerSection()
 //    let section_headers = [common_views.LKSectionBeginHeader]()
     
     var buttonActionStore = [String]()
@@ -92,7 +93,6 @@ class LKPackageDetail: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         _ = try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: .default, options: .mixWithOthers)
-
         
         if LKRoot.settings?.use_dark_mode ?? false {
             navigationController?.navigationBar.barStyle = .blackOpaque
@@ -196,9 +196,18 @@ class LKPackageDetail: UIViewController {
         banner_section.title.text = LKRoot.ins_common_operator.PAK_read_name(version: item.version.first?.value ?? LKRoot.ins_common_operator.PAK_return_error_vision())
         title = banner_section.title.text
         banner_section.sub_title.text = LKRoot.ins_common_operator.PAK_read_auth(version: item.version.first?.value ?? LKRoot.ins_common_operator.PAK_return_error_vision()).0
-        banner_section.button.setTitle("操作".localized(), for: .normal)
-        banner_section.button.backgroundColor = theme_color
+        banner_section.button.startDownloadButtonTitle = "获取".localized()
+        if LKRoot.ins_common_operator.PAK_read_current_status(packID: item.id) != .not_installed {
+            banner_section.button.startDownloadButtonTitle = "更改".localized()
+        }
+        banner_section.button.downloadedButtonTitle = "等待执行".localized()
+        banner_section.button.startDownloadButtonHighlightedBackgroundColor = .lightGray
+        banner_section.button.startDownloadButtonTitleSidePadding = 12
+        banner_section.button.delegate = self
+        banner_section.button.transitionAnimationDuration = 0.5
         banner_section.apart_init() // sizeThatFit 需要先放文字
+        
+        updateColor()
         
         // 防止抽风
         DispatchQueue.main.async {
@@ -346,5 +355,34 @@ class LKPackageDetail: UIViewController {
             setup_none(dep: "发生了未知错误。".localized())
         }
     }
+    
+}
+
+extension LKPackageDetail: AHDownloadButtonDelegate {
+    
+    func downloadButton(_ downloadButton: AHDownloadButton, tappedWithState state: AHDownloadButton.State) {
+        
+        switch state {
+            
+        case .startDownload:
+            
+            downloadButton.state = .pending
+            
+        case .pending:
+            
+            break
+            
+        case .downloading:
+            
+            break
+            
+        case .downloaded:
+            
+            break
+            
+        }
+        
+    }
+    
     
 }

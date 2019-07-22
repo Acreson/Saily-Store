@@ -1,19 +1,21 @@
 //
-//  LKIconBannerView.swift
+//  LKIconBannerSection.swift
 //  Saily
 //
 //  Created by Lakr Aream on 2019/7/18.
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+import AHDownloadButton
+
 extension common_views {
     
-    class LKIconBannerView: UIView {
+    class LKIconBannerSection: UIView {
         
         let icon = UIImageView()
         let title = UILabel()
         let sub_title = UILabel()
-        let button = UIButton()
+        let button = AHDownloadButton(alignment: .center)
         
         func apart_init() {
             addSubview(icon)
@@ -29,12 +31,13 @@ extension common_views {
                 x.height.equalTo(55)
             }
             
-            button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+            button.startDownloadButtonTitleFont = .boldSystemFont(ofSize: 16)
+            button.downloadedButtonTitleFont = .boldSystemFont(ofSize: 16)
             button.setRadiusCGF(radius: 15)
             button.snp.makeConstraints { (x) in
                 x.centerY.equalTo(self.snp.centerY)
                 x.right.equalTo(self.snp.right).offset(-18)
-                x.width.equalTo(66)
+                x.width.equalTo(88)
                 x.height.equalTo(30)
             }
             

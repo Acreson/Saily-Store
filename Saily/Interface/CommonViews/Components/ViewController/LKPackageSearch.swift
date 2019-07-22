@@ -68,7 +68,7 @@ class LKPackageSearch: UIViewController {
         
         self.searchBar(self.search_bar, textDidChange: "")
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             self.search_bar.becomeFirstResponder()
         }
         
@@ -77,6 +77,10 @@ class LKPackageSearch: UIViewController {
 }
 
 extension LKPackageSearch: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.last_search = searchText

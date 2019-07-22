@@ -201,6 +201,15 @@ class app_root_class {
         try? root_db?.insert(objects: insert, intoTable: common_data_handler.table_name.LKPackageRepos.rawValue)
     }
     
+    func breakPoint(_ str: String? = nil) {
+        if str != nil {
+            print("[LLDB] - " + str!)
+        }
+        #if DEBUG
+        raise(SIGINT) // asm("svc 0")
+        #endif
+    }
+    
 }
 
 
