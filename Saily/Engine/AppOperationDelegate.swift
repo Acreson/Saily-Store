@@ -27,8 +27,14 @@ class AppOperationDelegate {
             return (.failed, nil)
         }
         
-        let operation_info = DMOperationInfo(packid: pack.id, operation: .required_install)
-        operation_queue.append(operation_info)
+        var exists = false
+        for item in operation_queue where item.package == pack.id {
+            exists = true
+        }
+        if !exists {
+            let operation_info = DMOperationInfo(packid: pack.id, operation: .required_install)
+            operation_queue.append(operation_info)
+        }
         
         var ret: (operation_result, dld_info?) = (operation_result.failed, nil)
         if let sha256 = pack.version.first?.value.first?.value["SHA256"] {

@@ -6,6 +6,20 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+enum dependReq: String {
+    case biggerThen
+    case smallerThen
+    case BiggerOrEqualThen
+    case smallerOrEqualThen
+    case equal
+    case any
+}
+
+struct depends {
+    var req: dependReq
+    var ver: String
+}
+
 extension app_opeerator {
     
     func PAK_read_name(version: [String : [String : String]]) -> String {
@@ -107,14 +121,61 @@ extension app_opeerator {
         return LKDaemonUtils.ins_download_delegate.query_download_info(packID: packID).1
     }
     
-//    func PAK_read_all_dependency(dependStr: String) -> [String] {
-//        
-//    }
-//    
-//    func PAK_read_missing_dependency(dependStrs: [String]) -> [String] {
-//        
-//    }
-//    
+    func PAK_read_all_dependency(dependStr: String) -> [String : depends] {
+        var ret = [String : depends]()
+        
+        // I'm fucking done with this kinds of depends.
+        // 🦙 太难写了我放弃了
+        // [11] = (key = "DEPENDS", value = "com.abcydia.anemone | com.abcydia.anemone3 | com.abcydia.anemone | com.anemonetheming.anemone | com.anemonetheming.anemone3 | com.spark.snowboard | com.abcydia.snowboard")
+        
+        inner: for item in dependStr.split(separator: ",") where !item.contains("|") {
+            let itemStr = item.to_String().drop_space()
+            if itemStr.contains("(") && itemStr.contains(")") {
+                if let name = itemStr.split(separator: "(").first?.to_String().drop_space() {
+                    let ver = itemStr.split(separator: "(").last?.split(separator: ")").first?.to_String()
+                    let verstr = ver?.split(separator: " ").last?.to_String() ?? "0"
+                    if YA_package_in_exclude_list(id: name) {
+                        continue inner
+                    }
+                    if ver?.hasPrefix("=") ?? false {
+                        ret[name] = depends(req: .equal, ver: verstr)
+                    } else if ver?.hasPrefix(">=") ?? false {
+                        ret[name] = depends(req: .BiggerOrEqualThen, ver: verstr)
+                    } else if ver?.hasPrefix(">") ?? false {
+                        ret[name] = depends(req: .biggerThen, ver: verstr)
+                    } else if ver?.hasPrefix("<=") ?? false {
+                        ret[name] = depends(req: .smallerOrEqualThen, ver: verstr)
+                    } else if ver?.hasPrefix("<") ?? false {
+                        ret[name] = depends(req: .smallerThen, ver: verstr)
+                    } else {
+                        ret[name] = depends(req: .any, ver: verstr)
+                    }
+                }
+            } else {
+                if YA_package_in_exclude_list(id: itemStr) {
+                    continue inner
+                }
+                ret[itemStr] = depends(req: .any, ver: "0")
+            }
+        }
+        return ret
+    }
+
+    func PAK_read_missing_dependency(dependStr: String) -> [String : depends] {
+        var ret = [String : depends]()
+        let required = PAK_read_all_dependency(dependStr: dependStr)
+        inner: for item in required {
+            if LKRoot.container_installed_provides[item.key] != nil {
+                // It was kind of tricky but we go back here to finish the rest of it.
+                // let stru = LKRoot.container_installed_provides[item.key]
+                continue inner
+            } else {
+                ret[item.key] = item.value
+            }
+        }
+        return ret
+    }
+    
 //    func PAK_read_all_conflict(conflictStr: String) -> [String] {
 //        
 //    }

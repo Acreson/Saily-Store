@@ -55,5 +55,7 @@ class DMOperationInfo {
         current_info = LKRoot.ins_common_operator.PAK_read_current_install_status(packID: packid)
     }
     
+//    required init()
+    
 }
 
