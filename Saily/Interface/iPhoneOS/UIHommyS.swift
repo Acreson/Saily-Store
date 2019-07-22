@@ -274,19 +274,13 @@ class UIHommyS: UIViewController {
                                 new_card.setRadiusINT(radius: LKRoot.settings?.card_radius)
                                 new_card_container.addSubview(new_card)
                                 new_card.snp.makeConstraints({ (x) in
-                                    x.top.equalTo(new_card_container.snp.top).offset(0)
-                                    x.left.equalTo(new_card_container.snp.left).offset(0)
-                                    x.right.equalTo(new_card_container.snp.right).offset(0)
-                                    x.bottom.equalTo(new_card_container.snp.bottom).offset(0)
+                                    x.edges.equalTo(new_card_container.snp.edges)
                                 })
                                 let cover_button = UICardButton(info: card, index: CGPoint(x: current_index_group, y: current_index_ins), type: card.type, container: new_card_container, selff: new_card)
                                 new_card_container.addSubview(cover_button)
                                 cover_button.addTarget(self, action: #selector(self.card_button_handler(sender:)), for: .touchUpInside)
                                 cover_button.snp.makeConstraints({ (x) in
-                                    x.top.equalTo(new_card_container.snp.top).offset(0)
-                                    x.left.equalTo(new_card_container.snp.left).offset(0)
-                                    x.right.equalTo(new_card_container.snp.right).offset(0)
-                                    x.bottom.equalTo(new_card_container.snp.bottom).offset(0)
+                                    x.edges.equalTo(new_card_container.snp.edges)
                                 })
                                 // 移动定位和 index
                                 last_card = new_card_container
@@ -300,15 +294,24 @@ class UIHommyS: UIViewController {
                         }
                         
                         // 署名
-                        let label = UILabel()
-                        label.text = "Designed By @Lakr233 2019.5"
-                        label.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
-                        label.alpha = 0.233
-                        label.font = .boldSystemFont(ofSize: 12)
-                        self.container?.addSubview(label)
-                        label.snp.makeConstraints({ (x) in
+//                        let label = UILabel()
+//                        label.text = "Designed By @Lakr233 2019.5"
+//                        label.textColor = LKRoot.ins_color_manager.read_a_color("submain_title_one")
+//                        label.alpha = 0.233
+//                        label.font = .boldSystemFont(ofSize: 12)
+//                        self.container?.addSubview(label)
+//                        label.snp.makeConstraints({ (x) in
+//                            x.top.equalTo(last_view.snp.bottom).offset(24)
+//                            x.centerX.equalTo(self.view.snp.centerX)
+//                        })
+                        
+                        let foot = common_views.LKFooter()
+                        self.container?.addSubview(foot)
+                        foot.snp.makeConstraints({ (x) in
                             x.top.equalTo(last_view.snp.bottom).offset(24)
-                            x.centerX.equalTo(self.view.snp.centerX)
+                            x.left.equalTo(self.view.snp.left).offset(38)
+                            x.right.equalTo(self.view.snp.right).offset(-38)
+                            x.height.equalTo(128)
                         })
                         
                         LKRoot.container_string_store["REFRESH_IN_POGRESS_NP"] = "FALSE"
@@ -318,7 +321,7 @@ class UIHommyS: UIViewController {
                         button.addTarget(self, action: #selector(self.debugger_call), for: .touchUpInside)
                         self.container?.addSubview(button)
                         button.snp.makeConstraints({ (x) in
-                            x.edges.equalTo(label.snp.edges)
+                            x.edges.equalTo(foot.snp.edges).inset(UIEdgeInsets(top: 0, left: 128, bottom: 0, right: 0))
                         })
                         #endif
                         

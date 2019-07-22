@@ -17,22 +17,24 @@ target 'Saily' do
   pod 'SnapKit'
   pod 'StatusAlert', '~> 1.1.1'
   pod 'IHProgressHUD'
-  pod 'UIImageColors'
   pod 'SwiftMessages' # https://github.com/SwiftKickMobile/SwiftMessages
-  pod 'SWCompression'
   pod 'SwiftyMarkdown'
-  pod 'LTMorphingLabel'
-  pod 'JJFloatingActionButton'
   
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'Reveal-SDK', :configurations => ['Debug']
-  #  pod 'MLeaksFinder', :configurations => ['Debug']
-  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
-  #  pod 'InAppViewDebugger', :configurations => ['Debug']
   pod 'DoraemonKit/Core', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithGPS', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithLoad', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithLogger', '~> 1.1.7', :configurations => ['Debug']
+
+  # DoKit DEP
+  pod 'BSBacktraceLogger', :configurations => ['Debug']
+  pod 'CocoaLumberjack', :configurations => ['Debug']
+  pod 'DoraemonKit', :configurations => ['Debug']
+  pod 'PNChart', :configurations => ['Debug']
+  pod 'UICountingLabel', :configurations => ['Debug']
+  pod 'UITextView+Placeholder', :configurations => ['Debug']
+  pod 'fishhook', :configurations => ['Debug']
   
   # Don't forget to set cornerRadius at SwiftMessagesSegue.swift to 8
   

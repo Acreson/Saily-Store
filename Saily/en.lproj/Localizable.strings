@@ -147,3 +147,6 @@
 "没有作者信息" = "No Author Info";
 "错误的软件包识别码" = "Invalid Package Identity";
 "在获取这个软件包时出现了意外错误。" = "Unknown Error Occurred When Trying to Download Package Content";
+"条件与条款" = "EULA";
+"设备唯一识别代码：" = "UDID - ";
+"使用虚拟识别码：" = "VituralUDID - ";

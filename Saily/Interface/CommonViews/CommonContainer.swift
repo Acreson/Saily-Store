@@ -96,7 +96,6 @@ func presentPackage(pack: DBMPackage) {
     let pack = pack.copy()
     
     UIApplication.shared.beginIgnoringInteractionEvents()
-//    IHProgressHUD.show()
     let new = LKPackageDetail()
     
     LKRoot.queue_dispatch.async {

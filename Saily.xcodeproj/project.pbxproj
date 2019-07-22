@@ -69,6 +69,8 @@
 		B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */; };
 		B4318BDC22DEF771008082FC /* Solid.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4318BDB22DEF771008082FC /* Solid.xcassets */; };
 		B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */; };
+		B432BD1022E53DD3007B4727 /* LKFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD0F22E53DD3007B4727 /* LKFooter.swift */; };
+		B432BD1222E54FC9007B4727 /* LKPackageDetailExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
@@ -168,6 +170,8 @@
 		B4304F1C22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetInstalledInfo.swift; sourceTree = "<group>"; };
 		B4318BDB22DEF771008082FC /* Solid.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Solid.xcassets; sourceTree = "<group>"; };
 		B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMInstalledInfo.swift; sourceTree = "<group>"; };
+		B432BD0F22E53DD3007B4727 /* LKFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKFooter.swift; sourceTree = "<group>"; };
+		B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageDetailExtensions.swift; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 				B40CBF8322DFA00F005401B6 /* LKSettings.swift */,
 				B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */,
 				B4046A9222DEA63900DF3835 /* LKPackageDetail.swift */,
+				B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */,
 				B4B2415A22E287B500048604 /* LKPackageSearch.swift */,
 				B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */,
 			);
@@ -446,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				ABFBA823229D801E0070A17E /* LKHeader.swift */,
+				B432BD0F22E53DD3007B4727 /* LKFooter.swift */,
 				B42C289B22D30630002B1A96 /* LKIconStack.swift */,
 				B42F9C5022DFD2AC00557BB1 /* LKIconBannerView.swift */,
 				B42F9C5422E055F600557BB1 /* LKSectionBeginHeader.swift */,
@@ -740,10 +746,7 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
 				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
-				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/IHProgressHUD/IHProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
-				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
 				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
@@ -755,7 +758,6 @@
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyMarkdown/SwiftyMarkdown.framework",
 				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
-				"${BUILT_PRODUCTS_DIR}/UIImageColors/UIImageColors.framework",
 				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
 				"${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
@@ -771,10 +773,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
@@ -786,7 +785,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMarkdown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIImageColors.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDBSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
@@ -883,7 +881,9 @@
 				B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
 				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
+				B432BD1222E54FC9007B4727 /* LKPackageDetailExtensions.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,
+				B432BD1022E53DD3007B4727 /* LKFooter.swift in Sources */,
 				B411A85F22DBD617004CB35B /* LKIconGroupDetailView_Settings.swift in Sources */,
 				B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */,
 				ABE6DD01229EBBB600D18D9E /* UIManageS.swift in Sources */,

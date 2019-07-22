@@ -8,6 +8,8 @@
 
 #import "Operator.h"
 
+BOOL IN_FORCE_ROOT_APP = false;
+
 NSString *LKRDIR = @"";
 int daemon_status = 0;
 
@@ -20,9 +22,15 @@ NSString *readAppPath() {
 }
 
 void setAppPath(NSString *string) {
+    
+    if ([string containsString:@"/var/mobile/Containers/Data/Application/"] && IN_FORCE_ROOT_APP) {
+        NSLog(@"[*] 不允许沙箱内 App 启用此版本 daemon: %@", string);
+        exit(9);
+    }
+    
     LKRDIR = string;
     NSLog(@"[*] 将 daemon 初始化到应用程序路径: %@", string);
-    redirectConsoleLogToDocumentFolder();
+//    redirectConsoleLogToDocumentFolder();
 }
 
 void outDaemonStatus() {

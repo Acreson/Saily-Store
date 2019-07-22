@@ -18,6 +18,8 @@ class DBMPackage: WCDBSwift.TableCodable {
     var version = [String : [String : [String : String]]]()
     var signal = String()
     
+    var status: String = current_info.unknown.rawValue
+    
     enum CodingKeys: String, CodingTableKey { // swiftlint:disable:next nesting
         typealias Root = DBMPackage
         
@@ -27,6 +29,7 @@ class DBMPackage: WCDBSwift.TableCodable {
         case one_of_the_package_section_lol
         case version
         case signal
+        case status
         
         static let objectRelationalMapping = TableBinding(CodingKeys.self)
         
@@ -47,6 +50,7 @@ class DBMPackage: WCDBSwift.TableCodable {
         ret.one_of_the_package_name_lol = self.one_of_the_package_name_lol
         ret.version = self.version
         ret.signal = self.signal
+        ret.status = self.status
         return ret
         
     }

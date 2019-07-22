@@ -35,6 +35,7 @@ class app_daemon_utils {
             self.initialized = true
             print("[*] App_daemon_utils initialized.")
             self.checkDaemonOnline { (ret) in
+                print("[*] 获取到 Dameon 状态： " + ret.rawValue)
                 self.status = ret
             }
         }
@@ -43,7 +44,7 @@ class app_daemon_utils {
     func daemon_msg_pass(msg: String) {
         if sender_lock == true {
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
-            print("[-] [-] [-] [-] 发送器已上锁请检查线程安全!! [-] [-] [-] [-] ")
+            print("[-] [-] [-] [-] [-] 发送器已上锁请检查线程安全!! [-] [-] [-] [-] [-] [-] ")
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
             return
         }

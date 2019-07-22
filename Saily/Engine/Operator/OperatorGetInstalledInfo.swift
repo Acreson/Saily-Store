@@ -105,11 +105,10 @@ extension app_opeerator {
                             // 因为存在软件包 所以我们更新一下 SIG 字段
                             package[this_package["PACKAGE"]!]!.signal = ""
                             package[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = this_package["NAME"] ?? ""
-                            // 如果 dpkg 没有保存软件包的名字 那么我们看看炒鸡块炸表有没有他的名字
-                            if package[this_package["PACKAGE"]!]!.one_of_the_package_name_lol == "" {
-                                if let pack = LKRoot.container_packages[this_package["PACKAGE"]!] {
-                                    package[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = pack.one_of_the_package_name_lol
-                                }
+                            if this_package["STATUS"] == "install ok installed" {
+                                package[this_package["PACKAGE"]!]!.status = current_info.installed_ok.rawValue
+                            } else if this_package["STATUS"] != nil && this_package["STATUS"] != "" {
+                                package[this_package["PACKAGE"]!]!.status = current_info.installed_bad.rawValue
                             }
                         } else {
                             // 不存在软件包 创建软件包
@@ -122,11 +121,10 @@ extension app_opeerator {
                             new.one_of_the_package_name_lol = this_package["NAME"] ?? ""
                             new.latest_update_time = now
                             package[this_package["PACKAGE"]!] = new
-                            // 如果 dpkg 没有保存软件包的名字 那么我们看看炒鸡块炸表有没有他的名字
-                            if package[this_package["PACKAGE"]!]!.one_of_the_package_name_lol == "" {
-                                if let pack = LKRoot.container_packages[this_package["PACKAGE"]!] {
-                                    package[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = pack.one_of_the_package_name_lol
-                                }
+                            if this_package["STATUS"] == "install ok installed" {
+                                package[this_package["PACKAGE"]!]!.status = current_info.installed_ok.rawValue
+                            } else if this_package["STATUS"] != nil && this_package["STATUS"] != "" {
+                                package[this_package["PACKAGE"]!]!.status = current_info.installed_bad.rawValue
                             }
                         }
                         this_package = [String : String]()
