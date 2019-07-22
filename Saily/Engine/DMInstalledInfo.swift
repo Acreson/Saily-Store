@@ -52,7 +52,7 @@ class DMOperationInfo {
         priority = 0
         package = packid
         operation_type = operation
-        current_info = LKRoot.ins_common_operator.PAK_read_current_status(packID: packid)
+        current_info = LKRoot.ins_common_operator.PAK_read_current_install_status(packID: packid)
     }
     
 }

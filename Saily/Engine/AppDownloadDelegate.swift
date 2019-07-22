@@ -11,6 +11,7 @@
 class dld_info {
     
     var path: String
+    var repo: String
     var progress: Double
     
     var succeed: operation_result = .unkown
@@ -20,13 +21,15 @@ class dld_info {
     var sum5: String?
     var sha256: String?
     
-    required init(to: String, dlins: DownloadRequest) {
+    required init(fromRepo: String, to: String, dlins: DownloadRequest) {
+        repo = fromRepo
         path = to
         progress = 0
         dlReq = dlins
     }
     
-    required init(to: String, dlins: DownloadRequest, sha256str: String? = nil) {
+    required init(fromRepo: String, to: String, dlins: DownloadRequest, sha256str: String? = nil) {
+        repo = fromRepo
         path = to
         progress = 0
         dlReq = dlins
@@ -50,7 +53,7 @@ class AppDownloadDelegate {
         return (.download_unknowd, nil)
     }
     
-    func submit_download(packID: String, networkPath: String, UA_required: Bool = true, sha256: String? = nil) -> (operation_result, dld_info?) {
+    func submit_download(packID: String, fromRepo: String, networkPath: String, UA_required: Bool = true, sha256: String? = nil) -> (operation_result, dld_info?) {
         
         let status = query_download_info(packID: packID)
         
@@ -81,7 +84,7 @@ class AppDownloadDelegate {
             
             let dlreq = AF.download(nurl, method: .get, headers: h, to: destination)
             
-            let struct_t = dld_info(to: target, dlins: dlreq, sha256str: sha256)
+            let struct_t = dld_info(fromRepo: fromRepo, to: target, dlins: dlreq, sha256str: sha256)
             self.record[packID] = struct_t
             ret_dld = struct_t
             ss.signal()

@@ -56,6 +56,8 @@ extension app_opeerator {
             item.signal = "BEGIN_UPDATE"
         }
         
+        LKRoot.container_installed_provides.removeAll()
+        
         // 获取时间
         let date = Date()
         let formatter = DateFormatter()
@@ -110,6 +112,15 @@ extension app_opeerator {
                             } else if this_package["STATUS"] != nil && this_package["STATUS"] != "" {
                                 package[this_package["PACKAGE"]!]!.status = current_info.installed_bad.rawValue
                             }
+                            if let pro = this_package["PROVIDES"] {
+                                var provides = PAK_read_all_provides(provideStr: pro)
+                                provides[this_package["PACKAGE"]!] = this_package["Version"]
+                                for item in provides {
+                                    LKRoot.container_installed_provides[item.key] = item.value
+                                }
+                            } else {
+                                LKRoot.container_installed_provides[this_package["PACKAGE"]!] = this_package["VERSION"]
+                            }
                         } else {
                             // 不存在软件包 创建软件包
                             this_package["_internal_SIG_begin_update"] = "0x1"
@@ -125,6 +136,15 @@ extension app_opeerator {
                                 package[this_package["PACKAGE"]!]!.status = current_info.installed_ok.rawValue
                             } else if this_package["STATUS"] != nil && this_package["STATUS"] != "" {
                                 package[this_package["PACKAGE"]!]!.status = current_info.installed_bad.rawValue
+                            }
+                            if let pro = this_package["PROVIDES"] {
+                                var provides = PAK_read_all_provides(provideStr: pro)
+                                provides[this_package["PACKAGE"]!] = this_package["Version"]
+                                for item in provides {
+                                    LKRoot.container_installed_provides[item.key] = item.value
+                                }
+                            } else {
+                                LKRoot.container_installed_provides[this_package["PACKAGE"]!] = this_package["VERSION"]
                             }
                         }
                         this_package = [String : String]()

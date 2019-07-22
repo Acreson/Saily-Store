@@ -191,10 +191,22 @@ class LKPackageDetail: UIViewController {
         title = banner_section.title.text
         banner_section.sub_title.text = LKRoot.ins_common_operator.PAK_read_auth(version: item.version.first?.value ?? LKRoot.ins_common_operator.PAK_return_error_vision()).0
         banner_section.button.startDownloadButtonTitle = "获取".localized()
-        let infoo = LKRoot.ins_common_operator.PAK_read_current_status(packID: item.id)
+        let infoo = LKRoot.ins_common_operator.PAK_read_current_install_status(packID: item.id)
         item_status = infoo
         if infoo != .not_installed {
             banner_section.button.startDownloadButtonTitle = "更改".localized()
+        }
+        if let dldinfo = LKRoot.ins_common_operator.PAK_read_current_download_info(packID: item.id) {
+            item_dld = dldinfo
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
+                if dldinfo.succeed == .download_finished {
+                    self.banner_section.button.state = .downloaded
+                } else if dldinfo.succeed != .failed {
+                    self.banner_section.button.state = .pending
+                } else {
+                    // 下载失败咯
+                }
+            }
         }
         banner_section.button.downloadedButtonTitle = "等待执行".localized()
         banner_section.button.startDownloadButtonHighlightedBackgroundColor = .lightGray
@@ -358,40 +370,25 @@ class LKPackageDetail: UIViewController {
 extension LKPackageDetail: AHDownloadButtonDelegate {
     
     func downloadButton(_ downloadButton: AHDownloadButton, tappedWithState state: AHDownloadButton.State) {
-        
         switch state {
-            
         case .startDownload:
-            
-            downloadButton.state = .pending
-            
-        case .pending:
-            
-            break
-            
-        case .downloading:
-            
-            break
-            
-        case .downloaded:
-            
-            break
-            
+            if item.version.first?.value.first?.value["TAG"]?.contains("cydia::commercial") ?? false {
+                presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "暂不支持付费插件下载".localized())
+            } else {
+                downloadButton.state = .pending
+            }
+        case .pending: break
+        case .downloading: break
+        case .downloaded: break
         }
         
     }
     
     func downloadButton(_ downloadButton: AHDownloadButton, stateChanged state: AHDownloadButton.State) {
-        
-        
         switch state {
-            
         case .startDownload:
-            
             downloadButton.state = .pending
-            
         case .pending:
-            
             LKRoot.queue_dispatch.async {
                 if self.item_status == .not_installed {
                     let ret = LKDaemonUtils.ins_operation_delegate.add_install(pack: self.item)
@@ -410,20 +407,12 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
                     DispatchQueue.main.async {
                         downloadButton.state = .downloading
                     }
-                    
                 } else {
                     // some alert
                 }
             }
-            
-        case .downloading:
-            
-            break
-            
-        case .downloaded:
-            
-            break
-            
+        case .downloading: break
+        case .downloaded: break
         }
         
     }

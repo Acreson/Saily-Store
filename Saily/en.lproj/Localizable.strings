@@ -155,3 +155,4 @@
 "等待执行" = "AWAIT";
 "向权限经理发送消息失败" = "Failed to talk to privileged daemon";
 "无法添加到下载队列，请尝试刷新软件包" = "Failed to submit a download, please try to refresh";
+"暂不支持付费插件下载" = "We currently do not support paid packages";

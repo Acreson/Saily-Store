@@ -92,7 +92,7 @@ extension app_opeerator {
         return true
     }
     
-    func PAK_read_current_status(packID: String) -> current_info {
+    func PAK_read_current_install_status(packID: String) -> current_info {
         if let pack = LKRoot.container_packages_installed_DBSync[packID] {
             // 已经安装
             return current_info(rawValue: pack.status) ?? current_info.unknown
@@ -103,4 +103,48 @@ extension app_opeerator {
         return .unknown
     }
     
+    func PAK_read_current_download_info(packID: String) -> dld_info? {
+        return LKDaemonUtils.ins_download_delegate.query_download_info(packID: packID).1
+    }
+    
+//    func PAK_read_all_dependency(dependStr: String) -> [String] {
+//        
+//    }
+//    
+//    func PAK_read_missing_dependency(dependStrs: [String]) -> [String] {
+//        
+//    }
+//    
+//    func PAK_read_all_conflict(conflictStr: String) -> [String] {
+//        
+//    }
+//    
+//    func PAK_read_happened_conflict(conflictStrs: [String]) -> [String] {
+//        
+//    }
+//    
+//    func PAK_read_all_replace(conflictStr: String) -> [String] {
+//        
+//    }
+//    
+//    func PAK_read_happened_replace(conflictStrs: [String]) -> [String] {
+//        
+//    }
+    
+    func PAK_read_all_provides(provideStr: String) -> [String : String?] {
+        var ret = [String : String?]()
+        // Provides: org.thebigboss.libcolorpicker, org.thebigboss.libcolorpicker (= 1.6.1), libapt-pkg (= 1.4.8)
+        for item in provideStr.split(separator: ",") {
+            let itemStr = item.to_String().drop_space()
+            if itemStr.contains("(") && itemStr.contains(")") {
+                if let name = itemStr.split(separator: "(").first?.to_String().drop_space() {
+                    let ver = itemStr.split(separator: "(").last?.split(separator: ")").first?.split(separator: "=").last?.to_String().drop_space()
+                    ret[name] = ver
+                }
+            } else {
+                ret[itemStr] = nil
+            }
+        }
+        return ret
+    }
 }

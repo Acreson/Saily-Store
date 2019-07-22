@@ -32,9 +32,9 @@ class AppOperationDelegate {
         
         var ret: (operation_result, dld_info?) = (operation_result.failed, nil)
         if let sha256 = pack.version.first?.value.first?.value["SHA256"] {
-            ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, networkPath: repolink + filePath, UA_required: true, sha256: sha256)
+            ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, fromRepo: repolink, networkPath: repolink + filePath, UA_required: true, sha256: sha256)
         } else {
-            ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, networkPath: repolink + filePath, UA_required: true, sha256: nil)
+            ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, fromRepo: repolink, networkPath: repolink + filePath, UA_required: true, sha256: nil)
         }
         
         return ret

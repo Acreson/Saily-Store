@@ -52,6 +52,8 @@ class app_root_class {
     var container_recent_installed          = [DBMPackage]()                // 最近安装缓存
     var container_packages_randomfun_DBSync = [DBMPackage]()                // 已安装软件包
     
+    var container_installed_provides        = [String : String?]()          // 被提供的软件包 识别码 : 版本
+    
     let ins_color_manager = color_sheet()                   // 颜色表 - 以后拿来写主题
     let ins_view_manager = common_views()                   // 视图扩展
     let ins_networking = networking()                       // 网络处理
