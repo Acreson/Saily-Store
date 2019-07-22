@@ -179,7 +179,7 @@ extension app_opeerator {
     // 在 call 之前要先更换 session 然后手动解锁 LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] = "NO"
     func PR_download_all_package(session_id: String, sync_all: Bool, _ CallB: @escaping (Int) -> Void) {
         if LKRoot.container_string_store["IN_PROGRESS_DOWNLOAD_PACKAGE_REPOS"] == "YES" || session_id != LKRoot.container_string_store["SESSION_ID_PACKAGE_REPO_SYNC"] {
-            CallB(operation_result.another_in_progress.rawValue)
+            CallB(operation_result.thread_locked.rawValue)
             return
         }
         
@@ -499,7 +499,7 @@ extension app_opeerator {
         LKRoot.container_packages = sync_again
         
         DispatchQueue.main.async {
-            presentSwiftMessage(title: "提示".localized(), body: "软件包刷新已经完成！".localized())
+            presentSwiftMessageSuccess(title: "提示".localized(), body: "软件包刷新已经完成！".localized())
         }
         
         LKRoot.container_string_store["STR_SIG_PROGRESS"] = ""

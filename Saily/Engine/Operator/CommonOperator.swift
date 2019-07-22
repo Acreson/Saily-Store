@@ -11,7 +11,13 @@ import WebKit
 enum operation_result: Int {
     case success = 0x0
     case failed  = 0x1
-    case another_in_progress = 0x2
+    
+    case thread_locked = 0x2
+    
+    case download_exists = 0x141
+    case download_finished = 0x142
+    case download_unknowd = 0x143
+    
     case unkown  = 0x666
 }
 
@@ -73,11 +79,17 @@ class networking {
     let UA_Web_Request_Longer  = "Mozilla/5.0 (iPad; CPU OS 12_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/16A404 Safari/604.1 Cydia/1.1.32~b12 CyF/1556.00"
     
     func read_header() -> HTTPHeaders {
+        
+        var device_id = LKRoot.shared_device._id_str()
+        if device_id.hasPrefix("Simulator") {
+            device_id = device_id.dropFirst("Simulator".count).to_String().drop_space()
+        }
+        
         let header: HTTPHeaders = [
             "User-Agent" : UA_Default,
             "X-Firmware" : LKRoot.shared_device.systemVersion,
             "X-Unique-ID" : LKRoot.settings?.readUDID() ?? "",
-            "X-Machine" : LKRoot.shared_device._id_str(),
+            "X-Machine" : device_id,
             "Accept" : "*/*",
             "Accept-Language" : "zh-CN,en,*",
             "Accept-Encoding" : "gzip, deflate"

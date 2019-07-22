@@ -21,9 +21,10 @@ class app_daemon_utils {
     var initialized = false
     let object = LKCBObject()
     
-    var operation_queue = [DMOperationInfo]()
-    
     var status = daemon_status.offline
+    
+    let ins_operation_delegate = AppOperationDelegate()
+    let ins_download_delegate = AppDownloadDelegate()
     
     func initializing() {
         if LKDaemonUtils.session != "" {
@@ -45,6 +46,7 @@ class app_daemon_utils {
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
             print("[-] [-] [-] [-] [-] 发送器已上锁请检查线程安全!! [-] [-] [-] [-] [-] [-]")
             print("[-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-] [-]")
+            presentSwiftMessageError(title: "未知错误".localized(), body: "向权限经理发送消息失败".localized())
             LKRoot.breakPoint()
             return
         }

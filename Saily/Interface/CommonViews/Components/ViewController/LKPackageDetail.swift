@@ -15,22 +15,11 @@ import AHDownloadButton
 class LKPackageDetail: UIViewController {
     
     var item: DBMPackage = DBMPackage()
-    var theme_color = UIColor() {
-        willSet {
-        
-        }
-        didSet {
-            // Debug Propuse
-        }
-    }
-    var theme_color_bak = UIColor() {
-        willSet {
-            
-        }
-        didSet {
-            // Debug Propuse
-        }
-    }
+    var item_status = current_info.unknown
+    var item_dld: dld_info?
+    
+    var theme_color = UIColor()
+    var theme_color_bak = UIColor()
     var tint_color_consit = false
     var contentView = UIScrollView()
 
@@ -46,6 +35,8 @@ class LKPackageDetail: UIViewController {
     var buttonActionStore = [String]()
     
     var currentAnchor = UIView()
+    
+    var timer : Timer?
     
     var img_initd = false
     
@@ -79,6 +70,9 @@ class LKPackageDetail: UIViewController {
                                                                                blue: blue,
                                                                                alpha: 1)
         }, completion: nil)
+        
+        timer?.invalidate()
+        timer = nil
         
     }
     
@@ -197,7 +191,9 @@ class LKPackageDetail: UIViewController {
         title = banner_section.title.text
         banner_section.sub_title.text = LKRoot.ins_common_operator.PAK_read_auth(version: item.version.first?.value ?? LKRoot.ins_common_operator.PAK_return_error_vision()).0
         banner_section.button.startDownloadButtonTitle = "获取".localized()
-        if LKRoot.ins_common_operator.PAK_read_current_status(packID: item.id) != .not_installed {
+        let infoo = LKRoot.ins_common_operator.PAK_read_current_status(packID: item.id)
+        item_status = infoo
+        if infoo != .not_installed {
             banner_section.button.startDownloadButtonTitle = "更改".localized()
         }
         banner_section.button.downloadedButtonTitle = "等待执行".localized()
@@ -205,6 +201,7 @@ class LKPackageDetail: UIViewController {
         banner_section.button.startDownloadButtonTitleSidePadding = 12
         banner_section.button.delegate = self
         banner_section.button.transitionAnimationDuration = 0.5
+        banner_section.button.downloadingButtonCircleLineWidth = 2
         banner_section.apart_init() // sizeThatFit 需要先放文字
         
         updateColor()
@@ -382,6 +379,70 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
             
         }
         
+    }
+    
+    func downloadButton(_ downloadButton: AHDownloadButton, stateChanged state: AHDownloadButton.State) {
+        
+        
+        switch state {
+            
+        case .startDownload:
+            
+            downloadButton.state = .pending
+            
+        case .pending:
+            
+            LKRoot.queue_dispatch.async {
+                if self.item_status == .not_installed {
+                    let ret = LKDaemonUtils.ins_operation_delegate.add_install(pack: self.item)
+                    if ret.0 != .success && ret.1 == nil {
+                        DispatchQueue.main.async {
+                            downloadButton.state = .startDownload
+                        }
+                        presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "无法添加到下载队列，请尝试刷新软件包".localized())
+                        return
+                    }
+                    self.item_dld = ret.1
+                    self.timer = nil
+                    self.timer = Timer(timeInterval: 0.233, target: self, selector: #selector(self.downloadTimerCall(sender:)), userInfo: nil, repeats: false)
+                    self.timer?.fire()
+                    // 既然返回了 dld info 那就说明下载存在 发送到下载 session
+                    DispatchQueue.main.async {
+                        downloadButton.state = .downloading
+                    }
+                    
+                } else {
+                    // some alert
+                }
+            }
+            
+        case .downloading:
+            
+            break
+            
+        case .downloaded:
+            
+            break
+            
+        }
+        
+    }
+    
+    @objc func downloadTimerCall(sender: Any) {
+        LKRoot.queue_dispatch.async { // Don't change this I fuck you
+            DispatchQueue.main.async {
+                self.banner_section.button.progress = CGFloat(self.item_dld?.progress ?? 0)
+                if self.item_dld?.succeed == operation_result.download_finished {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    self.banner_section.button.state = .downloaded
+                } else {
+                    self.timer = nil
+                    self.timer = Timer(timeInterval: 0.233, target: self, selector: #selector(self.downloadTimerCall(sender:)), userInfo: nil, repeats: false)
+                    self.timer?.fire()
+                }
+            }
+        }
     }
     
     

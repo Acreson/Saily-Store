@@ -11,13 +11,13 @@
       location = "group:Saily.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:LocalizedFinder/LocalizedFinder.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:ideaTest/ideaTest.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <Group
       location = "group:IO"

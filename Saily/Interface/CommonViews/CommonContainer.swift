@@ -76,7 +76,7 @@ func presentStatusAlert(imgName: String, title: String, msg: String) {
     }
 }
 
-func presentSwiftMessage(title: String, body: String) {
+func presentSwiftMessageSuccess(title: String, body: String) {
     var config = SwiftMessages.Config()
     config.presentationStyle = .top
     config.presentationContext = .window(windowLevel: .normal)
@@ -87,7 +87,22 @@ func presentSwiftMessage(title: String, body: String) {
     view.configureContent(title: title, body: body)
     view.button?.isHidden = true
     view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-//    (view.backgroundView as? CornerRoundingView)?.cornerRadius = CGFloat(LKRoot.settings?.card_radius ?? 8)
+    //    (view.backgroundView as? CornerRoundingView)?.cornerRadius = CGFloat(LKRoot.settings?.card_radius ?? 8)
+    SwiftMessages.show(config: config, view: view)
+}
+
+func presentSwiftMessageError(title: String, body: String) {
+    var config = SwiftMessages.Config()
+    config.presentationStyle = .top
+    config.presentationContext = .window(windowLevel: .normal)
+    config.interactiveHide = true
+    let view = MessageView.viewFromNib(layout: .cardView)
+    view.configureTheme(.error)
+    view.configureDropShadow()
+    view.configureContent(title: title, body: body)
+    view.button?.isHidden = true
+    view.layoutMarginAdditions = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    //    (view.backgroundView as? CornerRoundingView)?.cornerRadius = CGFloat(LKRoot.settings?.card_radius ?? 8)
     SwiftMessages.show(config: config, view: view)
 }
 

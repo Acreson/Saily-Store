@@ -71,6 +71,9 @@
 		B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */; };
 		B432BD1022E53DD3007B4727 /* LKFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD0F22E53DD3007B4727 /* LKFooter.swift */; };
 		B432BD1222E54FC9007B4727 /* LKPackageDetailExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */; };
+		B432BD3022E61DD8007B4727 /* AppOperationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD2F22E61DD8007B4727 /* AppOperationDelegate.swift */; };
+		B432BD3222E61DE3007B4727 /* AppDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD3122E61DE3007B4727 /* AppDownloadDelegate.swift */; };
+		B432BD3422E628B3007B4727 /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD3322E628B3007B4727 /* NSData.swift */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
@@ -172,6 +175,9 @@
 		B432BD0D22E509A0007B4727 /* DMInstalledInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMInstalledInfo.swift; sourceTree = "<group>"; };
 		B432BD0F22E53DD3007B4727 /* LKFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKFooter.swift; sourceTree = "<group>"; };
 		B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageDetailExtensions.swift; sourceTree = "<group>"; };
+		B432BD2F22E61DD8007B4727 /* AppOperationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOperationDelegate.swift; sourceTree = "<group>"; };
+		B432BD3122E61DE3007B4727 /* AppDownloadDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDownloadDelegate.swift; sourceTree = "<group>"; };
+		B432BD3322E628B3007B4727 /* NSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
@@ -331,11 +337,13 @@
 		ABFBA7E4229D563C0070A17E /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				B42F9C5222E02D2500557BB1 /* AppDefine.swift */,
 				AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */,
 				ABFBA831229D88790070A17E /* AppRootClass.swift */,
 				ABFBA83B229D99EB0070A17E /* AppUserClass.swift */,
 				B4B2416022E365F300048604 /* AppDaemonUtils.swift */,
-				B42F9C5222E02D2500557BB1 /* AppDefine.swift */,
+				B432BD2F22E61DD8007B4727 /* AppOperationDelegate.swift */,
+				B432BD3122E61DE3007B4727 /* AppDownloadDelegate.swift */,
 				B4B2416522E3676A00048604 /* CoreBridge */,
 				AB198F7F229EDC64003A78BE /* Operator */,
 			);
@@ -402,6 +410,7 @@
 			children = (
 				ABFBA80E229D7DC40070A17E /* Global.swift */,
 				ABFBA810229D7DC40070A17E /* StringExtensions.swift */,
+				B432BD3322E628B3007B4727 /* NSData.swift */,
 				ABFBA814229D7DC40070A17E /* UIViewExtensions.swift */,
 				ABFBA817229D7DC40070A17E /* UIColorExtensions.swift */,
 				ABFBA815229D7DC40070A17E /* UILabelExtensions.swift */,
@@ -875,9 +884,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B432BD3222E61DE3007B4727 /* AppDownloadDelegate.swift in Sources */,
 				B42F9C5122DFD2AC00557BB1 /* LKIconBannerSection.swift in Sources */,
 				AB1461AE22A26AD500C031FE /* LKASMultiAppsRiver.swift in Sources */,
 				B42F9C5322E02D2500557BB1 /* AppDefine.swift in Sources */,
+				B432BD3422E628B3007B4727 /* NSData.swift in Sources */,
 				B432BD0E22E509A0007B4727 /* DMInstalledInfo.swift in Sources */,
 				B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */,
 				B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */,
@@ -912,6 +923,7 @@
 				B40B4C2022D7637600373449 /* DMPackageRepos.swift in Sources */,
 				ABFBA7F0229D700F0070A17E /* UIEnteryS.swift in Sources */,
 				B470FA9222D4515700C4A215 /* LKButtonStackTVCell.swift in Sources */,
+				B432BD3022E61DD8007B4727 /* AppOperationDelegate.swift in Sources */,
 				B42C289A22D30616002B1A96 /* LKIconGroupDetailView_NewsRepoSP.swift in Sources */,
 				B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */,
 				AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */,

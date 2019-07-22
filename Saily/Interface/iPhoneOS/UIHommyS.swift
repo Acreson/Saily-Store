@@ -735,7 +735,7 @@ class UIHommyS: UIViewController {
             return
         }
         if touched > 9 {
-            presentSwiftMessage(title: "你好开发者", body: "已经为你启用了多啦Kit")
+            presentSwiftMessageSuccess(title: "你好开发者", body: "已经为你启用了多啦Kit")
             DoraemonManager.shareInstance().install()
         }
     }
