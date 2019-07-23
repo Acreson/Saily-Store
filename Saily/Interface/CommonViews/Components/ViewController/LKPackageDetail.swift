@@ -418,8 +418,8 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
                     }
                 } else {
                     // some alert
-                    let alert = UIAlertController(title: "操作".localized(), message: "请选择一个操作".localized(), preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
+                    let alert = UIAlertController(title: "选择".localized(), message: "请选择一个操作".localized(), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "取消".localized(), style: .default, handler: { (_) in
                         self.downloadButtonSignal = false
                         self.banner_section.button.state = .startDownload
                     }))

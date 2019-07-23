@@ -94,7 +94,10 @@ class AppOperationDelegate {
                     }
                 } else {
                     // 没找到软件包 既然没有那怎么可能出现在安装队列呢？
-                    
+                    // 忽略所有的版本问题
+                    if missing_dep.key == "firmware" {
+                        continue inner
+                    }
                     // 但是我们要先检查一下这个错误是不是已经被上报了
                     for reported in unsolved_condition where reported.ID == missing_dep.key {
                         // 已经被上报 不管要求怎样肯定不对 就先不管她了

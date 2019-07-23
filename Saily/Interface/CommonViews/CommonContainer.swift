@@ -227,6 +227,11 @@ class centerSMSegue: SwiftMessagesSegue {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .centered)
         interactiveHide = false
+//        if LKRoot.settings?.use_dark_mode ?? false {
+//            dimMode = .blur(style: .dark, alpha: 0.8, interactive: true)
+//        } else {
+//            dimMode = .blur(style: .light, alpha: 0.5, interactive: true)
+//        }
         dimMode = .gray(interactive: true)
         messageView.configureNoDropShadow()
     }

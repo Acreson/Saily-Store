@@ -128,7 +128,6 @@
 "这个软件源可能不包含这个软件包" = "This repo does NOT contain this package";
 "错误" = "Error";
 "软件包信息校验失败，请尝试刷新。" = "Failed to vaildate package information";
-"操作" = "Modify";
 "因出现未知错误现提供软件包的原始信息：\n\n" = "No available depiction page available\n\n";
 "无更多信息" = "Nothing More";
 "发生了未知错误。" = "Unknown Error Occurred";
@@ -157,3 +156,6 @@
 "无法添加到下载队列，请尝试刷新软件包" = "Failed to submit a download, please try to refresh";
 "暂不支持付费插件下载" = "We currently do not support paid packages";
 "请选择一个操作" = "Please choose a operation";
+"选择" = "Choices";
+"更改" = "MODIFY";
+"请求队列" = "Requests";

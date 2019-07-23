@@ -20,6 +20,7 @@ target 'Saily' do
   pod 'SwiftMessages'
   pod 'SwiftyMarkdown'
   pod 'AHDownloadButton'
+  pod 'JJFloatingActionButton'
   
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'Reveal-SDK', :configurations => ['Debug']

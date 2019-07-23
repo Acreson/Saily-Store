@@ -6,6 +6,8 @@
 //  Copyright © 2019 Lakr Aream. All rights reserved.
 //
 
+import JJFloatingActionButton
+
 class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var table_view: UITableView = UITableView()
@@ -72,6 +74,33 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         DispatchQueue.main.async {
             self.timer_call()
         }
+        
+        let actionButton = JJFloatingActionButton()
+        actionButton.addItem(title: "请求队列".localized(), image: UIImage(named: "List"), action: { (_) in
+            presentSwiftMessageController(some: LKRequestList())
+        })
+        actionButton.setRadiusCGF(radius: 22.5)
+        actionButton.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
+        var bak_color = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        if LKRoot.settings?.use_dark_mode ?? false {
+            bak_color = bak_color.darken(by: 0.5)
+        }
+        actionButton.backgroundColor = bak_color
+        actionButton.buttonColor = bak_color
+        view.addSubview(actionButton)
+        view.bringSubviewToFront(actionButton)
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            actionButton.imageView.snp.remakeConstraints({ (x) in
+                x.edges.equalTo(actionButton.snp.edges).inset(UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
+            })
+            actionButton.snp.makeConstraints({ (x) in
+                x.right.equalTo(self.view.snp.right).offset(-18)
+                x.bottom.equalTo(self.view.snp.bottom).offset(0 - self.view.safeAreaInsets.bottom - 18)
+                x.height.equalTo(45)
+                x.width.equalTo(45)
+            })
+            
+        }
     }
     
     var last_size = CGFloat(0)
@@ -89,7 +118,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,6 +156,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
         case 2:
+            ret.backgroundColor = .clear
+        case 3:
             let news_repo_manager = LKRoot.manager_reg.nr
             news_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(news_repo_manager)
@@ -135,7 +166,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
-        case 3:
+        case 4:
             let package_repo_manager = LKRoot.manager_reg.pr
             package_repo_manager.apart_init(father: tableView)
             ret.contentView.addSubview(package_repo_manager)
@@ -144,7 +175,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
-        case 4:
+        case 5:
             let recent_installed = LKRoot.manager_reg.ya
             recent_installed.apart_init(father: tableView)
             ret.contentView.addSubview(recent_installed)
@@ -153,7 +184,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             }
             ret.backgroundView?.backgroundColor = .clear
             ret.backgroundColor = .clear
-        case 5:
+        case 6:
             let plh = UIView()
             ret.contentView.addSubview(plh)
             plh.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
@@ -200,7 +231,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
     
     func sum_the_height() -> CGFloat {
         var ret = CGFloat(0)
-        for i in 0...5 {
+        for i in 0...6 {
             ret += do_the_height_math(indexPath: IndexPath(row: i, section: 0))
         }
 //        if LKRoot.safe_area_needed {
@@ -220,24 +251,26 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
 //                return 22
 //            }
         case 2:
+            return 0
+        case 3:
             if LKRoot.container_manage_cell_status["NP_IS_COLLAPSED"] ?? true {
                 return 164
             } else {
                 return 164 + CGFloat(LKRoot.container_news_repo_DBSync.count + 1) * 62 - 32
             }
-        case 3:
+        case 4:
             if LKRoot.container_manage_cell_status["PR_IS_COLLAPSED"] ?? true {
                 return 171
             } else {
                 return 171 + CGFloat(LKRoot.container_package_repo_DBSync.count + 1) * 62 - 32
             }
-        case 4:
+        case 5:
             if LKRoot.container_manage_cell_status["YA_IS_COLLAPSED"] ?? true {
                 return 157
             } else {
                 return 157 + CGFloat(LKRoot.container_recent_installed.count + 1) * 62 - 32
             }
-        case 5:
+        case 6:
             return 68
         default: return 180
         }

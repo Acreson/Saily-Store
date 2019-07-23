@@ -13,7 +13,7 @@ extension common_views {
         var image_views = [UIImageView]()
         var images_address = [String]()
         
-        var max_image_count = 5
+        var max_image_count = 3
         
         var ever_inited = 0
         private var last_image_address = [String]()
