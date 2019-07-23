@@ -201,12 +201,16 @@ class LKPackageDetail: UIViewController {
         if let dldinfo = LKRoot.ins_common_operator.PAK_read_current_download_info(packID: item.id) {
             item_dld = dldinfo
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
-                if dldinfo.succeed == .download_finished {
-                    self.banner_section.button.state = .downloaded
-                } else if dldinfo.succeed != .failed && !dldinfo.dlReq.isSuspended && !dldinfo.dlReq.isCancelled {
-                    self.banner_section.button.state = .pending
-                } else {
-                    // 下载失败咯
+                // 请务必检查是否在队列
+                for item in LKDaemonUtils.ins_operation_delegate.operation_queue where item.package.id == self.item.id {
+                    if dldinfo.succeed == .download_finished {
+                        self.banner_section.button.state = .downloaded
+                    } else if dldinfo.succeed != .failed && !dldinfo.dlReq.isSuspended && !dldinfo.dlReq.isCancelled {
+                        self.banner_section.button.state = .pending
+                    } else {
+                        // 下载失败咯
+                    }
+                    break
                 }
             }
         }
@@ -445,14 +449,18 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
         LKRoot.queue_dispatch.async { // Don't change this I fuck you
             DispatchQueue.main.async {
                 self.banner_section.button.progress = CGFloat(self.item_dld?.progress ?? 0)
-                if self.item_dld?.succeed == operation_result.download_finished {
-                    self.timer?.invalidate()
-                    self.timer = nil
-                    self.banner_section.button.state = .downloaded
-                } else {
-                    self.timer = nil
-                    self.timer = Timer(timeInterval: 0.233, target: self, selector: #selector(self.downloadTimerCall(sender:)), userInfo: nil, repeats: false)
-                    self.timer?.fire()
+                // 请务必检查是否在队列内
+                for item in LKDaemonUtils.ins_operation_delegate.operation_queue where item.package.id == self.item.id {
+                    if self.item_dld?.succeed == operation_result.download_finished {
+                        self.timer?.invalidate()
+                        self.timer = nil
+                        self.banner_section.button.state = .downloaded
+                    } else {
+                        self.timer = nil
+                        self.timer = Timer(timeInterval: 0.233, target: self, selector: #selector(self.downloadTimerCall(sender:)), userInfo: nil, repeats: false)
+                        self.timer?.fire()
+                    }
+                    break
                 }
             }
         }
