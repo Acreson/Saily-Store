@@ -94,6 +94,7 @@ class app_root_class {
 //        try? FileManager.default.removeItem(atPath: root_path! + "/Lakr233.db-wal") 操这玩意害惨我了
         try? FileManager.default.createDirectory(atPath: root_path! + "/daemon.call", withIntermediateDirectories: true, attributes: nil)
         try? FileManager.default.createDirectory(atPath: root_path! + "/daemon.call/debs", withIntermediateDirectories: true, attributes: nil)
+        try? FileManager.default.createDirectory(atPath: root_path! + "/daemon.call/download_cache", withIntermediateDirectories: true, attributes: nil)
         root_db = Database(withPath: root_path! + "/" + "Lakr233.db")
         try? FileManager.default.removeItem(atPath: root_path! + "/caches")
         
@@ -122,6 +123,9 @@ class app_root_class {
         for item in package_from_database ?? [] {
             container_packages[item.id] = item
         }
+        
+        // 嘿嘿嘿
+        UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         
         // 发送到下载处理引擎
         queue_dispatch.async {

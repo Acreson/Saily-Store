@@ -10,7 +10,7 @@
 
 class dld_info {
     
-    var path: String
+    var path: String    // 保存目录
     var repo: String
     var progress: Double
     
@@ -53,7 +53,7 @@ class AppDownloadDelegate {
         return (.download_unknowd, nil)
     }
     
-    func submit_download(packID: String, fromRepo: String, networkPath: String, UA_required: Bool = true, sha256: String? = nil) -> (operation_result, dld_info?) {
+    func submit_download(packID: String, operation_info: DMOperationInfo, fromRepo: String, networkPath: String, UA_required: Bool = true, sha256: String? = nil) -> (operation_result, dld_info?) {
         
         let status = query_download_info(packID: packID)
         
@@ -61,7 +61,7 @@ class AppDownloadDelegate {
             return (.download_exists, status.1)
         }
         
-        let target = LKRoot.root_path! + "/daemon.call/debs/" + packID + ".deb"
+        let target = LKRoot.root_path! + "/daemon.call/download_cache/" + packID + ".deb"
         
         guard let nurl = URL(string: networkPath) else {
             return (.failed, nil)
@@ -87,6 +87,7 @@ class AppDownloadDelegate {
             let struct_t = dld_info(fromRepo: fromRepo, to: target, dlins: dlreq, sha256str: sha256)
             self.record[packID] = struct_t
             ret_dld = struct_t
+            operation_info.dowload = struct_t
             ss.signal()
             dlreq.downloadProgress(queue: LKRoot.queue_alamofire, closure: { (Progress) in
                 struct_t.progress = Progress.fractionCompleted

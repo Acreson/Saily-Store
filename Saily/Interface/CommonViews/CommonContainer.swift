@@ -227,6 +227,7 @@ class centerSMSegue: SwiftMessagesSegue {
         super.init(identifier: identifier, source: source, destination: destination)
         configure(layout: .centered)
         interactiveHide = false
+        // 不好看
 //        if LKRoot.settings?.use_dark_mode ?? false {
 //            dimMode = .blur(style: .dark, alpha: 0.8, interactive: true)
 //        } else {

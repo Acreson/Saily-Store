@@ -159,3 +159,4 @@
 "选择" = "Choices";
 "更改" = "MODIFY";
 "请求队列" = "Requests";
+"操作队列信息校验失败" = "Operation queue information mismatch";

@@ -36,23 +36,25 @@ struct dpkg_file {
 class DMOperationInfo {
 
     var priority: Int
-    var package: String
+    var package: DBMPackage
     var operation_type: operation_type_t
     var current_info: current_info
     
+    var dowload: dld_info?
+    
     init() {
         priority = 0
-        package = ""
+        package = DBMPackage()
         operation_type = .unknown
         current_info = .unknown
         fatalError("[E] DMOperationInfo 不允许被空初始化")
     }
     
-    required init(packid: String, operation: operation_type_t) {
+    required init(pack: DBMPackage, operation: operation_type_t) {
         priority = 0
-        package = packid
+        package = pack
         operation_type = operation
-        current_info = LKRoot.ins_common_operator.PAK_read_current_install_status(packID: packid)
+        current_info = LKRoot.ins_common_operator.PAK_read_current_install_status(packID: pack.id)
     }
     
 //    required init()

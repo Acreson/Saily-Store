@@ -75,6 +75,7 @@ class LKPackageDetail: UIViewController {
         timer?.invalidate()
         timer = nil
         IHProgressHUD.dismiss()
+        banner_section.button.removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -202,7 +203,7 @@ class LKPackageDetail: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
                 if dldinfo.succeed == .download_finished {
                     self.banner_section.button.state = .downloaded
-                } else if dldinfo.succeed != .failed {
+                } else if dldinfo.succeed != .failed && !dldinfo.dlReq.isSuspended && !dldinfo.dlReq.isCancelled {
                     self.banner_section.button.state = .pending
                 } else {
                     // 下载失败咯
@@ -381,10 +382,13 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
             }
         case .pending: break
         case .downloading:
+            downloadButtonSignal = false
             banner_section.button.state = .startDownload
             LKRoot.queue_dispatch.async {
                 LKDaemonUtils.ins_operation_delegate.cancel_add_install(packID: self.item.id)
             }
+            timer?.invalidate()
+            timer = nil
         case .downloaded:
             presentSwiftMessageController(some: LKRequestList())
         }
@@ -396,8 +400,13 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
         case .startDownload:
             if downloadButtonSignal == true {
                 downloadButton.state = .pending
+            } else {
+                downloadButtonSignal = true
             }
         case .pending:
+            if downloadButtonSignal != true {
+                return
+            }
             LKRoot.queue_dispatch.async {
                 if self.item_status == .not_installed {
                     let ret = LKDaemonUtils.ins_operation_delegate.add_install(pack: self.item)
