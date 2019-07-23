@@ -82,14 +82,24 @@ class AppOperationDelegate {
                         // 内循环添加 跳过
                         continue inner
                     }
-                    // 找到了软件包 接下来 检查软件包是否合法
-                    if add_install(pack: dep_package, required_install: false).0 == .failed {
+                    // 找到了软件包 接下来 处理软件包 只保留一个version
+                    let _pack = dep_package.copy()
+                    let targetVersion = LKRoot.ins_common_operator.PAK_read_newest_version(pack: _pack)
+                    _pack.version.removeAll()
+                    _pack.version[targetVersion.0] = [targetVersion.1.first?.key ?? "" : targetVersion.1.first?.value ?? ["" : ""]]
+                    if add_install(pack: _pack, required_install: false).0 == .failed {
                         // 添加失败 上报一个错误
                         let err = unMatched(ID: missing_dep.key, dep: missing_dep.value)
                         unsolved_condition.append(err)
                     }
                 } else {
                     // 没找到软件包 既然没有那怎么可能出现在安装队列呢？
+                    
+                    // 但是我们要先检查一下这个错误是不是已经被上报了
+                    for reported in unsolved_condition where reported.ID == missing_dep.key {
+                        // 已经被上报 不管要求怎样肯定不对 就先不管她了
+                        continue inner
+                    }
                     // 上报一个错误
                     let err = unMatched(ID: missing_dep.key, dep: missing_dep.value)
                     unsolved_condition.append(err)

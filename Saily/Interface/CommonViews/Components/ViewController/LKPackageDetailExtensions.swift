@@ -175,7 +175,7 @@ extension LKPackageDetail {
         updateColor()
         
         using_bottom_margins()
-        sum_content_height += 50
+        sum_content_height += 128
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) { [weak self] in
             self?.contentView.contentSize.height = CGFloat(self?.sum_content_height ?? 0)

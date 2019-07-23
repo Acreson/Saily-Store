@@ -74,6 +74,7 @@
 		B432BD3022E61DD8007B4727 /* AppOperationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD2F22E61DD8007B4727 /* AppOperationDelegate.swift */; };
 		B432BD3222E61DE3007B4727 /* AppDownloadDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD3122E61DE3007B4727 /* AppDownloadDelegate.swift */; };
 		B432BD3422E628B3007B4727 /* NSData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B432BD3322E628B3007B4727 /* NSData.swift */; };
+		B437DD7C22E6D7C300A827EB /* LKRequestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B437DD7B22E6D7C300A827EB /* LKRequestList.swift */; };
 		B439A8C422D9AE0700E1D577 /* LKActiveShineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */; };
 		B46EE49D22D60C6D000C6F6D /* LKResponderBlockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */; };
 		B46EE49F22D611CD000C6F6D /* LKRepoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B46EE49E22D611CD000C6F6D /* LKRepoView.swift */; };
@@ -178,6 +179,7 @@
 		B432BD2F22E61DD8007B4727 /* AppOperationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOperationDelegate.swift; sourceTree = "<group>"; };
 		B432BD3122E61DE3007B4727 /* AppDownloadDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDownloadDelegate.swift; sourceTree = "<group>"; };
 		B432BD3322E628B3007B4727 /* NSData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSData.swift; sourceTree = "<group>"; };
+		B437DD7B22E6D7C300A827EB /* LKRequestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRequestList.swift; sourceTree = "<group>"; };
 		B439A8C322D9AE0700E1D577 /* LKActiveShineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKActiveShineCell.swift; sourceTree = "<group>"; };
 		B46EE49C22D60C6C000C6F6D /* LKResponderBlockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKResponderBlockButton.swift; sourceTree = "<group>"; };
 		B46EE49E22D611CD000C6F6D /* LKRepoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKRepoView.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				B40CBF8322DFA00F005401B6 /* LKSettings.swift */,
+				B437DD7B22E6D7C300A827EB /* LKRequestList.swift */,
 				B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */,
 				B4046A9222DEA63900DF3835 /* LKPackageDetail.swift */,
 				B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */,
@@ -938,6 +941,7 @@
 				AB1DB1C822A36A180005DDD7 /* CardButton.swift in Sources */,
 				B4B2416122E365F300048604 /* AppDaemonUtils.swift in Sources */,
 				B4046A9322DEA63900DF3835 /* LKPackageDetail.swift in Sources */,
+				B437DD7C22E6D7C300A827EB /* LKRequestList.swift in Sources */,
 				ABFBA832229D88790070A17E /* AppRootClass.swift in Sources */,
 				ABFBA81E229D7DC40070A17E /* UIViewExtensions.swift in Sources */,
 				B4B2415E22E288DD00048604 /* LKPackageCLCell.swift in Sources */,

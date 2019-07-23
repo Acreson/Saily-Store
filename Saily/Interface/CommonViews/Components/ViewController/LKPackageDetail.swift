@@ -30,6 +30,7 @@ class LKPackageDetail: UIViewController {
     let status_bar_cover = UIView()
     let banner_image = UIImageView()
     let banner_section = common_views.LKIconBannerSection()
+    var downloadButtonSignal = false
 //    let section_headers = [common_views.LKSectionBeginHeader]()
     
     var buttonActionStore = [String]()
@@ -375,11 +376,17 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
             if item.version.first?.value.first?.value["TAG"]?.contains("cydia::commercial") ?? false {
                 presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "暂不支持付费插件下载".localized())
             } else {
+                downloadButtonSignal = true
                 downloadButton.state = .pending
             }
         case .pending: break
-        case .downloading: break
-        case .downloaded: break
+        case .downloading:
+            banner_section.button.state = .startDownload
+            LKRoot.queue_dispatch.async {
+                LKDaemonUtils.ins_operation_delegate.cancel_add_install(packID: self.item.id)
+            }
+        case .downloaded:
+            presentSwiftMessageController(some: LKRequestList())
         }
         
     }
@@ -387,7 +394,9 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
     func downloadButton(_ downloadButton: AHDownloadButton, stateChanged state: AHDownloadButton.State) {
         switch state {
         case .startDownload:
-            downloadButton.state = .pending
+            if downloadButtonSignal == true {
+                downloadButton.state = .pending
+            }
         case .pending:
             LKRoot.queue_dispatch.async {
                 if self.item_status == .not_installed {
@@ -409,6 +418,12 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
                     }
                 } else {
                     // some alert
+                    let alert = UIAlertController(title: "操作".localized(), message: "请选择一个操作".localized(), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
+                        self.downloadButtonSignal = false
+                        self.banner_section.button.state = .startDownload
+                    }))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         case .downloading: break
