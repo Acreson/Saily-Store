@@ -16,6 +16,27 @@ class AppOperationDelegate {
     var operation_queue = [DMOperationInfo]()
     var unsolved_condition = [unMatched]()
     
+    func printStatus() {
+        print("--> 操作队列")
+        for item in operation_queue {
+            let name: String = item.package
+            let curinfo: String = item.current_info.rawValue
+            let to: String = item.operation_type.rawValue
+            let p: String = String(item.priority)
+            var printStr: String = "---> 软件包 - " + name
+                printStr += "    " + curinfo
+                printStr += " -> " + to
+                printStr += " | " + p
+            print(printStr)
+        }
+        for item in unsolved_condition {
+            var printStr: String = "[*] ---> 未解决的问题 - " + item.ID
+                printStr += " <-> " + item.dep.req.rawValue
+                printStr += " " + item.dep.ver
+            print(printStr)
+        }
+    }
+    
     func add_install(pack: DBMPackage, required_install: Bool = true) -> (operation_result, dld_info?) {
         
         // 校验软件包数据合法性
@@ -47,6 +68,8 @@ class AppOperationDelegate {
                 operation_queue.append(operation_info)
             }
         }
+        
+        printStatus()
         
         // 检查依赖并且添加
         if let dependStr = pack.version.first?.value.first?.value["DEPENDS"] {
@@ -82,6 +105,10 @@ class AppOperationDelegate {
         }
         
         return ret
+        
+    }
+    
+    func cancel_add_install(packID: String) {
         
     }
     
