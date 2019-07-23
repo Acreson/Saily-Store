@@ -52,8 +52,13 @@ class AppOperationDelegate {
         if let dependStr = pack.version.first?.value.first?.value["DEPENDS"] {
             let checkResult = LKRoot.ins_common_operator.PAK_read_missing_dependency(dependStr: dependStr)
             print("[*] 软件包依赖检查结果：" + checkResult.debugDescription)
-            for missing_dep in checkResult {
+            inner: for missing_dep in checkResult {
                 if let dep_package = LKRoot.container_packages[missing_dep.key] {
+                    // 再次检查以免被内循环添加之后重复添加
+                    for re_check in operation_queue where re_check.package == missing_dep.key {
+                        // 内循环添加 跳过
+                        continue inner
+                    }
                     // 找到了软件包 接下来 检查软件包是否合法
                     if add_install(pack: dep_package, required_install: false).0 == .failed {
                         // 添加失败 上报一个错误
