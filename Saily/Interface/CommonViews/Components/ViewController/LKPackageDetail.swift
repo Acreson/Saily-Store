@@ -73,7 +73,7 @@ class LKPackageDetail: UIViewController {
         
         timer?.invalidate()
         timer = nil
-        
+        IHProgressHUD.dismiss()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

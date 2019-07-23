@@ -170,6 +170,9 @@ extension app_opeerator {
                 // let stru = LKRoot.container_installed_provides[item.key]
                 continue inner
             } else {
+                for install_queued in LKDaemonUtils.ins_operation_delegate.operation_queue where install_queued.package == item.key {
+                    continue inner
+                }
                 ret[item.key] = item.value
             }
         }
