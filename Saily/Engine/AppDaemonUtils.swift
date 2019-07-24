@@ -93,6 +93,89 @@ class app_daemon_utils {
         }
     }
     
-    
+    func submit() -> (operation_result, String) {
+        
+        // 再次检查表单 <- 晚点再写吧我对我自己粗查代码还是很自信的
+        ins_operation_delegate.printStatus()
+        
+        var auto_install = [String]()
+        var required_install = [String]()
+        var required_reinstall = [String]()
+        var required_remove = [String]()
+        
+        for item in ins_operation_delegate.operation_queue {
+            var thisSection = ""
+            switch item.operation_type {
+            case .required_install, .required_reinstall:
+                // 拷贝安装资源
+                if let path = item.dowload?.path {
+                    if FileManager.default.fileExists(atPath: path) {
+                        try? FileManager.default.copyItem(atPath: path, toPath: LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb")
+                        thisSection = "dpkg -i " + LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        if item.operation_type == .required_install {
+                            required_install.append(thisSection)
+                        } else {
+                            required_reinstall.append(thisSection)
+                        }
+                    } else {
+                        return (.failed, item.package.id)
+                    }
+                } else {
+                    return (.failed, item.package.id)
+                }
+            case .required_remove:
+                required_remove.append("dpkg --remove " + item.package.id)
+            case .required_config:
+                print("required_config")
+            case .required_modify_dcrp:
+                print("required_modify_dcrp")
+            case .auto_install:
+                // 拷贝安装资源
+                if let path = item.dowload?.path {
+                    if FileManager.default.fileExists(atPath: path) {
+                        try? FileManager.default.copyItem(atPath: path, toPath: LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb")
+                        thisSection = "dpkg -i " + LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        auto_install.append(thisSection)
+                    } else {
+                        return (.failed, item.package.id)
+                    }
+                } else {
+                    return (.failed, item.package.id)
+                }
+            case .DNG_auto_remove:
+                print("apt autoremove")
+            case .unknown:
+                print("unknown")
+            }
+        }
+        
+        var script = ""
+        for item in auto_install + required_reinstall + required_install + required_remove {
+            script += item + " &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
+        }
+        
+        try? script.write(toFile: LKRoot.root_path! + "/daemon.call/requsetScript.txt", atomically: true, encoding: .utf8)
+        try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/daemon.call/out.txt")
+        try? "".write(toFile: LKRoot.root_path! + "/daemon.call/out.txt", atomically: true, encoding: .utf8)
+        
+        print("---- Script ----")
+        print("")
+        print(script)
+        print("---- ------ ----")
+        
+        
+        daemon_msg_pass(msg: "init:req:fromScript")
+        
+        if status != .ready {
+            return (.failed, "Saily.Daemon")
+        }
+        
+        // 打开监视窗口
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+        }
+        
+        return (.success, "")
+    }
     
 }

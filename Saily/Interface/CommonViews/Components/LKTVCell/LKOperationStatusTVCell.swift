@@ -16,7 +16,7 @@ extension cell_views {
         let title = UILabel()
         let link = UILabel()
         let sep = UIView()
-        let arrow = UIImageView()
+        let prog = UILabel()
         
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,12 +24,12 @@ extension cell_views {
             title.translatesAutoresizingMaskIntoConstraints = false
             link.translatesAutoresizingMaskIntoConstraints = false
             sep.translatesAutoresizingMaskIntoConstraints = false
-            arrow.translatesAutoresizingMaskIntoConstraints = false
+            prog.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(icon)
             contentView.addSubview(title)
             contentView.addSubview(link)
             contentView.addSubview(sep)
-            contentView.addSubview(arrow)
+            contentView.addSubview(prog)
             
             icon.setRadiusINT(radius: 6)
             icon.contentMode = .scaleAspectFit
@@ -66,13 +66,33 @@ extension cell_views {
                 x.top.equalTo(contentView.snp.top).offset(6)
             }
             
-            //            arrow.image = UIImage(named: "info")
-            arrow.contentMode = .scaleAspectFit
-            arrow.snp.makeConstraints { (x) in
+            prog.font = .boldSystemFont(ofSize: 12)
+            prog.textColor = LKRoot.ins_color_manager.read_a_color("table_view_link")
+            prog.snp.makeConstraints { (x) in
                 x.centerY.equalTo(contentView.snp.centerY)
-                x.right.equalTo(contentView.snp.right).offset(-6)
+                x.right.equalTo(contentView.snp.right).offset(-12)
                 x.height.equalTo(20)
-                x.width.equalTo(20)
+                x.width.equalTo(55)
+            }
+        }
+        
+        var download: dld_info?
+        
+        func downloadMonitor(dldinfo: dld_info?) {
+            download = nil
+            download = dldinfo
+            doMonitor()
+        }
+        
+        func doMonitor() {
+            if download?.succeed == .download_finished {
+                prog.text = "就绪".localized()
+                return
+            }
+            let progress = Int((download?.progress ?? 0) * 100)
+            prog.text = String(progress) + "%"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                self?.doMonitor()
             }
         }
         

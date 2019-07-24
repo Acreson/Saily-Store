@@ -204,7 +204,7 @@ func presentViewController(some: UIViewController, animated: Bool = true) {
     }
 }
 
-func presentSwiftMessageController(some: UIViewController) {
+func presentSwiftMessageController(some: UIViewController, interActinoEnabled: Bool = true) {
     
     let target: UIViewController
     
@@ -217,8 +217,14 @@ func presentSwiftMessageController(some: UIViewController) {
         target = t
     }
     
-    let segue = centerSMSegue(identifier: nil, source: target, destination: some)
-    segue.perform()
+    if interActinoEnabled {
+        let segue = centerSMSegue(identifier: nil, source: target, destination: some)
+        segue.perform()
+    } else {
+        let segue = centerSMSegueNoInterAction(identifier: nil, source: target, destination: some)
+        segue.perform()
+    }
+    
     
 }
 
@@ -228,12 +234,22 @@ class centerSMSegue: SwiftMessagesSegue {
         configure(layout: .centered)
         interactiveHide = false
         // 不好看
-//        if LKRoot.settings?.use_dark_mode ?? false {
-//            dimMode = .blur(style: .dark, alpha: 0.8, interactive: true)
-//        } else {
-//            dimMode = .blur(style: .light, alpha: 0.5, interactive: true)
-//        }
+        //        if LKRoot.settings?.use_dark_mode ?? false {
+        //            dimMode = .blur(style: .dark, alpha: 0.8, interactive: true)
+        //        } else {
+        //            dimMode = .blur(style: .light, alpha: 0.5, interactive: true)
+        //        }
         dimMode = .gray(interactive: true)
+        messageView.configureNoDropShadow()
+    }
+}
+
+class centerSMSegueNoInterAction: SwiftMessagesSegue {
+    override public  init(identifier: String?, source: UIViewController, destination: UIViewController) {
+        super.init(identifier: identifier, source: source, destination: destination)
+        configure(layout: .centered)
+        interactiveHide = false
+        dimMode = .gray(interactive: false)
         messageView.configureNoDropShadow()
     }
 }

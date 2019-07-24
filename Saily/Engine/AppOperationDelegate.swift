@@ -300,6 +300,5 @@ class AppOperationDelegate {
         
     }
     
-    
 }
 

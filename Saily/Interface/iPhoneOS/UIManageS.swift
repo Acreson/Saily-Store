@@ -96,7 +96,7 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
             actionButton.imageView.snp.remakeConstraints({ (x) in
                 x.edges.equalTo(actionButton.snp.edges).inset(UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12))
             })
-            actionButton.snp.makeConstraints({ (x) in
+            actionButton.snp.remakeConstraints({ (x) in
                 x.right.equalTo(self.view.snp.right).offset(-18)
                 x.bottom.equalTo(self.view.snp.bottom).offset(0 - self.view.safeAreaInsets.bottom - 18)
                 x.height.equalTo(45)

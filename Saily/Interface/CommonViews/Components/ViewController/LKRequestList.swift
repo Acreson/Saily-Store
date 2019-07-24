@@ -83,6 +83,22 @@ class LKRequestList: UIViewController {
     @objc func submit(sender: Any) {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
+        if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count > 0 {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "您有的提交列表有未解决的先决条件问题".localized())
+            return
+        }
+        if LKDaemonUtils.ins_operation_delegate.operation_queue.count < 1 {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "您的操作队列没有请求".localized())
+            return
+        }
+        
+        let ret = LKDaemonUtils.submit()
+        if ret.0 != .success {
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "该错误与一下软件包有关：".localized() + ret.1)
+            return
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -122,6 +138,12 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ret = tableView.dequeueReusableCell(withIdentifier: "LKRequestList_TVCellID") as? cell_views.LKOperationStatusTVCell ?? cell_views.LKOperationStatusTVCell()
         
+        // 重置 cell
+        ret.icon.image = UIImage()
+        ret.title.text = ""
+        ret.link.text = ""
+        ret.prog.text = ""
+        
         if indexPath.section == 0 {
             if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
                 ret.icon.image = UIImage(named: "Clear")
@@ -151,12 +173,21 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
                 ret.sep.alpha = 0
                 
                 switch item.operation_type {
-                case .auto_install: ret.link.text = "这个软件包被其他软件包要求安装".localized()
-                case .required_install: ret.link.text = "这个软件包被您要求安装".localized()
-                case .required_reinstall: ret.link.text = "这个软件包被您要求重新安装".localized()
-                case .required_config: ret.link.text = "这个软件包被要求重新配置".localized()
-                case .required_remove: ret.link.text = "这个软件包被您要求删除".localized()
-                case .required_modify_dcrp: ret.link.text = "这个软件包在安装前被要求修改依赖".localized()
+                case .auto_install:
+                    ret.link.text = "这个软件包被其他软件包要求安装".localized()
+                    ret.downloadMonitor(dldinfo: item.dowload)
+                case .required_install:
+                    ret.link.text = "这个软件包被您要求安装".localized()
+                    ret.downloadMonitor(dldinfo: item.dowload)
+                case .required_reinstall:
+                    ret.link.text = "这个软件包被您要求重新安装".localized()
+                    ret.downloadMonitor(dldinfo: item.dowload)
+                case .required_config:
+                    ret.link.text = "这个软件包被要求重新配置".localized()
+                case .required_remove:
+                    ret.link.text = "这个软件包被您要求删除".localized()
+                case .required_modify_dcrp:
+                    ret.link.text = "这个软件包在安装前被要求修改依赖".localized()
                 case .DNG_auto_remove:
                     ret.link.text = "将为您执行软件包清理".localized()
                     ret.link.textColor = .red
