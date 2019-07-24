@@ -210,9 +210,96 @@ class AppOperationDelegate {
         printStatus()
     }
     
-    func add_uninstall() {
+    func add_uninstall(pack: DBMPackage) -> (operation_result, String?) {
+        
+        let pack = pack.copy()
+        let packID = pack.id
+        // 从 delegate 获取要安装的所有软件包
+        var required_packages = [DBMPackage]()
+        for item in operation_queue where item.package.id != packID {
+            required_packages.append(item.package)
+        }
+        for item in LKRoot.container_recent_installed where item.version.first?.value.first?.value["DEPENDS"] != nil {
+            required_packages.append(item)
+        }
+        // 这里是全部的需要的依赖 我们来看看撒
+        var all_depens = [String : depends]()
+        for item in required_packages {
+            for dep in LKRoot.ins_common_operator.PAK_read_looped_depends(packID: item.id, read_all: true) {
+                all_depens[dep.key] = dep.value
+            }
+        }
+        // 如果依赖中包含了这个玩意 那就返回错误
+        for item in all_depens where item.key == packID {
+            return (.failed, item.key)
+        }
+        
+        let operation = DMOperationInfo(pack: pack, operation: .required_remove)
+        LKDaemonUtils.ins_operation_delegate.operation_queue.append(operation)
+        
+        return (.success, nil)
+    }
+    
+    func add_reinstall(pack: DBMPackage) -> (operation_result, dld_info?) {
+        
+        // 校验软件包数据合法性
+        if pack.version.count != 1 || pack.version.first!.value.count != 1 {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包信息校验失败，请尝试刷新。".localized())
+            return (.failed, nil)
+        }
+        
+        guard let repolink = pack.version.first?.value.first?.key else {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包信息校验失败，请尝试刷新。".localized())
+            return (.failed, nil)
+        }
+        
+        guard let filePath = pack.version.first?.value.first?.value["Filename".uppercased()] else {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "软件包信息校验失败，请尝试刷新。".localized())
+            return (.failed, nil)
+        }
+        
+        var exists = false
+        for item in operation_queue where item.package.id == pack.id {
+            exists = true
+            break
+        }
+        var operation_info: DMOperationInfo?
+        if !exists {
+            operation_info = DMOperationInfo(pack: pack, operation: .required_reinstall)
+        } else {
+            return (.failed, nil)
+        }
+        
+        if operation_info == nil {
+            presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "操作队列信息校验失败".localized())
+            return (.failed, nil)
+        }
+        operation_queue.append(operation_info!)
+        // 不需要检查依赖哟 因为是重新安装
+        printStatus()
+        var ret: (operation_result, dld_info?) = (operation_result.failed, nil)
+        if unfired_download_req[pack.id] != nil {
+            operation_info?.dowload = unfired_download_req[pack.id]
+            operation_info?.dowload?.dlReq.resume()
+            // 创建新的 unfired
+            var new = [String : dld_info]()
+            for item in unfired_download_req where item.key != pack.id {
+                new[item.key] = item.value
+            }
+            unfired_download_req = new
+            ret = (.success, operation_info?.dowload)
+        } else {
+            if let sha256 = pack.version.first?.value.first?.value["SHA256"] {
+                ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, operation_info: operation_info!, fromRepo: repolink, networkPath: repolink + filePath, UA_required: true, sha256: sha256)
+            } else {
+                ret = LKDaemonUtils.ins_download_delegate.submit_download(packID: pack.id, operation_info: operation_info!, fromRepo: repolink, networkPath: repolink + filePath, UA_required: true, sha256: nil)
+            }
+        }
+        operation_info?.dowload = ret.1
+        return ret
         
     }
+    
     
 }
 

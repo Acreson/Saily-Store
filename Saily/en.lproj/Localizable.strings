@@ -53,9 +53,9 @@
 "分享 - 社交媒体" = "Social Media";
 "Copyright © 2019 Saily Team. All rights reserved." = "Copyright © 2019 Saily Team. All rights reserved.";
 " " = " ";
-"已尝试刷新新闻源。" = "Tried to Refreshed News Repo";
-"已尝试刷新软件源" = "Tried to Refreshed Packages & Sources";
-"软件包的更新将在后台进行。" = "Packages will download and refresh in background. We will notice you when its done.";
+"已尝试刷新新闻源。" = "Done";
+"已尝试刷新软件源" = "Refreshing...";
+"软件包的更新将在后台进行。" = "Packages will download and refresh in background.";
 "准备导入如下的新闻源\n" = "Attempt to import following news repo\n\n";
 "失败" = "Failed";
 "没有在剪贴板中找到有效的新闻源地址" = "No link validated in pasteboard";
@@ -176,3 +176,6 @@
 "这个软件包被您要求删除" = "REQUIRED REMOVE";
 "这个软件包在安装前被要求修改依赖" = "REQUIRED CLEAR DEPENDS BEFORE INSTALL";
 "将为您执行软件包清理" = "REQUIRED AUTOREMOVE";
+"该软件包可能被其他软件包所依赖" = "This package may be required by another package";
+"删除操作已经添加到队列" = "This operation was added to queue";
+"重新安装" = "Reinstall";

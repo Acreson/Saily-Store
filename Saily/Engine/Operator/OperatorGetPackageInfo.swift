@@ -161,18 +161,23 @@ extension app_opeerator {
         return ret
     }
     
-    func PAK_read_looped_depends(packID: String, checkQueue: Bool = false, loopBreaker: [String : depends] = [:], loopDeepth: Int = 0) -> [String : depends] {
+    func PAK_read_looped_depends(packID: String, read_all: Bool = false, checkQueue: Bool = false, loopBreaker: [String : depends] = [:], loopDeepth: Int = 0) -> [String : depends] {
         var ret = loopBreaker
         if loopDeepth > 2333 {
             // 退出可能的死循环
             return ret
         }
         if let depstr = LKRoot.container_packages[packID]?.version.first?.value.first?.value["DEPENDS"] {
-            let missing = PAK_read_missing_dependency(dependStr: depstr, checkQueue: checkQueue)
+            var deps = [String : depends]()
+            if read_all {
+                deps = PAK_read_all_dependency(dependStr: depstr)
+            } else {
+                deps = PAK_read_missing_dependency(dependStr: depstr, checkQueue: checkQueue)
+            }
             // 在迷失的先决条件内排出已经被循环搜索的依赖
-            for item in missing where ret[item.key] == nil {
+            for item in deps where ret[item.key] == nil {
                 ret[item.key] = item.value
-                for rets in PAK_read_looped_depends(packID: item.key, loopBreaker: ret, loopDeepth: loopDeepth + 1) where ret[rets.key] == nil {
+                for rets in PAK_read_looped_depends(packID: item.key, read_all: read_all, loopBreaker: ret, loopDeepth: loopDeepth + 1) where ret[rets.key] == nil {
                     ret[rets.key] = rets.value
                 }
             }

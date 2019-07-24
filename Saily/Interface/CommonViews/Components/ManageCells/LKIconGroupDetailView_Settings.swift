@@ -451,7 +451,7 @@ extension manage_views.LKIconGroupDetailView_Settings: UITableViewDelegate {
             LKRoot.ins_common_operator.NR_sync_and_download { (_) in
                 LKRoot.manager_reg.nr.update_user_interface {
                     presentStatusAlert(imgName: "Done",
-                                       title: " ".localized(),
+                                       title: "完成".localized(),
                                        msg: "已尝试刷新新闻源。".localized())
                 }
             }

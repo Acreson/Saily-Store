@@ -616,17 +616,17 @@ extension LKPackageDetail: WKNavigationDelegate {
         self.webView.evaluateJavaScript("document.readyState", completionHandler: { [weak self] (complete, _) in
             if complete != nil {
                 self?.webView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, _) in
+                    self?.contentView.contentSize.height = 233 + (height as? CGFloat ?? 0)
                     self?.webView.snp.remakeConstraints({ (x) in
                         x.top.equalTo(self!.currentAnchor.snp.bottom)
                         x.left.equalTo(self!.view.snp.left)
                         x.right.equalTo(self!.view.snp.right)
                         x.height.equalTo(height as? CGFloat ?? 0)
                     })
-                    self?.contentView.contentSize.height = 233 + (height as? CGFloat ?? 0)
                     if LKRoot.settings?.use_dark_mode ?? false {
                         self?.webView.alpha = 1
+                        self?.run_night_mode()
                     }
-                    self?.run_night_mode()
                 })
             }
             

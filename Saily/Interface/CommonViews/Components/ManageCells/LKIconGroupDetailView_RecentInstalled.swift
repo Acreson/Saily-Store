@@ -332,6 +332,14 @@ extension manage_views.LKIconGroupDetailView_RecentInstalled: UITableViewDelegat
         share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_four")
         
         let delete = UITableViewRowAction(style: .normal, title: "卸载".localized()) { _, index in
+            let pack = LKRoot.container_recent_installed[index.row]
+            let ret = LKDaemonUtils.ins_operation_delegate.add_uninstall(pack: pack)
+            if ret.0 != .success {
+                let msg = "该软件包可能被其他软件包所依赖".localized() + "\n" + (ret.1 ?? "")
+                presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: msg)
+            } else {
+                presentStatusAlert(imgName: "Done", title: "成功".localized(), msg: "删除操作已经添加到队列".localized())
+            }
         }
         delete.backgroundColor = .red
         return [share, delete]

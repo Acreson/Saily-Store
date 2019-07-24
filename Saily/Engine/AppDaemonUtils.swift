@@ -23,7 +23,9 @@ class app_daemon_utils {
     
     var status = daemon_status.offline
     
+    // swiftlint:disable:next weak_delegate
     let ins_operation_delegate = AppOperationDelegate()
+    // swiftlint:disable:next weak_delegate
     let ins_download_delegate = AppDownloadDelegate()
     
     func initializing() {

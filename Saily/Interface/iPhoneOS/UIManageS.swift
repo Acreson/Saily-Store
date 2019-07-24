@@ -8,6 +8,7 @@
 
 import JJFloatingActionButton
 
+// swiftlint:disable:next type_body_length
 class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var table_view: UITableView = UITableView()

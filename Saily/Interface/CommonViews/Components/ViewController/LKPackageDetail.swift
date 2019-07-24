@@ -58,7 +58,6 @@ class LKPackageDetail: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         UIView.animate(withDuration: 0.5, animations: {
             self.navigationController?.navigationBar.tintColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
             self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: LKRoot.ins_color_manager.read_a_color("main_tint_color")]
@@ -75,7 +74,6 @@ class LKPackageDetail: UIViewController {
         timer?.invalidate()
         timer = nil
         IHProgressHUD.dismiss()
-        banner_section.button.removeFromSuperview()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -432,6 +430,36 @@ extension LKPackageDetail: AHDownloadButtonDelegate {
                 } else {
                     // some alert
                     let alert = UIAlertController(title: "选择".localized(), message: "请选择一个操作".localized(), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "删除".localized(), style: .default, handler: { (_) in
+                        self.downloadButtonSignal = false
+                        let ret = LKDaemonUtils.ins_operation_delegate.add_uninstall(pack: self.item)
+                        if ret.0 != .success {
+                            let msg = "该软件包可能被其他软件包所依赖".localized() + "\n" + (ret.1 ?? "")
+                            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: msg)
+                        } else {
+                            presentStatusAlert(imgName: "Done", title: "成功".localized(), msg: "删除操作已经添加到队列".localized())
+                            downloadButton.state = .downloaded
+                        }
+                    }))
+                    alert.addAction(UIAlertAction(title: "重新安装".localized(), style: .default, handler: { (_) in
+                        self.downloadButtonSignal = false
+                        let ret = LKDaemonUtils.ins_operation_delegate.add_reinstall(pack: self.item)
+                        if ret.0 != .success && ret.1 == nil {
+                            DispatchQueue.main.async {
+                                downloadButton.state = .startDownload
+                            }
+                            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "无法添加到下载队列，请尝试刷新软件包".localized())
+                            return
+                        }
+                        self.item_dld = ret.1
+                        self.timer = nil
+                        self.timer = Timer(timeInterval: 0.233, target: self, selector: #selector(self.downloadTimerCall(sender:)), userInfo: nil, repeats: false)
+                        self.timer?.fire()
+                        // 既然返回了 dld info 那就说明下载存在 发送到下载 session
+                        DispatchQueue.main.async {
+                            downloadButton.state = .downloading
+                        }
+                    }))
                     alert.addAction(UIAlertAction(title: "取消".localized(), style: .default, handler: { (_) in
                         self.downloadButtonSignal = false
                         self.banner_section.button.state = .startDownload
