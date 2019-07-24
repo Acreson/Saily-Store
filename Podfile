@@ -1,6 +1,8 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '12.0'
 
+source 'https://cdn.cocoapods.org/'
+
 target 'Saily' do
   
   use_frameworks!
