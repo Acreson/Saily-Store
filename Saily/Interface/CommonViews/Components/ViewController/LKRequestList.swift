@@ -74,6 +74,10 @@ class LKRequestList: UIViewController {
             x.right.equalTo(self.view.snp.right).offset(-24)
         }
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
+            self.table_view.reloadData()
+        }
+        
     }
     
     @objc func submit(sender: Any) {
@@ -187,6 +191,81 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 62
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 {
+            if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
+                return false
+            } else {
+                return false
+            }
+        } else {
+            if LKDaemonUtils.ins_operation_delegate.operation_queue.count < 1 {
+                return false
+            } else {
+                if LKDaemonUtils.ins_operation_delegate.operation_queue[indexPath.row].operation_type == .auto_install {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 {
+            if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
+                return
+            } else {
+                return
+            }
+        } else {
+            if LKDaemonUtils.ins_operation_delegate.operation_queue.count < 1 {
+                return
+            } else {
+                let pack = LKDaemonUtils.ins_operation_delegate.operation_queue[indexPath.row].package
+                self.dismiss(animated: true) {
+                    DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
+                        presentPackage(pack: pack)
+                    })
+                }
+                return
+            }
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        if let indexPath = indexPath {
+            if indexPath.section == 0 {
+                if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
+                    return
+                } else {
+                    return
+                }
+            } else {
+                if LKDaemonUtils.ins_operation_delegate.operation_queue.count < 1 {
+                    return
+                } else {
+                    UIApplication.shared.beginIgnoringInteractionEvents()
+                    IHProgressHUD.show()
+                    LKRoot.queue_dispatch.async {
+                        let pack = LKDaemonUtils.ins_operation_delegate.operation_queue[indexPath.row]
+                        LKDaemonUtils.ins_operation_delegate.cancel_add_install(packID: pack.package.id)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
+                            self.table_view.reloadData()
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                        }
+                    }
+                    return
+                }
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        return nil
     }
     
 }
