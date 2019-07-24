@@ -8,7 +8,7 @@
 
 #import "Operator.h"
 
-BOOL IN_FORCE_ROOT_APP = false;
+BOOL IN_FORCE_ROOT_APP = true;
 
 NSString *LKRDIR = @"";
 int daemon_status = 0;

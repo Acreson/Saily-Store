@@ -72,3 +72,4 @@ fastlane/test_output
 Podfile.lock
 Packages/*
 
+Saily.Daemon/Package/Applications/Saily.app/

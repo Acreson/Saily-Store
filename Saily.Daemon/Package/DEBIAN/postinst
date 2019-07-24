@@ -4,3 +4,8 @@ chmod 0644 /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist
 chmod +x /usr/bin/Saily.Daemon
 # Load Daemon
 launchctl load /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist
+# Permission
+chmod +x /Applications/Saily.app/Saily
+chown -R root:wheel /Applications/Saily.app/*
+# Uicache
+uicache

@@ -157,11 +157,19 @@ class app_root_class {
         try? root_db?.insert(objects: [new_setting], intoTable: common_data_handler.table_name.LKSettings.rawValue)
         // 写入新闻源地址
         let default_news_repos_saily = DBMNewsRepo()
-        default_news_repos_saily.link = "https://lakraream.github.io/Saily/"
         default_news_repos_saily.sort_id = 0
         let default_news_repos_aream = DBMNewsRepo()
-        default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
         default_news_repos_aream.sort_id = 1
+
+        let pre = Locale.preferredLanguages[0]
+        if pre.contains("zh") {
+            default_news_repos_saily.link = "https://lakrowo.gitee.io/Saily/"
+            default_news_repos_aream.link = "https://lakrowo.gitee.io/AreamN/"
+        } else {
+            default_news_repos_saily.link = "https://lakraream.github.io/Saily/"
+            default_news_repos_aream.link = "https://lakraream.github.io/AreamN/"
+        }
+        
         try? root_db?.insert(objects: [default_news_repos_saily, default_news_repos_aream], intoTable: common_data_handler.table_name.LKNewsRepos.rawValue)
 //        #if DEBUG                                                                                       // 压力测试源
 //        let default_links =  [
