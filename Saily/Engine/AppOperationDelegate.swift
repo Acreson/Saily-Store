@@ -158,7 +158,7 @@ class AppOperationDelegate {
         // 从 delegate 获取要安装的所有软件包
         var required_packages = [DBMPackage]()
         // 除了要被删除的软件包
-        for item in operation_queue where item.package.id != packID && item.operation_type == .required_install {
+        for item in operation_queue where item.package.id != packID && item.operation_type != .auto_install {
             required_packages.append(item.package)
         }
         // 这里是全部的需要的依赖 我们来看看撒
