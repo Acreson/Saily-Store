@@ -225,6 +225,8 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
             if LKDaemonUtils.ins_operation_delegate.operation_queue.count < 1 {
                 return
             } else {
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
                 let pack = LKDaemonUtils.ins_operation_delegate.operation_queue[indexPath.row].package
                 self.dismiss(animated: true) {
                     DispatchQueue.main.asyncAfter(deadline: .now(), execute: {
@@ -235,9 +237,16 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-
-    func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
-        if let indexPath = indexPath {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+//        let share = UITableViewRowAction(style: .normal, title: "分享".localized()) { _, index in
+//
+//            presentStatusAlert(imgName: "Done", title: "成功".localized(), msg: (LKRoot.container_news_repo_DBSync[index.row].name) + " 的地址已经复制到剪贴板".localized())
+//        }
+//        share.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_title_two")
+        
+        let delete = UITableViewRowAction(style: .normal, title: "删除".localized()) { _, index in
             if indexPath.section == 0 {
                 if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
                     return
@@ -251,7 +260,7 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
                     UIApplication.shared.beginIgnoringInteractionEvents()
                     IHProgressHUD.show()
                     LKRoot.queue_dispatch.async {
-                        let pack = LKDaemonUtils.ins_operation_delegate.operation_queue[indexPath.row]
+                        let pack = LKDaemonUtils.ins_operation_delegate.operation_queue[index.row]
                         LKDaemonUtils.ins_operation_delegate.cancel_add_install(packID: pack.package.id)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
                             self.table_view.reloadData()
@@ -263,10 +272,8 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-    }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        return nil
+        delete.backgroundColor = .red
+        return [delete]
     }
     
 }
