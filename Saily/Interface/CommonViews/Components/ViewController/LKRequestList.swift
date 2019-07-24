@@ -19,6 +19,7 @@ class LKRequestList: UIViewController {
         table_view.delegate = self
         table_view.dataSource = self
         table_view.separatorColor = .clear
+        table_view.backgroundColor = .clear
         
         let title = UILabel(text: "操作队列".localized().uppercased())
         title.font = .boldSystemFont(ofSize: 20)
@@ -124,9 +125,12 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
         return num
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return nil
-//    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = LKRoot.ins_color_manager.read_a_color("main_text")
+        let header = view as? UITableViewHeaderFooterView
+        header?.textLabel?.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
+        header?.backgroundView?.alpha = 0.233
+    }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
@@ -143,6 +147,8 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
         ret.title.text = ""
         ret.link.text = ""
         ret.prog.text = ""
+        
+        ret.backgroundColor = .clear
         
         if indexPath.section == 0 {
             if LKDaemonUtils.ins_operation_delegate.unsolved_condition.count < 1 {
