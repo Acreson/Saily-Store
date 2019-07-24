@@ -113,6 +113,12 @@ class LKDaemonMonitor: UIViewController {
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 IHProgressHUD.show()
                 LKRoot.queue_dispatch.async {
+                    
+                    for obj in LKDaemonUtils.ins_operation_delegate.operation_queue {
+                        obj.dowload?.dlReq.suspend()
+                        LKDaemonUtils.ins_operation_delegate.unfired_download_req[obj.package.id] = obj.dowload
+                    }
+                    
                     LKDaemonUtils.ins_operation_delegate.operation_queue.removeAll()
                     LKDaemonUtils.ins_operation_delegate.unsolved_condition.removeAll()
                     print("[*] 开始更新已安装")
