@@ -105,7 +105,7 @@ extension manage_views {
             
             // 图标组
 
-            icon_stack.images_address = ["NAMED:ATCydiaSource"]
+            icon_stack.images_address = ["NAMED:" + TWEAK_DEFAULT_IMG_NAME]
             icon_stack.apart_init()
             contentView.addSubview(icon_stack)
             icon_stack.snp.makeConstraints { (x) in

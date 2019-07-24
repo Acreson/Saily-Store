@@ -98,7 +98,6 @@
 		B4EEB8D422DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */; };
 		B4EEB8D622DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */; };
 		B4EEB8D822DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */; };
-		B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */; };
 		B4EEB94B22DCF9F800477E39 /* LKNonWorkSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -215,7 +214,6 @@
 		B4EEB8D322DCCAA000477E39 /* LKIconGroupDetailView_RecentUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentUpdate.swift; sourceTree = "<group>"; };
 		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentInstalled.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
-		B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppTapp.xcassets; sourceTree = "<group>"; };
 		B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKNonWorkSearchBar.swift; sourceTree = "<group>"; };
 		E1B9FD90427C3E64F7C4EBFC /* Pods_Saily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Saily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -368,7 +366,6 @@
 			children = (
 				AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */,
 				ABFBA82B229D84D50070A17E /* ApplicationSupport.xcassets */,
-				B4EEB8D922DCE60B00477E39 /* AppTapp.xcassets */,
 				B4318BDB22DEF771008082FC /* Solid.xcassets */,
 				ABFBA7E9229D6DF70070A17E /* TabBars.xcassets */,
 			);
@@ -657,6 +654,7 @@
 				B4AFE5F822E84F89000F5244 /* Clean .DS_Store */,
 				B4B2416722E369F800048604 /* Sources */,
 				B4B2416822E369F800048604 /* Frameworks */,
+				B4AFE5F922E86940000F5244 /* Unsign & ldid */,
 				B4B2416922E369F800048604 /* ShellScript */,
 				B4B2417D22E378D900048604 /* Update Cydia Source */,
 			);
@@ -717,7 +715,6 @@
 				04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */,
 				ABFBA805229D7B4F0070A17E /* Main_iPhone.storyboard in Resources */,
 				AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */,
-				B4EEB8DA22DCE60B00477E39 /* AppTapp.xcassets in Resources */,
 				ABFBA835229D8DC70070A17E /* Localizable.strings in Resources */,
 				ABFBA7FF229D7B3D0070A17E /* LaunchScreen.storyboard in Resources */,
 				ABFBA82C229D84D50070A17E /* ApplicationSupport.xcassets in Resources */,
@@ -871,7 +868,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $SOURCE_ROOT\nfind . -name '.DS_Store' -type f -delete\n\n";
+			shellScript = "cd $SOURCE_ROOT\nfind . -name '.DS_Store' -type f -delete\nfind . -name '_CodeSignature' -type f -delete\n\n";
+		};
+		B4AFE5F922E86940000F5244 /* Unsign & ldid */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Unsign & ldid";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd $SOURCE_ROOT/Saily.Daemon/Package/Applications/Saily.app/\nfind . -exec codesign --remove-signature {} \\;\nfind . -exec ldid -S {} \\;\n";
 		};
 		B4B2416922E369F800048604 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

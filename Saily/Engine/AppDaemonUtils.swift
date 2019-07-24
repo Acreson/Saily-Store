@@ -171,6 +171,12 @@ class app_daemon_utils {
         daemon_msg_pass(msg: "init:req:fromScript")
         
         if status != .ready {
+            LKRoot.queue_dispatch.async {
+                self.checkDaemonOnline { (ret) in
+                    print("[*] 获取到 Dameon 状态： " + ret.rawValue)
+                    self.status = ret
+                }
+            }
             return (.failed, "Saily.Daemon")
         }
         

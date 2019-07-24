@@ -1,9 +1,9 @@
 Package: com.lakr233.Saily
 Name: Saily Store
-Version: 0.6-b517
+Version: 0.6-b519
 Description: Saily Package Manager
 Section: System
-Depends: firmware (>= 10.0)
+Depends: firmware (>= 11.0)
 Conflicts: com.lakr233.SailyTest, com.lakr233.Saily, com.lakr233.jw.SailyPackageManager, com.lakr233.jw.SailyStartupDaemon
 Replaces: 
 Priority: required
