@@ -195,14 +195,20 @@ class app_root_class {
 //            "https://repo.dynastic.co/"
 //        ]
 //        #else
-        let default_links = [
+        var default_links = [
             "https://apt.bingner.com/",
             "https://repo.chariz.io/",
             "https://repo.nepeta.me/",
             "https://repo.dynastic.co/"
         ]
 //        #endif
-//                             "http://repo.packix.com/"] Always error when debugging.
+        
+        if pre.contains("zh") {
+            default_links.insert("https://LakrOwO.gitee.io/repo", at: 0)
+        } else {
+            default_links.insert("https://OuOp.github.io/", at: 0)
+        }
+        
         var insert = [DBMPackageRepos]()
         var index = 0
         for item in default_links {

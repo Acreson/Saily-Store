@@ -59,17 +59,17 @@ class LKDaemonMonitor: UIViewController {
     var checkTimeOut = 256 // like some 60s?
     func updateText(round: Int = 0) {
         let str = (try? String(contentsOfFile: LKRoot.root_path! + "/daemon.call/out.txt")) ?? ""
+        textView.scrollToBottom()
+        textView.text = str
+        if round == checkTimeOut {
+            presentStatusAlert(imgName: "Warning", title: "⚠️", msg: "执行任务的时间超出了预期\n你可以选择手动退出")
+            exitCall(isTimeOut: true)
+        }
         if str.contains("Saily::internal_session_finished::Signal") && round < checkTimeOut {
             presentStatusAlert(imgName: "Done", title: "完成".localized(), msg: "你的操作已经完成".localized())
             exitCall()
             return
         }
-        if round == checkTimeOut {
-            presentStatusAlert(imgName: "Warning", title: "⚠️", msg: "执行任务的时间超出了预期\n你可以选择手动退出")
-            exitCall(isTimeOut: true)
-        }
-        textView.scrollToBottom()
-        textView.text = str
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
             self.updateText(round: round + 1)
         }
