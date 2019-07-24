@@ -2,16 +2,12 @@
 
 The most magical package manager forever. (Experimental Branch)   
 
-#Dont't steal my links XD  
+Acknowledgements:  
+Leader:  
+  @Lakr233   
 
-实验室分支，请低调。  
+Developers:
+  @u0x01   
+  @mx_yolande. 
 
-制作组名单:  
-
-Leader: @Lakr233  
-
-感谢名单:  
-
-@u0x01                              黑暗模式js  
-@mx_yolande                     代码审查  
-
+More thins coming later.... I got summery holiday homeworks to do.  
