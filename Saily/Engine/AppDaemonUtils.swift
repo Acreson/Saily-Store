@@ -125,7 +125,7 @@ class app_daemon_utils {
                     return (.failed, item.package.id)
                 }
             case .required_remove:
-                required_remove.append("dpkg --remove " + item.package.id)
+                required_remove.append("dpkg --purge " + item.package.id)
             case .required_config:
                 print("required_config")
             case .required_modify_dcrp:
