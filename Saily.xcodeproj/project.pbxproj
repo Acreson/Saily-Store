@@ -765,7 +765,7 @@
 				"${BUILT_PRODUCTS_DIR}/IHProgressHUD/IHProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
-				"${PODS_ROOT}/Reveal-SDK/RevealServer/iOS/RevealServer.framework",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-21/iOS/RevealServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
 				"${BUILT_PRODUCTS_DIR}/SWCompression/SWCompression.framework",

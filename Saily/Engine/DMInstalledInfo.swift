@@ -12,6 +12,7 @@ enum operation_type_t: String {
     case required_remove        // Will remove
     case required_config        // Install failed, will need to reconfig
     case required_modify_dcrp   // Dependency Conflict Replace Provide
+//    case required_purge_install // Fuck This Package And Remove Everythings Possible And Reinstall
     case auto_install           // Dependencies...
     case DNG_auto_remove        // Ask user before execute
     case unknown

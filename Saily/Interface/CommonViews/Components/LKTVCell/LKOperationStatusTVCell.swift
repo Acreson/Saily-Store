@@ -12,51 +12,68 @@ extension cell_views {
     
     class LKOperationStatusTVCell: UITableViewCell {
         
-        let button1 = UIButton()
-        let button2 = UIButton()
-        private let dummy = UIView()
+        let icon = UIImageView()
+        let title = UILabel()
+        let link = UILabel()
+        let sep = UIView()
+        let arrow = UIImageView()
         
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            button1.translatesAutoresizingMaskIntoConstraints = false
-            button2.translatesAutoresizingMaskIntoConstraints = false
-            dummy.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(button1)
-            contentView.addSubview(button2)
-            contentView.addSubview(dummy)
+            icon.translatesAutoresizingMaskIntoConstraints = false
+            title.translatesAutoresizingMaskIntoConstraints = false
+            link.translatesAutoresizingMaskIntoConstraints = false
+            sep.translatesAutoresizingMaskIntoConstraints = false
+            arrow.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(icon)
+            contentView.addSubview(title)
+            contentView.addSubview(link)
+            contentView.addSubview(sep)
+            contentView.addSubview(arrow)
             
-            dummy.snp.makeConstraints { (x) in
-                x.center.equalTo(contentView.snp.center)
-                x.width.equalTo(1)
-                x.height.equalTo(1)
+            icon.setRadiusINT(radius: 6)
+            icon.contentMode = .scaleAspectFit
+            icon.snp.makeConstraints { (x) in
+                x.centerY.equalTo(contentView.snp.centerY)
+                x.left.equalTo(contentView.snp.left).offset(24)
+                x.height.equalTo(33)
+                x.width.equalTo(33)
             }
             
-            button1.setTitle("Button1Title", for: .normal)
-            button1.titleLabel?.font = .boldSystemFont(ofSize: 15)
-            button1.setRadiusINT(radius: 8)
-            //        button1.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-            button1.setTitleColor(.gray, for: .highlighted)
-            button1.snp.makeConstraints { (x) in
-                x.left.equalTo(contentView.snp.left).offset(12)
-                x.right.equalTo(dummy.snp.left).offset(-12)
+            sep.backgroundColor = .lightGray
+            sep.snp.makeConstraints { (x) in
+                x.left.equalTo(icon.snp.right).offset(12)
+                x.bottom.equalTo(contentView.snp.bottom)
+                x.right.equalTo(contentView.snp.right)
+                x.height.equalTo(0.5)
+            }
+            
+            link.font = .boldSystemFont(ofSize: 12)
+            link.textColor = LKRoot.ins_color_manager.read_a_color("table_view_link")
+            link.snp.makeConstraints { (x) in
+                x.bottom.equalTo(icon.snp.bottom).offset(2)
+                x.left.equalTo(sep.snp.left).offset(4)
+                x.right.equalTo(contentView.snp.right)
+                x.height.equalTo(14)
+            }
+            
+            title.font = .boldSystemFont(ofSize: 18)
+            title.textColor = LKRoot.ins_color_manager.read_a_color("table_view_title")
+            title.snp.makeConstraints { (x) in
+                x.bottom.equalTo(link.snp.top).offset(0)
+                x.left.equalTo(link.snp.left)
+                x.right.equalTo(contentView.snp.right)
                 x.top.equalTo(contentView.snp.top).offset(6)
-                x.bottom.equalTo(contentView.snp.bottom).offset(-6)
             }
             
-            button2.setTitle("Button2Title", for: .normal)
-            button2.titleLabel?.font = .boldSystemFont(ofSize: 15)
-            button2.setRadiusINT(radius: 8)
-            //        button2.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
-            button2.setTitleColor(.gray, for: .highlighted)
-            button2.snp.makeConstraints { (x) in
-                x.left.equalTo(dummy.snp.right).offset(12)
-                x.right.equalTo(contentView.snp.right).offset(-12)
-                x.top.equalTo(contentView.snp.top).offset(6)
-                x.bottom.equalTo(contentView.snp.bottom).offset(-6)
+            //            arrow.image = UIImage(named: "info")
+            arrow.contentMode = .scaleAspectFit
+            arrow.snp.makeConstraints { (x) in
+                x.centerY.equalTo(contentView.snp.centerY)
+                x.right.equalTo(contentView.snp.right).offset(-6)
+                x.height.equalTo(20)
+                x.width.equalTo(20)
             }
-            
-            contentView.backgroundColor = .clear
-            
         }
         
         required init?(coder aDecoder: NSCoder) {
