@@ -13,8 +13,6 @@
 
 - (void)call_to_daemon_with:(NSString *)str;
 
-//- (BOOL)daemon_status_check(void);
-
 - (void)redirectConsoleLogToDocumentFolder;
 
 @end

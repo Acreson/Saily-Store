@@ -77,6 +77,8 @@ class UIManageS: UIViewController, UITableViewDelegate, UITableViewDataSource, U
         
         let actionButton = JJFloatingActionButton()
         actionButton.addItem(title: "请求队列".localized(), image: UIImage(named: "List"), action: { (_) in
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.impactOccurred()
             presentSwiftMessageController(some: LKRequestList())
         })
         actionButton.setRadiusCGF(radius: 22.5)
