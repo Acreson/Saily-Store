@@ -256,6 +256,7 @@ extension LKRequestList: UITableViewDelegate, UITableViewDataSource {
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
                             self.table_view.reloadData()
                             UIApplication.shared.endIgnoringInteractionEvents()
+                            IHProgressHUD.dismiss()
                         }
                     }
                     return
