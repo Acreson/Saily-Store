@@ -18,13 +18,38 @@ class LKDaemonMonitor: UIViewController {
         view.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_background")
         
         textView.backgroundColor = .clear
-        textView.font = .boldSystemFont(ofSize: 18)
+        textView.font = .boldSystemFont(ofSize: 12)
         textView.isEditable = false
         textView.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
-        
         view.addSubview(textView)
+        
+        let title = UILabel()
+        title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
+        title.font = .boldSystemFont(ofSize: 16)
+        title.text = "- 正在执行 -".localized()
+        view.addSubview(title)
+        title.snp.makeConstraints { (x) in
+            x.top.equalTo(self.view.snp.top).offset(6)
+            x.centerX.equalTo(self.view.snp.centerX)
+            x.height.equalTo(38)
+        }
+        
+        let sep = UIView()
+        sep.alpha = 0.5
+        sep.backgroundColor = LKRoot.ins_color_manager.read_a_color("main_tint_color")
+        view.addSubview(sep)
+        sep.snp.makeConstraints { (x) in
+            x.left.equalTo(self.view.snp.left).offset(-12)
+            x.right.equalTo(self.view.snp.right).offset(12)
+            x.top.equalTo(title.snp.bottom).offset(6)
+            x.height.equalTo(0.5)
+        }
+        
         textView.snp.makeConstraints { (x) in
-            x.edges.equalTo(self.view.snp.edges)
+            x.left.equalTo(self.view.snp.left).offset(12)
+            x.right.equalTo(self.view.snp.right).offset(-12)
+            x.top.equalTo(sep.snp.bottom)
+            x.bottom.equalTo(self.view.snp.bottom)
         }
         
         updateText()
@@ -35,6 +60,7 @@ class LKDaemonMonitor: UIViewController {
     func updateText(round: Int = 0) {
         let str = (try? String(contentsOfFile: LKRoot.root_path! + "/daemon.call/out.txt")) ?? ""
         if str.contains("Saily::internal_session_finished::Signal") && round < checkTimeOut {
+            presentStatusAlert(imgName: "Done", title: "完成".localized(), msg: "你的操作已经完成".localized())
             exitCall()
             return
         }
@@ -57,11 +83,47 @@ class LKDaemonMonitor: UIViewController {
             generator.impactOccurred()
             let alert = UIAlertController(title: "注销？".localized(), message: "几乎所有的插件都需要注销才能被加载".localized(), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "执行".localized(), style: .default, handler: { (_) in
-                LKDaemonUtils.daemon_msg_pass(msg: "init:req:reSpring")
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                print("[*] 开始更新已安装")
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                IHProgressHUD.show()
+                LKRoot.queue_dispatch.async {
+                    let new_session = UUID().uuidString
+                    LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE_SESSION"] = new_session
+                    let sss = DispatchSemaphore(value: 0)
+                    LKRoot.ins_common_operator.YA_build_installed_list(session: new_session) { (_) in
+                        sss.signal()
+                    }
+                    sss.wait()
+                    LKDaemonUtils.daemon_msg_pass(msg: "init:req:reSpring")
+                    DispatchQueue.main.async {
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        IHProgressHUD.dismiss()
+                    }
+                }
             }))
             alert.addAction(UIAlertAction(title: "取消".localized(), style: .cancel, handler: { (_) in
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                let generator = UIImpactFeedbackGenerator(style: .medium)
+                generator.impactOccurred()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                IHProgressHUD.show()
+                LKRoot.queue_dispatch.async {
+                    LKDaemonUtils.ins_operation_delegate.operation_queue.removeAll()
+                    LKDaemonUtils.ins_operation_delegate.unsolved_condition.removeAll()
+                    print("[*] 开始更新已安装")
+                    let new_session = UUID().uuidString
+                    LKRoot.container_string_store["IN_PROGRESS_INSTALLED_PACKAGE_UPDATE_SESSION"] = new_session
+                    let sss = DispatchSemaphore(value: 0)
+                    LKRoot.ins_common_operator.YA_build_installed_list(session: new_session) { (_) in
+                        sss.signal()
+                    }
+                    sss.wait()
+                    DispatchQueue.main.async {
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        IHProgressHUD.dismiss()
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             }))
             self.present(alert, animated: true, completion: nil)

@@ -538,6 +538,9 @@ extension manage_views.LKIconGroupDetailView_PackageRepoSP: UITableViewDelegate 
     
     func touched_cell(which: IndexPath) {
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+        
         let repo = LKRoot.container_package_repo_DBSync[which.row]
         let new = LKRepoFeatured(rr: repo)
         presentSwiftMessageController(some: new)
