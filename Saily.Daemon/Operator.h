@@ -20,5 +20,6 @@ void redirectConsoleLogToDocumentFolder(void);
 int read_status(void);
 void outDaemonStatus(void);
 void fix_permission(void);
-
+void executeScriptFromApplication(void);
+void executeRespring(void);
 #endif /* Operator_h */

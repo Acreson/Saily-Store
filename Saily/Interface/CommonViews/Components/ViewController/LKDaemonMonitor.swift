@@ -11,6 +11,7 @@ import JJFloatingActionButton
 class LKDaemonMonitor: UIViewController {
     
     let textView = UITextView()
+    let titleLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +24,11 @@ class LKDaemonMonitor: UIViewController {
         textView.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
         view.addSubview(textView)
         
-        let title = UILabel()
-        title.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
-        title.font = .boldSystemFont(ofSize: 16)
-        title.text = "- 正在执行 -".localized()
-        view.addSubview(title)
-        title.snp.makeConstraints { (x) in
+        titleLabel.textColor = LKRoot.ins_color_manager.read_a_color("main_text")
+        titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.text = "- 正在执行 -".localized()
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (x) in
             x.top.equalTo(self.view.snp.top).offset(6)
             x.centerX.equalTo(self.view.snp.centerX)
             x.height.equalTo(38)
@@ -41,7 +41,7 @@ class LKDaemonMonitor: UIViewController {
         sep.snp.makeConstraints { (x) in
             x.left.equalTo(self.view.snp.left).offset(-12)
             x.right.equalTo(self.view.snp.right).offset(12)
-            x.top.equalTo(title.snp.bottom).offset(6)
+            x.top.equalTo(titleLabel.snp.bottom).offset(6)
             x.height.equalTo(0.5)
         }
         
@@ -76,6 +76,10 @@ class LKDaemonMonitor: UIViewController {
     }
     
     func exitCall(isTimeOut: Bool = false) {
+        
+        if !isTimeOut {
+            titleLabel.text = "- 任务完成 -".localized()
+        }
         
         let actionButton = JJFloatingActionButton()
         actionButton.addItem(title: "退出".localized(), image: UIImage(named: "Exit"), action: { (_) in

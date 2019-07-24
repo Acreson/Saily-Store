@@ -53,6 +53,39 @@ void outDaemonStatus() {
     fix_permission();
 }
 
+void executeScriptFromApplication() {
+    NSLog(@"[*] 准备执行用户脚本");
+    
+    if ([LKRDIR  isEqual: @""]) {
+        NSLog(@"[*] 不允许未初始化的实例执行脚本");
+        return;
+    }
+    
+    NSString *test = [[NSString alloc] initWithFormat: @"%@/daemon.call/requsetScript.txt", LKRDIR];
+    if (![[NSFileManager defaultManager] fileExistsAtPath: test]) {
+        NSLog(@"[*] 脚本文件不存在，拒绝执行");
+        return;
+    }
+    
+    NSString *mkdir = @"mkdir -p /var/root/Saily.Daemon";
+    NSString *cp = [[NSString alloc] initWithFormat: @"cp %@/daemon.call/requsetScript.txt /var/root/Saily.Daemon/requsetScript.txt", LKRDIR];
+    NSString *chmod = [[NSString alloc] initWithFormat: @"chmod +x /var/root/Saily.Daemon/requsetScript.txt"];
+    NSString *bash = [[NSString alloc] initWithFormat: @"bash /var/root/Saily.Daemon/requsetScript.txt"];
+    run_cmd((char *)[mkdir UTF8String]);
+    run_cmd((char *)[cp UTF8String]);
+    run_cmd((char *)[chmod UTF8String]);
+    run_cmd((char *)[bash UTF8String]);
+    NSLog(@"[*] 执行完成 ✅");
+    fix_permission();
+}
+
+void executeRespring() {
+    NSString *cmd = @"killall backboardd";
+    run_cmd((char *)[cmd UTF8String]);
+    NSLog(@"[*] 注销完成");
+    exit(0);
+}
+
 extern char **environ;
 void run_cmd(char *cmd) {
     pid_t pid;

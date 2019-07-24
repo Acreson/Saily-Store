@@ -187,3 +187,5 @@
 "注销？" = "reSpring?";
 "几乎所有的插件都需要注销才能被加载" = "ALMOST EVERYTHING REQUIR A RESPRING TO WORK";
 "你的操作已经完成" = "Your request was finished";
+"- 任务完成 -" = "- FINISHED -";
+"- 正在执行 -" = "- RUNNING -";

@@ -36,6 +36,14 @@ static void read_end() {
         outDaemonStatus();
         return;
     }
+    if ([read_rdi hasPrefix:@"init:req:fromScript"]) {
+        executeScriptFromApplication();
+        return;
+    }
+    if ([read_rdi hasPrefix:@"init:req:reSpring"]) {
+        executeRespring();
+        return;
+    }
 }
 
 static void read_space() {

@@ -54,16 +54,16 @@ class app_daemon_utils {
         }
         sender_lock = true
         object.call_to_daemon_(with: "com.Lakr233.Saily.MsgPass.read.Begin")
-        usleep(233)
+        usleep(2333)
         let charasets = msg.charactersArray
         for item in charasets {
             let cs = String(item)
             let str = "com.Lakr233.Saily.MsgPass.read." + cs
             object.call_to_daemon_(with: str)
-            usleep(666)
+            usleep(2333)
         }
         object.call_to_daemon_(with: "com.Lakr233.Saily.MsgPass.read.End")
-        usleep(233)
+        usleep(2333)
         print("[*] 向远端发送数据完成：" + msg)
         sender_lock = false
     }
@@ -110,8 +110,9 @@ class app_daemon_utils {
                 // 拷贝安装资源
                 if let path = item.dowload?.path {
                     if FileManager.default.fileExists(atPath: path) {
-                        try? FileManager.default.copyItem(atPath: path, toPath: LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb")
-                        thisSection = "dpkg -i " + LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        let target = LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        try? FileManager.default.copyItem(atPath: path, toPath: target)
+                        thisSection = "dpkg -i " + target
                         if item.operation_type == .required_install {
                             required_install.append(thisSection)
                         } else {
@@ -133,8 +134,9 @@ class app_daemon_utils {
                 // 拷贝安装资源
                 if let path = item.dowload?.path {
                     if FileManager.default.fileExists(atPath: path) {
-                        try? FileManager.default.copyItem(atPath: path, toPath: LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb")
-                        thisSection = "dpkg -i " + LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        let target = LKRoot.root_path! + "/daemon.call/debs/" + UUID().uuidString + ".deb"
+                        try? FileManager.default.copyItem(atPath: path, toPath: target)
+                        thisSection = "dpkg -i " + target
                         auto_install.append(thisSection)
                     } else {
                         return (.failed, item.package.id)
@@ -151,10 +153,10 @@ class app_daemon_utils {
         
         var script = ""
         for item in auto_install + required_reinstall + required_install + required_remove {
-            script += item + " >> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
+            script += item + " &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         }
         
-        script += "echo Saily::internal_session_finished::Signal >> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
+        script += "echo Saily::internal_session_finished::Signal &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         
         try? script.write(toFile: LKRoot.root_path! + "/daemon.call/requsetScript.txt", atomically: true, encoding: .utf8)
         try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/daemon.call/out.txt")
