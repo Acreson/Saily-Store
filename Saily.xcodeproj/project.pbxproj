@@ -85,6 +85,7 @@
 		B493CC2B22DB519B00D31A47 /* OperatorGetPackageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */; };
 		B4A00EC022DA417000A9D9C1 /* DMPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */; };
 		B4AFE5F122E7C792000F5244 /* LKOperationStatusTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AFE5F022E7C792000F5244 /* LKOperationStatusTVCell.swift */; };
+		B4AFE5F322E83241000F5244 /* LKDaemonMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AFE5F222E83241000F5244 /* LKDaemonMonitor.swift */; };
 		B4B2415922E265F600048604 /* LKTVCellPutPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415822E265F600048604 /* LKTVCellPutPackage.swift */; };
 		B4B2415B22E287B500048604 /* LKPackageSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415A22E287B500048604 /* LKPackageSearch.swift */; };
 		B4B2415E22E288DD00048604 /* LKPackageCLCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4B2415D22E288DD00048604 /* LKPackageCLCell.swift */; };
@@ -191,6 +192,7 @@
 		B493CC2A22DB519B00D31A47 /* OperatorGetPackageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorGetPackageInfo.swift; sourceTree = "<group>"; };
 		B4A00EBF22DA417000A9D9C1 /* DMPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMPackages.swift; sourceTree = "<group>"; };
 		B4AFE5F022E7C792000F5244 /* LKOperationStatusTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKOperationStatusTVCell.swift; sourceTree = "<group>"; };
+		B4AFE5F222E83241000F5244 /* LKDaemonMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKDaemonMonitor.swift; sourceTree = "<group>"; };
 		B4B2415822E265F600048604 /* LKTVCellPutPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKTVCellPutPackage.swift; sourceTree = "<group>"; };
 		B4B2415A22E287B500048604 /* LKPackageSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageSearch.swift; sourceTree = "<group>"; };
 		B4B2415D22E288DD00048604 /* LKPackageCLCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKPackageCLCell.swift; sourceTree = "<group>"; };
@@ -445,8 +447,9 @@
 				B437DD7B22E6D7C300A827EB /* LKRequestList.swift */,
 				B42FFC8322E1ABD40011F6C8 /* LKRepoFeatured.swift */,
 				B4046A9222DEA63900DF3835 /* LKPackageDetail.swift */,
-				B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */,
 				B4B2415A22E287B500048604 /* LKPackageSearch.swift */,
+				B432BD1122E54FC9007B4727 /* LKPackageDetailExtensions.swift */,
+				B4AFE5F222E83241000F5244 /* LKDaemonMonitor.swift */,
 				B4046A6422DE2FAE00DF3835 /* LKItemListViewController.swift */,
 			);
 			path = ViewController;
@@ -901,6 +904,7 @@
 				B4304F1D22DDDC2400E98E22 /* OperatorGetInstalledInfo.swift in Sources */,
 				B48731FF22D6558500BADE62 /* UIManageL.swift in Sources */,
 				ABFBA81A229D7DC40070A17E /* StringExtensions.swift in Sources */,
+				B4AFE5F322E83241000F5244 /* LKDaemonMonitor.swift in Sources */,
 				B42C289C22D30630002B1A96 /* LKIconStack.swift in Sources */,
 				B432BD1222E54FC9007B4727 /* LKPackageDetailExtensions.swift in Sources */,
 				ABE6DD05229ED2A000D18D9E /* DMSettings.swift in Sources */,

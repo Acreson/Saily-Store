@@ -151,8 +151,10 @@ class app_daemon_utils {
         
         var script = ""
         for item in auto_install + required_reinstall + required_install + required_remove {
-            script += item + " &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
+            script += item + " >> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         }
+        
+        script += "echo Saily::internal_session_finished::Signal >> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         
         try? script.write(toFile: LKRoot.root_path! + "/daemon.call/requsetScript.txt", atomically: true, encoding: .utf8)
         try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/daemon.call/out.txt")
@@ -172,7 +174,7 @@ class app_daemon_utils {
         
         // 打开监视窗口
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            
+            presentSwiftMessageController(some: LKDaemonMonitor(), interActinoEnabled: false)
         }
         
         return (.success, "")
