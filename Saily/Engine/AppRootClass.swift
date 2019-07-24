@@ -204,7 +204,7 @@ class app_root_class {
 //        #endif
         
         if pre.contains("zh") {
-            default_links.insert("https://LakrOwO.gitee.io/repo", at: 0)
+            default_links.insert("https://LakrOwO.gitee.io/repo/", at: 0)
         } else {
             default_links.insert("https://OuOp.github.io/", at: 0)
         }
