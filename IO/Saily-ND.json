@@ -23,15 +23,15 @@
                     "screenshots": [
                         {
                             "accessibilityText": "Screenshot0",
-                            "url": "https://github.com/Co2333/Saily-Store/tree/master/IO/Preview01.PNG"
+                            "url": "https://github.com/Co2333/Saily-Store/raw/master/IO/Preview01.PNG"
                         },
                         {
                             "accessibilityText": "Screenshot1",
-                            "url": "https://github.com/Co2333/Saily-Store/tree/master/IO/Preview02.PNG"
+                            "url": "https://github.com/Co2333/Saily-Store/raw/master/IO/Preview02.PNG"
                         },
                         {
                             "accessibilityText": "Screenshot2",
-                            "url": "https://github.com/Co2333/Saily-Store/tree/master/IO/Preview03.PNG"
+                            "url": "https://github.com/Co2333/Saily-Store/raw/master/IO/Preview03.PNG"
                         }
                     ],
                     "itemSize": "{225, 487.2}",
