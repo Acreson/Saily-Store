@@ -99,6 +99,7 @@ extension app_opeerator {
                         if this_package["PACKAGE"] == nil || YA_package_in_exclude_list(id: this_package["PACKAGE"]!) {
                             //                            print("[*] 丢弃没有id的软件包")
                         } else if package[this_package["PACKAGE"]!] != nil {
+                            this_package["PACKAGE"] = this_package["PACKAGE"]!.lowercased()
                             // 存在软件包
                             this_package["_internal_SIG_begin_update"] = "0x1"
                             // 直接添加 version 不检查 version 是否存在因为它不存在就奇怪了
@@ -122,6 +123,7 @@ extension app_opeerator {
                                 LKRoot.container_installed_provides[this_package["PACKAGE"]!] = this_package["VERSION"]
                             }
                         } else {
+                            this_package["PACKAGE"] = this_package["PACKAGE"]!.lowercased()
                             // 不存在软件包 创建软件包
                             this_package["_internal_SIG_begin_update"] = "0x1"
                             let new = DBMPackage()

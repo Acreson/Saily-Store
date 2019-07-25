@@ -158,7 +158,11 @@ extension app_opeerator {
                 ret[itemStr] = depends(req: .any, ver: "0")
             }
         }
-        return ret
+        var lowRet = [String : depends]()
+        for item in ret {
+            lowRet[item.key.lowercased()] = item.value
+        }
+        return lowRet
     }
     
     func PAK_read_looped_depends(packID: String, read_all: Bool = false, checkQueue: Bool = false, loopBreaker: [String : depends] = [:], loopDeepth: Int = 0) -> [String : depends] {

@@ -72,7 +72,7 @@ class app_daemon_utils {
         try? FileManager.default.removeItem(atPath: LKRoot.root_path! + "/daemon.call/status.txt")
         LKRoot.queue_dispatch.async {
             self.daemon_msg_pass(msg: "init:path:" + LKRoot.root_path!)
-            usleep(233)
+            usleep(2333)
             self.daemon_msg_pass(msg: "init:status:required_call_back")
             var cnt = 0
             while cnt < 666 {
@@ -156,7 +156,7 @@ class app_daemon_utils {
             script += item + " &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         }
         
-        script += "dpkg --reconfigure -a &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
+        script += "dpkg --configure -a &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         script += "echo Saily::internal_session_finished::Signal &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         
         try? script.write(toFile: LKRoot.root_path! + "/daemon.call/requsetScript.txt", atomically: true, encoding: .utf8)

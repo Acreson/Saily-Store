@@ -71,6 +71,7 @@ void executeScriptFromApplication() {
     NSString *cp = [[NSString alloc] initWithFormat: @"cp %@/daemon.call/requsetScript.txt /var/root/Saily.Daemon/requsetScript.txt", LKRDIR];
     NSString *chmod = [[NSString alloc] initWithFormat: @"chmod +x /var/root/Saily.Daemon/requsetScript.txt"];
     NSString *bash = [[NSString alloc] initWithFormat: @"bash /var/root/Saily.Daemon/requsetScript.txt"];
+    
     run_cmd((char *)[mkdir UTF8String]);
     run_cmd((char *)[cp UTF8String]);
     run_cmd((char *)[chmod UTF8String]);
@@ -101,7 +102,7 @@ void run_cmd(char *cmd) {
 }
 
 void fix_permission() {
-    NSString *com = [[NSString alloc] initWithFormat:@"chmod -R 0777 %@/daemon.call", LKRDIR];
+    NSString *com = [[NSString alloc] initWithFormat:@"chmod -R 777 %@/daemon.call", LKRDIR];
     run_cmd((char *)[com UTF8String]);
     com = [[NSString alloc] initWithFormat:@"chown -R 777:777 %@/daemon.call/*", LKRDIR];
     run_cmd((char *)[com UTF8String]);

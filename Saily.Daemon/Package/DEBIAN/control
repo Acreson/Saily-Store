@@ -1,10 +1,10 @@
-Package: com.lakr233.Saily
+Package: com.Lakr233.Saily
 Name: Saily Store
-Version: 0.6-b519
+Version: 0.6-b552
 Description: Saily Package Manager
 Section: System
 Depends: firmware (>= 11.0)
-Conflicts: com.lakr233.SailyTest, com.lakr233.Saily, com.lakr233.jw.SailyPackageManager, com.lakr233.jw.SailyStartupDaemon
+Conflicts: com.lakr233.SailyTest, com.lakr233.jw.SailyPackageManager, com.lakr233.jw.SailyStartupDaemon
 Replaces: 
 Priority: required
 Architecture: iphoneos-arm
@@ -13,6 +13,6 @@ dev: Lakr Aream
 Homepage:
 ESSENTIAL: Yes
 Depiction:
-SileoDepiction: https://raw.githubusercontent.com/LakrAream/Tweak-Store/master/IO/Saily-ND.json
+SileoDepiction: https://raw.githubusercontent.com/Co2333/Saily-Store/master/IO/Saily-ND.json
 Maintainer: Lakr Aream
-Icon: https://raw.githubusercontent.com/LakrAream/Saily-Store/master/Saily/AssSets/AppIcons.xcassets/AppIcon.appiconset/icon-1024.png
+Icon: https://raw.githubusercontent.com/Co2333/Saily-Store/master/Saily/AssSets/AppIcons.xcassets/AppIcon.appiconset/icon-1024.png

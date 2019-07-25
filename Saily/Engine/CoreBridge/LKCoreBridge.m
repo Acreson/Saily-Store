@@ -9,6 +9,7 @@
 #import "LKCoreBridge.h"
 
 #include <notify.h>
+#include <dlfcn.h>
 
 @implementation LKCBObject
 

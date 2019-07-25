@@ -1,0 +1,3 @@
+uicache -a
+killall Saily.Daemon
+exit 0

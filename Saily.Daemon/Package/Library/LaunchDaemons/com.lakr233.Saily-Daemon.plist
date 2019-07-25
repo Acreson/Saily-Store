@@ -6,7 +6,7 @@
 	<true/>
 	<key>Label</key>
 	<string>com.lakr233.Saily-Daemon</string>
-	<key>ProgramArguments</key>
+	<key>Program</key>
 	<string>/usr/bin/Saily.Daemon</string>
 	<key>RunAtLoad</key>
 	<true/>

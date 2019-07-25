@@ -71,7 +71,9 @@ class LKDaemonMonitor: UIViewController {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.233) {
-            self.updateText(round: round + 1)
+            if !str.contains("Saily::internal_session_finished::Signal") {
+                self.updateText(round: round + 1)
+            }
         }
     }
     

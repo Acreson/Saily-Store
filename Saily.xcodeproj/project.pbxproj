@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04118A1522AA7E0500C4D94E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 04118A1722AA7E0500C4D94E /* InfoPlist.strings */; };
-		59304D677C65528748FF789A /* Pods_Saily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1B9FD90427C3E64F7C4EBFC /* Pods_Saily.framework */; };
+		2492077972C5289AA58F0900 /* Pods_Saily.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 632572248FECFA15C3EAEC08 /* Pods_Saily.framework */; };
 		AB04C51D22A4436000B29F0C /* CardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB04C51C22A4436000B29F0C /* CardDetails.swift */; };
 		AB081F95229D4BDC00ACA4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */; };
 		AB081F9C229D4BDD00ACA4DD /* AppIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB081F9B229D4BDD00ACA4DD /* AppIcons.xcassets */; };
@@ -105,8 +105,8 @@
 		04118A1622AA7E0500C4D94E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		04118A1822AA7E0800C4D94E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		04118A1B22AA7EDD00C4D94E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21969B68E7E161ED7633C91F /* Pods-Saily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Saily.release.xcconfig"; path = "Target Support Files/Pods-Saily/Pods-Saily.release.xcconfig"; sourceTree = "<group>"; };
-		922088349015C56366B3E38A /* Pods-Saily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Saily.debug.xcconfig"; path = "Target Support Files/Pods-Saily/Pods-Saily.debug.xcconfig"; sourceTree = "<group>"; };
+		0497D28C8C77251284C02B92 /* Pods-Saily.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Saily.release.xcconfig"; path = "Target Support Files/Pods-Saily/Pods-Saily.release.xcconfig"; sourceTree = "<group>"; };
+		632572248FECFA15C3EAEC08 /* Pods_Saily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Saily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB04C51C22A4436000B29F0C /* CardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetails.swift; sourceTree = "<group>"; };
 		AB081F91229D4BDC00ACA4DD /* Saily.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saily.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB081F94229D4BDC00ACA4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		B4EEB8D522DCDECF00477E39 /* LKIconGroupDetailView_RecentInstalled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RecentInstalled.swift; sourceTree = "<group>"; };
 		B4EEB8D722DCE3A000477E39 /* LKIconGroupDetailView_RandomPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKIconGroupDetailView_RandomPackage.swift; sourceTree = "<group>"; };
 		B4EEB94A22DCF9F800477E39 /* LKNonWorkSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LKNonWorkSearchBar.swift; sourceTree = "<group>"; };
-		E1B9FD90427C3E64F7C4EBFC /* Pods_Saily.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Saily.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB61DE6DF7C27A6CD3935A5E /* Pods-Saily.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Saily.debug.xcconfig"; path = "Target Support Files/Pods-Saily/Pods-Saily.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59304D677C65528748FF789A /* Pods_Saily.framework in Frameworks */,
+				2492077972C5289AA58F0900 /* Pods_Saily.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,8 +241,8 @@
 		35F0FD9C7EF0DEEACEA4981B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				922088349015C56366B3E38A /* Pods-Saily.debug.xcconfig */,
-				21969B68E7E161ED7633C91F /* Pods-Saily.release.xcconfig */,
+				EB61DE6DF7C27A6CD3935A5E /* Pods-Saily.debug.xcconfig */,
+				0497D28C8C77251284C02B92 /* Pods-Saily.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -618,7 +618,7 @@
 			children = (
 				B4046A9022DE895C00DF3835 /* Aiolos.framework */,
 				B4B2416C22E369F800048604 /* Foundation.framework */,
-				E1B9FD90427C3E64F7C4EBFC /* Pods_Saily.framework */,
+				632572248FECFA15C3EAEC08 /* Pods_Saily.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -630,13 +630,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB081FA3229D4BDD00ACA4DD /* Build configuration list for PBXNativeTarget "Saily" */;
 			buildPhases = (
-				2A7BEF2D2054B0C64E94352E /* [CP] Check Pods Manifest.lock */,
+				B7442EAD344C0F49360F4584 /* [CP] Check Pods Manifest.lock */,
 				ABFBA7E7229D5AF20070A17E /* SwiftLint */,
 				AB081F8D229D4BDC00ACA4DD /* Sources */,
 				AB081F8E229D4BDC00ACA4DD /* Frameworks */,
 				AB081F8F229D4BDC00ACA4DD /* Resources */,
 				ABFBA825229D807B0070A17E /* Bump Version */,
-				8CA69C0C19CA0E9B9834A4D7 /* [CP] Embed Pods Frameworks */,
+				5E1B6DB8775B399D328AF7CA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -726,7 +726,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A7BEF2D2054B0C64E94352E /* [CP] Check Pods Manifest.lock */ = {
+		5E1B6DB8775B399D328AF7CA /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -734,31 +734,60 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Saily-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8CA69C0C19CA0E9B9834A4D7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saily/Pods-Saily-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Saily/Pods-Saily-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AHDownloadButton/AHDownloadButton.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BSBacktraceLogger/BSBacktraceLogger.framework",
+				"${BUILT_PRODUCTS_DIR}/BitByteData/BitByteData.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/DoraemonKit/DoraemonKit.framework",
+				"${PODS_ROOT}/DoraemonKit/iOS/DoraemonKit/Framework/DoraemonLoadAnalyze.framework",
+				"${BUILT_PRODUCTS_DIR}/IHProgressHUD/IHProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
+				"${BUILT_PRODUCTS_DIR}/PNChart/PNChart.framework",
+				"${PODS_ROOT}/Reveal-SDK/RevealServer-21/iOS/RevealServer.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLiteRepairKit/sqliterk.framework",
+				"${BUILT_PRODUCTS_DIR}/SWCompression/SWCompression.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/StatusAlert/StatusAlert.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMessages/SwiftMessages.framework",
+				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyMarkdown/SwiftyMarkdown.framework",
+				"${BUILT_PRODUCTS_DIR}/UICountingLabel/UICountingLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDB.swift/WCDBSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/WCDBOptimizedSQLCipher/sqlcipher.framework",
+				"${BUILT_PRODUCTS_DIR}/fishhook/fishhook.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Saily/Pods-Saily-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AHDownloadButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSBacktraceLogger.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BitByteData.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DoraemonLoadAnalyze.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IHProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PNChart.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealServer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqliterk.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWCompression.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StatusAlert.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMessages.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyMarkdown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICountingLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCDBSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/sqlcipher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fishhook.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -817,7 +846,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd $SOURCE_ROOT\nfind . -name '.DS_Store' -type f -delete\nfind . -name '_CodeSignature' -type f -delete\n\n";
+			shellScript = "cd $SOURCE_ROOT\nfind . -name '.DS_Store' -delete\nfind . -name '_CodeSignature' -delete\ncd $SOURCE_ROOT/Saily.Daemon/Package/Applications\nfind . -name 'embedded.mobileprovision' -delete\n\n";
 		};
 		B4AFE5F922E86940000F5244 /* Unsign & ldid */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -871,6 +900,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nrm /Volumes/Hikari/Kirina/repo/debs/*.deb\ncp $SOURCE_ROOT/Packages/*.deb /Volumes/Hikari/Kirina/repo/debs\n/Volumes/Hikari/Kirina/repo/update.sh\n";
+		};
+		B7442EAD344C0F49360F4584 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Saily-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1138,7 +1189,7 @@
 		};
 		AB081FA4229D4BDD00ACA4DD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 922088349015C56366B3E38A /* Pods-Saily.debug.xcconfig */;
+			baseConfigurationReference = EB61DE6DF7C27A6CD3935A5E /* Pods-Saily.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1150,7 +1201,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lakr233.Saily;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lakr233.Saily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Saily/Engine/CoreBridge/Saily-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1161,7 +1212,7 @@
 		};
 		AB081FA5229D4BDD00ACA4DD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21969B68E7E161ED7633C91F /* Pods-Saily.release.xcconfig */;
+			baseConfigurationReference = 0497D28C8C77251284C02B92 /* Pods-Saily.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1173,7 +1224,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lakr233.Saily;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lakr233.Saily;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Saily/Engine/CoreBridge/Saily-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

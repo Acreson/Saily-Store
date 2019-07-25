@@ -23,7 +23,7 @@
       location = "group:IO"
       name = "IO">
       <FileRef
-         location = "group:/Users/ouo/Documents/GitHub/Tweak-Store/IO/Saily-ND.json">
+         location = "group:Saily-ND.json">
       </FileRef>
       <Group
          location = "group:Contents"

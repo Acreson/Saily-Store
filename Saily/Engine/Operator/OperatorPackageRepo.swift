@@ -377,6 +377,7 @@ extension app_opeerator {
                             if this_package["PACKAGE"] == nil || this_package["VERSION"] == nil {
                                 //                            print("[*] 丢弃没有id的软件包")
                             } else if packages[this_package["PACKAGE"]!] != nil {
+                                this_package["PACKAGE"] = this_package["PACKAGE"]!.lowercased()
                                 // 存在软件包
                                 if packages[this_package["PACKAGE"]!]!.version[this_package["VERSION"]!] == nil {
                                     // 不存在！
@@ -402,6 +403,7 @@ extension app_opeerator {
                                 packages[this_package["PACKAGE"]!]!.one_of_the_package_name_lol = this_package["NAME"] ?? ""
                                 packages[this_package["PACKAGE"]!]!.one_of_the_package_section_lol = this_package["SECTION"] ?? ""
                             } else {
+                                this_package["PACKAGE"] = this_package["PACKAGE"]!.lowercased()
                                 // 不存在软件包 创建软件包
                                 let new = DBMPackage()
                                 new.id = this_package["PACKAGE"]!
