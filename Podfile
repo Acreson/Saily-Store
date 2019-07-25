@@ -25,7 +25,7 @@ target 'Saily' do
   pod 'JJFloatingActionButton'
   
   pod 'SwiftLint', :configurations => ['Debug']
-  pod 'Reveal-SDK', '~> 21', :configurations => ['Debug']
+  pod 'LookinServer', :configurations => ['Debug']
   pod 'DoraemonKit/Core', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithGPS', '~> 1.1.7', :configurations => ['Debug']
   pod 'DoraemonKit/WithLoad', '~> 1.1.7', :configurations => ['Debug']

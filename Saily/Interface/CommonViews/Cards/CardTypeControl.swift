@@ -30,7 +30,8 @@ enum card_detail_type: Int {
     case package                                = 0x303
     
     // PRIVATE API - DO NOT USE IT PPPPLLLLEEEEAAAASSSSEEEE :P XD
-    case LKPrivateAPI_RESVERED                  = 0x600
+    case LKPrivateAPI_RESVERED                  = 0x580
+    case LKPrivateAPI_darkModeSwitcher          = 0x601
     case LKPrivateAPI_setting_page              = 0x620
     
 }

@@ -27,14 +27,24 @@ SSH - ALPINE
 ---> End Section
 
 --> Begin Section |text
-那么我们如何修改密码呢？
+那么我们如何修改密码呢？首先，你需要添加软件源
 //BLANK-LINE//
-      首先，你需要添加软件源
+---> End Section
+
+--> Begin Section |package_repo|https://repo.chariz.io/
+Chariz
+---> End Section
+
+--> Begin Section |text
+      并安装软件包 NewTerm 2
 //BLANK-LINE//
-            repo.chariz.io
-//BLANK-LINE//
-      并安装软件 NewTerm 2
-//BLANK-LINE//
+---> End Section
+
+--> Begin Section |package|ws.hbang.newterm
+The most geek tool for you.
+---> End Section
+
+--> Begin Section |text
 然后在终端输入如下的指令即可完成任务。
 //BLANK-LINE//
         login root

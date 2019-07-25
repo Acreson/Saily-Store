@@ -15,17 +15,17 @@
 --> Begin Section |text
 致用户的一封信：
 //BLANK-LINE//
-      还曾记得越狱的鼻祖 Cydia 吗？
+      还曾记得越狱的鼻祖Cydia吗？
 //BLANK-LINE//
-      这个咖啡色的纸盒快递承载了我多少年自由的回忆。从 iPhone 3Gs 开始，一直到 iPhoneX ，从 iOS4 开始一直到 iOS12 ，Cydia 都是越狱本身不可或缺的一部分。在此，我们向祖先们致敬。
+      这个咖啡色的纸盒快递承载了我多少年自由的回忆。从iPhone 3Gs开始，一直到iPhoneX，从iOS4开始一直到iOS12，Cydia都是越狱本身不可或缺的一部分。在此，我们向祖先们致敬。
 ---> End Section
 
 --> Begin Section |photo_with_description|./Resource/Jailbroken-iPhone.png|
-在设备性能极度严苛的条件下完美运转的 Cydia
+在设备性能极度严苛的条件下完美运转的Cydia
 ---> End Section
 
 --> Begin Section |text
-      但是随着设备硬件性能的发展，人们审美的变化，Cydia 已经看上去不那么闪闪发光，这也让社区诞生了许许多多的新产品。例如 Zebra, Sileo 这样的软件包管理器。Saily 就是其中的一款。
+      但是随着设备硬件性能的发展，人们审美的变化，Cydia已经看上去不那么闪闪发光，这也让社区诞生了许许多多的新产品。例如Zebra, Sileo这样的软件包管理器。Saily就是其中的一款。
 //BLANK-LINE//
       我们费劲心血，精心设计。在打造这款软件包管理器的过程中，曾4次推翻项目重构，共精简代码千行，优化数据模型十余次，UI帧率优化近百次，只为打造极致的用户体验。
 ---> End Section
@@ -39,7 +39,7 @@
 ---> End Section
 
 --> Begin Section |text|
-      本软件遵循 iOS 开发设计原则，依赖 APT/DPKG，与 Cydia 兼容。（与 Sileo 的兼容存在一定问题，请自行斟酌） 如果在使用过程中遇到任何问题，欢迎在软件的 “我与世界” 页面内获取支持。本软件完全开源，免费。
+      本软件遵循iOS开发设计原则，依赖APT/DPKG，与Cydia兼容。（与Sileo的兼容存在一定问题，请自行斟酌） 如果在使用过程中遇到任何问题，欢迎在软件的设置页面内获取支持。本软件完全开源，免费。
 //BLANK-LINE//
       祝越狱社区天长地久。
 //BLANK-LINE//

@@ -38,7 +38,7 @@ class LKSettingsController: UIViewController {
                                                                                blue: blue,
                                                                                alpha: 1)
         }, completion: nil)
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

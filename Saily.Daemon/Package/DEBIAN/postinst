@@ -4,8 +4,8 @@ chmod 0644 /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist
 chmod +x /usr/bin/Saily.Daemon
 
 # Load Daemon
-launchctl unload /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist
-launchctl load /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist
+launchctl unload /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist &> /dev/null
+launchctl load /Library/LaunchDaemons/com.lakr233.Saily-Daemon.plist &> /dev/null
 
 # Permission
 chmod 0755 /Applications/Saily.app/Saily
@@ -15,11 +15,11 @@ chown -R root:wheel /Applications/Saily.app/*
 # Uicache
 # uicache /Applications/Saily.app
 # Broken uicache on Chimera, sorry to say.
-uicache -a
+uicache -a &> /dev/null
 # su mobile -c uicache
 
 # Swap our daemon
-killall Saily.Daemon
+killall Saily.Daemon &> /dev/null
 
 # Force dpkg to continue
 exit 0

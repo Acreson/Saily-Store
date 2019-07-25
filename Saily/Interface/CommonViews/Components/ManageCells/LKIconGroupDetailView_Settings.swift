@@ -37,7 +37,7 @@ extension manage_views {
             contentView.addShadow(ofColor: LKRoot.ins_color_manager.read_a_color("shadow"))
             addSubview(contentView)
             contentView.snp.makeConstraints { (x) in
-                x.top.equalTo(self.snp.top).offset(14)
+                x.top.equalTo(self.snp.top).offset(0)
                 x.bottom.equalTo(self.snp.bottom).offset(-RN_ANCHOR_O + 8)
                 x.left.equalTo(self.snp.left).offset(RN_ANCHOR_O)
                 x.right.equalTo(self.snp.right).offset(-RN_ANCHOR_O)

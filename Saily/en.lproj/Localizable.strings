@@ -189,3 +189,5 @@
 "你的操作已经完成" = "Your request was finished";
 "- 任务完成 -" = "- FINISHED -";
 "- 正在执行 -" = "- RUNNING -";
+"查看" = "See";
+"没有找到这个软件包" = "Can't find this package";

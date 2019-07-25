@@ -17,9 +17,34 @@
 ---> End Section
 
 --> Begin Section |text
+      那么切换颜色主题呢？在目前的版本中，我们支持两种主题：柔彩白和高雅黑。你现在看到的主题很可能就是柔彩白。那么如何启用高雅黑主题呢？请考虑切换到管理页面。
+---> End Section
+
+--> Begin Section |photo_with_description|./Resource/ManageTab.jpeg|
+位于程序底部的功能栏
+---> End Section
+
+--> Begin Section |text
+//BLANK-LINE//
+然后滑动页面找到设置小按钮，轻触一下。
 //BLANK-LINE//
 //BLANK-LINE//
-本程序设计师：@Lakr233
+---> End Section
+
+--> Begin Section |photo_with_description|./Resource/SettingButton.jpeg|
+你可能需要滑动页面才能看到它
+---> End Section
+
+--> Begin Section |text
+      在打开的页面，找到交互界面一栏，选择“外观 - 启用黑夜模式”并单击重新启动。在重新打开的软件中，你将看到全新的外观。当然，切换回柔彩白只需要再次拨动同一个开关，并重新启动。
+---> End Section
+
+--> Begin Section |text
+//BLANK-LINE//
+//BLANK-LINE//
+让我们感谢本程序的设计师：@Lakr233 
+//BLANK-LINE//
+👏
 //BLANK-LINE//
 2019.6.3
 //BLANK-LINE//

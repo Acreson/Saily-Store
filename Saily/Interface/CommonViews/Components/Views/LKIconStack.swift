@@ -30,6 +30,15 @@ extension common_views {
         }
         
         func apart_init() {
+            
+            var new = [String]()
+            var index = 0
+            for item in images_address where index <= max_image_count {
+                index += 1
+                new.insert(item, at: 0)
+            }
+            images_address = new
+            
             if last_image_address == images_address && ever_inited == 1 {
                 return
             }

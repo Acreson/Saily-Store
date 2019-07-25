@@ -240,10 +240,154 @@ extension common_views {
                     x.height.equalTo(34)
                 }
             }
+        case .package_repo:
+            do {
+                let cell = common_views.LKIconBannerSection()
+                cell.apart_init()
+                cell.title.text = body
+                cell.sub_title.text = vfsl.first
+                cell.icon.sd_setImage(with: URL(string: (vfsl.first ?? "") + "/CydiaIcon.png"), completed: nil)
+                DispatchQueue.main.async {
+                    cell.button.removeFromSuperview()
+                }
+                let button = UIButton()
+                button.setTitle("添加".localized(), for: .normal)
+                button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_text"), for: .normal)
+                button.setTitleColor(.gray, for: .highlighted)
+                button.accessibilityHint = vfsl.first
+                button.addTarget(self, action: #selector(NRCD_add_repo_section_handler(sender:)), for: .touchUpInside)
+                ret.addSubview(cell)
+                ret.addSubview(button)
+                button.snp.makeConstraints { (x) in
+                    x.centerY.equalTo(cell.icon.snp.centerY)
+                    x.right.equalTo(ret.snp.right)
+                }
+                cell.clipsToBounds = true
+                cell.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(-15)
+                    x.right.equalTo(ret.snp.right).offset(-50)
+                    x.top.equalTo(ret.snp.top)
+                    x.height.equalTo(68)
+                }
+                lenth += 80
+            }
+        case .package:
+            do {
+                let cell = common_views.LKIconBannerSection()
+                cell.apart_init()
+                DispatchQueue.main.async {
+                    cell.button.removeFromSuperview()
+                }
+                let button = UIButton()
+                button.setTitle("查看".localized(), for: .normal)
+                button.setTitleColor(LKRoot.ins_color_manager.read_a_color("main_text"), for: .normal)
+                button.setTitleColor(.gray, for: .highlighted)
+                button.accessibilityHint = vfsl.first
+                button.addTarget(self, action: #selector(NRCD_add_package_section_handler(sender:)), for: .touchUpInside)
+                
+                ret.addSubview(cell)
+                ret.addSubview(button)
+                button.snp.makeConstraints { (x) in
+                    x.centerY.equalTo(cell.icon.snp.centerY)
+                    x.right.equalTo(ret.snp.right)
+                }
+                cell.clipsToBounds = true
+                cell.snp.makeConstraints { (x) in
+                    x.left.equalTo(ret.snp.left).offset(-15)
+                    x.right.equalTo(ret.snp.right).offset(-50)
+                    x.top.equalTo(ret.snp.top)
+                    x.height.equalTo(68)
+                }
+                lenth += 80
+                
+                if let vfslf = vfsl.first {
+                    if let pack = LKRoot.container_packages[vfslf]?.copy() {
+                        let version = LKRoot.ins_common_operator.PAK_read_newest_version(pack: pack).1
+                        cell.title.text = LKRoot.ins_common_operator.PAK_read_name(version: version)
+                        cell.sub_title.text = body
+                        let icon_link = LKRoot.ins_common_operator.PAK_read_icon_addr(version: version)
+                        if icon_link.hasPrefix("http") {
+                            cell.icon.sd_setImage(with: URL(string: icon_link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+                                if err != nil || img == nil {
+                                    cell.icon.image = UIImage(named: "Error")
+                                }
+                            }
+                        } else if icon_link.hasPrefix("NAMED:") {
+                            let link = icon_link.dropFirst("NAMED:".count).to_String()
+                            cell.icon.sd_setImage(with: URL(string: link), placeholderImage: UIImage(named: "Gary")) { (img, err, _, _) in
+                                if err != nil || img == nil {
+                                    cell.icon.image = UIImage(named: "Error")
+                                }
+                            }
+                        } else {
+                            if let some = UIImage(contentsOfFile: icon_link) {
+                                cell.icon.image = some
+                            } else {
+                                cell.icon.image = UIImage(named: TWEAK_DEFAULT_IMG_NAME)
+                            }
+                        }
+                        
+                    } else {
+                        cell.title.text = "未找到的软件包".localized()
+                        cell.sub_title.text = vfslf
+                        cell.icon.image = UIImage(named: "Error")
+                        button.isEnabled = false
+                    }
+                } else {
+                    cell.icon.image = UIImage(named: "Error")
+                }
+                
+            }
         default:
             print("[*] 这啥玩意啊？？？")
         }
         
         return (ret, lenth)
     } // NRCD_create_card_detail_build_single
+    
+    @objc func NRCD_add_repo_section_handler(sender: UIButton) {
+        if let url = URL(string: sender.accessibilityHint ?? "") {
+            let read = url.absoluteString
+            IHProgressHUD.show()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            LKRoot.queue_dispatch.async {
+                let new = DBMPackageRepos()
+                new.link = read
+                new.sort_id = LKRoot.container_package_repo_DBSync.count
+                try? LKRoot.root_db?.insertOrReplace(objects: new, intoTable: common_data_handler.table_name.LKPackageRepos.rawValue)
+                LKRoot.ins_common_operator.PR_sync_and_download(sync_all: false) { (_) in
+                    DispatchQueue.main.async {
+                        IHProgressHUD.dismiss()
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                        if LKRoot.manager_reg.pr.initd {
+                            LKRoot.manager_reg.pr.update_user_interface {
+                                presentStatusAlert(imgName: "Done",
+                                                   title: "已尝试刷新软件源".localized(),
+                                                   msg: "软件包的更新将在后台进行。".localized())
+                            } // update_user_interface
+                        } // initd
+                    } // async
+                } // PR_sync_and_download
+            } // async
+        } // if let url
+    }
+    
+    @objc func NRCD_add_package_section_handler(sender: UIButton) {
+        if let id = sender.accessibilityHint {
+            if let pack = LKRoot.container_packages[id]?.copy() {
+                if let vc = (LKRoot.tabbar_view_controller as? UIEnteryS) {
+                    vc.home.close_button_handler(sender: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        presentPackage(pack: pack)
+                    }
+                } else {
+                    //                (LKRoot.tabbar_view_controller as? UIEnteryL)?.home.close_button_handler(sender: nil)
+                    LKRoot.breakPoint("as? UIEnteryL")
+                }
+            } else {
+                presentStatusAlert(imgName: "Warning", title: "错误".localized(), msg: "没有找到这个软件包".localized())
+            }
+        }
+    }
+    
 }
