@@ -95,7 +95,7 @@ class LKRequestList: UIViewController {
         
         let ret = LKDaemonUtils.submit()
         if ret.0 != .success {
-            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "该错误与一下软件包有关：".localized() + ret.1)
+            presentStatusAlert(imgName: "Warning", title: "未知错误".localized(), msg: "该错误与以下软件包有关：".localized() + ret.1)
             return
         }
         
