@@ -156,6 +156,7 @@ class app_daemon_utils {
             script += item + " &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         }
         
+        script += "dpkg --reconfigure -a &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         script += "echo Saily::internal_session_finished::Signal &>> " + LKRoot.root_path! + "/daemon.call/out.txt ;\n"
         
         try? script.write(toFile: LKRoot.root_path! + "/daemon.call/requsetScript.txt", atomically: true, encoding: .utf8)

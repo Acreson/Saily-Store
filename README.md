@@ -10,4 +10,8 @@ Developers:
 - @u0x01     
 - @mx_yolande      
 
+Designers:   
+- @Lakr233     
+- @xerusdesign      
+
 More thins coming later.... I got summery holiday homeworks to do.  
